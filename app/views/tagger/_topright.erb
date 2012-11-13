@@ -1,0 +1,471 @@
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#general" data-toggle="tab">General</a></li>
+  <li><a href="#education" data-toggle="tab">Education</a></li>
+  <li><a href="#educationalignment" data-toggle="tab">Alignment</a></li>
+</ul>
+
+<div class="tab-content" id="dataTabs" >
+<div class="tab-pane active" id="general" >  
+		  <form name="LRMIData">
+		  <fieldset >			
+		  <table  class="table-condensed">
+		  	<tr>
+		  		<td style="text-align:left;">
+		    		<label class="control-label" for="title">Title</label>
+					<input type="text" class="input-xlarge" id="title">
+				</td>
+			</tr>			
+			<tr>				
+				<td style="text-align:left;">
+					<label class="control-label" for="url">URL</label>
+					<input type="text" class="input-xlarge" id="url">
+				</td>
+			</tr>			
+			<tr>				
+				<td style="text-align:left;">	
+					<label class="control-label" for="language">Language</label>
+					<select class="input-xlarge" id="language">
+						<option></option>
+						<option>English</option>
+						<option>Spanish</option>						
+					</select>
+				</td>
+			</tr>			
+			<tr>
+				<td style="text-align:left;">
+			  		<label class="control-label" for="createdOn">Created On</label>
+					<input type="text" class="input-xlarge" id="createdOn" value="2012-01-01">	
+				</td>				
+			</tr>
+			<tr>
+				<td style="text-align:left;">	
+					<label class="control-label" for="topic">Topic/Subject</label>
+					<input type="text" class="input-xlarge" id="topic">
+				</td>
+			</tr>			
+			<tr>				
+		  		<td style="text-align:left;">
+		    		<label class="control-label" for="createdBy">Created By</label>
+					<input type="text" class="input-xlarge" id="createdBy">
+				</td>
+			</tr>	
+			<tr>
+				<td style="text-align:left;">	
+					<label class="control-label" for="usageRightsURL">Usage Rights URL</label>
+					<input type="text" class="input-xlarge" id="usageRightsURL">	
+				</td>	
+			</tr>			
+			<tr>				
+				<td style="text-align:left;">	
+					<label class="control-label" for="publisher">Publisher</label>
+					<input type="text" class="input-xlarge" id="publisher">
+				</td>	
+			</tr>		
+			<tr>		
+				<td style="text-align:left;">	
+					<label class="control-label" for="isBasedOnURL">Is Based On URL</label>
+					<input type="text" class="input-xlarge" id="isBasedOnURL">	
+				</td>	
+			</tr>				
+		</table>
+  </fieldset>
+   </div>	
+   
+
+
+<div class="tab-pane" id="education" >  
+	<fieldset>	
+	<div class="accordion" id="educationAccordion">
+		<div class="accordion-group">
+			<div class="accordion-heading">
+				<a class="accordion-toggle" data-toggle="collapse" data-parent="#educationAccordion" href="#endUserDiv" id="endUserLink">End User</a>
+            </div>
+            <div id="endUserDiv" class="accordion-body collapse">
+                <div class="accordion-inner">
+                  	<select multiple="multiple" class="input-xlarge" id="endUser">
+						<option>Administrator</option>
+						<option>Mentor</option>
+						<option>Parent</option>
+						<option>Peer Tutor</option>
+						<option>Specialist</option>
+						<option>Student</option>
+						<option>Teacher</option>
+						<option>Team</option>
+					</select>
+					<br/>
+					<input type="text" class="input-large" style="width:95%;" id="endUserOther" placeholder="Other (comma separated for multiple values)">
+                </div>
+              </div>
+            </div>
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#educationAccordion" href="#ageRangeDiv">Age Range</a>
+				</div>
+				<div id="ageRangeDiv" class="accordion-body collapse" >
+					<div class="accordion-inner">
+						<select multiple="multiple" class="input-xlarge" id="ageRange">
+							<option>0-2</option>
+							<option>2-5</option>
+							<option>5-8</option>
+							<option>8-10</option>
+							<option>10-12</option>
+							<option>12-14</option>
+							<option>14-16</option>
+							<option>16-18</option>
+							<option>18+</option>				
+						</select>
+						<br/>
+						<input type="text" class="input-large" style="width:95%;" id="ageRangeOther" placeholder="Other (comma separated for multiple values)">
+					</div>
+				</div>
+            </div>	
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#educationAccordion" href="#educationalUseDiv">Educational Use</a>
+				</div>
+				<div id="educationalUseDiv" class="accordion-body collapse">
+					<div class="accordion-inner">
+						<select multiple="multiple" class="input-xlarge" id="educationalUse">
+							<option>Activity</option>
+							<option>Analogies</option>
+							<option>Assessment</option>
+							<option>Auditory</option>
+							<option>Brainstorming</option>
+							<option>Classifying</option>
+							<option>Comparing</option>
+							<option>Cooperative Learning</option>
+							<option>Creative Response</option>
+							<option>Demonstration</option>
+							<option>Differentiation </option>
+							<option>Discovery Learning</option>
+							<option>Discussion/Debate</option>
+							<option>Drill & Practice</option>
+							<option>Experiential</option>
+							<option>Field Trip</option>
+							<option>Game</option>
+							<option>Generating hypotheses</option>
+							<option>Guided questions </option>
+							<option>Hands-on</option>
+							<option>Homework</option>
+							<option>Identify similarities & differences</option>
+							<option>Inquiry</option>
+							<option>Interactive</option>
+							<option>Interview/Survey</option>
+							<option>Interviews</option>
+							<option>Introduction</option>
+							<option>Journaling </option>
+							<option>Kinesthetic</option>
+							<option>Laboratory</option>
+							<option>Lecture</option>
+							<option>Metaphors</option>
+							<option>Model & Simulation</option>
+							<option>Musical</option>
+							<option>Nonlinguistic </option>
+							<option>Note taking </option>
+							<option>Peer Coaching</option>
+							<option>Peer Response</option>
+							<option>Play</option>
+							<option>Presentation</option>
+							<option>Problem Solving</option>
+							<option>Problem Based</option>
+							<option>Project</option>
+							<option>Questioning </option>
+							<option>Reading</option>
+							<option>Reciprocal Teaching </option>
+							<option>Reflection</option>
+							<option>Reinforcement</option>
+							<option>Research</option>
+							<option>Review</option>
+							<option>Role Playing</option>
+							<option>Service Learning </option>
+							<option>Simulations</option>
+							<option>Summarizing </option>
+							<option>Technology </option>
+							<option>Testing Hypotheses</option>
+							<option>Thematic Instruction </option>
+							<option>Visual/Spatial</option>
+							<option>Word Association</option>
+							<option>Writing</option>
+						</select>
+						<br/>
+						<input type="text" class="input-large" style="width:95%;" id="educationalUseOther" placeholder="Other (comma separated for multiple values)">
+					</div>
+				</div>
+            </div>				
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#educationAccordion" href="#interactivityTypeDiv">Interactivity Type</a>
+				</div>
+				<div id="interactivityTypeDiv" class="accordion-body collapse">
+					<div class="accordion-inner">
+						<select multiple="multiple" class="input-xlarge" id="interactivityType">
+							<option>Active</option>
+							<option>Expositive</option>
+							<option>Mixed</option>		
+						</select>
+						<br/>
+						<input type="text" class="input-large" style="width:95%;display:none;" id="interactivityTypeOther" placeholder="Other (comma separated for multiple values)">
+					</div>
+				</div>
+            </div>	
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#educationAccordion" href="#learningResourceTypeDiv">Learning Resource Type</a>
+				</div>
+				<div id="learningResourceTypeDiv" class="accordion-body collapse">
+					<div class="accordion-inner">
+						<select multiple="multiple" class="input-xlarge" id="learningResourceType">
+							<option>Activity</option>
+							<option>Assessment</option>
+							<option>Audio</option>
+							<option>Broadcast</option>
+							<option>Calculator</option>
+							<option>Discussion</option>
+							<option>E-Mail</option>
+							<option>Field Trip</option>
+							<option>Hands-on</option>
+							<option>In-Person/Speaker</option>
+							<option>Kinesthetic</option>
+							<option>Lab Material (Printed Activities - Instruments - Samples...)</option>
+							<option>Lesson Plan</option>
+							<option>Manipulative</option>
+							<option>MBL (Microcomputer Based)</option>
+							<option>Model</option>
+							<option>N/A</option>
+							<option>On-Line</option>
+							<option>Podcast</option>
+							<option>Presentation</option>
+							<option>Printed</option>
+							<option>Quiz</option>
+							<option>Robotics</option>
+							<option>Still Image</option>
+							<option>Test</option>
+							<option>Video</option>
+							<option>Wiki</option>
+							<option>Worksheet</option>					
+						</select>
+						<br/>
+						<input type="text" class="input-large" style="width:95%;" id="learningResourceTypeOther" placeholder="Other (comma separated for multiple values)">
+					</div>
+				</div>
+            </div>	
+			<div class="accordion-group" >
+				<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#educationAccordion" href="#mediaTypeDiv">Media Type</a>
+				</div>
+				<div id="mediaTypeDiv" class="accordion-body collapse" >
+					<div class="accordion-inner" >
+						<select multiple="multiple" class="input-xlarge" id="mediaType">
+							<option>Audio CD</option>
+							<option>Audiotape</option>
+							<option>Calculator</option>
+							<option>CD-I</option>
+							<option>CD-ROM</option>
+							<option>Diskette</option>
+							<option>Duplication Master</option>
+							<option>DVD/ Blu-ray</option>
+							<option>E-Mail</option>
+							<option>Electronic Slides</option>
+							<option>Field Trip</option>
+							<option>Filmstrip</option>
+							<option>Flash</option>
+							<option>Image</option>
+							<option>In-Person/Speaker</option>
+							<option>Interactive Whiteboard</option>
+							<option>Manipulative</option>
+							<option>MBL (Microcomputer Based)</option>
+							<option>Microfiche</option>
+							<option>Overhead</option>
+							<option>Pamphlet</option>
+							<option>PDF</option>
+							<option>Person-to-Person</option>
+							<option>Phonograph Record</option>
+							<option>Photo</option>
+							<option>Podcast</option>
+							<option>Printed</option>
+							<option>Radio</option>
+							<option>Robotics</option>
+							<option>Satellite</option>
+							<option>Slides</option>
+							<option>Television</option>
+							<option>Transparency</option>
+							<option>Video Conference</option>
+							<option>Videodisc</option>
+							<option>Webpage</option>
+							<option>Wiki</option>					
+						</select>
+						<br/>
+						<input type="text" class="input-large" style="width:95%;" id="mediaTypeOther" placeholder="Other (comma separated for multiple values)">
+					</div>
+				</div>
+			</div>	
+	
+			<div class="accordion-group" id="groupTypeDisplay" style="display:none;">
+				<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#educationAccordion" href="#groupTypeDiv">Group Type</a>
+				</div>
+				<div id="groupTypeDiv" class="accordion-body collapse">
+					<div class="accordion-inner" >
+						<select multiple="multiple" class="input-xlarge" id="groupType">
+							<option>Class</option>
+							<option>Community</option>
+							<option>Grade</option>
+							<option>Group Large (6+ members)</option>
+							<option>Group Small (3-5 members)</option>
+							<option>Individual</option>
+							<option>Inter-Generational</option>
+							<option>Multiple Class</option>
+							<option>Pair</option>
+							<option>School</option>
+							<option>State/Province</option>
+							<option>World</option>
+													
+						</select>
+						<br/>
+						<input type="text" class="input-large" style="width:95%;" id="groupTypeOther" placeholder="Other (comma separated for multiple values)">
+					</div>
+				</div>
+			</div>	
+
+	
+			<div class="accordion-group">
+				  <div class="accordion-heading">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#educationAccordion" href="#timeRequiredDiv">Time Required</a>
+				  </div>
+				  <div id="timeRequiredDiv" class="accordion-body collapse">
+						<div class="accordion-inner">			
+							<div id="slider">
+								<table border=0 align=center style="width:100%;">
+									<tr>
+										<td>
+											<p id="amountyears" style="border:0; color:#f6931f;font-size:10px;font-weight:bold;text-align:right;">Year</p>
+											<span id="slideryears"></span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p id="amountmonths" style="border:0; color:#f6931f;font-size:10px;font-weight:bold;text-align:right;">Month</p>
+											<span id="slidermonths"></span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p id="amountweeks" style="border:0; color:#f6931f;font-size:10px;font-weight:bold;text-align:right;">Week</p>
+											<span id="sliderweeks"></span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p id="amountdays" style="border:0; color:#f6931f;font-size:10px;font-weight:bold;text-align:right;">Day</p>
+											<span id="sliderdays"></span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p id="amounthours" style="border:0; color:#f6931f;font-size:10px;font-weight:bold;text-align:right;">Hour</p>
+											<span id="sliderhours"></span>
+										</td>
+									</tr>	
+									<tr>
+										<td>
+											<p id="amountminutes" style="border:0; color:#f6931f;font-size:10px;text-align:right;">Minute</p>
+											<span id="sliderminutes"></span>
+										</td>
+									</tr>	
+									<tr>
+										<td>
+											<p id="amountseconds" style="border:0; color:#f6931f;font-size:10px;text-align:right;">Second</p>
+											<span id="sliderseconds"></span>
+										</td>
+									</tr>						
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>	
+			</div>			
+  </fieldset>
+</div>	  
+
+
+
+  
+   
+   
+ <div class="tab-pane" id="educationalignment">
+   <fieldset>
+	  <table cellspacing=2 cellpadding=5 class="table-condensed" style="width:100%;border-bottom: thin solid #FBD385;">
+		  	<tr>
+					<td style="text-align:left;">	
+					<label class="control-label" for="educationalAlignment">Educational Alignment</label>
+					<select class="input-xlarge" id="educationalAlignment">
+						<option></option>
+						<option selected="selected">Common Core State Standards</option>					
+					</select>
+				</td>
+			</tr>			
+			<tr>				
+				<td style="text-align:left;">	
+					<label class="control-label" for="alignmentType">Alignment Type</label>
+					<select class="input-xlarge" id="alignmentType">
+						<option></option>
+						<option>assesses</option>
+						<option>teaches</option>
+						<option>requires</option>
+						<option>textComplexity</option>
+						<option>readingLevel</option>
+						<option>educationalSubject</option>
+						<option>educationLevel</option>						
+					</select>
+				</td>
+			</tr>			
+			<tr>
+				<td style="text-align:left;">
+					<label class="control-label" for="dotNotation">Dot Notation</label>
+					<input type="text" class="input-xlarge" id="dotNotation">		
+				</td>
+			</tr>			
+			<tr>				
+				<td style="text-align:left;">
+			  		<label class="control-label" for="itemURL">Item URL</label>
+					<input type="text" class="input-xlarge" id="itemURL">	
+				</td>				
+			</tr>
+			<tr style="display:none;">				
+				<td style="text-align:left;">
+			  		<label class="control-label" for="itemGUID">Item GUID</label>
+					<input type="text" class="input-xlarge" readonly="readonly" id="itemGUID">	
+				</td>				
+			</tr>			
+			<tr>
+				<td style="text-align:left;">	
+					<label class="control-label" for="description">Description</label>
+					<textarea type="text" class="input-xlarge" id="description" rows="10"></textarea>
+					</fieldset>
+					</form> 
+				</td>
+			</tr>	
+			<tr>				
+				<td style="text-align:right;">	
+					<button class="btn btn-success" id="addButton"><i class="icon-tag"></i>  Add</button>	
+					<button class="btn btn-warning disabled" id="deleteButton"><i class="icon-remove"></i>  Delete</span></button>&nbsp;&nbsp;&nbsp;	
+					<br/>&nbsp;
+				</td>				
+			</tr>				
+		</table>
+		<br/>
+		<h4>Previous Session Alignments:</h4>
+		<p style="font-size:8pt;color:Grey;"><i>Hover over items below for more information</i></p>
+		<table id="currentAlignmentTable" style="width:100%;text-align:center;">
+		  <thead>
+			  <tr>
+				<th>Select</th><th>Dot Notation</th>
+			  </tr>
+		  </thead>
+		  <tbody>
+		  </tbody>
+		</table>
+ </div>
+</div>
+	
+	

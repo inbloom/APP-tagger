@@ -1,4 +1,4 @@
-SlcTagger::Application.configure do
+LRMI::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on
@@ -9,6 +9,9 @@ SlcTagger::Application.configure do
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
 
+  # Google Analytics
+  GA.tracker = "UA-34218293-1"
+  
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false

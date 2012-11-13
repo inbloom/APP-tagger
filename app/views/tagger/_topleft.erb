@@ -1,0 +1,26 @@
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#tags" data-toggle="tab">Tags</a></li>
+  <li><a href="#output" data-toggle="tab">Output</a></li>
+</ul>
+
+<div class="tab-content" id="dataTabs">
+	<div class="tab-pane active" id="tags" style="margin-left:15px;">  
+		<form class="form" id="checkBoxForm" name="checkBoxForm">
+		  <fieldset>
+			<div class="control-group">
+				<div class="controls" id="multiItemSelector" name="multiItemSelector">
+							Press New or Load to start tagging.	
+				</div>
+				<input type='checkbox' id='tagItem' name='tagItem' style='display:none;'>
+			</div>
+		  </fieldset>
+		</form>
+	</div>
+	<div class="tab-pane" id="output" style="margin-left:15px;">  
+		<div>  
+			<textarea id="textarea" style="height: 90%; width: 95%;font-size:x-small;"></textarea>
+			<textarea id="textareahidden" style="display:none;"></textarea>
+		</div>
+	</div>
+</div>
+

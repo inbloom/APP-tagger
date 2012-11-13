@@ -1,12 +1,15 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
+gem "rake", "0.8.7"
+gem 'rails', '3.2.6'
 gem 'sqlite3'
-
+gem 'json'
+gem 'libv8', '~> 3.3.10'
+gem "therubyracer", '~> 0.10.2'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'google-analytics-rails'
+# gem 'nokogiri'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -19,8 +22,6 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-
-gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -35,4 +36,4 @@ gem 'jquery-rails'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+# gem 'ruby-debug'

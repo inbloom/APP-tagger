@@ -1,8 +1,11 @@
-SlcTagger::Application.configure do
+LRMI::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
   config.cache_classes = true
+
+  # Google Analytics
+  GA.tracker = "UA-34218293-1"
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false

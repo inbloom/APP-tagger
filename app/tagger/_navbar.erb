@@ -1,0 +1,309 @@
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+		<div class="pull-left">
+			<div class="pull-left">
+				<button class="btn btn-success" id="newbutton"><i class="icon-edit icon-white"></i> New</button>
+				<button class="btn btn-success" id="loadButton" data-toggle="modal" href="#loadModal"><i class="icon-upload icon-white"></i> Load</span></button>			
+			</div>
+			<div class="btn-group pull-left">
+			  <a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-download icon-white"></i> Save  <span class="caret"></span>
+			  </a>
+			  <ul class="dropdown-menu" style="font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-size: 13px;line-height: 18px;">
+				<label style="color:black;">LOCAL</label>
+			    <label id="csvSaveButton" style="color:black;"><i class="icon-download icon-white"></i> - CSV</label>
+				<li class="divider"></li>
+				<label style="color:black;">SERVER</label>
+				<label id="saveButton" style="color:black;"><i class="icon-download icon-white"></i> - JSON</label>	
+			  </ul>
+			</div>
+			<div class="pull-right" style="margin-top:10px;">LRMI Version 1.0.0</div>
+		</div>
+		<div class="pull-right">
+			<div id="userWelcome" class="pull-left" style="margin-top:10px;">You are not logged in.</div>
+			<!-- a class="btn btn-inverse" href="mailto:michael.j.vacirca@lmco.com?Subject=LRMI Web Inquiry"><i class="icon-flag icon-white"></i>  Help</span></a-->	
+			<a class="btn btn-inverse" target="_blank" href="https://docs.google.com/spreadsheet/viewform?formkey=dHdkazN1cWhLUXhUU2Jjang0Qjl2eXc6MQ#gid=0"><i class="icon-flag icon-white"></i>  Report Issue</span></a>
+			<a class="btn btn-inverse" target="_blank" href="http://asn.jesandco.org/resources/ASNJurisdiction/CCSS"><i class="icon-info-sign icon-white"></i>  CCSS Web</span></a>			
+		</div>	
+	</div>
+  </div>
+</div>
+
+<div class="modal hide" id="loadModal">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" id="closeModalButton">X</button>
+		<h3>Quick Load</h3>
+	</div>
+	<div class="modal-body">
+		<p>If you have utilized the LMRI CSV Template, you may select it from your local folder. The file must be in CSV format to be uploaded. <br/><br/> You may find a copy of the <a href="LRMI%20Template.csv">LRMI Template</a> available online.</p>
+		<br/>
+		<input type="file" id="files" name="files" multiple />
+		<output id="list"></output>
+	</div>
+	<div class="modal-header">	
+	<hr/>
+		<h3>Or Load A CSV Template</h3>
+	</div>
+	<div class="modal-body">
+		<p>To create multiple entries enter <i>title,URL</i> once per line.<br/><br/>   <strong>Example:</strong><br/>  Actual Title,http://www.test.com<br/>Actual Title Two,http://www.test2.com</p>
+		<br/>
+		<textarea id="loadModalTextArea" style="height: 50px; width: 95%;font-size:small;"></textarea>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn btn-primary" data-dismiss="modal" id="saveLoadModalButton">Load</a>
+	</div>
+</div>
+
+
+<div class="modal hide" id="userModal">
+		<h1>Welcome To Tagger</h1>
+	<div class="modal-body">
+		<p>To begin using the LRMI Tagger, please fill in your user information:</p>
+		<br/>
+		<form name="userData">
+		  <fieldset >			
+				<table  class="table-condensed">
+					<tr>
+						<td style="text-align:left;">
+							<label class="control-label" for="firstName">First Name</label>
+							<input type="text" class="input-large" id="firstName">
+						</td>
+						<td style="text-align:left;">
+							<label class="control-label" for="lastName">Last Name</label>
+							<input type="text" class="input-large" id="lastName">
+						</td>
+					</tr>	
+					<tr>
+						<td style="text-align:left;">
+							<label class="control-label" for="organizationName">Organization Name</label>
+							<input type="text" class="input-large" id="organizationName">
+						</td>
+						<td style="text-align:left;">
+							<label class="control-label" for="userEmail">Work E-Mail Address</label>
+							<input type="text" class="input-large" id="userEmail">
+						</td>
+					</tr>				
+					<tr>
+						<td style="text-align:left;">
+							<label class="control-label" for="userRole">Role</label>
+							<input type="text" class="input-large" id="userRole">
+						</td>
+						<td style="text-align:left;">
+							<label class="control-label" for="userGrade">Year/Grade Taught</label>
+							<input type="text" class="input-large" id="userGrade">
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:left;">
+							<label class="control-label" for="userExperience">Years of Experience</label>
+							<input type="text" class="input-large" id="userExperience">
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</form>	
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn btn-primary" data-dismiss="modal" id="saveUserData">Save</a>
+	</div>
+</div>
+
+
+
+<script>
+// Cookie Checking for User Session Data
+function getCookie(c_name)
+{
+	var i,x,y,ARRcookies=document.cookie.split(";");
+	for (i=0;i<ARRcookies.length;i++)
+	{
+		x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+		y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+		x=x.replace(/^\s+|\s+$/g,"");
+		if (x==c_name)
+		{
+			return unescape(y);
+		}
+	}
+}
+
+function setCookie(c_name,value,exdays)
+{
+	var exdate=new Date();
+	exdate.setDate(exdate.getDate() + exdays);
+	var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+	document.cookie=c_name + "=" + c_value;
+}
+
+function checkCookie()
+{
+	firstName 			= getCookie("firstName");
+	lastName  			= getCookie("lastName");
+	organizationName	= getCookie("organizationName");
+	userEmail			= getCookie("userEmail");
+	userRole			= getCookie("userRole");
+	userGrade			= getCookie("userGrade");
+	userExperience		= getCookie("userExperience");
+	
+	if (firstName !=null && firstName != "" && lastName != null && lastName != "")
+	{
+
+		document.getElementById('userWelcome').innerHTML = "Welcome, " + firstName + " " + lastName + "<label onClick='clearCookie();' style='font-size:10px;display:inline;'>   (Not Me?)</label>";
+	}
+	else 
+	{
+		$("#userModal").modal('show');  
+	}
+}
+
+
+function clearCookie()
+{
+	setCookie("firstName",'',1);
+	setCookie("lastName",'',1);
+	setCookie("organizationName",'',1);
+	setCookie("userEmail",'',1);
+	setCookie("userRole",'',1);
+	setCookie("userGrade",'',1);
+	setCookie("userExperience",'',1);
+	document.getElementById('userWelcome').innerHTML = "<label onClick='clearCookie();' style='display:inline;'>Click Here To Login (First and Last Name are Required).</label>";
+	checkCookie();
+}
+
+// Close Button Action
+jQuery(function($){
+    $("#saveUserData").click(function() {
+				clearCookie();
+				setCookie("firstName",$("#firstName").val(),1);
+				setCookie("lastName",$("#lastName").val(),1);
+				setCookie("organizationName",$("#organizationName").val(),1);
+				setCookie("userEmail",$("#userEmail").val(),1);
+				setCookie("userRole",$("#userRole").val(),1);
+				setCookie("userGrade",$("#userGrade").val(),1);
+				setCookie("userExperience",$("#userExperience").val(),1);
+				checkCookie();
+        });
+});
+</script>
+
+
+
+
+
+
+
+<script>
+  function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+	//console.log(evt.target.files[0].name);
+	//$.twFile.load(evt.target.files[0].name);
+    // files is a FileList of File objects. List some properties.
+    var output = [];
+    for (var i = 0, f; f = files[i]; i++) {
+      output.push('<br><li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+                  f.size, ' bytes, last modified: ',
+                  f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+                  '</li>');
+		 // Only process image files.
+      // if (!f.type.match('csv')) {
+        // alert("File is not in CSV format.");
+		// $("#saveLoadModalButton").attr('class','btn btn-primary disabled');
+		// break;
+      // }
+	  $("#saveLoadModalButton").attr('class','btn btn-primary');
+      var reader = new FileReader();
+
+      // Closure to capture the file information.
+      reader.onload = (function(theFile) {
+        return function(e) {
+			var allText = e.target.result;
+			var output = $.csv2Array(allText);
+			for (var i = 1; i < output.length; i++)
+			{
+
+				if (itemCounter == 0){
+					jQuery("#multiItemSelector").empty();
+				}
+				var timeFormat = "P" + $( "#amountyears" ).val() + "Y" + $( "#amountmonths" ).val() + "M" + $( "#amountweeks" ).val() + "W" + $( "#amountdays" ).val() + "DT" + $( "#amounthours" ).val() + "H" + $( "#amountminutes" ).val() + "M" + $( "#amountseconds" ).val() + "S";
+				var educationAlignmentArray = new Array();
+
+					educationAlignmentArray.push({
+					'educationalAlignment':output[i][17],
+					'alignmentType':output[i][18],
+					'dotNotation':output[i][19],
+					'itemURL':output[i][20],
+					'description':output[i][21],
+					'guid':output[i][22]});	
+					
+				window.items.push({
+				'id':itemCounter,
+				'title':output[i][1],
+				'language':output[i][8],
+				'url':output[i][2],
+				'createdOn':output[i][5],
+				'topic':output[i][4],
+				'createdBy':output[i][6],
+				'usageRightsURL':output[i][10],
+				'publisher':output[i][7],
+				'isBasedOnURL':output[i][11],
+				'endUser':output[i][12],
+				'ageRange':output[i][14],
+				'educationalUse':output[i][13],
+				'interactivityType':output[i][15],
+				'learningResourceType':output[i][16],
+				'mediaType':output[i][9],
+				'timeRequired':timeFormat,
+				'educationAlignmentArray':educationAlignmentArray});	
+				
+				jQuery("#multiItemSelector").append($("<table style='width:100%;'><tr><td><label name='tagLabel"+itemCounter+"' id='tagLabel"+itemCounter+"' class='checkbox'><input type='checkbox' id='tagItem' name='tagItem'>"+output[i][1]+"</label></td><td><a id='tagURL"+itemCounter+"' class='pull-right' style='display:block;' onclick='updateMainContentBottom(\""+output[i][2]+"\");'><i class='icon-share'></i></a></td><tr/></table>"));		
+				jQuery("#mainContentTopLeft").hide();
+				jQuery("#mainContentTopRight").hide();
+				jQuery("#mainContentBottom").hide();					
+				itemCounter++;
+				
+							
+				var metaSourceValue1 = output[i][17];
+				var metaSourceValue2 = output[i][18];
+				var metaSourceValue3 = output[i][19];
+				var metaSourceValue4 = output[i][20];
+				var metaSourceValue5 = output[i][21];
+				var metaSourceValue6 = output[i][22];
+				
+								//Check to see if the current Alignment is already Added to the currentAlignmentArray
+				var alreadyExists = false;
+				for (j = 0; j < currentAlignmentArray.length; j++) {
+					if(	(currentAlignmentArray[j].educationalAlignment == metaSourceValue1) &&
+						(currentAlignmentArray[j].alignmentType == metaSourceValue2) &&
+						(currentAlignmentArray[j].dotNotation == metaSourceValue3) &&
+						(currentAlignmentArray[j].itemURL == metaSourceValue4) &&
+						(currentAlignmentArray[j].description == metaSourceValue5 ) &&
+						(currentAlignmentArray[j].guid == metaSourceValue6 )   ){
+								alreadyExists = true;
+					}
+				}
+				
+				if (!alreadyExists) {
+					
+					blankCurrentAlignment();
+					
+					// Add to the currentAlignmentArray
+					currentAlignmentArray.push({'educationalAlignment':metaSourceValue1,'alignmentType':metaSourceValue2,'dotNotation':metaSourceValue3,'itemURL':metaSourceValue4,'description':metaSourceValue5,'guid':metaSourceValue6});
+					
+					//Updates the Alignment Table on the Alignment Tab
+					if (metaSourceValue3 == '') metaSourceValue3 = 'N/A';
+					$('#currentAlignmentTable > tbody:last').append('<tr style="background-color:#F8B93B;color:#ffffff;" id="currentAlignmentRow' + currentAlignmentCounter + '" onclick="updateAlignmentFields(' + currentAlignmentCounter + ');" onMouseOver="currentAlignmentMouseOver(' + currentAlignmentCounter + ');" onMouseOut="currentAlignmentMouseOut(' + currentAlignmentCounter + ');"><td><a id="currentAlignmentSelect' + currentAlignmentCounter + '"><i id="currentAlignmentIcon' + currentAlignmentCounter + '" class="icon-chevron-up icon-white"></i></a></td><td>'+ metaSourceValue3 +'</td></tr>');
+					currentAlignmentItem = currentAlignmentCounter;
+					currentAlignmentCounter++;
+				}
+
+			}
+        };
+      })(f);
+
+      // Read in the image file as a data URL.
+      reader.readAsText(f);
+    }		  
+    document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+  }    
+document.getElementById('files').addEventListener('change', handleFileSelect, false);
+</script>

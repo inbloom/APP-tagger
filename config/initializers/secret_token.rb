@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-SlcTagger::Application.config.secret_token = '207e3a9b8154524527774ea32cba846949d10aa9afe7569dee87d689a459cfaf23a62be06c1add0603c8a48c32101980bada18485d4e17832145f51c3cc06ee6'
+LRMI::Application.config.secret_token = '85480ffea35f0c611c3a6abc82190342bec7129aa6fe32c01c20bfe7072564d0ea90d82413d752db67fb13c47bb69fc64613944f7767501d7485ac3241b3ca74'

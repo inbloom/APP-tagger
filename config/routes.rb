@@ -1,4 +1,7 @@
-SlcTagger::Application.routes.draw do
+LRMI::Application.routes.draw do
+  get "tagger/index"
+  match '/tagger' => 'tagger#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
