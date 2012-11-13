@@ -3,30 +3,35 @@
     <div class="container">
       <div class="pull-left">
         <button class="btn btn-success" id="newbutton"><i class="icon-edit icon-white"></i> New</button>
-        <button class="btn btn-success" id="loadButton" data-toggle="modal" href="#loadModal"><i class="icon-upload icon-white"></i> Load</span></button>
+        <button class="btn btn-success" id="loadButton" data-toggle="modal" href="#loadModal"><i class="icon-upload icon-white"></i> Load</button>
+
         <div class="btn-group">
-          <a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-download icon-white"></i> Save  <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu" style="font-family:Helvetica Neue,Helvetica,Arial,sans-serif;font-size: 13px;line-height: 18px;">
-          <label style="color:black;">LOCAL</label>
-            <label id="csvLocalSaveButton" style="color:black;"><i class="icon-download icon-white"></i> - CSV</label>
-          <label id="JSONLocalSaveButton" style="color:black;"><i class="icon-download icon-white"></i> - JSON</label>
-          <label id="HTMLLocalSaveButton" style="color:black;"><i class="icon-download icon-white"></i> - HTML</label>
-          <li class="divider"></li>
-          <label style="color:black;">SERVER</label>
-          <label id="JSONServerSaveButton" style="color:black;"><i class="icon-download icon-white"></i> - JSON</label>
-          <!-- TODO: UNCOMMENT WHEN LEARNING REGISTRY FUNCTION IS COMPLETE li class="divider"></li>
-          <label style="color:black;">LEARNING REGISTRY</label>
-          <label id="JSONLearningRegistrySaveButton" style="color:black;"><i class="icon-download icon-white"></i> - JSON</label-->				  </ul>
+          <a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-download icon-white"></i> Save  <span class="caret"></span></a>
+
+          <ul class="dropdown-menu">
+            <li>LOCAL</li>
+            <li><a id="csvLocalSaveButton" href="#"><i class="icon-download icon-white"></i> - CSV</a></li>
+            <li><a id="JSONLocalSaveButton" href="#"><i class="icon-download icon-white"></i> - JSON</a></li>
+            <li><a id="HTMLLocalSaveButton" href="#"><i class="icon-download icon-white"></i> - HTML</a></li>
+            <li class="divider"></li>
+            <li>SERVER</li>
+            <li><a id="JSONServerSaveButton" href="#"><i class="icon-download icon-white"></i> - JSON</a></li>
+            <!-- li class="divider"></li -->
+            <!-- li>LEARNING REGISTRY</li -->
+            <!-- li><a href="#"><i class="icon-download icon-white"></i> - LRI</a></li -->
+          </ul>
         </div>
-        LRMI Version 1.0.0
+
       </div>
+      <div class='pull-left navbar-text'>LRMI Version 1.0.0</div>
+
       <div class="pull-right">
-        <div id="userWelcome" class="pull-left" style="margin-top:10px;">You are not logged in.</div>
         <a class="btn btn-inverse" href="help/LRMI_Tagger_1.0.html" target="_blank"><i class="icon-flag icon-white"></i>  Help</span></a>
         <a class="btn btn-inverse" target="_blank" href="https://docs.google.com/spreadsheet/viewform?formkey=dHdkazN1cWhLUXhUU2Jjang0Qjl2eXc6MQ#gid=0"><i class="icon-flag icon-white"></i>  Report Issue</span></a>
         <a class="btn btn-inverse" target="_blank" href="http://asn.jesandco.org/resources/ASNJurisdiction/CCSS"><i class="icon-info-sign icon-white"></i>  CCSS Web</span></a>
       </div>
+      <div id="userWelcome" class="pull-right navbar-text">You are not logged in.</div>
+
     </div>
   </div>
 </div>
