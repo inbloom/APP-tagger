@@ -14,6 +14,19 @@
  * limitations under the License.
  */
 
+//<HTML>
+//    <head>
+//        <script src="oauthTest.js"></script>
+//        <script src="oauth.js"></script>
+//        <script src="sha1.js"></script>
+//    </head>
+//    <body>
+//        <button onclick="testEncode()">encode</button><br/>
+//        <button onclick="testGetParameters()">getParameters</button><br/>
+//        <button onclick="testGetBaseString()">getBaseString</button><br/>
+//        <button onclick="testGetSignature()">getSignature</button><br/>
+//    </body>
+//</HTML>
 // Here are some unit tests for the software in oauth.js.
 // The test data were copied from http://oauth.pbwiki.com/TestCases
 
