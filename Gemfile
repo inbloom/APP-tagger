@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-gem "rake", "0.8.7"
-gem 'rails', '3.2.6'
+gem "rake"
+gem 'rails', '3.2.8'
 gem 'sqlite3'
 gem 'json'
 gem 'libv8', '~> 3.3.10'
