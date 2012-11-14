@@ -1,37 +1,37 @@
-// jQuery( function ($) {
-$("#HTMLLocalSaveButton").click( function() {
-    var str = processHTMLOutput();
-    saveLocal(str,".html");
-});
-
-// jQuery( function ($) {
-$("#csvLocalSaveButton").click( function() {
-    var str = processCSVOutput();
-    saveLocal(str,".csv");
-});
-
-// jQuery( function ($) {
-$("#JSONLocalSaveButton").click( function() {
-    var str = processJSONOutput();
-    saveLocal(str,".json");
-});
-
-
-// jQuery( function ($) {
-$("#JSONServerSaveButton").click( function() {
-    var str = processJSONOutput();
-    saveServer(str);
-});
-
-// jQuery( function ($) {
-$("#JSONLearningRegistrySaveButton").click( function() {
-    var str = processJSONOutput();
-    saveLearningRegistry(str);
-});
-
-// Save Load Modal Button Action
-
 jQuery( function ($) {
+
+    // jQuery( function ($) {
+    $("#HTMLLocalSaveButton").click( function() {
+        var str = processHTMLOutput();
+        saveLocal(str,".html");
+    });
+
+    // jQuery( function ($) {
+    $("#csvLocalSaveButton").click( function() {
+        var str = processCSVOutput();
+        saveLocal(str,".csv");
+    });
+
+    // jQuery( function ($) {
+    $("#JSONLocalSaveButton").click( function() {
+        var str = processJSONOutput();
+        saveLocal(str,".json");
+    });
+
+
+    // jQuery( function ($) {
+    $("#JSONServerSaveButton").click( function() {
+        var str = processJSONOutput();
+        saveServer(str);
+    });
+
+    // jQuery( function ($) {
+    $("#JSONLearningRegistrySaveButton").click( function() {
+        var str = processJSONOutput();
+        saveLearningRegistry(str);
+    });
+
+    // Save Load Modal Button Action
     $("#saveLoadModalButton").click( function() {
         if (document.getElementById("loadModalTextArea").value != "")
         {

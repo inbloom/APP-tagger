@@ -70,7 +70,7 @@ $(document).ready(function(){
     $mainContentTopRight.height( $window.height() - ($mainContentTopRight.position().top+5));
     $mainContentBottom.height( $window.height() - ($mainContentBottom.position().top+5));
 
-//    $textarea.height( $window.height()  - 200 );
+    $textarea.height( $window.height() - 160);
 
     $("#endUser").css("height", parseInt($("#endUser option").length) * 17.5);
     $("#ageRange").css("height", parseInt($("#ageRange option").length) * 17);
@@ -89,7 +89,7 @@ $(document).ready(function(){
         $mainContentTopRight.height( $window.height() - ($mainContentTopRight.position().top+5));
         $mainContentBottom.height( $window.height() - ($mainContentBottom.position().top+5));
 
-//        $textarea.height( $window.height() - 200 );
+        $textarea.height( $window.height() - 160);
 
     });
 
@@ -593,7 +593,7 @@ function handleFileSelect(evt) {
     }
     //document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
 }
-document.getElementById('files').addEventListener('change', handleFileSelect, false);
+//document.getElementById('files').addEventListener('change', handleFileSelect, false);
 
 
 
