@@ -41,9 +41,9 @@ $(document).ready(function(){
     $("#amounthours").val('0');
     $("#amountminutes").val('0');
     $("#amountseconds").val('0');
-    $( "#mainContentTopLeft" ).resizable();
-    $( "#mainContentTopRight" ).resizable();
-    $( "#mainContentBottom" ).resizable();
+    $("#mainContentTopLeft" ).resizable();
+    $("#mainContentTopRight" ).resizable();
+    $("#mainContentBottom" ).resizable();
 
     jQuery("#mainContentTopRight").hide();
     jQuery("#mainContentBottom").show();
@@ -66,11 +66,11 @@ $(document).ready(function(){
     var $dotNotation = $( '#dotNotation');
     var $createdOn = $( '#createdOn');
 
-    $mainContentTopLeft.height( $window.height()  );
-    $mainContentTopRight.height( $window.height() );
-    $mainContentBottom.height( $window.height() );
+    $mainContentTopLeft.height( $window.height() - ($mainContentTopLeft.position().top+5));
+    $mainContentTopRight.height( $window.height() - ($mainContentTopRight.position().top+5));
+    $mainContentBottom.height( $window.height() - ($mainContentBottom.position().top+5));
 
-    $textarea.height( $window.height()  - 200 );
+//    $textarea.height( $window.height()  - 200 );
 
     $("#endUser").css("height", parseInt($("#endUser option").length) * 17.5);
     $("#ageRange").css("height", parseInt($("#ageRange option").length) * 17);
@@ -85,11 +85,11 @@ $(document).ready(function(){
     $createdOn.val('');
 
     $window.resize(function() {
-        $mainContentTopLeft.height( $window.height()  );
-        $mainContentTopRight.height( $window.height() );
-        $mainContentBottom.height( $window.height() );
+        $mainContentTopLeft.height( $window.height() - ($mainContentTopLeft.position().top+5));
+        $mainContentTopRight.height( $window.height() - ($mainContentTopRight.position().top+5));
+        $mainContentBottom.height( $window.height() - ($mainContentBottom.position().top+5));
 
-        $textarea.height( $window.height() - 200 );
+//        $textarea.height( $window.height() - 200 );
 
     });
 
