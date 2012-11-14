@@ -32,6 +32,8 @@ $(document).ready(function(){
     window.dotNotationDisplayArray = new Array();
     window.currentAlignmentArray = new Array();
 
+    var offsetTopPanels = 80;
+
     readAlignmentDataFromFiles();
 
     $("#amountyears").val('0');
@@ -41,11 +43,13 @@ $(document).ready(function(){
     $("#amounthours").val('0');
     $("#amountminutes").val('0');
     $("#amountseconds").val('0');
-    $("#mainContentTopLeft" ).resizable();
-    $("#mainContentTopRight" ).resizable();
-    $("#mainContentBottom" ).resizable();
 
-    jQuery("#mainContentTopRight").hide();
+    // Make two flyout panels resizable but not the iframe one
+    $("#mainContentTopLeft" ).resizable({ handles: "e"});
+    $("#mainContentTopRight" ).resizable({ handles: "e"});
+//    $("#mainContentBottom" ).resizable();
+
+//    jQuery("#mainContentTopRight").hide();
     jQuery("#mainContentBottom").show();
 
     $.ajaxSetup({ cache: false });
@@ -66,31 +70,35 @@ $(document).ready(function(){
     var $dotNotation = $( '#dotNotation');
     var $createdOn = $( '#createdOn');
 
-    $mainContentTopLeft.height( $window.height() - ($mainContentTopLeft.position().top+5));
-    $mainContentTopRight.height( $window.height() - ($mainContentTopRight.position().top+5));
-    $mainContentBottom.height( $window.height() - ($mainContentBottom.position().top+5));
+    $mainContentTopLeft.height( $window.height() - offsetTopPanels);
+    $mainContentTopRight.height( $window.height() - offsetTopPanels);
+    $mainContentBottom.height( $window.height() - offsetTopPanels);
+
+    console.log($window.width() - $mainContentTopLeft.width() - $mainContentTopRight.width() );
+
+    $mainContentBottom.width( $window.width() - $mainContentTopLeft.width() - $mainContentTopRight.width() - 50 );
 
     $textarea.height( $window.height() - 160);
 
-    $("#endUser").css("height", parseInt($("#endUser option").length) * 17.5);
-    $("#ageRange").css("height", parseInt($("#ageRange option").length) * 17);
-    $("#educationalUse").css("height", parseInt($("#educationalUse option").length) * 16.5);
-    $("#interactivityType").css("height", parseInt($("#interactivityType option").length) * 19);
-    $("#learningResourceType").css("height", parseInt($("#learningResourceType option").length) * 17);
-    $("#mediaType").css("height", parseInt($("#mediaType option").length) * 16.5);
-    $("#groupType").css("height", parseInt($("#groupType option").length) * 16.5);
+//    $("#endUser").css("height", parseInt($("#endUser option").length) * 17.5);
+//    $("#ageRange").css("height", parseInt($("#ageRange option").length) * 17);
+//    $("#educationalUse").css("height", parseInt($("#educationalUse option").length) * 16.5);
+//    $("#interactivityType").css("height", parseInt($("#interactivityType option").length) * 19);
+//    $("#learningResourceType").css("height", parseInt($("#learningResourceType option").length) * 17);
+//    $("#mediaType").css("height", parseInt($("#mediaType option").length) * 16.5);
+//    $("#groupType").css("height", parseInt($("#groupType option").length) * 16.5);
 
     $dotNotation.typeahead({source: dotNotationDisplayArray, items:8});
 
     $createdOn.val('');
 
     $window.resize(function() {
-        $mainContentTopLeft.height( $window.height() - ($mainContentTopLeft.position().top+5));
-        $mainContentTopRight.height( $window.height() - ($mainContentTopRight.position().top+5));
-        $mainContentBottom.height( $window.height() - ($mainContentBottom.position().top+5));
+        $mainContentTopLeft.height( $window.height() - offsetTopPanels);
+        $mainContentTopRight.height( $window.height() - offsetTopPanels);
+        $mainContentBottom.height( $window.height() - offsetTopPanels);
+        $mainContentBottom.width( $window.width() - $mainContentTopLeft.width() - $mainContentTopRight.width() - 50 );
 
         $textarea.height( $window.height() - 160);
-
     });
 
     checkCookie();
@@ -254,7 +262,6 @@ jQuery(function($){
         jQuery("#mainContentTopLeft").show();
         jQuery("#mainContentTopRight").show();
         jQuery("#mainContentBottom").show();
-
 
         // Clear checkboxes of current selection
         // for (i = 0; i < boxes; i++) {
@@ -625,12 +632,7 @@ function processDataForAlignmentArray(allText)	{
 
 //Update Main Content Bottom with URL iFrame
 function updateMainContentBottom(metaSourceValue){
-    jQuery("#mainContentBottom").show();
-    jQuery("#mainContentBottom").html("<iframe scrolling=\"auto\" frameborder=0 id=\"iframe\" width=\"100%\" src=\""+ metaSourceValue +"\"></iframe>");
-    var $window = $( window );
-    var $iframe = $( '#iframe' );
-    $iframe.height( $window.height() - 100 );
-
+    jQuery('#iframe').attr('src',metaSourceValue);
 }
 
 function updateTextArea(){

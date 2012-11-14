@@ -1,4 +1,5 @@
 body {
+  overflow: hidden;
   background: url(/assets/LRMI.png) top right no-repeat;
 }
 
@@ -10,26 +11,32 @@ body {
   position: relative;
   padding-right: 10px;
   bottom: 0px;
+  overflow-y: auto;
+  overflow-x: hidden;
   background-color: #ffffff;
   border-right: 1px solid #fbd385;
 }
 
 #mainContentTopRight {
   float: left;
-  width: 305px;
+  width: 315px;
   z-index: 100;
-  min-width: 305px;
+  min-width: 315px;
   position: relative;
   padding-right: 10px;
   left: 15px;
   bottom: 0px;
+  overflow-y: auto;
+  overflow-x: hidden;
   background-color: #ffffff;
   border-right: 1px solid #fbd385;
 }
 
 #mainContentBottom {
   float: left;
-
+  position: relative;
+  left: 25px;
+  right: 0px;
 }
 
 #tags,
