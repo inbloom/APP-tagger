@@ -34,8 +34,7 @@ function checkCookie()
 
     if (firstName !=null && firstName != "" && lastName != null && lastName != "")
     {
-
-        document.getElementById('userWelcome').innerHTML = "Welcome, " + firstName + " " + lastName + "<label onClick='clearCookie();' style='font-size:10px;display:inline;'>   (Not Me?)</label>";
+        document.getElementById('userWelcome').innerHTML = "Welcome, " + firstName + " " + lastName + " <small>(<a href='javascript:clearCookie();' >Not Me?</a>)</small>";
     }
     else
     {
@@ -52,6 +51,6 @@ function clearCookie()
     setCookie("userRole",'',1);
     setCookie("userGrade",'',1);
     setCookie("userExperience",'',1);
-    document.getElementById('userWelcome').innerHTML = "<label onClick='clearCookie();' style='display:inline;'>Click Here To Login (First and Last Name Required).</label>";
+    document.getElementById('userWelcome').innerHTML = "<label onClick='clearCookie();' style='display:inline;'>You are not logged in.</label>";
     checkCookie();
 }
