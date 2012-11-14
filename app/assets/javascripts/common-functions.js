@@ -51,6 +51,6 @@ function clearCookie()
     setCookie("userRole",'',1);
     setCookie("userGrade",'',1);
     setCookie("userExperience",'',1);
-    document.getElementById('userWelcome').innerHTML = "<label onClick='clearCookie();' style='display:inline;'>You are not logged in.</label>";
+    document.getElementById('userWelcome').innerHTML = "You are not logged in.";
     checkCookie();
 }
