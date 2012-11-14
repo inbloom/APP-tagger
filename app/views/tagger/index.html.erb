@@ -1,19 +1,15 @@
 <%= render :partial => 'navbar' %>
 
-	<div class="row">
+<div id="mainContentTopLeft" class="main-content-topleft border-right">
+  <%= render :partial => 'topleft' %>
+</div>
 
-    <div id="mainContentTopLeft" class="span3 border-right">
-      <%= render :partial => 'topleft' %>
-    </div>
+<div id="mainContentTopRight" class="main-content-topright border-right">
+  <%= render :partial => 'topright' %>
+</div>
 
-    <div id="mainContentTopRight" class="span3 border-right">
-      <%= render :partial => 'topright' %>
-    </div>
-
-    <div id="mainContentBottom" class="span4">
-    </div>
-
-	</div>
+<div id="mainContentBottom" class="page">
+</div>
 
 <%= render :partial => 'load_modal' %>
 <%= render :partial => 'user_modal' %>
