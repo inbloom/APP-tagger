@@ -2,16 +2,42 @@ body {
   background: url(/assets/LRMI.png) top right no-repeat;
 }
 
+#mainContentTopLeft {
+  float: left;
+  width: 250px;
+  z-index: 200;
+  min-width: 250px;
+  position: relative;
+  padding-right: 10px;
+  bottom: 0px;
+  background-color: #ffffff;
+  border-right: 1px solid #fbd385;
+}
+
+#mainContentTopRight {
+  float: left;
+  width: 305px;
+  z-index: 100;
+  min-width: 305px;
+  position: relative;
+  padding-right: 10px;
+  left: 15px;
+  bottom: 0px;
+  background-color: #ffffff;
+  border-right: 1px solid #fbd385;
+}
+
+#mainContentBottom {
+  float: left;
+
+}
+
+#tags,
+#output {
+  padding-left: 15px;
+}
+
 .navbar-inner {
   padding: 0 10px;
 }
 
-div.border-right {
-  margin-left: 0px;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-right: 1px solid #fbd385;
-  &:first-of-type {
-    margin-left: 30px;
-  }
-}
