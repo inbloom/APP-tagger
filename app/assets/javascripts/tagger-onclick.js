@@ -80,7 +80,7 @@ jQuery( function ($) {
         if (itemCounter == 0){
             jQuery("#multiItemSelector").empty();
         }
-        jQuery("#multiItemSelector").append($("<table style='width:100%;'><tr><td><label name='tagLabel"+itemCounter+"'  id='tagLabel"+itemCounter+"' class='checkbox'><input type='checkbox' id='tagItem' checked='checked' name='tagItem'>New Item "+itemCounter+"</label></td><td><a id='tagURL"+itemCounter+"' class='pull-right' style='display:none;' onclick='updateMainContentBottom(\"\");'><i class='icon-share'></i></a></td><tr/></table>"));
+        jQuery("#multiItemSelector").append($("<a class='pull-right'><i class='icon-remove'></i></a>  <a id='tagURL"+itemCounter+"' style='display:none;' class='pull-right' onclick='updateMainContentBottom(\"\");'><i class='icon-share'></i>&nbsp;</a>  <label name='tagLabel"+itemCounter+"' id='tagLabel"+itemCounter+"' class='checkbox'><input type='checkbox' id='tagItem' checked='checked' name='tagItem'>New Item "+itemCounter+"</label>"));
         var timeFormat = "P" + $( "#amountyears" ).val() + "Y" + $( "#amountmonths" ).val() + "M" + $( "#amountweeks" ).val() + "W" + $( "#amountdays" ).val() + "DT" + $( "#amounthours" ).val() + "H" + $( "#amountminutes" ).val() + "M" + $( "#amountseconds" ).val() + "S";
 
         var educationAlignmentArray = new Array();
