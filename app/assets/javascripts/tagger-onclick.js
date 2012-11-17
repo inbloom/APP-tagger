@@ -73,7 +73,9 @@ jQuery( function ($) {
         // Uncheck everything when you add a new tag
         jQuery("#multiItemSelector input[type=checkbox]").each(function(i,o) {
             o.checked = false;
-        })
+        });
+
+        updateInputFields();
 
         if (itemCounter == 0){
             jQuery("#multiItemSelector").empty();
