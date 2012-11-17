@@ -256,50 +256,6 @@ jQuery(function($){
 });
 
 
-// New Button Action
-jQuery(function($){
-    $("#newbutton").click(function() {
-        jQuery("#mainContentTopLeft").show();
-        jQuery("#mainContentTopRight").show();
-        jQuery("#mainContentBottom").show();
-
-        // Clear checkboxes of current selection
-        // for (i = 0; i < boxes; i++) {
-        // document.checkBoxForm.tagItem[i].checked = false;
-        // }
-
-        if (itemCounter == 0){
-            jQuery("#multiItemSelector").empty();
-        }
-        jQuery("#multiItemSelector").append($("<table style='width:100%;'><tr><td><label name='tagLabel"+itemCounter+"'  id='tagLabel"+itemCounter+"' class='checkbox'><input type='checkbox' id='tagItem' name='tagItem'>New Item "+itemCounter+"</label></td><td><a id='tagURL"+itemCounter+"' class='pull-right' style='display:none;' onclick='updateMainContentBottom(\"\");'><i class='icon-share'></i></a></td><tr/></table>"));
-        var timeFormat = "P" + $( "#amountyears" ).val() + "Y" + $( "#amountmonths" ).val() + "M" + $( "#amountweeks" ).val() + "W" + $( "#amountdays" ).val() + "DT" + $( "#amounthours" ).val() + "H" + $( "#amountminutes" ).val() + "M" + $( "#amountseconds" ).val() + "S";
-
-        var educationAlignmentArray = new Array();
-        window.items.push({'id':itemCounter,'title':'','language':'','url':'','createdOn':'','topic':'','createdBy':'','usageRightsURL':'','publisher':'','isBasedOnURL':'','endUser':'','ageRange':'','educationalUse':'','interactivityType':'','learningResourceType':'','mediaType':'','timeRequired':timeFormat,'educationAlignmentArray':educationAlignmentArray});
-
-        itemCounter++;
-    });
-});
-
-// Load Button Action
-
-jQuery(function($){
-    $("#loadButton").click(function() {
-        jQuery("#mainContentTopLeft").hide();
-        jQuery("#mainContentTopRight").hide();
-        jQuery("#mainContentBottom").hide();
-    });
-});
-
-// Close Button Action
-jQuery(function($){
-    $("#closeModalButton").click(function() {
-        jQuery("#mainContentTopLeft").show();
-        jQuery("#mainContentTopRight").show();
-        jQuery("#mainContentBottom").show();
-    });
-});
-
 // Setup Javascript Structure for Form Data
 
 function makeStruct(names) {
@@ -312,7 +268,6 @@ function makeStruct(names) {
   }
   return constructor;
 }
-
 
 
 // Slider Setup
