@@ -74,8 +74,6 @@ $(document).ready(function(){
     $mainContentTopRight.height( $window.height() - offsetTopPanels);
     $mainContentBottom.height( $window.height() - offsetTopPanels);
 
-    console.log($window.width() - $mainContentTopLeft.width() - $mainContentTopRight.width() );
-
     $mainContentBottom.width( $window.width() - $mainContentTopLeft.width() - $mainContentTopRight.width() - 50 );
 
     $textarea.height( $window.height() - 160);
@@ -174,6 +172,8 @@ jQuery(function($){
         }
 
         updateTextArea();
+
+        return false;
     });
 });
 
