@@ -235,38 +235,41 @@ function updateMainContentBottom(metaSourceValue){
 }
 
 function updateTextArea(){
+    var textAreaValue = "";
 
     $("#multiItemSelector input[type=checkbox]:checked").each(function(i,obj) {
 
-        if (items[obj.id].title != "") $("#textarea").append("Title:\n<br/>", items[obj.id].title,"\n<br/>");
-        if (items[obj.id].url != "") $("#textarea").append("URL:\n<br/>", items[obj.id].url,"\n<br/>");
-        if (items[obj.id].language != "") $("#textarea").append("Language:\n<br/>", items[obj.id].language,"\n<br/>");
-        if (items[obj.id].createdOn != "") $("#textarea").append("Created On:\n<br/>", items[obj.id].createdOn,"\n<br/>");
-        if (items[obj.id].topic != "") $("#textarea").append("Topic/Subject:\n<br/>", items[obj.id].topic,"\n<br/>");
-        if (items[obj.id].createdBy != "") $("#textarea").append("Created By:\n<br/>", items[obj.id].createdBy,"\n<br/>");
-        if (items[obj.id].usageRightsURL != "") $("#textarea").append("Usage Rights URL:\n<br/>", items[obj.id].usageRightsURL,"\n<br/>");
-        if (items[obj.id].publisher != "") $("#textarea").append("Publisher:\n<br/>", items[obj.id].publisher,"\n<br/>");
-        if (items[obj.id].isBasedOnURL != "") $("#textarea").append("Is Based On URL:\n<br/>", items[obj.id].isBasedOnURL,"\n<br/>");
-        if (items[obj.id].endUser != "") $("#textarea").append("End User:\n<br/>", items[obj.id].endUser,"\n<br/>");
-        if (items[obj.id].ageRange != "") $("#textarea").append("Age Range:\n<br/>", items[obj.id].ageRange,"\n<br/>");
-        if (items[obj.id].educationalUse != "") $("#textarea").append("Educational Use:\n<br/>", items[obj.id].educationalUse,"\n<br/>");
-        if (items[obj.id].interactivityType != "") $("#textarea").append("Interactivity Type:\n<br/>", items[obj.id].interactivityType,"\n<br/>");
-        if (items[obj.id].learningResourceType != "") $("#textarea").append("Learning Res Type:\n<br/>", items[obj.id].learningResourceType,"\n<br/>");
-        if (items[obj.id].mediaType != "") $("#textarea").append("Media Type:\n<br/>", items[obj.id].mediaType,"\n<br/>");
-        if (items[obj.id].groupType != "") $("#textarea").append("Group Type:\n<br/>", items[obj.id].groupType,"\n<br/>");
-        if (items[obj.id].timeRequired != "P0Y0M0W0DT0H0M0S") $("#textarea").append("Time Required:\n<br/>", items[obj.id].timeRequired,"\n<br/>\n<br/>");
+        if (items[obj.id].title != "") textAreaValue += "Title:\n"+items[obj.id].title+"\n";
+        if (items[obj.id].url != "") textAreaValue += "URL:\n"+items[obj.id].url+"\n";
+        if (items[obj.id].language != "") textAreaValue += "Language:\n"+items[obj.id].language+"\n";
+        if (items[obj.id].createdOn != "") textAreaValue += "Created On:\n"+items[obj.id].createdOn+"\n";
+        if (items[obj.id].topic != "") textAreaValue += "Topic/Subject:\n"+items[obj.id].topic+"\n";
+        if (items[obj.id].createdBy != "") textAreaValue += "Created By:\n"+items[obj.id].createdBy+"\n";
+        if (items[obj.id].usageRightsURL != "") textAreaValue += "Usage Rights URL:\n"+items[obj.id].usageRightsURL+"\n";
+        if (items[obj.id].publisher != "") textAreaValue += "Publisher:\n"+items[obj.id].publisher+"\n";
+        if (items[obj.id].isBasedOnURL != "") textAreaValue += "Is Based On URL:\n"+items[obj.id].isBasedOnURL+"\n";
+        if (items[obj.id].endUser != "") textAreaValue += "End User:\n"+items[obj.id].endUser+"\n";
+        if (items[obj.id].ageRange != "") textAreaValue += "Age Range:\n"+items[obj.id].ageRange+"\n";
+        if (items[obj.id].educationalUse != "") textAreaValue += "Educational Use:\n"+items[obj.id].educationalUse+"\n";
+        if (items[obj.id].interactivityType != "") textAreaValue += "Interactivity Type:\n"+items[obj.id].interactivityType+"\n";
+        if (items[obj.id].learningResourceType != "") textAreaValue += "Learning Res Type:\n"+items[obj.id].learningResourceType+"\n";
+        if (items[obj.id].mediaType != "") textAreaValue += "Media Type:\n"+items[obj.id].mediaType+"\n";
+        if (items[obj.id].groupType != "") textAreaValue += "Group Type:\n"+items[obj.id].groupType+"\n";
+        if (items[obj.id].timeRequired != "P0Y0M0W0DT0H0M0S") textAreaValue += "Time Required:\n"+items[obj.id].timeRequired+"\n\n";
 
         for (j = 0; j < items[obj.id].educationAlignmentArray.length; j++){
-            if (items[obj.id].educationAlignmentArray[j].educationalAlignment != "") $("#textarea").append("Educational Alignment:\n<br/>",  items[obj.id].educationAlignmentArray[j].educationalAlignment,"\n<br/>");
-            if (items[obj.id].educationAlignmentArray[j].alignmentType != "") $("#textarea").append("Alignment Type:\n<br/>",  items[obj.id].educationAlignmentArray[j].alignmentType,"\n<br/>");
-            if (items[obj.id].educationAlignmentArray[j].dotNotation != "") $("#textarea").append("Dot Notation:\n<br/>",  items[obj.id].educationAlignmentArray[j].dotNotation,"\n<br/>");
-            if (items[obj.id].educationAlignmentArray[j].itemURL != "") $("#textarea").append("Item URL:\n<br/>",  items[obj.id].educationAlignmentArray[j].itemURL,"\n<br/>");
-            if (items[obj.id].educationAlignmentArray[j].description != "") $("#textarea").append("Description:\n<br/>",  items[obj.id].educationAlignmentArray[j].description,"\n<br/>");
-            //	if (items[obj.id].educationAlignmentArray[j].guid != "") $("#textarea").append("Item GUID:\n<br/>",  items[obj.id].educationAlignmentArray[j].guid,"\n<br/>\n<br/>");
+            if (items[obj.id].educationAlignmentArray[j].educationalAlignment != "") textAreaValue += "Educational Alignment:\n"+ items[obj.id].educationAlignmentArray[j].educationalAlignment+"\n";
+            if (items[obj.id].educationAlignmentArray[j].alignmentType != "") textAreaValue += "Alignment Type:\n"+ items[obj.id].educationAlignmentArray[j].alignmentType+"\n";
+            if (items[obj.id].educationAlignmentArray[j].dotNotation != "") textAreaValue += "Dot Notation:\n"+ items[obj.id].educationAlignmentArray[j].dotNotation+"\n";
+            if (items[obj.id].educationAlignmentArray[j].itemURL != "") textAreaValue += "Item URL:\n"+ items[obj.id].educationAlignmentArray[j].itemURL+"\n";
+            if (items[obj.id].educationAlignmentArray[j].description != "") textAreaValue += "Description:\n"+ items[obj.id].educationAlignmentArray[j].description+"\n";
+            //	if (items[obj.id].educationAlignmentArray[j].guid != "") textAreaValue += "Item GUID:\n"+ items[obj.id].educationAlignmentArray[j].guid+"\n\n";
         }
-        $("#textarea").append("\n<br/>-----------------------\n\n<br/><br/>");
+        textAreaValue += "\n-----------------------\n\n";
 
     });
+
+    $("#textarea").val(textAreaValue);
 
 }
 
