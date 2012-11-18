@@ -1,13 +1,14 @@
 $(function() {
 
-    $("#isBasedOnURL").change(function(){
-        var metaSourceValue = $('#isBasedOnURL').val();
-        boxes = document.checkBoxForm.tagItem.length;
-        for (i = 0; i < boxes; i++) {
-            if (document.checkBoxForm.tagItem[i].checked) {
-                items[i].isBasedOnURL = metaSourceValue;
-            }
-        }
+    var objName = "isBasedOnURL"
+
+    $("#"+objName).change(function(obj){
+        var metaSourceValue = $(obj.target).val();
+
+        $("#multiItemSelector input[type=checkbox]:checked").each(function(i,obj) {
+            items[obj.id][objName] = metaSourceValue;
+        });
+
         updateTextArea();
     });
 

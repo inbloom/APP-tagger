@@ -1,13 +1,14 @@
 $(function() {
 
-    $("#publisher").change(function(){
-        var metaSourceValue = $('#publisher').val();
-        boxes = document.checkBoxForm.tagItem.length;
-        for (i = 0; i < boxes; i++) {
-            if (document.checkBoxForm.tagItem[i].checked) {
-                items[i].publisher = metaSourceValue;
-            }
-        }
+    var objName = "publisher"
+
+    $("#"+objName).change(function(obj){
+        var metaSourceValue = $(obj.target).val();
+
+        $("#multiItemSelector input[type=checkbox]:checked").each(function(i,obj) {
+            items[obj.id][objName] = metaSourceValue;
+        });
+
         updateTextArea();
     });
 

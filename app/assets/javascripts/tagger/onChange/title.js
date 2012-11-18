@@ -1,10 +1,12 @@
 $(function() {
 
-    $("#title").change(function(obj){
+    var objName = "title"
+
+    $("#"+objName).change(function(obj){
         var metaSourceValue = $(obj.target).val();
 
         $("#multiItemSelector input[type=checkbox]:checked").each(function(i,obj) {
-            items[obj.id].title = metaSourceValue;
+            items[obj.id][objName] = metaSourceValue;
             $("#"+obj.id+"Label span")[0].innerHTML = metaSourceValue;
         });
 
