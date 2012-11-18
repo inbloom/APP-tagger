@@ -2,15 +2,16 @@ $(function() {
 
     $("#createdOn").datepicker({
         format: 'yyyy-mm-dd'
-    }).on('changeDate', function(){
-        var metaSourceValue = $('#createdOn').val();
-        boxes = document.checkBoxForm.tagItem.length;
-        for (i = 0; i < boxes; i++) {
-            if (document.checkBoxForm.tagItem[i].checked) {
-                items[i].createdOn = metaSourceValue;
-            }
-        }
+    }).on('changeDate', function(obj){
+
+        var metaSourceValue = $(obj.target).val();
+
+        $("#multiItemSelector input[type=checkbox]:checked").each(function(i,obj) {
+            items[obj.id].createdOn = metaSourceValue;
+        });
+
         updateTextArea();
+
     });
 
 });
