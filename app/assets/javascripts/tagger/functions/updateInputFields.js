@@ -1,66 +1,43 @@
-// This function is in a horrible state.. wtf does it do and why?
 
 function updateInputFields(){
+    // Clear form data
+    $("form[name=LRMIData]").find("input[type=text], textarea").val("");
+    // If only one is selected then update the form with that one
+    if ($("#multiItemSelector input[type=checkbox]:checked").length == 1) {
+        var item = items[$("#multiItemSelector input[type=checkbox]:checked").first().attr('id')];
 
-    // Check to see if no tags are checked.  If none are checked, blank out all fields.
+        //Setup General Tab for Single Selection
+        if (item.title != "")                         $("#title").val(item.title);
+        if (item.url != "")                           $("#url").val(item.url);
+        if (item.language == "EN_US")                 $("#language").val("English");
+        if (item.language == "ES_ES")                 $("#language").val("Spanish");
+        if (item.language == "")                      $("#language").val("");
+        if (item.createdOn != "")                     $("#createdOn").val(item.createdOn);
+        if (item.topic != "")                         $("#topic").val(item.topic);
+        if (item.createdBy != "")                     $("#createdBy").val(item.createdBy);
+        if (item.usageRightsURL != "")                $("#usageRightsURL").val(item.usageRightsURL);
+        if (item.publisher != "")                     $("#publisher").val(item.publisher);
+        if (item.isBasedOnURL != "")                  $("#isBasedOnURL").val(item.isBasedOnURL);
+        if (item.timeRequired != "P0Y0M0W0DT0H0M0S")  $("#timeRequired").val(item.timeRequired);
 
-    var LRMIForm = document.forms.LRMIData.elements;
-    var myform = document.checkBoxForm;
-    var TempObject;
-    var checkedArray = new Array();
-    boxes = 0;
-    for (var i=0; i<document.checkBoxForm.tagItem.length; i++) {
-        if (myform.elements['tagItem'][i].checked) {
-            boxes++;
-            TempObject = items[i];
-            checkedArray.push(items[i]);
+        //Setup Education Tab for Single Selection
+        setupDisplayFieldsEducationTab(item, 'endUser');
+        setupDisplayFieldsEducationTab(item, 'ageRange');
+        setupDisplayFieldsEducationTab(item, 'educationalUse');
+        setupDisplayFieldsEducationTab(item, 'interactivityType');
+        setupDisplayFieldsEducationTab(item, 'learningResourceType');
+        setupDisplayFieldsEducationTab(item, 'mediaType');
+        setupDisplayFieldsEducationTab(item, 'groupType');
+
+        //Setup Alignment Tab for Single Selection - Defaults to Last Added Educational Alignment
+        if (typeof item.educationAlignmentArray[item.educationAlignmentArray.length-1] != 'undefined') {
+            if (item.educationAlignmentArray[item.educationAlignmentArray.length-1].educationalAlignment != "")  $("#educationalAlignment").val(item.educationAlignmentArray[item.educationAlignmentArray.length-1].educationalAlignment);
+            if (item.educationAlignmentArray[item.educationAlignmentArray.length-1].alignmentType != "")         $("#alignmentType").val(item.educationAlignmentArray[item.educationAlignmentArray.length-1].alignmentType);
+            if (item.educationAlignmentArray[item.educationAlignmentArray.length-1].dotNotation != "")           $("#dotNotation").val(item.educationAlignmentArray[item.educationAlignmentArray.length-1].dotNotation);
+            if (item.educationAlignmentArray[item.educationAlignmentArray.length-1].itemURL != "")               $("#itemURL").val(item.educationAlignmentArray[item.educationAlignmentArray.length-1].itemURL);
+            if (item.educationAlignmentArray[item.educationAlignmentArray.length-1].description != "")           $("#description").val(item.educationAlignmentArray[item.educationAlignmentArray.length-1].description);
+            if (item.educationAlignmentArray[item.educationAlignmentArray.length-1].guid != "")                  $("#itemGUID").val(item.educationAlignmentArray[item.educationAlignmentArray.length-1].guid);
         }
+
     }
-
-    // If no tags, or 1 tag are checked we want to clear out the fields of current data.
-    if (boxes == 0 || boxes == 1){ for (var i in LRMIForm){ LRMIForm[i].value = ''; } }
-
-    // If only one tag is checked, set field values to the values of the single tag checked.
-    if (boxes == 1){ setupDisplayFieldsForCurrentTagSelection(TempObject); }
-
-
-    // If tags are checked, compare their values to see if they are the same.
-    // If they are the same, set the field to the value. Otherwise, blank out the field.
-    // TODO: Finish multiple selection
-    else {
-        // for (var i in LRMIForm){
-        // if(LRMIForm[i].type == 'text'){
-        // var LRMIid = LRMIForm[i].id;
-        // var undef = false;  //TODO
-        // for (var j in checkedArray){
-        // if(typeof checkedArray[j][LRMIid] == 'undefined'){
-        // LRMIForm[i].value = '';
-        // undef = true;
-        // }
-        // else {
-        // console.log(checkedArray[j][LRMIid]);
-        // }
-        // }
-        // count(array_keys(items[j], 'yes')) == count(items[j]);//console.log(LRMIid);
-        // console.log(items[j].LRMIid);
-        // || LRMIForm[i].type == 'select-one' || LRMIForm[i].type == 'select-multiple'
-        // }
-        // }
-        for (var i in LRMIForm){ LRMIForm[i].value = ''; }
-    }
-    // boxes = document.checkBoxForm.tagItem.length;
-
-    // for (i = 0; i < boxes; i++) {
-    // if (document.checkBoxForm.tagItem[i].checked) {
-
-
-
-    // for (j = 0; j < items[i].educationAlignmentArray.length; j++){
-    // if (items[i].educationAlignmentArray[j].educationalAlignment != "") $("#textarea").append("Educational Alignment:\n",  items[i].educationAlignmentArray[j].educationalAlignment,"\n");
-    // if (items[i].educationAlignmentArray[j].alignmentType != "") $("#textarea").append("Alignment Type:\n",  items[i].educationAlignmentArray[j].alignmentType,"\n");
-    // if (items[i].educationAlignmentArray[j].dotNotation != "") $("#textarea").append("Dot Notation:\n",  items[i].educationAlignmentArray[j].dotNotation,"\n");
-    // if (items[i].educationAlignmentArray[j].itemURL != "") $("#textarea").append("Item URL:\n",  items[i].educationAlignmentArray[j].itemURL,"\n");
-    // if (items[i].educationAlignmentArray[j].description != "") $("#textarea").append("Description:\n",  items[i].educationAlignmentArray[j].description,"\n\n");
-    // }
-    // $("#textarea").append("\n-----------------------\n\n");
 }
