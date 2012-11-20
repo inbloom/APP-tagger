@@ -1,7 +1,7 @@
 $(function() {
 
     $("#learningResourceType").change(function(){
-        educationalTabUpdateDataModel('learningResourceType','learningResourceTypeOther');
+        updateItemEducationTab('learningResourceType','learningResourceTypeOther');
     });
 
 });

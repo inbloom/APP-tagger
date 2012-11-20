@@ -1,10 +1,11 @@
 $(function() {
 
     $(".delete-tag").live('click', function(obj) {
-
         var tag_id = $(obj.target).parent().attr('href').substr(1);
 
-console.log(tag_id);
+        $('#deleteModal .btn-danger').attr('href', "javascript:deleteTag('"+tag_id+"');return false;");
+        $('#deleteModal').modal('show');
+
         return false;
     })
 

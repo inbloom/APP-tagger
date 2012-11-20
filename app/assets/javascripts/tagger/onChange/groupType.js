@@ -1,7 +1,7 @@
 $(function() {
 
     $("#groupType").change(function(){
-        educationalTabUpdateDataModel('groupType','groupTypeOther');
+        updateItemEducationTab('groupType','groupTypeOther');
     });
 
 });

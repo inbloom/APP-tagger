@@ -1,7 +1,7 @@
 $(function() {
 
     $("#educationalUseOther").change(function(){
-        educationalTabUpdateDataModel('educationalUse','educationalUseOther');
+        updateItemEducationTab('educationalUse','educationalUseOther');
     });
 
 });

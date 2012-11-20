@@ -1,7 +1,7 @@
 $(function() {
 
     $("#interactivityType").change(function(){
-        educationalTabUpdateDataModel('interactivityType','interactivityTypeOther');
+        updateItemEducationTab('interactivityType','interactivityTypeOther');
     });
 
 });

@@ -1,7 +1,7 @@
 $(function() {
 
     $("#mediaType").change(function(){
-        educationalTabUpdateDataModel('mediaType','mediaTypeOther');
+        updateItemEducationTab('mediaType','mediaTypeOther');
     });
 
 });

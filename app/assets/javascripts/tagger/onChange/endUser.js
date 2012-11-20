@@ -1,7 +1,7 @@
 $(function() {
 
     $("#endUser").change(function(){
-        educationalTabUpdateDataModel('endUser','endUserOther');
+        updateItemEducationTab('endUser','endUserOther');
     });
 
 });
