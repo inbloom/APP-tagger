@@ -1,7 +1,7 @@
 
 function updateInputFields(){
     // Clear form data
-    $("form[name=LRMIData]").find("input[type=text], textarea").val("");
+    $("form[name=LRMIData]").find("input[type=text], textarea, select").val("");
     // If only one is selected then update the form with that one
     if ($("#multiItemSelector input[type=checkbox]:checked").length == 1) {
         var item = items[$("#multiItemSelector input[type=checkbox]:checked").first().attr('id')];
@@ -9,9 +9,7 @@ function updateInputFields(){
         //Setup General Tab for Single Selection
         if (item.title != "")                         $("#title").val(item.title);
         if (item.url != "")                           $("#url").val(item.url);
-        if (item.language == "EN_US")                 $("#language").val("English");
-        if (item.language == "ES_ES")                 $("#language").val("Spanish");
-        if (item.language == "")                      $("#language").val("");
+        if (item.language != "")                      $("#language").val(item.language);
         if (item.createdOn != "")                     $("#createdOn").val(item.createdOn);
         if (item.topic != "")                         $("#topic").val(item.topic);
         if (item.createdBy != "")                     $("#createdBy").val(item.createdBy);
