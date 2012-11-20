@@ -19,13 +19,7 @@ $(function() {
 
     readAlignmentDataFromFiles();
 
-    $("#amountyears").val('0');
-    $("#amountmonths").val('0');
-    $("#amountweeks").val('0');
-    $("#amountdays").val('0');
-    $("#amounthours").val('0');
-    $("#amountminutes").val('0');
-    $("#amountseconds").val('0');
+    clearTimeRequired();
 
     // Make two flyout panels resizable but not the iframe one
     $("#mainContentTopLeft" ).resizable({ handles: "e"});

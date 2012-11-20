@@ -15,7 +15,14 @@ $(function() {
         jQuery("#multiItemSelector").append($("<a href='#itemTag"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#itemTag"+itemCounter+"' id='itemTag"+itemCounter+"URL' style='display:none;' class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='itemTag"+itemCounter+"Label' class='checkbox'><input id='itemTag"+itemCounter+"' type='checkbox' name='tagItem'/><span>New Item "+itemCounter+"</span></label>"));
         $('#itemTag'+itemCounter).prop('checked', true);
 
-        var timeFormat = "P" + $( "#amountyears" ).val() + "Y" + $( "#amountmonths" ).val() + "M" + $( "#amountweeks" ).val() + "W" + $( "#amountdays" ).val() + "DT" + $( "#amounthours" ).val() + "H" + $( "#amountminutes" ).val() + "M" + $( "#amountseconds" ).val() + "S";
+        var timeFormat = "P" + 
+            $( "#slideryears" ).slider("value") + "Y" + 
+            $( "#slidermonths" ).slider("value") + "M" + 
+            $( "#sliderweeks" ).slider("value") + "W" + 
+            $( "#sliderdays" ).slider("value") + "DT" + 
+            $( "#sliderhours" ).slider("value") + "H" + 
+            $( "#sliderminutes" ).slider("value") + "M" + 
+            $( "#sliderseconds" ).slider("value") + "S";
 
         var educationAlignmentArray = new Array();
 
