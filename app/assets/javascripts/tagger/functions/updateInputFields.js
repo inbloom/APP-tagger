@@ -20,6 +20,9 @@ function updateInputFields(){
         if (item.isBasedOnURL != "")                  $("#isBasedOnURL").val(item.isBasedOnURL);
         if (item.timeRequired != "P0Y0M0W0DT0H0M0S")  $("#timeRequired").val(item.timeRequired);
 
+        // Stuff the iframe
+        if (item.url != "") updateMainContentBottom(item.url);
+
         //Setup Education Tab for Single Selection
         setupDisplayFieldsEducationTab(item, 'endUser');
         setupDisplayFieldsEducationTab(item, 'ageRange');
