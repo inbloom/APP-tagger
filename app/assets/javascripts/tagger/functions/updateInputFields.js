@@ -4,6 +4,8 @@ function updateInputFields(){
     $("form[name=LRMIData]").find("input[type=text], textarea, select").val("");
     // Clear the time required sliders as they are special
     clearTimeRequired();
+    // Clear the iframe
+    updateMainContentBottom();
     // If only one is selected then update the form with that one
     if ($("#multiItemSelector input[type=checkbox]:checked").length == 1) {
         var item = items[$("#multiItemSelector input[type=checkbox]:checked").first().attr('id')];
