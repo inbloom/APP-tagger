@@ -20,7 +20,6 @@ function processCSVOutput(){
         str = str + '"' + items[i].interactivityType.replace(/\"/g, "'") + '",';
         str = str + '"' + items[i].learningResourceType.replace(/\"/g, "'") + '",';
 
-
         var alignmentString1 = '"';
         var alignmentString2 = '"';
         var alignmentString3 = '"';
@@ -28,11 +27,11 @@ function processCSVOutput(){
         var alignmentString5 = '"';
 
         for (j in items[i].educationalAlignments) {
-            alignmentString1 += items[i].educationalAlignments[j].educationalAlignment + ',';
-            alignmentString2 += items[i].educationalAlignments[j].alignmentType + ',';
-            alignmentString3 += items[i].educationalAlignments[j].dotNotation + ',';
-            alignmentString4 += items[i].educationalAlignments[j].itemURL + ',';
-            alignmentString5 += items[i].educationalAlignments[j].description.replace(/\"/g, "'") + ',';
+            alignmentString1 += items[i].educationalAlignments[j].educationalAlignment.replace(/,/g, '') + ',';
+            alignmentString2 += items[i].educationalAlignments[j].alignmentType.replace(/,/g, '') + ',';
+            alignmentString3 += items[i].educationalAlignments[j].dotNotation.replace(/,/g, '') + ',';
+            alignmentString4 += items[i].educationalAlignments[j].itemURL.replace(/,/g, '') + ',';
+            alignmentString5 += items[i].educationalAlignments[j].description.replace(/\"/g, "'").replace(/,/g, '') + ',';
         }
         alignmentString1 += '"';
         alignmentString2 += '"';
