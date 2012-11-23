@@ -12,7 +12,6 @@ $(function() {
         var formDotNotation = $('#dotNotation').val();
         var formDescription = $('#description').val();
         var formItemUrl = $('#itemURL').val();
-        var formGuid = $('#itemGUID').val();
 
         // Create our object
         var object = {
@@ -20,8 +19,7 @@ $(function() {
             'alignmentType' : formAlignmentType,
             'dotNotation' : formDotNotation,
             'description' : formDescription,
-            'itemURL' : formItemUrl,
-            'guid' : formGuid
+            'itemURL' : formItemUrl
         };
 
         var objHash = objectToHash(object);
