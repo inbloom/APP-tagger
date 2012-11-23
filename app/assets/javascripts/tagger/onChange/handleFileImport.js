@@ -11,7 +11,7 @@ $(function() {
                     var output = $.csv2Array(allText);
 
                     for (var i = 1; i < output.length; i++) {
-                        if (output[i].length == 0) continue;
+                        if (output[i] == undefined || output[i].length == 0) continue;
 
                         // Uncheck everything when you add a new tag
                         jQuery("#multiItemSelector input[type=checkbox]").each(function(i,obj) {
@@ -23,8 +23,6 @@ $(function() {
                         if (itemCounter == 0){
                             jQuery("#multiItemSelector").empty();
                         }
-
-                        var educationAlignmentArray = new Array();
 
                         items['itemTag' + itemCounter] = {
                             'id':itemCounter,
@@ -45,7 +43,7 @@ $(function() {
                             'mediaType':output[i][9],
                             'groupType':output[i][23],
                             'timeRequired':output[i][3],
-                            'educationAlignmentArray':educationAlignmentArray
+                            'educationalAlignments':{}
                         };
 
                         var itemTitle = output[i][1];
