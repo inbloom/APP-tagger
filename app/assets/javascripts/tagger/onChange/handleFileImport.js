@@ -11,6 +11,7 @@ $(function() {
                     var output = $.csv2Array(allText);
 
                     for (var i = 1; i < output.length; i++) {
+                        if (output[i].length == 0) continue;
 
                         // Uncheck everything when you add a new tag
                         jQuery("#multiItemSelector input[type=checkbox]").each(function(i,obj) {
@@ -22,17 +23,6 @@ $(function() {
                         if (itemCounter == 0){
                             jQuery("#multiItemSelector").empty();
                         }
-                        jQuery("#multiItemSelector").append($("<a href='#itemTag"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#itemTag"+itemCounter+"' id='itemTag"+itemCounter+"URL' style='display:none;' class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='itemTag"+itemCounter+"Label' class='checkbox'><input id='itemTag"+itemCounter+"' type='checkbox' name='tagItem'/><span>New Item "+itemCounter+"</span></label>"));
-                        $('#itemTag'+itemCounter).prop('checked', true);
-
-                        var timeFormat = "P" +
-                            $( "#slideryears" ).slider("value") + "Y" +
-                            $( "#slidermonths" ).slider("value") + "M" +
-                            $( "#sliderweeks" ).slider("value") + "W" +
-                            $( "#sliderdays" ).slider("value") + "DT" +
-                            $( "#sliderhours" ).slider("value") + "H" +
-                            $( "#sliderminutes" ).slider("value") + "M" +
-                            $( "#sliderseconds" ).slider("value") + "S";
 
                         var educationAlignmentArray = new Array();
 
@@ -54,9 +44,14 @@ $(function() {
                             'learningResourceType':output[i][16],
                             'mediaType':output[i][9],
                             'groupType':output[i][23],
-                            'timeRequired':timeFormat,
+                            'timeRequired':output[i][3],
                             'educationAlignmentArray':educationAlignmentArray
                         };
+
+                        var itemTitle = output[i][1];
+                        var itemUrl = output[i][2];
+
+                        jQuery("#multiItemSelector").append($("<a href='#itemTag"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#itemTag"+itemCounter+"' id='itemTag"+itemCounter+"URL' "+(itemUrl!=""?"":"style='display:none;'")+" class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='itemTag"+itemCounter+"Label' class='checkbox'><input id='itemTag"+itemCounter+"' type='checkbox' name='tagItem'/><span>"+itemTitle+"</span></label>"));
 
                         itemCounter++;
 
