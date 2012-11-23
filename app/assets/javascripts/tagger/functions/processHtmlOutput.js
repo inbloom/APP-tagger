@@ -64,7 +64,7 @@ function processHTMLOutput(){
             }
         }
 
-        for (j = 0; j < items[i].educationAlignmentArray.length; j++){
+        for (j in items[i].educationalAlignments) {
             str = str + '\t<meta itemprop="educationalAlignment" itemscope="itemscope" itemtype="schema.org/alignmentObject">';
             str = str + '\t\t<meta itemprop="name" content="' + items[i].educationAlignmentArray[j].educationalAlignment + '"></meta>\n';
             str = str + '\t\t<meta itemprop="alignmentType" content="' + items[i].educationAlignmentArray[j].alignmentType + '"></meta>\n';

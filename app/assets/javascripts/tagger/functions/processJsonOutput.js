@@ -76,7 +76,7 @@ function processJSONOutput(){
         myJSONText = myJSONText + "\n               \"educationalAlignment\":[";
 
         var hasLength = false;
-        for (j = 0; j < items[i].educationAlignmentArray.length; j++) {
+        for (j in items[i].educationalAlignments) {
             myJSONText = myJSONText + "\n                  {\n                     \"type\":\"http://schema.org/AlignmentObject\",\n                     \"properties\":{\n                        \"name\":[\"" + items[i].educationAlignmentArray[j].educationalAlignment + "\"],\n                        \"alignmentType\":[\""+items[i].educationAlignmentArray[j].alignmentType+"\"],\n                        \"targetDescription\":[\""+items[i].educationAlignmentArray[j].description.replace(/\"/g, "'")+"\"],\n                        \"targetName\":[\""+items[i].educationAlignmentArray[j].dotNotation+"\"],\n                        \"targetURL\":[\""+items[i].educationAlignmentArray[j].itemURL+"\"]\n                     }\n                  },";
             hasLength = true;
         }
