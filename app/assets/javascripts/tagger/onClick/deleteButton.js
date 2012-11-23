@@ -1,3 +1,5 @@
+// # this code is garbage and not used right now.
+
 $(function() {
 
     $("#deleteButton").click(function() {
@@ -11,6 +13,7 @@ $(function() {
         // Updates the Educational Alignment Array of the Tagged Items
         boxes = document.checkBoxForm.tagItem.length;
         var onlyInChecked = true;
+//        $("#multiItemSelector input[type=checkbox]:checked").each(function(i,obj) {
 
         for (i = 0; i < boxes; i++) {
             if (document.checkBoxForm.tagItem[i].checked) {
@@ -43,8 +46,7 @@ $(function() {
 
 
             if (onlyinChecked){
-                document.getElementById('deleteButton').setAttribute("class","btn btn-warning disabled");
-
+                $("#deleteButton").addClass('disabled');
 
                 // Update the Alignment Previous Session History
                 $('#currentAlignmentTable').html('<thead><tr><th>Select</th><th>Dot Notation</th></tr></thead><tbody></tbody>');
