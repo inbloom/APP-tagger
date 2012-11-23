@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-SlcTagger::Application.load_tasks
+LRMI::Application.load_tasks

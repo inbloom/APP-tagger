@@ -1,0 +1,31 @@
+# Database example yml file.
+
+development:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: tagger_development
+  pool: 5
+  username:                     # change these to whatever it is
+  password:                     # change these to whatever it is
+  socket: /tmp/mysql.sock
+
+test:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: tagger_test
+  pool: 5
+  username:                     # change these to whatever it is
+  password:                     # change these to whatever it is
+  socket: /tmp/mysql.sock
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: tagger_production
+  pool: 5
+  username:                     # change these to whatever it is
+  password:                     # change these to whatever it is
+  socket: /tmp/mysql.sock

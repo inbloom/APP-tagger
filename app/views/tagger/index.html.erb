@@ -1,0 +1,18 @@
+<%= render :partial => 'navbar' %>
+
+<div id="mainContentTopLeft" class="main-content-topleft border-right">
+  <%= render :partial => 'topleft' %>
+</div>
+
+<div id="mainContentTopRight" class="main-content-topright border-right">
+  <%= render :partial => 'topright' %>
+</div>
+
+<div id="mainContentBottom" class="page">
+  <iframe id='iframe' scrolling='auto' frameborder='0' width='100%' height='100%'></iframe>
+</div>
+
+<%= render :partial => "tagger/modals/load_modal" %>
+<%= render :partial => "tagger/modals/user_modal" %>
+<%= render :partial => "tagger/modals/delete_modal" %>
+<%= render :partial => "tagger/modals/alignment_modal" %>

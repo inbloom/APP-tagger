@@ -1,0 +1,24 @@
+<div class="modal hide fade" id="loadModal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" id="closeModalButton">X</button>
+    <h3>Load A CSV Template</h3>
+  </div>
+  <div class="modal-body">
+    <p>If you have utilized the LMRI CSV Template, you may select it from your local folder. The file must be in CSV format to be uploaded. <br/><br/> You may find a copy of the <a href="LRMI%20Tagger%20CSV%20Upload%20Template%20User%20Instructions.docx">LRMI Template Guide</a> available online.This file contains the CSV file embedded.</p>
+    <br/>
+    <input type="file" id="files" name="files" multiple />
+    <!--output id="list"></output-->
+  </div>
+  <div class="modal-header">
+    <hr/>
+    <h3>Quick Load</h3>
+  </div>
+  <div class="modal-body">
+    <p>To create multiple entries enter <i>title,URL</i> once per line.<br/><br/>   <strong>Example:</strong><br/>  Actual Title,http://www.test.com<br/>Actual Title Two,http://www.test2.com</p>
+    <br/>
+    <textarea id="loadModalTextArea" style="height: 50px; width: 95%;font-size:small;"></textarea>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-primary" data-dismiss="modal" id="saveLoadModalButton">Load</a>
+  </div>
+</div>

@@ -1,0 +1,95 @@
+body {
+  overflow: hidden;
+  background: url(/assets/LRMI.png) top right no-repeat;
+}
+
+#mainContentTopLeft {
+  float: left;
+  width: 250px;
+  z-index: 200;
+  min-width: 250px;
+  position: relative;
+  padding-right: 10px;
+  bottom: 0px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #ffffff;
+  border-right: 1px solid #fbd385;
+}
+
+#mainContentTopRight {
+  float: left;
+  width: 315px;
+  z-index: 100;
+  min-width: 315px;
+  position: relative;
+  padding-right: 10px;
+  left: 15px;
+  bottom: 0px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #ffffff;
+  border-right: 1px solid #fbd385;
+}
+
+#mainContentBottom {
+  float: left;
+  position: relative;
+  left: 25px;
+  right: 0px;
+}
+
+#tags,
+#output {
+  padding-left: 15px;
+}
+
+#userWelcome {
+  color: #ffffff;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
+  a {
+    color: #ffffff;
+  }
+}
+
+select.multiple {
+  height: 300px;
+  &#endUser {
+    height: 165px;
+  }
+  &#ageRange {
+    height: 165px;
+  }
+  &#interactivityType {
+    height: 60px;
+  }
+}
+
+li a.disabled {
+  font-weight: bold;
+  &:hover {
+    color: #000000;
+    background: #ffffff;
+  }
+}
+
+.navbar-inner {
+  padding: 0 10px;
+}
+
+.bigModal {
+  width: 630px;
+  margin-left: -315px;
+}
+.textarea-xxlarge {
+  width: 562px;
+}
+tr.noAlignmentsYet td {
+  text-align: center;
+}
+div.tag-alignments {
+  text-align: center;
+}
+.typeahead {
+  z-index: 10000;
+}

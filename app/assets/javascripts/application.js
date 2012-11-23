@@ -12,4 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
+//= require jquery.ui.core
+//= require jquery.ui.mouse
+//= require jquery.ui.resizable
+//= require jquery.ui.slider
 //= require_tree .
+
