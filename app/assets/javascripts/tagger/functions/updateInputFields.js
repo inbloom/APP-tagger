@@ -2,8 +2,6 @@
 function updateInputFields(){
     // Clear form data
     $("form[name=LRMIData]").find("input[type=text], textarea, select").val("");
-    // Clear the time required sliders as they are special
-    clearTimeRequired();
     // Clear the iframe
     updateMainContentBottom();
     // If only one is selected then update the form with that one
@@ -20,7 +18,20 @@ function updateInputFields(){
         if (item.usageRightsURL != "")                $("#usageRightsURL").val(item.usageRightsURL);
         if (item.publisher != "")                     $("#publisher").val(item.publisher);
         if (item.isBasedOnURL != "")                  $("#isBasedOnURL").val(item.isBasedOnURL);
-        if (item.timeRequired != "P0Y0M0W0DT0H0M0S")  $("#timeRequired").val(item.timeRequired);
+
+        // Refactoring timeRequired update -- why are we using this format?
+        if (item.timeRequired != "P0Y0M0W0DT0H0M0S") {
+            var vals = item['timeRequired'].match(/(\d+)/g);
+
+            updateSlider($("#slideryears"), 'Year', vals[0]);
+            updateSlider($("#slidermonths"), 'Month', vals[1]);
+            updateSlider($("#sliderweeks"), 'Week', vals[2]);
+            updateSlider($("#sliderdays"), 'Day', vals[3]);
+            updateSlider($("#sliderhours"), 'Hour', vals[4]);
+            updateSlider($("#sliderminutes"), 'Minute', vals[5]);
+            updateSlider($("#sliderseconds"), 'Second', vals[6]);
+
+        }
 
         // Stuff the iframe
         if (item.url != "") updateMainContentBottom(item.url);
@@ -44,5 +55,8 @@ function updateInputFields(){
             if (item.educationAlignmentArray[item.educationAlignmentArray.length-1].guid != "")                  $("#itemGUID").val(item.educationAlignmentArray[item.educationAlignmentArray.length-1].guid);
         }
 
+    } else {
+        // Clear the time required sliders as they are special
+        clearTimeRequired();
     }
 }

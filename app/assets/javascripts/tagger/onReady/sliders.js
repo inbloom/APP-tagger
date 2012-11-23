@@ -7,13 +7,8 @@ $(function() {
         max: 24,
         value: 0,
         slide: function( event, ui ) {
-            var p = $(ui.handle).parent().prev();
-            if (ui.value == 0) p.html("Year");
-            else if (ui.value == 1) p.html( ui.value + " year " );
-            else p.html( ui.value + " years " );
-        },
-        change: function () {
-            updateTimeRequired();
+            updateSlider('#slideryears', 'Year');
+            updateTimeRequired('Year');
         }
     });
 
@@ -24,13 +19,8 @@ $(function() {
         max: 11,
         value: 0,
         slide: function( event, ui ) {
-            var p = $(ui.handle).parent().prev();
-            if (ui.value == 0) p.html("Month");
-            else if (ui.value == 1) p.html( ui.value + " month " );
-            else p.html( ui.value + " months " );
-        },
-        change: function () {
-            updateTimeRequired();
+            updateSlider('#slidermonths', 'Month');
+            updateTimeRequired('Month');
         }
     });
 
@@ -41,13 +31,8 @@ $(function() {
         max: 51,
         value: 0,
         slide: function( event, ui ) {
-            var p = $(ui.handle).parent().prev();
-            if (ui.value == 0) p.html("Week");
-            else if (ui.value == 1) p.html( ui.value + " week " );
-            else p.html( ui.value + " weeks " );
-        },
-        change: function () {
-            updateTimeRequired();
+            updateSlider('#sliderweeks', 'Week');
+            updateTimeRequired('Week');
         }
     });
 
@@ -58,13 +43,8 @@ $(function() {
         max: 30,
         value: 0,
         slide: function( event, ui ) {
-            var p = $(ui.handle).parent().prev();
-            if (ui.value == 0) p.html("Day");
-            else if (ui.value == 1) p.html( ui.value + " day " );
-            else p.html( ui.value + " days " );
-        },
-        change: function () {
-            updateTimeRequired();
+            updateSlider('#sliderdays', 'Day');
+            updateTimeRequired('Day');
         }
     });
 
@@ -75,13 +55,8 @@ $(function() {
         max: 23,
         value: 0,
         slide: function( event, ui ) {
-            var p = $(ui.handle).parent().prev();
-            if (ui.value == 0) p.html("Hour");
-            else if (ui.value == 1) p.html( ui.value + " hour " );
-            else p.html( ui.value + " hours " );
-        },
-        change: function () {
-            updateTimeRequired();
+            updateSlider('#sliderhours', 'Hour');
+            updateTimeRequired('Hour');
         }
     });
 
@@ -92,13 +67,8 @@ $(function() {
         max: 59,
         value: 0,
         slide: function( event, ui ) {
-            var p = $(ui.handle).parent().prev();
-            if (ui.value == 0) p.html("Minute");
-            else if (ui.value == 1) p.html( ui.value + " minute " );
-            else p.html( ui.value + " minutes " );
-        },
-        change: function () {
-            updateTimeRequired();
+            updateSlider('#sliderminutes', 'Minute');
+            updateTimeRequired('Minute');
         }
     });
 
@@ -109,14 +79,30 @@ $(function() {
         max:59,
         value: 0,
         slide: function( event, ui ) {
-            var p = $(ui.handle).parent().prev();
-            if (ui.value == 0) p.html("Second");
-            else if (ui.value == 1) p.html( ui.value + " second " );
-            else p.html( ui.value + " seconds " );
-        },
-        change: function () {
-            updateTimeRequired();
+            updateSlider('#sliderseconds', 'Second');
+            updateTimeRequired('Second');
         }
     });
 
 });
+
+// Function to update the slider view elements without adjusting the item hash
+// sliderValue is optional
+function updateSlider(sliderObj, unitString, sliderValue) {
+
+    if (sliderValue == undefined) {
+        sliderValue = $(sliderObj).slider('value');
+    } else {
+        $(sliderObj).slider({value:sliderValue});
+    }
+
+    var p = $(sliderObj).prev();
+    if (sliderValue == 0) {
+        p.html(unitString);
+    } else if (sliderValue == 1) {
+        p.html(sliderValue + " " + unitString);
+    } else {
+        p.html(sliderValue + " " + unitString + "s");
+    }
+
+}
