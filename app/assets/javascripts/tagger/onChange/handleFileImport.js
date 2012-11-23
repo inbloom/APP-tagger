@@ -24,11 +24,14 @@ $(function() {
                             jQuery("#multiItemSelector").empty();
                         }
 
+                        var itemTitle = (output[i][1]!='')?output[i][1]:"New Item " + itemCounter;
+                        var itemUrl = output[i][2];
+
                         items['itemTag' + itemCounter] = {
                             'id':itemCounter,
-                            'title':output[i][1],
+                            'title':itemTitle,
                             'language':output[i][8],
-                            'url':output[i][2],
+                            'url':itemUrl,
                             'createdOn':output[i][5],
                             'topic':output[i][4],
                             'createdBy':output[i][6],
@@ -45,9 +48,6 @@ $(function() {
                             'timeRequired':output[i][3],
                             'educationalAlignments':{}
                         };
-
-                        var itemTitle = output[i][1];
-                        var itemUrl = output[i][2];
 
                         jQuery("#multiItemSelector").append($("<a href='#itemTag"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#itemTag"+itemCounter+"' id='itemTag"+itemCounter+"URL' "+(itemUrl!=""?"":"style='display:none;'")+" class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='itemTag"+itemCounter+"Label' class='checkbox'><input id='itemTag"+itemCounter+"' type='checkbox' name='tagItem'/><span>"+itemTitle+"</span></label>"));
 
