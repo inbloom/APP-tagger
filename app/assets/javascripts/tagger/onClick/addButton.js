@@ -14,23 +14,24 @@ $(function() {
         var formItemUrl = $('#itemURL').val();
         var formGuid = $('#itemGUID').val();
 
+        // Create our object
+        var object = {
+            'educationalAlignment' : formEducationAlignment,
+            'alignmentType' : formAlignmentType,
+            'dotNotation' : formDotNotation,
+            'description' : formDescription,
+            'itemURL' : formItemUrl,
+            'guid' : formGuid
+        };
+
+        var objHash = objectToHash(object);
+
         // Okay add it.
-        if (alignments[formGuid] == undefined) {
-
-            // Add to alignment hash
-            alignments[formGuid] = {
-                'educationalAlignment' : formEducationAlignment,
-                'alignmentType' : formAlignmentType,
-                'dotNotation' : formDotNotation,
-                'description' : formDescription,
-                'itemURL' : formItemUrl,
-                'guid' : formGuid
-            };
-
+        if (alignments[objHash] == undefined) {
+            alignments[objHash] = object;
             //Updates the Alignment Table on the Alignment Tab
             if (formDotNotation == '') formDotNotation = 'N/A';
-            $('#currentAlignmentTable > tbody:last').append('<tr><td><label class="checkbox"><input type="checkbox" class="alignment-checkbox" value="'+formGuid+'" />'+ formDotNotation +'</label></td><td>'+ formAlignmentType +'</td></tr>');
-
+            $('#currentAlignmentTable > tbody:last').append('<tr><td><label class="checkbox"><input type="checkbox" class="alignment-checkbox" value="'+objHash+'" />'+ formDotNotation +'</label></td><td>'+ capitalize(formAlignmentType) +'</td></tr>');
         }
 
         updateTextArea();
