@@ -1,73 +1,86 @@
+
 $(function() {
 
     $("#addButton").click(function() {
-        var metaSourceValue1 = $('#educationalAlignment').val();
-        var metaSourceValue2 = $('#alignmentType').val();
-        var metaSourceValue3 = $('#dotNotation').val();
-        var metaSourceValue4 = $('#itemURL').val();
-        var metaSourceValue5 = $('#description').val();
-        var metaSourceValue6 = $('#itemGUID').val();
-
-        //Updates the Educational Alignment Array of the Tagged Items
-        boxes = document.checkBoxForm.tagItem.length;
-        for (i = 0; i < boxes; i++) {
-            if (document.checkBoxForm.tagItem[i].checked) {
-
-                //Check to see if the EducationalArray already contains this Alignment
-                var inEducationalAlignmentTaggedItems = false;
-                if (typeof items[i].educationAlignmentArray[0] !== 'undefined' && items[i].educationAlignmentArray[0] !== null){
-                    for (var j = 0; j < items[i].educationAlignmentArray.length; j++) {
-                        if(	(items[i].educationAlignmentArray[j].educationalAlignment == $('#educationalAlignment').val()) &&
-                            (items[i].educationAlignmentArray[j].alignmentType == $('#alignmentType').val()) &&
-                            (items[i].educationAlignmentArray[j].dotNotation == $('#dotNotation').val()) &&
-                            (items[i].educationAlignmentArray[j].itemURL == $('#itemURL').val()) &&
-                            (items[i].educationAlignmentArray[j].description == $('#description').val() ) &&
-                            (items[i].educationAlignmentArray[j].guid == $('#itemGUID').val() )  ){
-                            inEducationalAlignmentTaggedItems = true;
-                            if (items[i].title == '') alert("This alignment has already been added to the Tagged Item: " + items[i].id );
-                            if (items[i].title != '') alert("This alignment has already been added to the Tagged Item: " + items[i].title );
-                        }
-                    }
-                    if (!inEducationalAlignmentTaggedItems) {
-                        setTimeout(items[i].educationAlignmentArray.push({'educationalAlignment':metaSourceValue1,'alignmentType':metaSourceValue2,'dotNotation':metaSourceValue3,'itemURL':metaSourceValue4,'description':metaSourceValue5,'guid':metaSourceValue6}),3000);
-                        document.getElementById('deleteButton').setAttribute("class","btn btn-warning");
-
-                    }
-                }
-                else setTimeout(items[i].educationAlignmentArray.push({'educationalAlignment':metaSourceValue1,'alignmentType':metaSourceValue2,'dotNotation':metaSourceValue3,'itemURL':metaSourceValue4,'description':metaSourceValue5,'guid':metaSourceValue6}),3000);
-                document.getElementById('deleteButton').setAttribute("class","btn btn-warning");
-            }
-        }
+        // Hide the modal
+        $('#alignmentsModal').modal('hide');
+        $('.noAlignmentsYet').hide();
+        // Dig out the data
+        var formEducationAlignment = $('#educationalAlignment').val();
+        var formAlignmentType = $('#alignmentType').val();
+        var formDotNotation = $('#dotNotation').val();
+        var formDescription = $('#description').val();
+        var formItemUrl = $('#itemURL').val();
+        var formGuid = $('#itemGUID').val();
 
 
-        //Check to see if the current Alignment is already Added to the currentAlignmentArray
+        // Check to see if the current Alignment is already Added to the currentAlignmentArray
+        // @TODO These should be a hash but dont have time
         var alreadyExists = false;
         for (i = 0; i < currentAlignmentArray.length; i++) {
-            if(	(currentAlignmentArray[i].educationalAlignment == $('#educationalAlignment').val()) &&
-                (currentAlignmentArray[i].alignmentType == $('#alignmentType').val()) &&
-                (currentAlignmentArray[i].dotNotation == $('#dotNotation').val()) &&
-                (currentAlignmentArray[i].itemURL == $('#itemURL').val()) &&
-                (currentAlignmentArray[i].description == $('#description').val() ) &&
-                (currentAlignmentArray[i].guid == $('#itemGUID').val()  )){
+            if ((currentAlignmentArray[i].educationalAlignment == formEducationAlignment) &&
+                (currentAlignmentArray[i].alignmentType == formAlignmentType) &&
+                (currentAlignmentArray[i].dotNotation == formDotNotation) &&
+                (currentAlignmentArray[i].itemURL == formItemUrl) &&
+                (currentAlignmentArray[i].description == formDescription) &&
+                (currentAlignmentArray[i].guid == formGuid)
+            ) {
                 alreadyExists = true;
             }
         }
 
+        // Okay add it.
         if (!alreadyExists) {
-
             blankCurrentAlignment();
 
             // Add to the currentAlignmentArray
-            currentAlignmentArray.push({'educationalAlignment':metaSourceValue1,'alignmentType':metaSourceValue2,'dotNotation':metaSourceValue3,'itemURL':metaSourceValue4,'description':metaSourceValue5,'guid':metaSourceValue6});
+            currentAlignmentArray.push({
+                'educationalAlignment'  : formEducationAlignment,
+                'alignmentType'         : formAlignmentType,
+                'dotNotation'           : formDotNotation,
+                'itemURL'               : formItemUrl,
+                'description'           : formDescription,
+                'guid'                  : formGuid
+            });
 
             //Updates the Alignment Table on the Alignment Tab
-            if (metaSourceValue3 == '') metaSourceValue3 = 'N/A';
-            $('#currentAlignmentTable > tbody:last').append('<tr style="background-color:#F8B93B;color:#ffffff;" id="currentAlignmentRow' + currentAlignmentCounter + '" onclick="updateAlignmentFields(' + currentAlignmentCounter + ');" onMouseOver="currentAlignmentMouseOver(' + currentAlignmentCounter + ');" onMouseOut="currentAlignmentMouseOut(' + currentAlignmentCounter + ');"><td><a id="currentAlignmentSelect' + currentAlignmentCounter + '"><i id="currentAlignmentIcon' + currentAlignmentCounter + '" class="icon-chevron-up icon-white"></i></a></td><td>'+ metaSourceValue3 +'</td></tr>');
+            if (formDotNotation == '') formDotNotation = 'N/A';
+            $('#currentAlignmentTable > tbody:last').append('<tr><td><label class="checkbox"><input type="checkbox" value="'+formGuid+'" />'+ formDotNotation +'</label></td><td>'+ formAlignmentType +'</td></tr>');
+
             currentAlignmentItem = currentAlignmentCounter;
             currentAlignmentCounter++;
         }
 
         updateTextArea();
+
+//        $("#multiItemSelector input[type=checkbox]:checked").each(function(i,obj) {
+//
+//            //Check to see if the EducationalArray already contains this Alignment
+//            var inEducationalAlignmentTaggedItems = false;
+//            if (typeof items[obj.id].educationAlignmentArray[0] !== 'undefined' && items[obj.id].educationAlignmentArray[0] !== null){
+//                for (var j = 0; j < items[obj.id].educationAlignmentArray.length; j++) {
+//                    if(	(items[obj.id].educationAlignmentArray[j].educationalAlignment == $('#educationalAlignment').val()) &&
+//                        (items[obj.id].educationAlignmentArray[j].alignmentType == $('#alignmentType').val()) &&
+//                        (items[obj.id].educationAlignmentArray[j].dotNotation == $('#dotNotation').val()) &&
+//                        (items[obj.id].educationAlignmentArray[j].itemURL == $('#itemURL').val()) &&
+//                        (items[obj.id].educationAlignmentArray[j].description == $('#description').val() ) &&
+//                        (items[obj.id].educationAlignmentArray[j].guid == $('#itemGUID').val() )  ){
+//                        inEducationalAlignmentTaggedItems = true;
+//                        if (items[obj.id].title == '') alert("This alignment has already been added to the Tagged Item: " + items[obj.id].id );
+//                        if (items[obj.id].title != '') alert("This alignment has already been added to the Tagged Item: " + items[obj.id].title );
+//                    }
+//                }
+//                if (!inEducationalAlignmentTaggedItems) {
+//                    // @TODO Why was he using a settimeout here for this?  If it doesn't exist, push it in -- in 3 seconds?  huh?
+//                    setTimeout(items[obj.id].educationAlignmentArray.push({'educationalAlignment':metaSourceValue1,'alignmentType':metaSourceValue2,'dotNotation':metaSourceValue3,'itemURL':metaSourceValue4,'description':metaSourceValue5,'guid':metaSourceValue6}),3000);
+//                }
+//            }
+//            // @TODO Why was he using a settimeout here for this?
+//            else setTimeout(items[obj.id].educationAlignmentArray.push({'educationalAlignment':metaSourceValue1,'alignmentType':metaSourceValue2,'dotNotation':metaSourceValue3,'itemURL':metaSourceValue4,'description':metaSourceValue5,'guid':metaSourceValue6}),3000);
+//
+//        });
+
+
 
         return false;
     });

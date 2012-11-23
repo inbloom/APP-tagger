@@ -1,68 +1,18 @@
-<table cellspacing='2' cellpadding='5' class="table-condensed" style="width:100%;border-bottom: thin solid #FBD385;">
-  <tr>
-    <td style="text-align:left;">
-      <label class="control-label" for="educationalAlignment">Educational Alignment</label>
-      <select class="input-xlarge" id="educationalAlignment">
-        <option selected="selected">Common Core State Standards</option>
-      </select>
-    </td>
-  </tr>
-  <tr>
-    <td style="text-align:left;">
-      <label class="control-label" for="alignmentType">Alignment Type</label>
-      <select class="input-xlarge" id="alignmentType">
-        <option>Alignment Type...</option>
-        <option value='assesses'>Assesses</option>
-        <option value='teaches'>Teaches</option>
-        <option value='requires'>Requires</option>
-        <option value='textComplexity'>TextComplexity</option>
-        <option value='readingLevel'>ReadingLevel</option>
-        <option value='educationalSubject'>EducationalSubject</option>
-        <option value='educationLevel'>EducationLevel</option>
-      </select>
-    </td>
-  </tr>
-  <tr>
-    <td style="text-align:left;">
-      <label class="control-label" for="dotNotation">Dot Notation</label>
-      <input type="text" class="input-xlarge" id="dotNotation" placeholder='Dot Notation'>
-    </td>
-  </tr>
-  <tr>
-    <td style="text-align:left;">
-      <label class="control-label" for="itemURL">Item URL</label>
-      <input type="text" class="input-xlarge" id="itemURL" placeholder='Item URL'>
-    </td>
-  </tr>
-  <tr style="display:none;">
-    <td style="text-align:left;">
-      <label class="control-label" for="itemGUID">Item GUID</label>
-      <input type="text" class="input-xlarge" readonly="readonly" id="itemGUID">
-    </td>
-  </tr>
-  <tr>
-    <td style="text-align:left;">
-      <label class="control-label" for="description">Description</label>
-      <textarea type="text" class="input-xlarge" id="description" rows="5"></textarea>
-    </td>
-  </tr>
-  <tr>
-    <td style="text-align:right;">
-      <button class="btn btn-mini btn-success" id="addButton"><i class="icon-tag"></i> Add</button>
-      <button class="btn btn-mini btn-warning disabled" id="deleteButton"><i class="icon-remove"></i> Delete</button>
-    </td>
-  </tr>
-</table>
-<br/>
-<h4>Previous Session Alignments:</h4>
-<p style="font-size:8pt;color:Grey;"><i>Hover over items below for more information</i></p>
-<table id="currentAlignmentTable" style="width:100%;text-align:center;">
+
+<table class="table table-striped" id='currentAlignmentTable'>
   <thead>
-    <tr>
-      <th>Select</th>
-      <th>Dot Notation</th>
-    </tr>
+  <tr>
+    <th>DOT Notation</th>
+    <th>Alignment</th>
+  </tr>
   </thead>
   <tbody>
+  <tr class='noAlignmentsYet'>
+    <td colspan='2'>[ No alignments for this session ]</td>
+  </tr>
   </tbody>
 </table>
+
+
+<br />
+<button class="btn btn-mini btn-success add-alignment pull-right"><i class="icon-tag"></i> Add Alignment</button>
