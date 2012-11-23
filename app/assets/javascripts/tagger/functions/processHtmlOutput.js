@@ -1,6 +1,5 @@
 function processHTMLOutput(){
-    boxes = items.length;
-    for (i = 0; i < boxes; i++) {
+    for (i in items) {
         var str = '<meta itemscope="itemscope" itemtype="http://schema.org/CreativeWork">\n';
         str = str + '\t<meta itemprop="inLanguage" content="' + items[i].language + '"></meta>\n';
         str = str + '\t<meta itemprop="name" content="' + items[i].title.replace(/\"/g, "'") + '"></meta>\n';

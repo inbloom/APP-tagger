@@ -1,7 +1,7 @@
 function processCSVOutput(){
     var str = '"Metadata:","Title","URL","Time Required (FORMAT: P0Y0M0W0DT0H0M0S)","Topic","Created (FORMAT: YYYY-MM-DD)","Creator","Publisher","Language","Mediatype","Use Rights URL","Is based on  URL","Intended End User Role","Educational Use","Typical Age Range","Interactivity Type","Learning Resource Type","Educational Alignment","Alignment Type","Dot Notation","Target URL","Target Description","Group Type"\n';
-    boxes = items.length;
-    for (i = 0; i < boxes; i++) {
+
+    for (i in items) {
         str = str + '"",';
         str = str + '"' + items[i].title.replace(/\"/g, "'") + '",';
         str = str + '"' + items[i].url + '",';

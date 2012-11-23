@@ -8,9 +8,9 @@ function processJSONOutput(){
     myJSONText = myJSONText + "   \"document_version\":\"1.0\",\n   \"document_creation_time\":\"" +		ISODateString(d) + "\",\n   \"userFirstName\":\""+ firstName +"\",\n   \"userLastName\":\""+ lastName +"\",\n   \"userOrganization\":\""+ organizationName +"\",\n   \"userEmail\":\""+ userEmail +"\",\n   \"userRole\":\""+ userRole +"\",\n   \"userGrade\":\""+ userGrade +"\",\n   \"userExperience\":\""+ userExperience +"\",\n   \"microdata\":{\n      \"items\":[";
 
     // Setup new Item JSON Output per Item
-    for (var i = 0; i < items.length; i++) {
+    for (i in items) {
 
-        // General Information
+            // General Information
         myJSONText = myJSONText + "\n         {\n            \"type\":\"http://schema.org/CreativeWork\",\n            \"properties\":{\n               \"inLanguage\":[\""+items[i].language+"\"],\n               \"name\":[\""+items[i].title.replace(/\"/g, "'")+"\"],\n               \"url\":[\""+items[i].url+"\"],\n               \"about\":[\""+items[i].topic.replace(/\"/g, "'")+"\"],\n               \"dateCreated\":[\""+items[i].createdOn+"\"],\n               \"thumbnailURL\":[\"N/A\"],\n               \"author\":[{\n                  \"type\":\"http://schema.org/Person\",\n                  \"properties\":{\n                     \"name\":[\""+items[i].createdBy+"\"]\n                  }\n               }],\n               \"publisher\":[{\n                  \"type\":\"http://schema.org/Organization\",\n                  \"properties\":{\n                     \"name\":[\""+items[i].publisher+"\"]\n                  }\n               }],\n               \"useRightsURL\":[\""+items[i].usageRightsURL+"\"],\n               \"isBasedOnURL\":[\""+items[i].isBasedOnURL+"\"],";
 
 
