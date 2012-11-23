@@ -18,3 +18,4 @@
 //= require jquery.ui.resizable
 //= require jquery.ui.slider
 //= require_tree .
+

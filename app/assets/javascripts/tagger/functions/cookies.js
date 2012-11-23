@@ -1,6 +1,6 @@
+// Not sure why we are using these instead of jquery for cookies.
 
-function getCookie(c_name)
-{
+function getCookie(c_name) {
     var i,x,y,ARRcookies=document.cookie.split(";");
     for (i=0;i<ARRcookies.length;i++)
     {
@@ -14,16 +14,14 @@ function getCookie(c_name)
     }
 }
 
-function setCookie(c_name,value,exdays)
-{
+function setCookie(c_name,value,exdays) {
     var exdate=new Date();
     exdate.setDate(exdate.getDate() + exdays);
     var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
     document.cookie=c_name + "=" + c_value;
 }
 
-function checkCookie()
-{
+function checkCookie() {
     firstName 			= getCookie("firstName");
     lastName  			= getCookie("lastName");
     organizationName	= getCookie("organizationName");
@@ -42,8 +40,7 @@ function checkCookie()
     }
 }
 
-function clearCookie()
-{
+function clearCookie() {
     setCookie("firstName",'',1);
     setCookie("lastName",'',1);
     setCookie("organizationName",'',1);

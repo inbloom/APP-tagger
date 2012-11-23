@@ -1,7 +1,9 @@
 LRMI::Application.routes.draw do
-  get "tagger/index"
-  post "tagger/save_local"
-  
-  match '/tagger' => 'tagger#index'
+
+  # use a real resource
+  resources :tagger, :only => [ :index ]
+
+  # Until we get the products united, just forward to tagger code
+  root :to => 'tagger#index'
 
 end
