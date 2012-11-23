@@ -29,7 +29,9 @@ $(function() {
             document.getElementById("loadModalTextArea").value = "";
         }
         else if (document.getElementById("files").value != "") {
+
         }
+
     });
 
 });
