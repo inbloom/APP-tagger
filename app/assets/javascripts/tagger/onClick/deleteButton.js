@@ -69,7 +69,7 @@ $(function() {
                     currentAlignmentItem = currentAlignmentCounter;
                     currentAlignmentCounter++;
                 }
-                blankCurrentAlignment();
+
             }
         }
     });
