@@ -3,7 +3,8 @@ $(function() {
     var objName = "createdOn"
 
     $("#"+objName).datepicker({
-        format: 'yyyy-mm-dd'
+        format: 'yyyy-mm-dd',
+        showButtonPanel: true
     }).on('changeDate', function(obj){
 
         var metaSourceValue = $(obj.target).val();
@@ -14,6 +15,7 @@ $(function() {
 
         updateTextArea();
 
+        $(this).datepicker('hide').blur();
     });
 
 });
