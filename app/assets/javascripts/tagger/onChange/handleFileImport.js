@@ -50,6 +50,7 @@ $(function() {
                                 'itemURL' : tempItemURLArray[ea]
                             };
                             var objHash = objectToHash(object);
+                            $('.noAlignmentsYet').hide();
                             if (alignments[objHash] == undefined) {
                                 alignments[objHash] = object;
                                 if (tempDotNotationArray[ea] == '') tempDotNotationArray[ea] = 'N/A';
