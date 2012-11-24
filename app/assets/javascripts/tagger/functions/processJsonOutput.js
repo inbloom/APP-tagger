@@ -77,7 +77,7 @@ function processJSONOutput(){
 
         var hasLength = false;
         for (j in items[i].educationalAlignments) {
-            myJSONText = myJSONText + "\n                  {\n                     \"type\":\"http://schema.org/AlignmentObject\",\n                     \"properties\":{\n                        \"name\":[\"" + items[i].educationAlignmentArray[j].educationalAlignment + "\"],\n                        \"alignmentType\":[\""+items[i].educationAlignmentArray[j].alignmentType+"\"],\n                        \"targetDescription\":[\""+items[i].educationAlignmentArray[j].description.replace(/\"/g, "'")+"\"],\n                        \"targetName\":[\""+items[i].educationAlignmentArray[j].dotNotation+"\"],\n                        \"targetURL\":[\""+items[i].educationAlignmentArray[j].itemURL+"\"]\n                     }\n                  },";
+            myJSONText = myJSONText + "\n                  {\n                     \"type\":\"http://schema.org/AlignmentObject\",\n                     \"properties\":{\n                        \"name\":[\"" + items[i].educationalAlignments[j].educationalAlignment + "\"],\n                        \"alignmentType\":[\""+items[i].educationalAlignments[j].alignmentType+"\"],\n                        \"targetDescription\":[\""+items[i].educationalAlignments[j].description.replace(/\"/g, "'")+"\"],\n                        \"targetName\":[\""+items[i].educationalAlignments[j].dotNotation+"\"],\n                        \"targetURL\":[\""+items[i].educationalAlignments[j].itemURL+"\"]\n                     }\n                  },";
             hasLength = true;
         }
 
