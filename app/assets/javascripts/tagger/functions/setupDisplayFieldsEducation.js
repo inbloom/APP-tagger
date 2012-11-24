@@ -2,7 +2,7 @@
 // Any of the values in the comma separated list for {field} that doesn't have an option in select#{field}
 // Get stuffed into {field}Other as it's own comma separated list.
 function setupDisplayFieldsEducationTab(item, field) {
-    if (item[field] != '' && $('select#'+field)[0] != undefined) {
+    if (item[field] != undefined && item[field] != '' && $('select#'+field)[0] != undefined) {
         var itemOptions = item[field].split(',');
         $('select#'+field+' option').each(function() {
             if ($.inArray($(this).val(),itemOptions) !== -1) {
