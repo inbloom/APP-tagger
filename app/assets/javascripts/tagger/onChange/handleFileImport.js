@@ -7,6 +7,8 @@ $(function() {
             reader = new FileReader();
             reader.onload = (function(theFile) {
                 return function(e) {
+                    $("#loadModal").modal("hide");
+
                     var allText = e.target.result;
                     var output = $.csv2Array(allText);
 
@@ -90,6 +92,7 @@ $(function() {
 
             reader.readAsText(file);
 
+            $("#fileForm")[0].reset();
         }
     });
 
