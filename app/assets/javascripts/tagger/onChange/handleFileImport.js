@@ -39,8 +39,11 @@ $(function() {
                             var itemUrl = output[i].url;
 
                             for (objHash in output[i].educationalAlignments) {
-                                alignments[objHash] = output[i].educationalAlignments[objHash];
-                                $('#currentAlignmentTable > tbody:last').append('<tr><td><label class="checkbox"><input type="checkbox" class="alignment-checkbox" value="'+objHash+'" />'+ output[i].educationalAlignments[objHash].dotNotation +'</label></td><td>'+ capitalize(output[i].educationalAlignments[objHash].alignmentType) +'</td></tr>');
+                                if (alignments[objHash] == undefined) {
+                                    $('.noAlignmentsYet').hide();
+                                    alignments[objHash] = output[i].educationalAlignments[objHash];
+                                    $('#currentAlignmentTable > tbody:last').append('<tr><td><label class="checkbox"><input type="checkbox" class="alignment-checkbox" value="'+objHash+'" />'+ output[i].educationalAlignments[objHash].dotNotation +'</label></td><td>'+ capitalize(output[i].educationalAlignments[objHash].alignmentType) +'</td></tr>');
+                                }
                             }
 
                             jQuery("#multiItemSelector").append($("<a href='#itemTag"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#itemTag"+itemCounter+"' id='itemTag"+itemCounter+"URL' "+(itemUrl!=""?"":"style='display:none;'")+" class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='itemTag"+itemCounter+"Label' class='checkbox'><input id='itemTag"+itemCounter+"' type='checkbox' name='tagItem'/><span>"+itemTitle+"</span></label>"));
@@ -82,10 +85,9 @@ $(function() {
                                     'itemURL' : tempItemURLArray[ea]
                                 };
                                 var objHash = objectToHash(object);
-                                $('.noAlignmentsYet').hide();
                                 if (alignments[objHash] == undefined) {
+                                    $('.noAlignmentsYet').hide();
                                     alignments[objHash] = object;
-                                    if (tempDotNotationArray[ea] == '') tempDotNotationArray[ea] = 'N/A';
                                     $('#currentAlignmentTable > tbody:last').append('<tr><td><label class="checkbox"><input type="checkbox" class="alignment-checkbox" value="'+objHash+'" />'+ tempDotNotationArray[ea] +'</label></td><td>'+ capitalize(tempAlignmentTypeArray[ea]) +'</td></tr>');
                                 }
 
