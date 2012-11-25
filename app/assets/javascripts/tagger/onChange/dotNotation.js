@@ -3,7 +3,7 @@ $(function() {
     $("#dotNotation").change(function(e){
         if (e.target.value == previousDotValue) {}
         else {
-            blankCurrentAlignment();
+
             previousDotValue = $('#dotNotation').val();
             document.getElementById('itemURL').value = '';
             document.getElementById('description').value = '';

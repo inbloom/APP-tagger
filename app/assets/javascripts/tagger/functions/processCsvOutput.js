@@ -20,45 +20,33 @@ function processCSVOutput(){
         str = str + '"' + items[i].interactivityType.replace(/\"/g, "'") + '",';
         str = str + '"' + items[i].learningResourceType.replace(/\"/g, "'") + '",';
 
+        var alignmentString1 = '"';
+        var alignmentString2 = '"';
+        var alignmentString3 = '"';
+        var alignmentString4 = '"';
+        var alignmentString5 = '"';
 
-        if (items[i].educationAlignmentArray.length == 0)
-        {
-            var alignmentString1 = ',';
-            var alignmentString2 = ',';
-            var alignmentString3 = ',';
-            var alignmentString4 = ',';
-            var alignmentString5 = ',,';
-            str = str + alignmentString1 + alignmentString2 + alignmentString3 + alignmentString4 + alignmentString5;
+        for (j in items[i].educationalAlignments) {
+            alignmentString1 += items[i].educationalAlignments[j].educationalAlignment.replace(/,/g, '') + ',';
+            alignmentString2 += items[i].educationalAlignments[j].alignmentType.replace(/,/g, '') + ',';
+            alignmentString3 += items[i].educationalAlignments[j].dotNotation.replace(/,/g, '') + ',';
+            alignmentString4 += items[i].educationalAlignments[j].itemURL.replace(/,/g, '') + ',';
+            alignmentString5 += items[i].educationalAlignments[j].description.replace(/\"/g, "'").replace(/,/g, '') + ',';
         }
-        else
-        {
-            var alignmentString1 = '"';
-            var alignmentString2 = '"';
-            var alignmentString3 = '"';
-            var alignmentString4 = '"';
-            var alignmentString5 = '"';
+        alignmentString1 += '"';
+        alignmentString2 += '"';
+        alignmentString3 += '"';
+        alignmentString4 += '"';
+        alignmentString5 += '"';
 
-            for (j = 0; j < items[i].educationAlignmentArray.length; j++){
-                alignmentString1 = alignmentString1 + items[i].educationAlignmentArray[j].educationalAlignment + ',';
-                alignmentString2 = alignmentString2 + items[i].educationAlignmentArray[j].alignmentType + ',';
-                alignmentString3 = alignmentString3 + items[i].educationAlignmentArray[j].dotNotation + ',';
-                alignmentString4 = alignmentString4 + items[i].educationAlignmentArray[j].itemURL + ',';
-                alignmentString5 = alignmentString5 + items[i].educationAlignmentArray[j].description.replace(/\"/g, "'") + ',';
-            }
-            alignmentString1 = alignmentString1.slice(0,alignmentString1.length-1);
-            alignmentString2 = alignmentString2.slice(0,alignmentString2.length-1);
-            alignmentString3 = alignmentString3.slice(0,alignmentString3.length-1);
-            alignmentString4 = alignmentString4.slice(0,alignmentString4.length-1);
-            alignmentString5 = alignmentString5.slice(0,alignmentString5.length-1);
-            str = str + alignmentString1 + '",' + alignmentString2 + '",' + alignmentString3 + '",' + alignmentString4 + '",' + alignmentString5 + '",';
-        }
+        str = str + alignmentString1 + ',' + alignmentString2 + ',' + alignmentString3 + ',' + alignmentString4 + ',' + alignmentString5 + ',';
 
-        str = str.slice(0,str.length-1);
         if (typeof items[i].groupType !== 'undefined') {
             str = str + '"' + items[i].groupType.replace(/\"/g, "'") + '"';
         }
         str = str + '\n';
 
     }
+
     return str;
 }

@@ -10,10 +10,10 @@ $(function() {
     window.previousDotValue = '';
 
     items = {};
+    alignments = {};
 
     window.alignmentArray = new Array();
     window.dotNotationDisplayArray = new Array();
-    window.currentAlignmentArray = new Array();
 
     var offsetTopPanels = 80;
 

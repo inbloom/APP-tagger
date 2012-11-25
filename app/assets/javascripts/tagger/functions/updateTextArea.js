@@ -23,13 +23,12 @@ function updateTextArea(){
         if (items[obj.id].groupType != "") textAreaValue += "Group Type:\n"+items[obj.id].groupType+"\n";
         if (items[obj.id].timeRequired != "P0Y0M0W0DT0H0M0S") textAreaValue += "Time Required:\n"+items[obj.id].timeRequired+"\n\n";
 
-        for (j = 0; j < items[obj.id].educationAlignmentArray.length; j++){
-            if (items[obj.id].educationAlignmentArray[j].educationalAlignment != "") textAreaValue += "Educational Alignment:\n"+ items[obj.id].educationAlignmentArray[j].educationalAlignment+"\n";
-            if (items[obj.id].educationAlignmentArray[j].alignmentType != "") textAreaValue += "Alignment Type:\n"+ items[obj.id].educationAlignmentArray[j].alignmentType+"\n";
-            if (items[obj.id].educationAlignmentArray[j].dotNotation != "") textAreaValue += "Dot Notation:\n"+ items[obj.id].educationAlignmentArray[j].dotNotation+"\n";
-            if (items[obj.id].educationAlignmentArray[j].itemURL != "") textAreaValue += "Item URL:\n"+ items[obj.id].educationAlignmentArray[j].itemURL+"\n";
-            if (items[obj.id].educationAlignmentArray[j].description != "") textAreaValue += "Description:\n"+ items[obj.id].educationAlignmentArray[j].description+"\n";
-            //	if (items[obj.id].educationAlignmentArray[j].guid != "") textAreaValue += "Item GUID:\n"+ items[obj.id].educationAlignmentArray[j].guid+"\n\n";
+        for (j in items[obj.id].educationalAlignments){
+            if (items[obj.id].educationalAlignments[j].educationalAlignment != "") textAreaValue += "Educational Alignment:\n"+ items[obj.id].educationalAlignments[j].educationalAlignment+"\n";
+            if (items[obj.id].educationalAlignments[j].alignmentType != "") textAreaValue += "Alignment Type:\n"+ items[obj.id].educationalAlignments[j].alignmentType+"\n";
+            if (items[obj.id].educationalAlignments[j].dotNotation != "") textAreaValue += "Dot Notation:\n"+ items[obj.id].educationalAlignments[j].dotNotation+"\n";
+            if (items[obj.id].educationalAlignments[j].itemURL != "") textAreaValue += "Item URL:\n"+ items[obj.id].educationalAlignments[j].itemURL+"\n";
+            if (items[obj.id].educationalAlignments[j].description != "") textAreaValue += "Description:\n"+ items[obj.id].educationalAlignments[j].description+"\n";
         }
         textAreaValue += "\n-----------------------\n\n";
 

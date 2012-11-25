@@ -24,8 +24,6 @@ $(function() {
             $( "#sliderminutes" ).slider("value") + "M" + 
             $( "#sliderseconds" ).slider("value") + "S";
 
-        var educationAlignmentArray = new Array();
-
         items['itemTag' + itemCounter] = {
             'id':itemCounter,
             'title':'',
@@ -45,7 +43,7 @@ $(function() {
             'mediaType':'',
             'groupType':'',
             'timeRequired':timeFormat,
-            'educationAlignmentArray':educationAlignmentArray
+            'educationalAlignments':{}
         };
 
         itemCounter++;

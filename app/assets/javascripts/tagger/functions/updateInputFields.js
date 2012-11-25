@@ -2,6 +2,8 @@
 function updateInputFields(){
     // Clear form data
     $("form[name=LRMIData]").find("input[type=text], textarea, select").val("");
+    // Clear alignment tabs
+    $("#currentAlignmentTable input[type=checkbox]").attr('checked', false);
     // Clear the iframe
     updateMainContentBottom();
     // If only one is selected then update the form with that one
@@ -45,14 +47,8 @@ function updateInputFields(){
         setupDisplayFieldsEducationTab(item, 'mediaType');
         setupDisplayFieldsEducationTab(item, 'groupType');
 
-        //Setup Alignment Tab for Single Selection - Defaults to Last Added Educational Alignment
-        if (typeof item.educationAlignmentArray[item.educationAlignmentArray.length-1] != 'undefined') {
-            if (item.educationAlignmentArray[item.educationAlignmentArray.length-1].educationalAlignment != "")  $("#educationalAlignment").val(item.educationAlignmentArray[item.educationAlignmentArray.length-1].educationalAlignment);
-            if (item.educationAlignmentArray[item.educationAlignmentArray.length-1].alignmentType != "")         $("#alignmentType").val(item.educationAlignmentArray[item.educationAlignmentArray.length-1].alignmentType);
-            if (item.educationAlignmentArray[item.educationAlignmentArray.length-1].dotNotation != "")           $("#dotNotation").val(item.educationAlignmentArray[item.educationAlignmentArray.length-1].dotNotation);
-            if (item.educationAlignmentArray[item.educationAlignmentArray.length-1].itemURL != "")               $("#itemURL").val(item.educationAlignmentArray[item.educationAlignmentArray.length-1].itemURL);
-            if (item.educationAlignmentArray[item.educationAlignmentArray.length-1].description != "")           $("#description").val(item.educationAlignmentArray[item.educationAlignmentArray.length-1].description);
-            if (item.educationAlignmentArray[item.educationAlignmentArray.length-1].guid != "")                  $("#itemGUID").val(item.educationAlignmentArray[item.educationAlignmentArray.length-1].guid);
+        for (j in item.educationalAlignments) {
+            $("input[type=checkbox][value="+j+"]").attr('checked',true);
         }
 
     } else {
