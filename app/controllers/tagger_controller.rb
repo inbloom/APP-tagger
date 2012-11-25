@@ -4,7 +4,6 @@ class TaggerController < ApplicationController
   
   # Saves a string to a file named filename on a user's machine
   def save_local
-    Tag.new(:session_id => request.session_options[:id], :data => params[:data]).save
     send_data("#{params[:data]}", :filename => "#{params[:filename]}", :type => "text/plain")
   end
   
