@@ -10,7 +10,8 @@ function saveLocal(str, fileType){
 }
 
 function saveServer(str){
-    $('<form></form>', { action: 'http://23.23.213.206:81/index.php', method: 'POST'}).append(
+		var form_action = location.protocol + '//' + location.host + "/tagger/save_lri/";
+    $('<form></form>', { action: form_action, method: 'POST'}).append(
         $('<input></input>', { name: 'content', type: 'hidden', value: str })
     ).submit();
 }
