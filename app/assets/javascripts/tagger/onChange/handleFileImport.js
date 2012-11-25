@@ -68,7 +68,7 @@ $(function() {
                             'createdOn':output[i][5],
                             'topic':output[i][4],
                             'createdBy':output[i][6],
-                            'usageRightsURL':output[i][1],
+                            'usageRightsURL':output[i][10],
                             'publisher':output[i][7],
                             'isBasedOnURL':output[i][11],
                             'endUser':output[i][12],
