@@ -1,26 +1,34 @@
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#tags" data-toggle="tab">Tags</a></li>
+  <li class="active"><a href="#tags" data-toggle="tab">Resources</a></li>
   <li><a href="#output" data-toggle="tab">Output</a></li>
+  <li><a href="#history" data-toggle="tab">History</a></li>
 </ul>
 
 <div class="tab-content" id="dataTabs">
+
 	<div class="tab-pane active" id="tags">
 		<form class="form" id="checkBoxForm" name="checkBoxForm">
 		  <fieldset>
 			<div class="control-group">
 				<div class="controls" id="multiItemSelector" name="multiItemSelector">
-							Press New or Load to start tagging.	
+							Press New or Import to start tagging.
 				</div>
 				<input type='checkbox' id='tagItem' name='tagItem' style='display:none;'>
 			</div>
 		  </fieldset>
 		</form>
 	</div>
+
 	<div class="tab-pane" id="output">
 		<div>  
 			<textarea id="textarea"></textarea>
 			<textarea id="textareahidden" style="display:none;"></textarea>
 		</div>
 	</div>
+
+  <div class="tab-pane" id="history">
+
+  </div>
+
 </div>
 
