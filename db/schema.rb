@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121126173509) do
+ActiveRecord::Schema.define(:version => 20121126204219) do
 
   create_table "tags", :force => true do |t|
     t.datetime "created_at",                    :null => false
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20121126173509) do
     t.text     "data"
     t.string   "session_id"
     t.boolean  "published",  :default => false
+    t.string   "uuid"
   end
 
 end
