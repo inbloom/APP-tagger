@@ -1,7 +1,28 @@
 class TaggerController < ApplicationController
+
   def index
+    # TODO - Refactor this when we have sso
+    session[:guid] ||= SecureRandom.uuid
   end
-  
+
+  # Load the items list into the UI
+  def load_drafts
+    # TODO - Refactor this when we have sso
+    session[:guid] ||= SecureRandom.uuid
+    # The object we return to the UI, if any
+    response = {}
+    # Get our tags
+    tags = Tag.where :session_id => session[:guid]
+    tags.each_with_index do |tag,index|
+      item = ActiveSupport::JSON.decode(tag[:data])
+      response[index] = item
+    end
+
+    respond_to do |format|
+      format.json { render json: response }
+    end
+  end
+
   # Saves a string to a file named filename on a user's machine
   def save_export
     send_data("#{params[:data]}", :filename => "#{params[:filename]}", :type => "text/plain")
