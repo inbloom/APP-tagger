@@ -12,10 +12,10 @@ class TaggerController < ApplicationController
     # The object we return to the UI, if any
     response = {}
     # Get our tags
-    tags = Tag.where :session_id => session[:guid]
+    tags = Tag.where :session_id => session[:guid], :published => false
     tags.each_with_index do |tag,index|
-      item = ActiveSupport::JSON.decode(tag[:data])
-      response[index] = item
+      key = "itemTag"+index.to_s
+      response[key] = ActiveSupport::JSON.decode(tag[:data])
     end
 
     respond_to do |format|
