@@ -14,7 +14,7 @@ class TaggerController < ApplicationController
     session[:guid] ||= SecureRandom.uuid
     
     # Save tag to db
-    Tag.new(:session_id => session[:guid], :data => params[:data]).save
+    Tag.new(:session_id => session[:guid], :data => params[:content]).save
     
     # TODO - send data to LRI
     
