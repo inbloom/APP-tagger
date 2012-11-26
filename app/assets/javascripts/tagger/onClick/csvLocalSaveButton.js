@@ -2,7 +2,7 @@ $(function() {
 
     $("#csvLocalSaveButton").click( function() {
         var str = processCSVOutput();
-        saveLocal(str,".csv");
+        saveAndExport(str,".csv");
     });
 
 });

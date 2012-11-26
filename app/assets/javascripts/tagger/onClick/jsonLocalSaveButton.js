@@ -2,7 +2,7 @@ $(function() {
 
     $("#JSONLocalSaveButton").click( function() {
         var str = processJSONOutput();
-        saveLocal(str,".json");
+        saveAndExport(str,".json");
     });
 
 });

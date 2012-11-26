@@ -1,8 +1,8 @@
 $(function() {
 
-    $("#JSONServerSaveButton").click( function() {
+    $("#saveDraftButton").click( function() {
         var str = processJSONOutput();
-        saveServer(str);
+        saveDraft(str);
     });
 
 });
