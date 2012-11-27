@@ -84,7 +84,7 @@ module LriHelper
     # Now request from the LRI to see if this object has been inserted before
     rawResponse = Net::HTTP.get(
         URI.parse(
-            URI::encode('http://lriserver.com:8200/entity/search?q={"'+remap_key('uuid')+'":"'+uuid+'"}')
+            URI::encode('http://lriserver.com:8200/entity/search?ops={"details":true}&q={"'+remap_key('uuid')+'":"'+uuid+'"}')
         )
     )
     # TODO Capture the error when we tried to search for something and it failed from the response
@@ -94,15 +94,25 @@ module LriHelper
   end
 
   # Create the entity in the LRI
+  # This will create the initial entity with all the currently added parameters
   def self.create entity
-    # Now request from the LRI to see if this object has been inserted before
-    rawResponse = Net::HTTP.get(
-        URI.parse(
-            URI::encode('http://lriserver.com:8200/entity/create?q=' + entity.to_json )
-        )
-    )
+    # Remove all EMPTY keys
 
-    puts rawResponse
+puts entity
+    entity.delete_if {|k,v| v.empty? }
+puts entity
+
+#puts entity
+#puts 'http://lriserver.com:8200/entity/create?q=' + entity.to_json
+
+    # Now request from the LRI to see if this object has been inserted before
+    #rawResponse = Net::HTTP.get(
+    #    URI.parse(
+    #        URI::encode('http://lriserver.com:8200/entity/create?q=' + entity.to_json )
+    #    )
+    #)
+    #
+    #puts rawResponse
 
   end
 
