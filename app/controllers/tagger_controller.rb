@@ -48,7 +48,6 @@ class TaggerController < ApplicationController
     end
   end
 
-
   private
 
   # Private method to get the users session id (likely temporary)
