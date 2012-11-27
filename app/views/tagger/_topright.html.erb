@@ -1,22 +1,22 @@
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#general" data-toggle="tab">General</a></li>
-  <li><a href="#education" data-toggle="tab">Education</a></li>
-  <li><a href="#educationalignment" data-toggle="tab">Alignment</a></li>
+  <li id="generalTab" class="active"><a href="#generalPanel" data-toggle="tab">General</a></li>
+  <li id="educationTab"><a href="#educationPanel" data-toggle="tab">Education</a></li>
+  <li id="alignmentTab"><a href="#alignmentPanel" data-toggle="tab">Alignment</a></li>
 </ul>
 
 <form name="LRMIData" id="LRMIData">
   <fieldset >
 
     <div class="tab-content" id="dataTabs" >
-      <div class="tab-pane active" id="generalTab" >
+      <div class="tab-pane active" id="generalPanel" >
         <%= render "general_tab" %>
       </div>
 
-      <div class="tab-pane" id="educationTab" >
+      <div class="tab-pane" id="educationPanel" >
         <%= render "education_tab" %>
       </div>
 
-      <div class="tab-pane" id="alignmentTab">
+      <div class="tab-pane" id="alignmentPanel">
         <%= render "alignment_tab" %>
       </div>
     </div>
