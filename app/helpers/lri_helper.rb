@@ -4,13 +4,6 @@ module LriHelper
 
   def self.publish tags
 
-    tags = map_tags_to_requests tags
-
-  end
-
-  private
-
-  def self.map_tags_to_requests tags
     # Alignments array for storing the alignments that are removed from the tag
     alignments_array = []
     # This is a storage for all the tag to request conversions
@@ -30,6 +23,9 @@ module LriHelper
       # TODO TEMPORARY -- The property "mediaType" is reference by the LRMI spec as existing in schema.org, but schema.org has no such property.
       tag.delete('mediaType')
 
+      # TODO The property "groupType" does not appear to exist in the LRMI or schema.org specs.
+      tag.delete('groupType')
+
       # TODO Change Author into an LRI object?
       # TODO Change Publisher into LRI object?
 
@@ -37,40 +33,26 @@ module LriHelper
       lri_request_hashes << Hash[tag.map{|k,v| [self.remap_key(k),v] }]
     end
 
+    # At this point the tags array of tag hashes should now be scrubbed and converted to the lri_request array of hashes.
+
     # For each of the request objects, do stuff
     lri_request_hashes.each do |request|
       # Now request from the LRI to see if this object has been inserted before
-      rawResponse = Net::HTTP.get(
-          URI.parse(
-              URI::encode('http://lriserver.com:8200/entity/search?q={"'+remap_key('uuid')+'":"'+request[remap_key('uuid')]+'"}')
-          )
-      )
-      jsonResponse = ActiveSupport::JSON.decode(rawResponse)
-
-      # TODO Capture the error when we tried to search for something and it failed.
-
-      # Okay now that we have a response, is it there?
-      if jsonResponse["response"].present?
-        # Update
-        puts "HERE"
+      # and then create or update it based on that.
+      if self.find(request[remap_key('uuid')]).present?
+        self.update request
       else
-        # Create
-        puts "NOT HERE"
+        self.create request
       end
-#      puts req
 
     end
 
-
-    # Now check to see if this tag is in the lri already
-    # If the tag is in the lri, then update it
-    # if the tag isn't in the lri then add it
-
   end
+
+  private
 
   # Take any incoming key and map it to the correct LRI output key (Just keys.. not values)
   def self.remap_key key
-
     # A list of key mappings to replace
     lri_key_mappings = {
         'uuid'                  => 'urn:lri:property_type:id',
@@ -93,11 +75,43 @@ module LriHelper
         'educationalAlignments' => 'urn:schema-org:property_type:educational_alignment',
 #        'mediaType'             => 'urn:schema-org:property_type:media_type', # Not in Schema.org?
     }
-
     return lri_key_mappings[key] if lri_key_mappings[key].present?
-
     key
   end
+
+  # Search the LRI and pull back the data for this object
+  def self.find uuid
+    # Now request from the LRI to see if this object has been inserted before
+    rawResponse = Net::HTTP.get(
+        URI.parse(
+            URI::encode('http://lriserver.com:8200/entity/search?q={"'+remap_key('uuid')+'":"'+uuid+'"}')
+        )
+    )
+    # TODO Capture the error when we tried to search for something and it failed from the response
+    jsonResponse = ActiveSupport::JSON.decode(rawResponse)
+    # Only return the actual entity, we dont' need the transport response
+    jsonResponse['response']
+  end
+
+  # Create the entity in the LRI
+  def self.create entity
+    # Now request from the LRI to see if this object has been inserted before
+    rawResponse = Net::HTTP.get(
+        URI.parse(
+            URI::encode('http://lriserver.com:8200/entity/create?q=' + entity.to_json )
+        )
+    )
+
+    puts rawResponse
+
+  end
+
+  # Update the entity in the LRI
+  def self.update entity
+    # TODO Okay now do an entity/update to save the new entity
+    puts :update
+  end
+
 
 
 end
