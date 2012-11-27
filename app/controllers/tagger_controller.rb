@@ -49,7 +49,7 @@ class TaggerController < ApplicationController
     # Break out the tags from the sent parsed json hash
     json_tags.each {|h| tags << h[1] }
     # Save those tags baby
-    response = save_tags_state json_tags  #, true
+    response = save_tags_state json_tags  #, true # TODO you want to publish so true should be on eventually
     # Parse the tags into remote format
 
     case params[:remote]
@@ -58,7 +58,7 @@ class TaggerController < ApplicationController
     end
 
     respond_to do |format|
-      format.json { render json: response }
+      format.json { head :no_content } #render json: response } # TODO send back the tags that should be shown
     end
   end
 
