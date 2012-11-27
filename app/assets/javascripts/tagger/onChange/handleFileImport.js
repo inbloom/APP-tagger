@@ -95,7 +95,7 @@ $(function() {
 
                             items['itemTag' + itemCounter] = {
                                 'id':itemCounter,
-                                'title':itemTitle,
+                                'title':output[i][1],
                                 'language':output[i][8],
                                 'url':itemUrl,
                                 'createdOn':output[i][5],
