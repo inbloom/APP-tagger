@@ -32,8 +32,26 @@ function saveDraft(str){
     })
 }
 
+// Save the selected tag to the remote server chosen (LRI is the only one as of this writing)
+// This will also save the current version of the tag to the db and then flag it as published
+// it will then remove it from the current resources tab and place it into the history
 function saveRemote(str, remote) {
-// # TODO
+    $.ajax({
+        type : "POST",
+        dataType : 'json',
+        url  : "/tagger/save_remote",
+        data : { content : str, remote : remote },
+        // On success update our items list to be what the server sends back
+        // Really nothing should change other than now the items have a UUID
+        success : function(xhr) {
+//            items = xhr
+        },
+        error : function(xhr, txtStatus, errThrown) {
+            // # TODO No. Add a real error modal
+            console.log(arguments);
+        }
+    })
+
 }
 
 // This should ONLY ever be the first thing done after the UI loads.
@@ -55,13 +73,9 @@ function loadDrafts() {
             // Update the form
             updateInputFields();
 
-            if (itemCounter == 0){
-                jQuery("#multiItemSelector").empty();
-            }
-
             for (itemCounter in items) {
-
-                jQuery("#multiItemSelector").append($("<a href='#"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#"+itemCounter+"' id='"+itemCounter+"URL' "+ (items[itemCounter]['url']?"":"style='display:none;'") +" class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='"+itemCounter+"Label' class='checkbox'><input id='"+itemCounter+"' type='checkbox' name='tagItem'/><span>"+items[itemCounter]['title']+"</span></label>"));
+                $("#multiItemSelector span.notYet").hide();
+                $("#multiItemSelector").append($("<a href='#"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#"+itemCounter+"' id='"+itemCounter+"URL' "+ (items[itemCounter]['url']?"":"style='display:none;'") +" class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='"+itemCounter+"Label' class='checkbox'><input id='"+itemCounter+"' type='checkbox' name='tagItem'/><span>"+items[itemCounter]['title']+"</span></label>"));
 
                 for (objHash in items[itemCounter].educationalAlignments) {
                     // Create our object
