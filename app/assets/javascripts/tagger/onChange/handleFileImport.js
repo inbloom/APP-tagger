@@ -35,7 +35,7 @@ $(function() {
                             output[i].id = itemCounter;
                             items['itemTag' + itemCounter] = output[i];
 
-                            var itemTitle = (output[i].title!='')?output[i].title:"New Item " + itemCounter;
+                            var itemTitle = (output[i].title!='')? ((output[i].title.length > 25) ? output[i].title.substr(0,25) + '&hellip;' : output[i].title) :"New Item " + itemCounter;
                             var itemUrl = output[i].url;
 
                             for (objHash in output[i].educationalAlignments) {
@@ -45,8 +45,7 @@ $(function() {
                                     $('#currentAlignmentTable > tbody:last').append('<tr><td><label class="checkbox"><input type="checkbox" class="alignment-checkbox" value="'+objHash+'" />'+ output[i].educationalAlignments[objHash].dotNotation +'</label></td><td>'+ capitalize(output[i].educationalAlignments[objHash].alignmentType) +'</td></tr>');
                                 }
                             }
-
-                            jQuery("#multiItemSelector").append($("<a href='#itemTag"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#itemTag"+itemCounter+"' id='itemTag"+itemCounter+"URL' "+(itemUrl!=""?"":"style='display:none;'")+" class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='itemTag"+itemCounter+"Label' class='checkbox'><input id='itemTag"+itemCounter+"' type='checkbox' name='tagItem'/><span>"+itemTitle+"</span></label>"));
+                            $("#multiItemSelector").append($("<a href='#itemTag"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#itemTag"+itemCounter+"' id='itemTag"+itemCounter+"URL' "+(itemUrl!=""?"":"style='display:none;'")+" class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='itemTag"+itemCounter+"Label' class='checkbox'><input id='itemTag"+itemCounter+"' type='checkbox' name='tagItem'/><span>"+itemTitle+"</span></label>"));
                             itemCounter++;
 
                         }
@@ -61,7 +60,7 @@ $(function() {
                         for (var i = 1; i < output.length; i++) {
                             if (output[i] == undefined || output[i].length == 0) continue;
 
-                            var itemTitle = (output[i][1]!='')?output[i][1]:"New Item " + itemCounter;
+                            var itemTitle = (output[i][1]!='')? ((output[i][1].length > 25) ? output[i][1].substr(0,25) + '&hellip;' : output[i][1]) :"New Item " + itemCounter;
                             var itemUrl = output[i][2];
 
                             // Parse the education alignments and use them, or create new ones.
@@ -116,7 +115,7 @@ $(function() {
                                 'educationalAlignments':itemEducationAlignments
                             };
 
-                            jQuery("#multiItemSelector").append($("<a href='#itemTag"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#itemTag"+itemCounter+"' id='itemTag"+itemCounter+"URL' "+(itemUrl!=""?"":"style='display:none;'")+" class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='itemTag"+itemCounter+"Label' class='checkbox'><input id='itemTag"+itemCounter+"' type='checkbox' name='tagItem'/><span>"+itemTitle+"</span></label>"));
+                            $("#multiItemSelector").append($("<a href='#itemTag"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#itemTag"+itemCounter+"' id='itemTag"+itemCounter+"URL' "+(itemUrl!=""?"":"style='display:none;'")+" class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='itemTag"+itemCounter+"Label' class='checkbox'><input id='itemTag"+itemCounter+"' type='checkbox' name='tagItem'/><span>"+itemTitle+"</span></label>"));
                             itemCounter++;
 
                         }
