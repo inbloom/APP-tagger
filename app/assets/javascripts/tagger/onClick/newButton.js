@@ -2,10 +2,13 @@ $(function() {
 
     $("#newbutton").click(function() {
 
+        itemCounter = 0;
         // Uncheck everything when you add a new tag
         jQuery("#multiItemSelector input[type=checkbox]").each(function(i,obj) {
             obj.checked = false;
+            itemCounter++;
         });
+
         // Update the form
         updateInputFields();
 
