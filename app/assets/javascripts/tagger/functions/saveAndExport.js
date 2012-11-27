@@ -32,7 +32,7 @@ function saveDraft(str){
     })
 }
 
-function saveRemote(str) {
+function saveRemote(str, remote) {
 // # TODO
 }
 
