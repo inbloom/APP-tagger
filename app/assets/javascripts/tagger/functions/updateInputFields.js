@@ -6,6 +6,8 @@ function updateInputFields(){
     $("#currentAlignmentTable input[type=checkbox]").attr('checked', false);
     // Clear the iframe
     updateMainContentBottom();
+    // Update form enabled/disabled state
+    toggleForm();
     // If only one is selected then update the form with that one
     if ($("#multiItemSelector input[type=checkbox]:checked").length == 1) {
         var item = items[$("#multiItemSelector input[type=checkbox]:checked").first().attr('id')];

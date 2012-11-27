@@ -49,6 +49,7 @@ $(function() {
         itemCounter++;
 
         updateMainContentBottom('');
+        toggleForm();
     });
 
 });
