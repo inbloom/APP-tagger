@@ -1,7 +1,7 @@
 $(function() {
 
     $("#publishLriButton").click( function() {
-        var str = processJSONOutput();
+        var str = processJSONOutput(true);
         saveRemote(str, 'LRI');
     });
 
