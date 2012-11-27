@@ -75,7 +75,9 @@ function loadDrafts() {
 
             for (itemCounter in items) {
                 $("#multiItemSelector span.notYet").hide();
-                $("#multiItemSelector").append($("<a href='#"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#"+itemCounter+"' id='"+itemCounter+"URL' "+ (items[itemCounter]['url']?"":"style='display:none;'") +" class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='"+itemCounter+"Label' class='checkbox'><input id='"+itemCounter+"' type='checkbox' name='tagItem'/><span>"+items[itemCounter]['title']+"</span></label>"));
+
+                var title = (items[itemCounter]['title'].length > 25) ? items[itemCounter]['title'].substr(0,25) + '&hellip;' : items[itemCounter]['title'];
+                $("#multiItemSelector").append($("<a href='#"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#"+itemCounter+"' id='"+itemCounter+"URL' "+ (items[itemCounter]['url']?"":"style='display:none;'") +" class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='"+itemCounter+"Label' class='checkbox'><input id='"+itemCounter+"' type='checkbox' name='tagItem'/><span>"+title+"</span></label>"));
 
                 for (objHash in items[itemCounter].educationalAlignments) {
                     // Create our object
