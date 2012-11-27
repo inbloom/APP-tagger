@@ -1,8 +1,15 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
-# Mysql
-gem 'mysql2'
+
+group :development do  
+  # Mysql
+  gem 'mysql2'
+end
+
+group :production do
+  gem 'pg'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
