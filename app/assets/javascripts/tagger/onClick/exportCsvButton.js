@@ -1,6 +1,6 @@
 $(function() {
 
-    $("#csvLocalSaveButton").click( function() {
+    $("#exportCsvButton").click( function() {
         var str = processCSVOutput();
         saveAndExport(str,".csv");
     });
