@@ -1,14 +1,12 @@
 class TaggerController < ApplicationController
 
+  before_filter :set_session_id
+
   def index
-    # TODO - Refactor this when we have sso
-    session[:guid] ||= SecureRandom.uuid
   end
 
   # Load the items list into the UI
   def load_drafts
-    # TODO - Refactor this when we have sso
-    session[:guid] ||= SecureRandom.uuid
     # The object we return to the UI, if any
     response = {}
     # Get our tags
@@ -30,9 +28,6 @@ class TaggerController < ApplicationController
   
   # Saves a json formatted string to the db, then formats and sends to LRI
   def save_draft
-    
-    # TODO - Refactor this when we have sso
-    session[:guid] ||= SecureRandom.uuid
     # The object we return to the UI, if any
     response = {}
     # Parse through incoming items array and create a tag for each
@@ -70,7 +65,25 @@ class TaggerController < ApplicationController
     respond_to do |format|
       format.json { render json: response }
     end
-
   end
-  
+
+  # Save the data to a remote thingy out in the world. Yes I said thingy!
+  def save_remote
+    # The object we return to the UI, if any
+    response = {}
+
+
+    respond_to do |format|
+      format.json { render json: response }
+    end
+  end
+
+
+  private
+
+  def set_session_id
+    # TODO - Refactor this when we have sso
+    session[:guid] ||= SecureRandom.uuid
+  end
+
 end
