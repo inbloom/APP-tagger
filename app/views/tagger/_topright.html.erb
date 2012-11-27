@@ -4,19 +4,19 @@
   <li><a href="#educationalignment" data-toggle="tab">Alignment</a></li>
 </ul>
 
-<form name="LRMIData">
+<form name="LRMIData" id="LRMIData">
   <fieldset >
 
     <div class="tab-content" id="dataTabs" >
-      <div class="tab-pane active" id="general" >
+      <div class="tab-pane active" id="generalTab" >
         <%= render "general_tab" %>
       </div>
 
-      <div class="tab-pane" id="education" >
+      <div class="tab-pane" id="educationTab" >
         <%= render "education_tab" %>
       </div>
 
-      <div class="tab-pane" id="educationalignment">
+      <div class="tab-pane" id="alignmentTab">
         <%= render "alignment_tab" %>
       </div>
     </div>
