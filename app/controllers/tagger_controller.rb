@@ -54,11 +54,24 @@ class TaggerController < ApplicationController
 
     case params[:remote]
       when 'LRI' then
-        LriHelper::publish tags
+        results = LriHelper::publish tags
+    end
+
+    # The object we return to the UI, if any
+    response = {}
+    # Get all the draft tags and send those to the ui
+    tags = Tag.where :session_id => session[:guid], :published => false
+    tags.each_with_index do |tag,index|
+      key = "itemTag"+index.to_s
+      response[key] = ActiveSupport::JSON.decode(tag[:data])
     end
 
     respond_to do |format|
-      format.json { head :no_content } #render json: response } # TODO send back the tags that should be shown
+      if results.empty?
+        format.json { render json: response } # TODO send back the tags that should be shown
+      else
+        format.json { render status: 500, json: results }
+      end
     end
   end
 
