@@ -17,14 +17,10 @@ module LriHelper
         'isBasedOnURL',
         'endUser',
         'ageRange',
-
-        # TODO check to see why the above aren't in the lri at all.. and should I just add them?  Ask kurt
-
         'educationalUse',
         'interactivityType',
         'learningResourceType',
         'educationalAlignments',
-
     ]
 
 
@@ -45,7 +41,7 @@ module LriHelper
 #      tag['educationalAlignments'] = tag['educationalAlignments'].map{|k,v| "urn:lrmi:alignment_object:" + k }
 
       # TODO If the key is in the deleted keys list above, delete it..
-      # NOTE: this is temporary until I figure out how to get all those keys working.
+      # TODO NOTE: this is temporary until I figure out how to get all those keys working. (ADDENDUM Kurt has to add them)
       tag.delete_if{|k,v| deleted_keys.include?(k) }
 
       # Remap the keys using the key mappings above
@@ -62,17 +58,13 @@ module LriHelper
       search = self.find(request[remap_key('uuid')])
       if search
         if search['response'].present?
-puts :update
           self.update request, search['response'].first
         else
-puts :create
           self.create request
         end
       end
 
-
     end
-
 
     @@failures
   end
@@ -151,17 +143,18 @@ puts :create
 
   # Okay so now we need to create a new property and stuff it into the lri
   # while associating it to the guid provided
-  def self.create_property guid, property
-    request = {"from"=>guid}.merge property
+  def self.create_property entity_guid, property
+    request = {"from"=>entity_guid}.merge property
     self.request :createProperty, request
   end
 
   # Now we need to update the property as it is already in the system..
-  def self.update_property guid, property
-    request = {"from"=>guid}.merge property
+  def self.update_property entity_guid, property
+#    request = {"guid"=>entity_guid}.merge property
 
-puts "UPDATE THE PROPERTY HERE"
-puts request
+    # TODO Right here we need the GUID of the property we are updating.. I have yet to find out how to get that from kurt
+
+#    self.request :updateProperty, request
   end
 
   # A helper method for defining our various request types -- trying to keep it dry
