@@ -48,7 +48,7 @@ function saveRemote(str, remote) {
             showMessage("Resources published");
         },
         error : function(xhr, txtStatus, errThrown) {
-            showMessage(xhr.responseText, "Error saving remotely");
+            showMessage("Go ahead and reload your ui, any work you were doing should have been saved. <br />" + xhr.responseText, "Remote Error (RELOAD YOUR UI!!)");
         }
     })
 
