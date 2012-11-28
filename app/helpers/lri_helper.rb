@@ -129,9 +129,10 @@ module LriHelper
 
     # Now we need to figure out which request properties to create
     # to do that just reap all entity properties from the request clone
+    # and any that are empty (see above, we dont check in empty strings)
     # thus leaving us with those that the lri doesn't know about yet.
     properties_to_create = request
-    properties_to_create.delete_if{|k,v| entity['props'][k].present? }
+    properties_to_create.delete_if{|k,v| entity['props'][k].present? || v.empty? }
     properties_to_create.each do |key,value|
       self.create_property guid, {key=>value}
     end
