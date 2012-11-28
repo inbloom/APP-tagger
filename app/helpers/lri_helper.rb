@@ -13,20 +13,17 @@ module LriHelper
         'groupType', # The property "groupType" does not appear to exist in the LRMI or schema.org specs.
         'timeRequired', # Find the time required LRMI or Schema.org spec
 
-#        'about',
-#        'author',
-#        'createdOn',
-#        'topic',
         'usageRightsURL',
-        'publisher',
+        'isBasedOnURL',
         'endUser',
         'ageRange',
+
+        # TODO check to see why the above aren't in the lri at all.. and should I just add them?  Ask kurt
+
         'educationalUse',
         'interactivityType',
         'learningResourceType',
-        'createdBy',
         'educationalAlignments',
-        'isBasedOnURL'
 
     ]
 
