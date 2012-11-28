@@ -62,8 +62,10 @@ module LriHelper
       search = self.find(request[remap_key('uuid')])
       if search
         if search['response'].present?
+puts :update
           self.update request, search['response'].first
         else
+puts :create
           self.create request
         end
       end
@@ -128,21 +130,21 @@ module LriHelper
     # to do that just reap all entity properties from the request clone
     # and any that are empty (see above, we dont check in empty strings)
     # thus leaving us with those that the lri doesn't know about yet.
-    properties_to_create = request
+    properties_to_create = request.clone
     properties_to_create.delete_if{|k,v| entity['props'][k].present? || v.empty? }
     properties_to_create.each do |key,value|
       self.create_property guid, {key=>value}
     end
 
-    # Now we need to figure out which request properties to upate
+    # Now we need to figure out which request properties to update
     # to do that just push all items into an array that are in both the
     # request and the found entity.. only do so though if the values are different
     properties_to_update = []
     entity['props'].each do |key,value|
-      properties_to_update << prop if request[key].present? if request[key] != value
+      properties_to_update << {key=>value} if request[key].present? if request[key] != value
     end
-    properties_to_update.each do |key,value|
-      self.update_property guid, {key=>value}
+    properties_to_update.each do |hash|
+      self.update_property guid, hash
     end
 
   end
@@ -156,8 +158,10 @@ module LriHelper
 
   # Now we need to update the property as it is already in the system..
   def self.update_property guid, property
-    #request = {"from"=>guid}.merge property
+    request = {"from"=>guid}.merge property
+
 puts "UPDATE THE PROPERTY HERE"
+puts request
   end
 
   # A helper method for defining our various request types -- trying to keep it dry
