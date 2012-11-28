@@ -44,7 +44,7 @@ function saveRemote(str, remote) {
         // On success update our items list to be what the server sends back
         // Really nothing should change other than now the items have a UUID
         success : function(xhr) {
-//            items = xhr
+            items = xhr
             showMessage("Resources published");
         },
         error : function(xhr, txtStatus, errThrown) {
