@@ -3,11 +3,13 @@
     <div class="container">
       <div class="pull-left">
         <button class="btn btn-success" id="newbutton"><i class="icon-edit icon-white"></i> New</button>
-        <button class="btn btn-success" id="saveDraftButton" href="#"><i class="icon-hdd icon-white"></i> Save</button>
+				<% if current_user %>
+        	<button class="btn btn-success" id="saveDraftButton" href="#"><i class="icon-hdd icon-white"></i> Save</button>
+				<% end %>
         <button class="btn btn-success" id="loadButton" data-toggle="modal" href="#loadModal"><i class="icon-upload icon-white"></i> Import</button>
 
         <div class="btn-group">
-          <a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-download icon-white"></i> Export  <span class="caret"></span></a>
+          <a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-download icon-white"></i> Save As  <span class="caret"></span></a>
 
           <ul class="dropdown-menu">
             <li><a id="exportCsvButton" href="#"><i class="icon-download icon-white"></i> CSV</a></li>
@@ -15,9 +17,9 @@
             <li><a id="exportHtmlButton" href="#"><i class="icon-download icon-white"></i> HTML</a></li>
           </ul>
         </div>
-
-        <button class="btn btn-inverse" id="publishLriButton"><i class="icon-ok-sign icon-white"></i> Publish</button>
-
+				<% if current_user %>
+        	<button class="btn btn-inverse" id="publishLriButton"><i class="icon-ok-sign icon-white"></i> Publish</button>
+				<% end %>
       </div>
       <div class='pull-left navbar-text'>LRMI Version 1.0.0</div>
 
