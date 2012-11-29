@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :name, :provider, :uid
   
+  has_many :tags
+  
   def self.create_with_omniauth(request, auth)
     session_info = self.check_session(request, auth)
     create! do |user|

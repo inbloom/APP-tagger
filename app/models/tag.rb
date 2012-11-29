@@ -1,3 +1,6 @@
 class Tag < ActiveRecord::Base
-  attr_accessible :session_id, :data, :published, :uuid
+  attr_accessible :user_id, :data, :published, :uuid
+  
+  belongs_to :user
+  
 end
