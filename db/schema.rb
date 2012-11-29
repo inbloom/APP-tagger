@@ -11,15 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121127232524) do
+ActiveRecord::Schema.define(:version => 20121128231346) do
 
   create_table "tags", :force => true do |t|
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.text     "data"
-    t.string   "session_id"
     t.boolean  "published",  :default => false
     t.string   "uuid"
+    t.integer  "user_id"
   end
 
   create_table "users", :force => true do |t|
