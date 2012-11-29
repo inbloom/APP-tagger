@@ -1,7 +1,5 @@
 class TaggerController < ApplicationController
 
-  before_filter :set_session_id
-
   def index
   end
 
@@ -10,7 +8,7 @@ class TaggerController < ApplicationController
     # The object we return to the UI, if any
     response = {}
     # Get our tags
-    tags = Tag.where :session_id => session[:guid], :published => false
+    tags = Tag.where :user_id => session[:user_id], :published => false
     tags.each_with_index do |tag,index|
       key = "itemTag"+index.to_s
       response[key] = ActiveSupport::JSON.decode(tag[:data])
@@ -50,12 +48,6 @@ class TaggerController < ApplicationController
 
   private
 
-  # Private method to get the users session id (likely temporary)
-  def set_session_id
-    # TODO - Refactor this when we have sso
-    session[:guid] ||= SecureRandom.uuid
-  end
-
   # Its possible to need to save the tags from multiple places so lets extract this
   # out into a function of it's own for others to use.. share and share-a-like!
   def save_tags_state tags, publish = false
@@ -73,7 +65,7 @@ class TaggerController < ApplicationController
         # This tag has a UUID so we need to load it first
         found_tag = Tag.find_by_uuid tag['uuid']
         if found_tag.present?
-          found_tag.session_id = session[:guid]
+          found_tag.user_id = session[:user_id]
           found_tag.data = tag.to_json
           found_tag.published = publish
           found_tag.save()
@@ -84,7 +76,7 @@ class TaggerController < ApplicationController
         tag['uuid'] ||= SecureRandom.uuid
         # Create each tag in the database
         Tag.create(
-            :session_id => session[:guid],
+            :user_id => current_user.id,
             :uuid => tag['uuid'],
             :data => tag.to_json,
             :published => publish
@@ -105,9 +97,9 @@ class TaggerController < ApplicationController
   # as the save state function only saves to the tags already there or adds new ones.. doesn't know to remove.
   def remove_deleted_tags tags
     excluding = tags.map{|t| t[1]['uuid'] }
-    session_tags = Tag.where(:session_id => session[:guid], :published => false).find(:all, :conditions => ['uuid not in (?)', excluding])
+    user_tags = Tag.where(:user_id => session[:user_id], :published => false).find(:all, :conditions => ['uuid not in (?)', excluding])
     # ^^ That shit right there is why I love ruby..
-    session_tags.each do |tag|
+    user_tags.each do |tag|
       tag.destroy
     end
   end
