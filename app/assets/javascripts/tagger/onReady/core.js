@@ -64,7 +64,7 @@ $(function() {
         $textarea.height( $window.height() - 160);
     });
 
-    checkCookie();
+    // checkCookie();
 
     // # TODO Load this after user auths, not before. But for now this works.
     loadDrafts();

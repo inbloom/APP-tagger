@@ -3,7 +3,9 @@
     <div class="container">
       <div class="pull-left">
         <button class="btn btn-success" id="newbutton"><i class="icon-edit icon-white"></i> New</button>
-        <button class="btn btn-success" id="saveDraftButton" href="#"><i class="icon-hdd icon-white"></i> Save</button>
+				<% if current_user %>
+        	<button class="btn btn-success" id="saveDraftButton" href="#"><i class="icon-hdd icon-white"></i> Save</button>
+				<% end %>
         <button class="btn btn-success" id="loadButton" data-toggle="modal" href="#loadModal"><i class="icon-upload icon-white"></i> Import</button>
 
         <div class="btn-group">
@@ -15,9 +17,9 @@
             <li><a id="exportHtmlButton" href="#"><i class="icon-download icon-white"></i> HTML</a></li>
           </ul>
         </div>
-
-        <button class="btn btn-inverse" id="publishLriButton"><i class="icon-ok-sign icon-white"></i> Publish</button>
-
+				<% if current_user %>
+        	<button class="btn btn-inverse" id="publishLriButton"><i class="icon-ok-sign icon-white"></i> Publish</button>
+				<% end %>
       </div>
       <div class='pull-left navbar-text'>LRMI Version 1.1.0</div>
 
@@ -26,7 +28,15 @@
         <a class="btn btn-inverse" target="_blank" href="https://docs.google.com/spreadsheet/viewform?formkey=dHdkazN1cWhLUXhUU2Jjang0Qjl2eXc6MQ#gid=0"><i class="icon-warning-sign icon-white"></i>  Report Issue</span></a>
         <a class="btn btn-inverse" target="_blank" href="http://asn.jesandco.org/resources/ASNJurisdiction/CCSS"><i class="icon-info-sign icon-white"></i>  CCSS Web</span></a>
       </div>
-      <div id="userWelcome" class="pull-right navbar-text">You are not logged in.</div>
+      <div id="userWelcome" class="pull-right navbar-text">
+      	<% if current_user %>
+				  Welcome <%= current_user.full_name %>!
+				  <%= link_to "Sign Out", signout_path %>
+				  <p><%= @slc_request %>
+				<% else %>
+				  <%= link_to "Sign in with Slc", "/auth/slc" %>
+				<% end %>
+      </div>
 
     </div>
   </div>
