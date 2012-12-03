@@ -27,6 +27,7 @@ group :assets do
 end
 
 # SLC OAuth Gem
+gem 'omniauth'
 gem 'omniauth-slc', '0.0.2'
 # HTTP Party Rockin
 gem 'httparty'
