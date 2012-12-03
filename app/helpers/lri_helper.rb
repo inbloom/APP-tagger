@@ -13,14 +13,18 @@ module LriHelper
         'groupType', # The property "groupType" does not appear to exist in the LRMI or schema.org specs.
         'timeRequired', # Find the time required LRMI or Schema.org spec
 
-        'usageRightsURL',
-        'isBasedOnURL',
-        'endUser',
-        'ageRange',
-        'educationalUse',
-        'interactivityType',
-        'learningResourceType',
+        'endUser', # Odd error
         'educationalAlignments',
+
+        # need to get on a call with kurt today for sure..
+
+        # For the time being instead of getting update working maybe delete then update?  etc.
+        # How to do keyword searches.. and filters etc..
+
+        # Issues with certain keys that just fail
+        # Some keys don't exist at all how do we use them?
+
+        # I need 100% super fast turn around for getting keys working through kurt.
     ]
 
 
@@ -115,6 +119,7 @@ module LriHelper
 
   # Update the entity in the LRI
   def self.update request, entity
+#puts entity.inspect
     # The internal temp guid used by lri to do assignments
     guid = entity['guid']
 
@@ -125,6 +130,7 @@ module LriHelper
     properties_to_create = request.clone
     properties_to_create.delete_if{|k,v| entity['props'][k].present? || v.empty? }
     properties_to_create.each do |key,value|
+#puts "attempting to create the property: " + value
       self.create_property guid, {key=>value}
     end
 
@@ -133,9 +139,10 @@ module LriHelper
     # request and the found entity.. only do so though if the values are different
     properties_to_update = []
     entity['props'].each do |key,value|
-      properties_to_update << {key=>value} if request[key].present? if request[key] != value
+      properties_to_update << {key=>request[key]} if request[key].present? if request[key] != value
     end
     properties_to_update.each do |hash|
+#puts "attempting to update the property: " + hash.inspect
       self.update_property guid, hash
     end
 
@@ -164,7 +171,7 @@ module LriHelper
         :createProperty => '/property/create?q=',
         :updateProperty => '/property/update?q=',
         :createEntity   => '/entity/create?q=',
-        :search         => '/entity/search?ops={"details":true}&q='
+        :search         => '/entity/search?ops={"details":true,"use_cached":false}&q='
     }
     # If not one of our request types, dump out
     return false unless requestTypes[type].present?
@@ -174,6 +181,9 @@ module LriHelper
             URI::encode('http://lriserver.com:8200' + requestTypes[type] + request.to_json )
         )
     )
+#puts 'http://lriserver.com:8200' + requestTypes[type] + request.to_json if type == :search
+#puts rawResponse if type == :search
+
     # Parse out the response
     results = ActiveSupport::JSON.decode(rawResponse)
     # Check for and store failures
