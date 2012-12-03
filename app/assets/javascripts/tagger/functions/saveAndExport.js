@@ -24,10 +24,10 @@ function saveDraft(str){
         // Really nothing should change other than now the items have a UUID
         success : function(xhr) {
             items = xhr
+            showMessage("Successfully saved drafts", "Success");
         },
         error : function(xhr, txtStatus, errThrown) {
-            // # TODO No. Add a real error modal
-            console.log(arguments);
+            showMessage(errThrown, "Error saving drafts");
         }
     })
 }
@@ -44,11 +44,11 @@ function saveRemote(str, remote) {
         // On success update our items list to be what the server sends back
         // Really nothing should change other than now the items have a UUID
         success : function(xhr) {
-//            items = xhr
+            items = xhr
+            showMessage("Resources published");
         },
         error : function(xhr, txtStatus, errThrown) {
-            // # TODO No. Add a real error modal
-            console.log(arguments);
+            showMessage("Go ahead and reload your ui, any work you were doing should have been saved. <br />" + xhr.responseText, "Remote Error (RELOAD YOUR UI!!)");
         }
     })
 
@@ -103,8 +103,7 @@ function loadDrafts() {
 
         },
         error : function(xhr, txtStatus, errThrown) {
-            // # TODO No. Add a real error modal
-            console.log(arguments);
+            showMessage(errThrown, "Error loading drafts");
         }
     })
 }
