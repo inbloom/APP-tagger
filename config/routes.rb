@@ -9,6 +9,9 @@ LRMI::Application.routes.draw do
       post :save_remote, :path => "/save_remote", :constraints => { :format => /json/ }
     end
   end
+  
+  match "/auth/:provider/callback" => "sessions#create"
+  match "/signout" => "sessions#destroy", :as => :signout
 
   # Until we get the products united, just forward to tagger code
   root :to => 'tagger#index'

@@ -26,6 +26,10 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+# SLC OAuth Gem
+gem 'omniauth-slc', '0.0.2'
+# HTTP Party Rockin
+gem 'httparty'
 # Twitter bootstrap baby
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 # JSON
