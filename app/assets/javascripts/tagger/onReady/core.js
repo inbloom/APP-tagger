@@ -49,7 +49,7 @@ $(function() {
 
     $mainContentBottom.width( $window.width() - $mainContentTopLeft.width() - $mainContentTopRight.width() - 70 );
 
-    $textarea.height( $window.height() - 160);
+    $textarea.height( $window.height() - offsetTopPanels - 100);
 
     $dotNotation.typeahead({source: dotNotationDisplayArray, items:8});
 
@@ -61,7 +61,7 @@ $(function() {
         $mainContentBottom.height( $window.height() - offsetTopPanels);
         $mainContentBottom.width( $window.width() - $mainContentTopLeft.width() - $mainContentTopRight.width() - 70 );
 
-        $textarea.height( $window.height() - 160);
+        $textarea.height( $window.height() - offsetTopPanels - 100);
     });
 
     // checkCookie();
