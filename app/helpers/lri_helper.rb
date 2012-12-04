@@ -141,13 +141,16 @@ module LriHelper
       self.update_property hash[:guid], hash[:value]
     end
 
-    properties_to_delete = request.clone
+    # Now lets go through the request and delete from the known entity any properties that have been set
+    # to nothing.  While there is a distict difference between "" and nil in this case the form just knows
+    # that "" is nil.  So we must remove those, as opposed to setting them as "" in the lri
+    properties_to_delete = []
     request.each do |key,value|
-      puts key +":"+value if value.empty?
+      properties_to_delete << entity['props'][key] if entity['props'][key].present? && value.empty?
     end
-#    properties_to_delete.delete_if{|k,v| !v.empty? }
-#puts :DELETE
-#puts properties_to_delete
+    properties_to_delete.each do |hash|
+      self.delete_property hash.first[1][0]['guid']
+    end
 
   end
 
@@ -162,6 +165,12 @@ module LriHelper
   def self.update_property entity_guid, property_value
     request = {:guid=>entity_guid,:value=>property_value}
     self.request :updateProperty, request
+  end
+
+  # Delete any properties sent
+  def self.delete_property entity_guid
+    request = {:guid=>entity_guid}
+    self.request :deleteProperty, request
   end
 
   # A helper method for defining our various request types -- trying to keep it dry
@@ -182,9 +191,6 @@ module LriHelper
             URI::encode('http://lriserver.com:8200' + requestTypes[type] + request.to_json )
         )
     )
-#puts 'http://lriserver.com:8200' + requestTypes[type] + request.to_json if type == :search
-#puts rawResponse if type == :search
-
     # Parse out the response
     results = ActiveSupport::JSON.decode(rawResponse)
     # Check for and store failures
