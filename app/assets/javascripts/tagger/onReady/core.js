@@ -47,7 +47,7 @@ $(function() {
     $mainContentTopRight.height( $window.height() - offsetTopPanels);
     $mainContentBottom.height( $window.height() - offsetTopPanels);
 
-    $mainContentBottom.width( $window.width() - $mainContentTopLeft.width() - $mainContentTopRight.width() - 50 );
+    $mainContentBottom.width( $window.width() - $mainContentTopLeft.width() - $mainContentTopRight.width() - 70 );
 
     $textarea.height( $window.height() - 160);
 
@@ -59,7 +59,7 @@ $(function() {
         $mainContentTopLeft.height( $window.height() - offsetTopPanels);
         $mainContentTopRight.height( $window.height() - offsetTopPanels);
         $mainContentBottom.height( $window.height() - offsetTopPanels);
-        $mainContentBottom.width( $window.width() - $mainContentTopLeft.width() - $mainContentTopRight.width() - 50 );
+        $mainContentBottom.width( $window.width() - $mainContentTopLeft.width() - $mainContentTopRight.width() - 70 );
 
         $textarea.height( $window.height() - 160);
     });
