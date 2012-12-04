@@ -165,7 +165,7 @@ DEPENDENCIES
   jquery-ui-rails
   json
   less-rails
-  libv8 (~> 3.11.8)
+  libv8
   mysql2
   omniauth
   omniauth-slc (= 0.0.2)
