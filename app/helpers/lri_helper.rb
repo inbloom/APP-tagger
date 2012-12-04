@@ -107,7 +107,6 @@ module LriHelper
 
   # Update the entity in the LRI
   def self.update request, entity
-
     # The internal temp guid used by lri to do assignments
     guid = entity['guid']
 
@@ -124,31 +123,45 @@ module LriHelper
     # Now we need to figure out which request properties to update
     # to do that just push all items into an array that are in both the
     # request and the found entity.. only do so though if the values are different
+    # Note that in details mode the output for the item is verbose and uses the value as the KEY!
+    # The way we have to get information out of it is kinda confusing and seems wrong.. but there ya go
     properties_to_update = []
-    entity['props'].each do |key,value|
-      properties_to_update << {key=>request[key]} if request[key].present? if request[key] != value
+    entity['props'].each do |key,values|
+      if request[key].present?
+        # This can't be the right way to get the data out..
+        if request[key].to_s != values.keys[0].to_s
+          properties_to_update << {:value=>request[key],:guid=>values.first[1][0]['guid']}
+        end
+      end
     end
+    # Now iterate through all those properties and send them to the update method.
+    # Note we are rebuilding the exact same hash in the update_property call, but that's cause I expect how
+    # we build this properties_to_update variable will change drastically and I dont want to change the method
     properties_to_update.each do |hash|
-puts "attempting to update the property: " + hash.inspect
-      self.update_property guid, hash
+      self.update_property hash[:guid], hash[:value]
     end
+
+    properties_to_delete = request.clone
+    request.each do |key,value|
+      puts key +":"+value if value.empty?
+    end
+#    properties_to_delete.delete_if{|k,v| !v.empty? }
+#puts :DELETE
+#puts properties_to_delete
 
   end
 
   # Okay so now we need to create a new property and stuff it into the lri
   # while associating it to the guid provided
   def self.create_property entity_guid, property
-    request = {"from"=>entity_guid}.merge property
+    request = {:from=>entity_guid}.merge property
     self.request :createProperty, request
   end
 
   # Now we need to update the property as it is already in the system..
-  def self.update_property entity_guid, property
-#    request = {"guid"=>entity_guid}.merge property
-
-    # TODO Right here we need the GUID of the property we are updating.. I have yet to find out how to get that from kurt
-
-#    self.request :updateProperty, request
+  def self.update_property entity_guid, property_value
+    request = {:guid=>entity_guid,:value=>property_value}
+    self.request :updateProperty, request
   end
 
   # A helper method for defining our various request types -- trying to keep it dry
@@ -158,7 +171,8 @@ puts "attempting to update the property: " + hash.inspect
         :createProperty => '/property/create?q=',
         :updateProperty => '/property/update?q=',
         :createEntity   => '/entity/create?q=',
-        :search         => '/entity/search?ops={"details":true,"use_cached":false}&q='
+        :search         => '/entity/search?opts={"details":true,"use_cached":false}&q=',
+        :deleteProperty => '/property/update?opts={"active":false}&q='
     }
     # If not one of our request types, dump out
     return false unless requestTypes[type].present?
@@ -168,8 +182,8 @@ puts "attempting to update the property: " + hash.inspect
             URI::encode('http://lriserver.com:8200' + requestTypes[type] + request.to_json )
         )
     )
-puts 'http://lriserver.com:8200' + requestTypes[type] + request.to_json if type == :search
-puts rawResponse if type == :search
+#puts 'http://lriserver.com:8200' + requestTypes[type] + request.to_json if type == :search
+#puts rawResponse if type == :search
 
     # Parse out the response
     results = ActiveSupport::JSON.decode(rawResponse)
