@@ -16,3 +16,5 @@
 
 /config/database.yml
 config/slc.yml
+
+/.idea
