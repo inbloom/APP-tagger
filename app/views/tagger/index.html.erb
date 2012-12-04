@@ -1,15 +1,21 @@
-<%= render :partial => 'navbar' %>
+<%= render :partial => 'tagger/slc/header' %>
 
-<div id="mainContentTopLeft" class="main-content-topleft border-right">
-  <%= render :partial => 'topleft' %>
-</div>
+<div class='container-fluid'>
 
-<div id="mainContentTopRight" class="main-content-topright border-right">
-  <%= render :partial => 'topright' %>
-</div>
+  <%= render :partial => 'navbar' %>
 
-<div id="mainContentBottom" class="page">
-  <iframe id='iframe' scrolling='auto' frameborder='0' width='100%' height='100%'></iframe>
+  <div id="mainContentTopLeft" class="main-content-topleft border-right">
+    <%= render :partial => 'topleft' %>
+  </div>
+
+  <div id="mainContentTopRight" class="main-content-topright border-right">
+    <%= render :partial => 'topright' %>
+  </div>
+
+  <div id="mainContentBottom" class="page">
+    <iframe id='iframe' scrolling='auto' frameborder='0' width='100%' height='100%'></iframe>
+  </div>
+
 </div>
 
 <%= render :partial => "tagger/modals/load_modal" %>
