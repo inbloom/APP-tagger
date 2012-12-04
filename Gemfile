@@ -47,5 +47,3 @@ group :development, :test do
 # Use thin as webserver
   gem 'thin'
 end
-
-gem 'ruby-debug19'
