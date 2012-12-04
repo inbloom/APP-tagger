@@ -15,7 +15,7 @@ $(function() {
     window.alignmentArray = new Array();
     window.dotNotationDisplayArray = new Array();
 
-    var offsetTopPanels = 80;
+    var offsetTopPanels = $('#mainContentTopLeft').position().top;
 
     readAlignmentDataFromFiles();
 
