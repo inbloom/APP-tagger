@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
 
-group :development do  
+group :development, :staging do  
   # Mysql
   gem 'mysql2'
 end
@@ -47,3 +47,5 @@ group :development, :test do
 # Use thin as webserver
   gem 'thin'
 end
+
+gem 'ruby-debug19'
