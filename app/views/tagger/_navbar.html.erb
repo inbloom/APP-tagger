@@ -28,15 +28,6 @@
         <a class="btn btn-inverse" target="_blank" href="https://docs.google.com/spreadsheet/viewform?formkey=dHdkazN1cWhLUXhUU2Jjang0Qjl2eXc6MQ#gid=0"><i class="icon-warning-sign icon-white"></i>  Report Issue</span></a>
         <a class="btn btn-inverse" target="_blank" href="http://asn.jesandco.org/resources/ASNJurisdiction/CCSS"><i class="icon-info-sign icon-white"></i>  CCSS Web</span></a>
       </div>
-      <div id="userWelcome" class="pull-right navbar-text">
-      	<% if current_user %>
-				  Welcome <%= current_user.full_name %>!
-				  <%= link_to "Sign Out", signout_path %>
-				  <p><%= @slc_request %>
-				<% else %>
-				  <%= link_to "Sign in with Slc", "/auth/slc" %>
-				<% end %>
-      </div>
 
     </div>
   </div>
