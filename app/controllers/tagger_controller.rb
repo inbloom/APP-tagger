@@ -58,7 +58,7 @@ class TaggerController < ApplicationController
     # The object we return to the UI, if any
     response = {}
     # Get all the draft tags and send those to the ui
-    tags = Tag.where :session_id => session[:guid], :published => false
+    tags = Tag.where :user_id => current_user.id, :published => false
     tags.each_with_index do |tag,index|
       key = "itemTag"+index.to_s
       response[key] = ActiveSupport::JSON.decode(tag[:data])
