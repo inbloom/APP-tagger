@@ -15,7 +15,7 @@ $(function() {
     window.alignmentArray = new Array();
     window.dotNotationDisplayArray = new Array();
 
-    var offsetTopPanels = 80;
+    var offsetTopPanels = $('#mainContentTopLeft').position().top;
 
     readAlignmentDataFromFiles();
 
@@ -47,9 +47,9 @@ $(function() {
     $mainContentTopRight.height( $window.height() - offsetTopPanels);
     $mainContentBottom.height( $window.height() - offsetTopPanels);
 
-    $mainContentBottom.width( $window.width() - $mainContentTopLeft.width() - $mainContentTopRight.width() - 50 );
+    $mainContentBottom.width( $window.width() - $mainContentTopLeft.width() - $mainContentTopRight.width() - 70 );
 
-    $textarea.height( $window.height() - 160);
+    $textarea.height( $window.height() - offsetTopPanels - 100);
 
     $dotNotation.typeahead({source: dotNotationDisplayArray, items:8});
 
@@ -59,9 +59,9 @@ $(function() {
         $mainContentTopLeft.height( $window.height() - offsetTopPanels);
         $mainContentTopRight.height( $window.height() - offsetTopPanels);
         $mainContentBottom.height( $window.height() - offsetTopPanels);
-        $mainContentBottom.width( $window.width() - $mainContentTopLeft.width() - $mainContentTopRight.width() - 50 );
+        $mainContentBottom.width( $window.width() - $mainContentTopLeft.width() - $mainContentTopRight.width() - 70 );
 
-        $textarea.height( $window.height() - 160);
+        $textarea.height( $window.height() - offsetTopPanels - 100);
     });
 
     // checkCookie();

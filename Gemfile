@@ -36,7 +36,7 @@ gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootst
 # JSON
 gem 'json'
 # Lib V8 Javascript Engine
-gem 'libv8', '~> 3.3.10'
+gem 'libv8', '~> 3.11.8'
 # Jquery Goodness
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
