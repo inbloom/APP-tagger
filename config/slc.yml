@@ -1,0 +1,12 @@
+development:
+  client_id: gyipqMp4UW
+  shared_secret: NeF8WljTBIf9fBJ32njqt9c0Vr7fT2Z8Z1zl3X7ls4so3ocW
+staging:
+  client_id: gyipqMp4UW
+  shared_secret: NeF8WljTBIf9fBJ32njqt9c0Vr7fT2Z8Z1zl3X7ls4so3ocW  
+test:
+  client_id: gyipqMp4UW
+  shared_secret: NeF8WljTBIf9fBJ32njqt9c0Vr7fT2Z8Z1zl3X7ls4so3ocW
+production:
+  client_id: 
+  shared_secret: 
