@@ -183,7 +183,7 @@ module LriHelper
         :updateProperty   => '/property/update?opts={"access_token":"letmein"}&q=',
         :deleteProperty   => '/property/update?opts={"access_token":"letmein","active":false}&q=',
         :createEntity     => '/entity/create?opts={"access_token":"letmein"}&q=',
-        :getEnumerations  => '/entity/search?optsq=',
+        :getEnumerations  => '/entity/search?opts={"use_cached":false}&q=',
         :search           => '/entity/search?opts={"details":true,"use_cached":false}&q=',
     }
     # If not one of our request types, dump out
