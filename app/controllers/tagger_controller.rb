@@ -62,28 +62,34 @@ class TaggerController < ApplicationController
     tags = []
     # Break out the tags from the sent parsed json hash
     json_tags.each {|h| tags << h[1] }
-    # Save those tags baby -- response is those tags that are being published.. Don't think we need it.
-    response = save_tags_state json_tags, true
 
+    # Choose which adaptor to use and publish those suckers
     case params[:remote]
       when 'LRI' then
-        results = LriHelper::publish tags, current_user
+        errors = LriHelper::publish tags, current_user
     end
 
-    # The object we return to the UI, if any
-    response = {}
-    # Get all the draft tags and send those to the ui
-    tags = Tag.where :user_id => current_user.id, :published => false
-    tags.each_with_index do |tag,index|
-      key = "itemTag"+index.to_s
-      response[key] = ActiveSupport::JSON.decode(tag[:data])
+    # TODO Eventually I need to only error those tags that didn't save, and set published the ones that did actually publish
+    # If we have no errors, then go ahead and mark tags as published..etc..
+    if errors.empty?
+      # Save those tags baby
+      save_tags_state json_tags, true
+
+      # The object we return to the UI, if any
+      response = {}
+      # Get all the draft tags and send those to the ui
+      tags = Tag.where :user_id => current_user.id, :published => false
+      tags.each_with_index do |tag,index|
+        key = "itemTag"+index.to_s
+        response[key] = ActiveSupport::JSON.decode(tag[:data])
+      end
     end
 
     respond_to do |format|
-      if results.empty?
-        format.json { render json: response } # TODO send back the tags that should be shown
+      if errors.empty?
+        format.json { render json: response }
       else
-        format.json { render status: 500, json: results }
+        format.json { render status: 500, json: errors }
       end
     end
   end
