@@ -47,6 +47,7 @@ $(function() {
     $createdOn.val('');
 
     $window.resize(function() {
+        var panelsHeight = $window.height() - $('div.footer').height() - offsetTopPanels;
         $textarea.height( panelsHeight - 100);
     });
 
