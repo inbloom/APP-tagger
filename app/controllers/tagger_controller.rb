@@ -39,7 +39,7 @@ class TaggerController < ApplicationController
   def save_export
     send_data("#{params[:data]}", :filename => "#{params[:filename]}", :type => "text/plain")
   end
-  
+
   # Saves a json formatted string to the db, then formats and sends to LRI
   def save_draft
     # Parse through incoming tags array and create a tag for each
@@ -61,8 +61,7 @@ class TaggerController < ApplicationController
     # Working array of tags
     tags = []
     # Break out the tags from the sent parsed json hash
-    json_tags.each {|h| tags << h[1] }
-
+    json_tags.each {|h| tags << h[1].clone }
     # Choose which adaptor to use and publish those suckers
     case params[:remote]
       when 'LRI' then
