@@ -19,10 +19,6 @@ $(function() {
 
     clearTimeRequired();
 
-    // Make two flyout panels resizable but not the iframe one
-    $("#mainContentTopLeft" ).resizable({ handles: "e"});
-    $("#mainContentTopRight" ).resizable({ handles: "e"});
-
     $.ajaxSetup({ cache: false });
 
     var $window = $( window );
@@ -44,10 +40,6 @@ $(function() {
     var offsetTopPanels = $('#mainContentTopLeft').position().top;
     var panelsHeight = $window.height() - $('div.footer').height() - offsetTopPanels;
 
-    $mainContentTopLeft.height( panelsHeight );
-    $mainContentTopRight.height( panelsHeight );
-    $mainContentBottom.height( panelsHeight );
-    $mainContentBottom.width( $window.width() - $mainContentTopLeft.width() - $mainContentTopRight.width() - 70 );
     $textarea.height( panelsHeight - 100);
 
     $dotNotation.typeahead({source: dotNotationDisplayArray, items:8});
@@ -55,10 +47,6 @@ $(function() {
     $createdOn.val('');
 
     $window.resize(function() {
-        $mainContentTopLeft.height( panelsHeight );
-        $mainContentTopRight.height( panelsHeight );
-        $mainContentBottom.height( panelsHeight );
-        $mainContentBottom.width( $window.width() - $mainContentTopLeft.width() - $mainContentTopRight.width() - 70 );
         $textarea.height( panelsHeight - 100);
     });
 
