@@ -193,6 +193,13 @@ module LriHelper
             URI::encode('http://lriserver.com:8200' + requestTypes[type] + request.to_json )
         )
     )
+
+# This is here to test changes made by kurt.. it gives us an idea of what we are trying to do and what happened.
+#puts :REQUEST.to_s + "::" + type.to_s
+#puts 'http://lriserver.com:8200' + requestTypes[type] + request.to_json
+#puts :RESPONSE
+#puts rawResponse
+
     # Parse out the response
     results = ActiveSupport::JSON.decode(rawResponse)
     # Check for and store failures
