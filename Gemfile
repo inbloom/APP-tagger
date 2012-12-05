@@ -32,7 +32,7 @@ gem 'omniauth-slc', '0.0.2'
 # HTTP Party Rockin
 gem 'httparty'
 # Twitter bootstrap baby
-gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'twitter-bootstrap-rails', '2.1.0'
 # JSON
 gem 'json'
 # Lib V8 Javascript Engine
