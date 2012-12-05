@@ -1,0 +1,12 @@
+development:
+  client_id: pJvLcdXyPx
+  shared_secret: edxzmOr2BA2AQAGIWUKHQJ4ZjO5eK8I2Q4FRKB2yUYRJrWGt
+staging:
+  client_id: pJvLcdXyPx
+  shared_secret: edxzmOr2BA2AQAGIWUKHQJ4ZjO5eK8I2Q4FRKB2yUYRJrWGt  
+test:
+  client_id: pJvLcdXyPx
+  shared_secret: edxzmOr2BA2AQAGIWUKHQJ4ZjO5eK8I2Q4FRKB2yUYRJrWGt
+production:
+  client_id: pJvLcdXyPx
+  shared_secret: edxzmOr2BA2AQAGIWUKHQJ4ZjO5eK8I2Q4FRKB2yUYRJrWGt

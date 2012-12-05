@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
 
-group :development do  
+group :development, :staging do  
   # Mysql
   gem 'mysql2'
 end
@@ -20,8 +20,8 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', :platforms => :ruby
-  #gem "therubyracer", '~> 0.10.2'
+  #gem 'therubyracer', :platforms => :ruby
+  gem "therubyracer", '~> 0.10.2'
 
   gem 'uglifier', '>= 1.0.3'
 end
@@ -32,11 +32,11 @@ gem 'omniauth-slc', '0.0.2'
 # HTTP Party Rockin
 gem 'httparty'
 # Twitter bootstrap baby
-gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'twitter-bootstrap-rails', '2.1.6'
 # JSON
 gem 'json'
 # Lib V8 Javascript Engine
-gem 'libv8', '~> 3.11.8'
+gem 'libv8'
 # Jquery Goodness
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
