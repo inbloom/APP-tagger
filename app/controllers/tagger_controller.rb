@@ -19,6 +19,22 @@ class TaggerController < ApplicationController
     end
   end
 
+  # Load the historical items into the UI
+  def load_history
+    # The object we return to the UI, if any
+    response = {}
+    # Get historical tags
+    tags = Tag.where :user_id => session[:user_id], :published => true
+    tags.each_with_index do |tag,index|
+      key = "historicalTag"+index.to_s
+      response[key] = ActiveSupport::JSON.decode(tag[:data])
+    end
+
+    respond_to do |format|
+      format.json { render json: response }
+    end
+  end
+
   # Saves a string to a file named filename on a user's machine
   def save_export
     send_data("#{params[:data]}", :filename => "#{params[:filename]}", :type => "text/plain")
