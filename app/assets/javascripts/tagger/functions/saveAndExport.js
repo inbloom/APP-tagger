@@ -45,6 +45,7 @@ function saveRemote(str, remote) {
         // Really nothing should change other than now the items have a UUID
         success : function(xhr) {
             items = xhr
+            reDrawBasedOnItems();
             showMessage("Resources published");
         },
         error : function(xhr, txtStatus, errThrown) {
@@ -65,45 +66,50 @@ function loadDrafts() {
         // Really nothing should change other than now the items have a UUID
         success : function(xhr) {
             items = xhr
-
-            // Uncheck everything when you add a new tag
-            jQuery("#multiItemSelector input[type=checkbox]").each(function(i,obj) {
-                obj.checked = false;
-            });
-            // Update the form
-            updateInputFields();
-
-            for (itemCounter in items) {
-                $("#multiItemSelector span.notYet").hide();
-
-                var title = (items[itemCounter]['title'].length > 25) ? items[itemCounter]['title'].substr(0,25) + '&hellip;' : items[itemCounter]['title'];
-                $("#multiItemSelector").append($("<a href='#"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#"+itemCounter+"' id='"+itemCounter+"URL' "+ (items[itemCounter]['url']?"":"style='display:none;'") +" class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='"+itemCounter+"Label' class='checkbox'><input id='"+itemCounter+"' type='checkbox' name='tagItem'/><span>"+title+"</span></label>"));
-
-                for (objHash in items[itemCounter].educationalAlignments) {
-                    // Create our object
-                    var object = {
-                        'educationalAlignment' : items[itemCounter].educationalAlignments[objHash]['educationalAlignment'],
-                        'alignmentType' : items[itemCounter].educationalAlignments[objHash]['alignmentType'],
-                        'dotNotation' : items[itemCounter].educationalAlignments[objHash]['dotNotation'],
-                        'description' : items[itemCounter].educationalAlignments[objHash]['description'],
-                        'itemURL' : items[itemCounter].educationalAlignments[objHash]['itemURL']
-                    };
-
-                    // Okay add it.
-                    if (alignments[objHash] == undefined) {
-                        $('.noAlignmentsYet').hide();
-                        alignments[objHash] = object;
-                        $('#currentAlignmentTable > tbody:last').append('<tr><td><label class="checkbox"><input type="checkbox" class="alignment-checkbox" value="'+objHash+'" />'+ object.dotNotation +'</label></td><td>'+ capitalize(object.alignmentType) +'</td></tr>');
-                    }
-                }
-
-            }
-
-            updateTextArea();
-
+            reDrawBasedOnItems();
         },
         error : function(xhr, txtStatus, errThrown) {
             showMessage(errThrown, "Error loading drafts");
         }
     })
+}
+
+// Helper function to redraw panels based on on the items array instead of the other way around
+function reDrawBasedOnItems() {
+    $("#multiItemSelector").empty();
+
+    // Uncheck everything when you add a new tag
+    $("#multiItemSelector input[type=checkbox]").each(function(i,obj) {
+        obj.checked = false;
+    });
+    // Update the form
+    updateInputFields();
+
+    for (itemCounter in items) {
+        $("#multiItemSelector span.notYet").hide();
+
+        var title = (items[itemCounter]['title'].length > 25) ? items[itemCounter]['title'].substr(0,25) + '&hellip;' : items[itemCounter]['title'];
+        $("#multiItemSelector").append($("<a href='#"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#"+itemCounter+"' id='"+itemCounter+"URL' "+ (items[itemCounter]['url']?"":"style='display:none;'") +" class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='"+itemCounter+"Label' class='checkbox'><input id='"+itemCounter+"' type='checkbox' name='tagItem'/><span>"+title+"</span></label>"));
+
+        for (objHash in items[itemCounter].educationalAlignments) {
+            // Create our object
+            var object = {
+                'educationalAlignment' : items[itemCounter].educationalAlignments[objHash]['educationalAlignment'],
+                'alignmentType' : items[itemCounter].educationalAlignments[objHash]['alignmentType'],
+                'dotNotation' : items[itemCounter].educationalAlignments[objHash]['dotNotation'],
+                'description' : items[itemCounter].educationalAlignments[objHash]['description'],
+                'itemURL' : items[itemCounter].educationalAlignments[objHash]['itemURL']
+            };
+
+            // Okay add it.
+            if (alignments[objHash] == undefined) {
+                $('.noAlignmentsYet').hide();
+                alignments[objHash] = object;
+                $('#currentAlignmentTable > tbody:last').append('<tr><td><label class="checkbox"><input type="checkbox" class="alignment-checkbox" value="'+objHash+'" />'+ object.dotNotation +'</label></td><td>'+ capitalize(object.alignmentType) +'</td></tr>');
+            }
+        }
+
+    }
+
+    updateTextArea();
 }
