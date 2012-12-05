@@ -6,7 +6,7 @@ function deleteTag(tag_id) {
     }
     // Remove the refresh and delete buttons too
     if ($('#'+tag_id).length > 0) {
-        $('#'+tag_id).parent().remove();
+        $('#'+tag_id).parent().hide().addClass('deleted');
         $('a[href=#'+tag_id+']').remove();
     }
     // Hide the modal

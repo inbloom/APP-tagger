@@ -82,11 +82,11 @@ function loadDrafts() {
                 for (objHash in items[itemCounter].educationalAlignments) {
                     // Create our object
                     var object = {
-                        'educationalAlignment' : items[itemCounter].educationalAlignments[objHash]['educationAlignment'],
+                        'educationalAlignment' : items[itemCounter].educationalAlignments[objHash]['educationalAlignment'],
                         'alignmentType' : items[itemCounter].educationalAlignments[objHash]['alignmentType'],
                         'dotNotation' : items[itemCounter].educationalAlignments[objHash]['dotNotation'],
                         'description' : items[itemCounter].educationalAlignments[objHash]['description'],
-                        'itemURL' : items[itemCounter].educationalAlignments[objHash]['itemUrl']
+                        'itemURL' : items[itemCounter].educationalAlignments[objHash]['itemURL']
                     };
 
                     // Okay add it.

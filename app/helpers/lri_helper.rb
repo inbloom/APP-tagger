@@ -1,17 +1,16 @@
 require 'net/http'
 
 module LriHelper
+  @@user = nil
   @@failures = []
 
-  def self.publish tags
-
+  def self.publish tags, user
+    @@user = user
     @@failures = []
 
     # The following is a list of deleted keys we are removing for the time being
     deleted_keys = [
-        'mediaType', # The property "mediaType" is reference by the LRMI spec as existing in schema.org, but schema.org has no such property.
         'groupType', # The property "groupType" does not appear to exist in the LRMI or schema.org specs.
-        'endUser', # Odd error
         'educationalAlignments'
     ]
 
@@ -58,6 +57,7 @@ module LriHelper
 
     end
 
+    # Now return any failures if there are any
     @@failures
   end
 
@@ -85,7 +85,7 @@ module LriHelper
         'timeRequired'          => 'urn:schema-org:property_type:time_required',
         'createdBy'             => 'urn:schema-org:property_type:author',
         'educationalAlignments' => 'urn:schema-org:property_type:educational_alignment',
-        'mediaType'             => 'urn:schema-org:property_type:media_type', # Not in Schema.org?
+        'mediaType'             => 'urn:schema-org:property_type:physical_media_type'
     }
     return lri_key_mappings[key] if lri_key_mappings[key].present?
     key
@@ -177,11 +177,13 @@ module LriHelper
   def self.request type, request
     # Current list of request types
     requestTypes = {
-        :createProperty => '/property/create?q=',
-        :updateProperty => '/property/update?q=',
-        :createEntity   => '/entity/create?q=',
-        :search         => '/entity/search?opts={"details":true,"use_cached":false}&q=',
-        :deleteProperty => '/property/update?opts={"active":false}&q='
+        # TODO get away from "letmein" and move towards using the users hash with the slc.. should work now not sure why it doesn't (LRI issue)
+        :createProperty   => '/property/create?opts={"access_token":"letmein"}&q=',
+        :updateProperty   => '/property/update?opts={"access_token":"letmein"}&q=',
+        :deleteProperty   => '/property/update?opts={"access_token":"letmein","active":false}&q=',
+        :createEntity     => '/entity/create?opts={"access_token":"letmein"}&q=',
+        :getEnumerations  => '/entity/search?optsq=',
+        :search           => '/entity/search?opts={"details":true,"use_cached":false}&q=',
     }
     # If not one of our request types, dump out
     return false unless requestTypes[type].present?

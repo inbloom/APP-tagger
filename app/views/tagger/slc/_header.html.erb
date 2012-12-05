@@ -5,12 +5,12 @@
     Shared Learning Collaborative
   </div>
 
-  <div id="userWelcome" class="pull-right navbar-text">
+  <div id="userWelcome" class="pull-right">
     <% if current_user %>
       Welcome, <%= current_user.full_name %> | <%= link_to "Sign Out", signout_path, :class => "muted" %>
       <%= @slc_request %>
     <% else %>
-      <%= link_to "Sign in with Slc", "/auth/slc" %>
+      <%= link_to "Sign in with SLC", "/auth/slc" %>
     <% end %>
   </div>
 

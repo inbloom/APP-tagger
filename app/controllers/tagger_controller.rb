@@ -52,7 +52,7 @@ class TaggerController < ApplicationController
 
     case params[:remote]
       when 'LRI' then
-        results = LriHelper::publish tags
+        results = LriHelper::publish tags, current_user
     end
 
     # The object we return to the UI, if any

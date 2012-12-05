@@ -7,6 +7,13 @@ $(function() {
             reader = new FileReader();
             reader.onload = (function(theFile) {
 
+                itemCounter = 0;
+                // Uncheck everything when you add a new tag
+                jQuery("#multiItemSelector input[type=checkbox]").each(function(i,obj) {
+                    obj.checked = false;
+                    itemCounter++;
+                });
+
                 return function(e) {
                     $("#loadModal").modal("hide");
 
@@ -53,14 +60,14 @@ $(function() {
                     }
 
                     // parse CSV input
-                    if (allText[0] == '"') {
+                    if (allText[0] != '{') {
 
                         var output = $.csv2Array(allText);
 
                         for (var i = 1; i < output.length; i++) {
                             if (output[i] == undefined || output[i].length == 0) continue;
 
-                            var itemTitle = (output[i][1]!='')? ((output[i][1].length > 25) ? output[i][1].substr(0,25) + '&hellip;' : output[i][1]) :"New Item " + itemCounter;
+                            var itemTitle = (output[i][1] != '' && output[i][1] != undefined)? ((output[i][1].length > 25) ? output[i][1].substr(0,25) + '&hellip;' : output[i][1]) :"New Item " + itemCounter;
                             var itemUrl = output[i][2];
 
                             // Parse the education alignments and use them, or create new ones.
