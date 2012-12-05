@@ -24,7 +24,7 @@ class TaggerController < ApplicationController
     # The object we return to the UI, if any
     response = {}
     # Get historical tags
-    tags = Tag.where :user_id => session[:user_id], :published => true
+    tags = Tag.where(:user_id => session[:user_id], :published => true).order("updated_at desc")
     tags.each_with_index do |tag,index|
       key = "historicalTag"+index.to_s
       response[key] = ActiveSupport::JSON.decode(tag[:data])
