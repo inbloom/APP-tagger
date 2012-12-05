@@ -53,6 +53,6 @@ $(function() {
 
     // checkCookie();
 
-    // # TODO Load this after user auths, not before. But for now this works.
     loadDrafts();
+    loadHistory();
 });
