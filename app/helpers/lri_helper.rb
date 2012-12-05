@@ -11,7 +11,7 @@ module LriHelper
     # The following is a list of deleted keys we are removing for the time being
     deleted_keys = [
         'groupType', # The property "groupType" does not appear to exist in the LRMI or schema.org specs.
-        'educationalAlignments'
+        'educationalAlignments' # TODO Need the CCSS stuff injected before I can use this..
     ]
 
 
@@ -26,6 +26,7 @@ module LriHelper
       tag['uuid'] = "urn:slc:tag:" + tag['uuid']
       tag['types'] = "urn:schema-org:entity_type:creative_work"
 
+      # TODO Need the CCSS stuff injected before I can use this..
       # Store the alignments in the alignments array to be added later.
 #      alignments_array << tag['educationalAlignments']
       # Change alignments hash to array of id's in the LRI to make association
