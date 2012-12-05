@@ -25,6 +25,18 @@ div.header {
   }
 }
 
+div.footer {
+  background: black;
+  border-top: 1px solid #1990d4;
+  color: white;
+  height: 30px;
+  line-height: 30px;
+  position: fixed;
+  bottom: 0;
+  left:0;
+  right:0;
+}
+
 .disabled.hidden {
   display: none;
 }
@@ -37,28 +49,29 @@ div.header-title {
 }
 
 #mainContentTopLeft {
-  float: left;
-  width: 250px;
+  position:absolute;
+  top: 155px;
+  left: 20px;
+  width: 260px;
   z-index: 200;
   min-width: 250px;
-  position: relative;
   padding-right: 10px;
-  bottom: 0px;
-  overflow-y: hidden;
+  bottom: 32px;
+  overflow-y: auto;
   overflow-x: hidden;
   background-color: #ffffff;
   border-right: 1px solid #fbd385;
 }
 
 #mainContentTopRight {
-  float: left;
+  position:absolute;
+  top: 155px;
+  left: 300px;
   width: 315px;
   z-index: 100;
   min-width: 315px;
-  position: relative;
   padding-right: 10px;
-  left: 15px;
-  bottom: 0px;
+  bottom: 32px;
   overflow-y: auto;
   overflow-x: hidden;
   background-color: #ffffff;
@@ -66,10 +79,11 @@ div.header-title {
 }
 
 #mainContentBottom {
-  float: left;
-  position: relative;
-  left: 25px;
+  position:absolute;
+  top: 155px;
+  left: 630px;
   right: 0px;
+  bottom: 32px;
 }
 
 #tags,

@@ -15,15 +15,9 @@ $(function() {
     window.alignmentArray = new Array();
     window.dotNotationDisplayArray = new Array();
 
-    var offsetTopPanels = $('#mainContentTopLeft').position().top;
-
     readAlignmentDataFromFiles();
 
     clearTimeRequired();
-
-    // Make two flyout panels resizable but not the iframe one
-    $("#mainContentTopLeft" ).resizable({ handles: "e"});
-    $("#mainContentTopRight" ).resizable({ handles: "e"});
 
     $.ajaxSetup({ cache: false });
 
@@ -43,25 +37,17 @@ $(function() {
     var $dotNotation = $( '#dotNotation');
     var $createdOn = $( '#createdOn');
 
-    $mainContentTopLeft.height( $window.height() - offsetTopPanels);
-    $mainContentTopRight.height( $window.height() - offsetTopPanels);
-    $mainContentBottom.height( $window.height() - offsetTopPanels);
+    var offsetTopPanels = $('#mainContentTopLeft').position().top;
+    var panelsHeight = $window.height() - $('div.footer').height() - offsetTopPanels;
 
-    $mainContentBottom.width( $window.width() - $mainContentTopLeft.width() - $mainContentTopRight.width() - 70 );
-
-    $textarea.height( $window.height() - offsetTopPanels - 100);
+    $textarea.height( panelsHeight - 100);
 
     $dotNotation.typeahead({source: dotNotationDisplayArray, items:8});
 
     $createdOn.val('');
 
     $window.resize(function() {
-        $mainContentTopLeft.height( $window.height() - offsetTopPanels);
-        $mainContentTopRight.height( $window.height() - offsetTopPanels);
-        $mainContentBottom.height( $window.height() - offsetTopPanels);
-        $mainContentBottom.width( $window.width() - $mainContentTopLeft.width() - $mainContentTopRight.width() - 70 );
-
-        $textarea.height( $window.height() - offsetTopPanels - 100);
+        $textarea.height( panelsHeight - 100);
     });
 
     // checkCookie();
