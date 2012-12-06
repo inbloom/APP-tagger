@@ -46,13 +46,13 @@ function saveRemote(str, remote) {
         success : function(xhr) {
             items = xhr
             redrawResourcesBasedOnItems();
+            loadHistory();
             showMessage("Resources published");
         },
         error : function(xhr, txtStatus, errThrown) {
             showMessage("Go ahead and reload your ui, any work you were doing should have been saved. <br />" + xhr.responseText, "Remote Error (RELOAD YOUR UI!!)");
         }
     })
-
 }
 
 // Load the drafts in the db into the items array and then redraw
