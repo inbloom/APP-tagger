@@ -3,11 +3,12 @@ LRMI::Application.routes.draw do
   # use a real resource
   resources :tagger, :only => [ :index, :save_draft, :save_export, :save_remote ] do
     collection do
-      post :load_history, :path => "/load_history", :constraints => { :format => /json/ }
-      post :load_drafts, :path => "/load_drafts", :constraints => { :format => /json/ }
-      post :save_draft, :path => "/save_draft", :constraints => { :format => /json/ }
-      post :save_export, :path => "/save_export", :constraints => { :format => /json/ }
-      post :save_remote, :path => "/save_remote", :constraints => { :format => /json/ }
+      post :load_history,   :path => "/load_history",   :constraints => { :format => /json/ }
+      post :load_drafts,    :path => "/load_drafts",    :constraints => { :format => /json/ }
+      post :save_draft,     :path => "/save_draft",     :constraints => { :format => /json/ }
+      post :save_export,    :path => "/save_export",    :constraints => { :format => /json/ }
+      post :save_remote,    :path => "/save_remote",    :constraints => { :format => /json/ }
+      post :reset_resource, :path => "/reset_resource", :constraints => { :format => /json/ }
     end
   end
   
