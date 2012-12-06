@@ -21,14 +21,15 @@ module LriHelper
 
     # For each tag sent, do the following
     tags.each do |tag|
+
+      # Which incoming keys do we need to url encode the values of?
+      tag.each do |k,v|
+        tag[k] = Rack::Utils.escape v
+      end
+
       # Adjust or insert stuff prior to remapping
       tag['uuid'] = "urn:slc:tag:" + tag['uuid']
       tag['types'] = "urn:schema-org:entity_type:creative_work"
-
-      # Which incoming keys do we need to url encode the values of?
-      tag['url'] = Rack::Utils.escape tag['url']
-      tag['isBasedOnURL'] = Rack::Utils.escape tag['isBasedOnURL']
-      tag['usageRightsURL'] = Rack::Utils.escape tag['usageRightsURL']
 
       # TODO Need the CCSS stuff injected before I can use this..
       # Store the alignments in the alignments array to be added later.
@@ -39,7 +40,6 @@ module LriHelper
       # TODO If the key is in the deleted keys list above, delete it..
       # TODO NOTE: this is temporary until I figure out how to get all those keys working. (ADDENDUM Kurt has to add them)
       tag.delete_if{|k,v| deleted_keys.include?(k) }
-
 
       # Remap the keys using the key mappings above
       lri_request_hashes << Hash[tag.map{|k,v| [self.remap_key(k),v] }]
@@ -134,8 +134,9 @@ module LriHelper
     properties_to_update = []
     entity['props'].each do |key,values|
       if request[key].present?
-        # This can't be the right way to get the data out..
-        if request[key].to_s != values.keys[0].to_s
+        # Test the unescaped values to see if they have changed, if they have..
+        # then push them into the properties to update array for updating.
+        if Rack::Utils.unescape(request[key].to_s) != Rack::Utils.unescape(values.keys[0].to_s)
           properties_to_update << {:value=>request[key],:guid=>values.first[1][0]['guid']}
         end
       end
