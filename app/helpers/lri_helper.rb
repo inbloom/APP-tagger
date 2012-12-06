@@ -14,7 +14,6 @@ module LriHelper
         'educationalAlignments' # TODO Need the CCSS stuff injected before I can use this..
     ]
 
-
     # Alignments array for storing the alignments that are removed from the tag
     alignments_array = []
     # This is a storage for all the tag to request conversions
@@ -26,6 +25,11 @@ module LriHelper
       tag['uuid'] = "urn:slc:tag:" + tag['uuid']
       tag['types'] = "urn:schema-org:entity_type:creative_work"
 
+      # Which incoming keys do we need to url encode the values of?
+      tag['url'] = Rack::Utils.escape tag['url']
+      tag['isBasedOnURL'] = Rack::Utils.escape tag['isBasedOnURL']
+      tag['usageRightsURL'] = Rack::Utils.escape tag['usageRightsURL']
+
       # TODO Need the CCSS stuff injected before I can use this..
       # Store the alignments in the alignments array to be added later.
 #      alignments_array << tag['educationalAlignments']
@@ -35,6 +39,7 @@ module LriHelper
       # TODO If the key is in the deleted keys list above, delete it..
       # TODO NOTE: this is temporary until I figure out how to get all those keys working. (ADDENDUM Kurt has to add them)
       tag.delete_if{|k,v| deleted_keys.include?(k) }
+
 
       # Remap the keys using the key mappings above
       lri_request_hashes << Hash[tag.map{|k,v| [self.remap_key(k),v] }]
@@ -183,7 +188,7 @@ module LriHelper
         :updateProperty   => '/property/update?opts={"access_token":"letmein"}&q=',
         :deleteProperty   => '/property/update?opts={"access_token":"letmein","active":false}&q=',
         :createEntity     => '/entity/create?opts={"access_token":"letmein"}&q=',
-        :getEnumerations  => '/entity/search?optsq=',
+        :getEnumerations  => '/entity/search?opts={"use_cached":false}&q=',
         :search           => '/entity/search?opts={"details":true,"use_cached":false}&q=',
     }
     # If not one of our request types, dump out

@@ -8,7 +8,7 @@ class TaggerController < ApplicationController
     # The object we return to the UI, if any
     response = {}
     # Get our tags
-    tags = Tag.where :user_id => session[:user_id], :published => false
+    tags = Tag.where(:user_id => session[:user_id], :published => false).order("updated_at asc")
     tags.each_with_index do |tag,index|
       key = "itemTag"+index.to_s
       response[key] = ActiveSupport::JSON.decode(tag[:data])
@@ -19,11 +19,40 @@ class TaggerController < ApplicationController
     end
   end
 
+  # Load the historical items into the UI
+  def load_history
+    # The object we return to the UI, if any
+    response = {}
+    # Get historical tags
+    tags = Tag.where(:user_id => session[:user_id], :published => true).order("updated_at desc")
+    tags.each_with_index do |tag,index|
+      key = "historicalTag"+index.to_s
+      response[key] = ActiveSupport::JSON.decode(tag[:data])
+    end
+
+    respond_to do |format|
+      format.json { render json: response }
+    end
+  end
+
+  def reset_resource
+    found_tag = Tag.find_by_uuid params['uuid']
+    if found_tag.present?
+      found_tag.published = false
+      found_tag.save();
+    end
+
+    respond_to do |format|
+      format.json { head :no_content }
+    end
+
+  end
+
   # Saves a string to a file named filename on a user's machine
   def save_export
     send_data("#{params[:data]}", :filename => "#{params[:filename]}", :type => "text/plain")
   end
-  
+
   # Saves a json formatted string to the db, then formats and sends to LRI
   def save_draft
     # Parse through incoming tags array and create a tag for each
@@ -45,29 +74,34 @@ class TaggerController < ApplicationController
     # Working array of tags
     tags = []
     # Break out the tags from the sent parsed json hash
-    json_tags.each {|h| tags << h[1] }
-    # Save those tags baby -- response is those tags that are being published.. Don't think we need it.
-    response = save_tags_state json_tags, true
-
+    json_tags.each {|h| tags << h[1].clone }
+    # Choose which adaptor to use and publish those suckers
     case params[:remote]
       when 'LRI' then
-        results = LriHelper::publish tags, current_user
+        errors = LriHelper::publish tags, current_user
     end
 
-    # The object we return to the UI, if any
-    response = {}
-    # Get all the draft tags and send those to the ui
-    tags = Tag.where :user_id => current_user.id, :published => false
-    tags.each_with_index do |tag,index|
-      key = "itemTag"+index.to_s
-      response[key] = ActiveSupport::JSON.decode(tag[:data])
+    # TODO Eventually I need to only error those tags that didn't save, and set published the ones that did actually publish
+    # If we have no errors, then go ahead and mark tags as published..etc..
+    if errors.empty?
+      # Save those tags baby
+      save_tags_state json_tags, true
+
+      # The object we return to the UI, if any
+      response = {}
+      # Get all the draft tags and send those to the ui
+      tags = Tag.where :user_id => current_user.id, :published => false
+      tags.each_with_index do |tag,index|
+        key = "itemTag"+index.to_s
+        response[key] = ActiveSupport::JSON.decode(tag[:data])
+      end
     end
 
     respond_to do |format|
-      if results.empty?
-        format.json { render json: response } # TODO send back the tags that should be shown
+      if errors.empty?
+        format.json { render json: response }
       else
-        format.json { render status: 500, json: results }
+        format.json { render status: 500, json: errors }
       end
     end
   end

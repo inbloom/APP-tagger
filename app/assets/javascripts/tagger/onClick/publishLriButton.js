@@ -1,8 +1,10 @@
 $(function() {
 
     $("#publishLriButton").click( function() {
-        var str = processJSONOutput(true);
-        saveRemote(str, 'LRI');
+        if (!$(this).hasClass('disabled')) {
+            var str = processJSONOutput(true);
+            saveRemote(str, 'LRI');
+        }
     });
 
 });

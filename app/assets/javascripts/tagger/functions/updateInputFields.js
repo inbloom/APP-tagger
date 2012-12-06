@@ -1,5 +1,7 @@
 
 function updateInputFields(){
+    // Disable the publish button
+    $("#publishLriButton").addClass('disabled');
     // Clear form data
     $("form[name=LRMIData]").find("input[type=text], textarea, select").val("");
     // Clear alignment tabs
@@ -10,6 +12,9 @@ function updateInputFields(){
     toggleForm();
     // If only one is selected then update the form with that one
     if ($("#multiItemSelector input[type=checkbox]:checked").length == 1) {
+        // Enable the publish button
+        $("#publishLriButton").removeClass('disabled');
+
         var item = items[$("#multiItemSelector input[type=checkbox]:checked").first().attr('id')];
 
         //Setup General Tab for Single Selection
@@ -34,7 +39,6 @@ function updateInputFields(){
             updateSlider($("#sliderhours"), 'Hour', vals[4]);
             updateSlider($("#sliderminutes"), 'Minute', vals[5]);
             updateSlider($("#sliderseconds"), 'Second', vals[6]);
-
         }
 
         // Stuff the iframe
@@ -52,7 +56,10 @@ function updateInputFields(){
         for (j in item.educationalAlignments) {
             $("input[type=checkbox][value="+j+"]").attr('checked',true);
         }
-
+        // If only one is selected then update the form with that one
+    } else if ($("#multiItemSelector input[type=checkbox]:checked").length > 1) {
+        // Enable the publish button
+        $("#publishLriButton").removeClass('disabled');
     } else {
         // Clear the time required sliders as they are special
         clearTimeRequired();
