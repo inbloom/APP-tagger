@@ -45,7 +45,7 @@ function saveRemote(str, remote) {
         // Really nothing should change other than now the items have a UUID
         success : function(xhr) {
             items = xhr
-            reDrawBasedOnItems();
+            redrawResourcesBasedOnItems();
             showMessage("Resources published");
         },
         error : function(xhr, txtStatus, errThrown) {
@@ -55,8 +55,7 @@ function saveRemote(str, remote) {
 
 }
 
-// This should ONLY ever be the first thing done after the UI loads.
-// Do it at anyother time and unexpected results could ensue.
+// Load the drafts in the db into the items array and then redraw
 function loadDrafts() {
     $.ajax({
         type : "POST",
@@ -66,7 +65,7 @@ function loadDrafts() {
         // Really nothing should change other than now the items have a UUID
         success : function(xhr) {
             items = xhr
-            reDrawBasedOnItems();
+            redrawResourcesBasedOnItems();
         },
         error : function(xhr, txtStatus, errThrown) {
             showMessage(errThrown, "Error loading drafts");
@@ -74,8 +73,23 @@ function loadDrafts() {
     })
 }
 
-// Helper function to redraw panels based on on the items array instead of the other way around
-function reDrawBasedOnItems() {
+// Load the history in the db into the history tab not saved in an array at all
+function loadHistory() {
+    $.ajax({
+        type : "POST",
+        dataType : 'json',
+        url  : "/tagger/load_history",
+        success : function(xhr) {
+            redrawHistoryBasedOn(xhr);
+        },
+        error : function(xhr, txtStatus, errThrown) {
+            showMessage(errThrown, "Error loading drafts");
+        }
+    })
+}
+
+// Helper function to redraw panels based on the items array instead of the other way around
+function redrawResourcesBasedOnItems() {
     $("#multiItemSelector").empty();
 
     // Uncheck everything when you add a new tag
@@ -108,8 +122,15 @@ function reDrawBasedOnItems() {
                 $('#currentAlignmentTable > tbody:last').append('<tr><td><label class="checkbox"><input type="checkbox" class="alignment-checkbox" value="'+objHash+'" />'+ object.dotNotation +'</label></td><td>'+ capitalize(object.alignmentType) +'</td></tr>');
             }
         }
-
     }
-
     updateTextArea();
+}
+
+// Helper function to redraw the history panel items based on list sent
+function redrawHistoryBasedOn(history) {
+    $("#history").empty();
+    for (i in history) {
+        var title = (history[i]['title'].length > 25) ? history[i]['title'].substr(0,25) + '&hellip;' : history[i]['title'];
+        $("#history").append($("<label><a href='#"+history[i]["uuid"]+"'><i class='icon-repeat'></i> "+title+"</a></label>"))
+    }
 }
