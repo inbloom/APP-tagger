@@ -8,7 +8,7 @@ class TaggerController < ApplicationController
     # The object we return to the UI, if any
     response = {}
     # Get our tags
-    tags = Tag.where :user_id => session[:user_id], :published => false
+    tags = Tag.where(:user_id => session[:user_id], :published => false).order("updated_at asc")
     tags.each_with_index do |tag,index|
       key = "itemTag"+index.to_s
       response[key] = ActiveSupport::JSON.decode(tag[:data])
@@ -33,6 +33,19 @@ class TaggerController < ApplicationController
     respond_to do |format|
       format.json { render json: response }
     end
+  end
+
+  def reset_resource
+    found_tag = Tag.find_by_uuid params['uuid']
+    if found_tag.present?
+      found_tag.published = false
+      found_tag.save();
+    end
+
+    respond_to do |format|
+      format.json { head :no_content }
+    end
+
   end
 
   # Saves a string to a file named filename on a user's machine
