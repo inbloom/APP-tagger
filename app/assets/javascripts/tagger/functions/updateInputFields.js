@@ -1,5 +1,6 @@
 
 function updateInputFields(){
+
     // Disable the publish button
     $("#publishLriButton").addClass('disabled');
     // Clear form data
@@ -12,6 +13,7 @@ function updateInputFields(){
     toggleForm();
     // If only one is selected then update the form with that one
     if ($("#multiItemSelector input[type=checkbox]:checked").length == 1) {
+
         // Enable the publish button
         $("#publishLriButton").removeClass('disabled');
 
@@ -21,12 +23,23 @@ function updateInputFields(){
         if (item.title != "")                         $("#title").val(item.title);
         if (item.url != "")                           $("#url").val(item.url);
         if (item.language != "")                      $("#language").val(item.language);
-        if (item.createdOn != "")                     $("#createdOn").val(item.createdOn);
         if (item.topic != "")                         $("#topic").val(item.topic);
         if (item.createdBy != "")                     $("#createdBy").val(item.createdBy);
         if (item.usageRightsURL != "")                $("#usageRightsURL").val(item.usageRightsURL);
         if (item.publisher != "")                     $("#publisher").val(item.publisher);
         if (item.isBasedOnURL != "")                  $("#isBasedOnURL").val(item.isBasedOnURL);
+        
+        d = new Date();
+        var curr_day = ('0' + d.getDate()).slice(-2);
+        var curr_month = d.getMonth()+1;
+        var curr_year = d.getFullYear();
+        ds = curr_year + "-" + curr_month + "-" + curr_day;
+        
+        if (item.createdOn != "") {
+          $("#createdOn").val(item.createdOn);
+        } else {
+          $("#createdOn").val(ds);
+        }
 
         // Refactoring timeRequired update -- why are we using this format?
         if (item.timeRequired != "P0Y0M0W0DT0H0M0S") {

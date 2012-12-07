@@ -17,7 +17,7 @@ $(function() {
                         url: 'http://anyorigin.com/get?url='+alignmentArray[i].description+'&callback=?',
                         dataType: "json",
                         success: function(data){
-                            var newTitle = $(data.contents).filter('title').text();
+                            var newTitle = $(data.contents).filter('title').text().replace(' | Achievement Standards Network', '');
                             if (newTitle != ''){
                                 var tempDivLength = newTitle.length;
                                 document.getElementById('description').value = newTitle;
@@ -25,7 +25,7 @@ $(function() {
                             if (newTitle == ''){
                                 document.getElementById('description').value = 'No Description Available';
                             }
-
+                            validateAlignmentForm();
                         }
                     });
                 }
