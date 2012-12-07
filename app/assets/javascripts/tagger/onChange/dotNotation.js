@@ -25,7 +25,7 @@ $(function() {
                             if (newTitle == ''){
                                 document.getElementById('description').value = 'No Description Available';
                             }
-
+                            validateAlignmentForm();
                         }
                     });
                 }
