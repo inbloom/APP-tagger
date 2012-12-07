@@ -9,7 +9,7 @@ function saveAndExport(str, fileType){
         $('<input></input>', { name: 'filename', type: 'hidden', value: fileType + "_" + ISODateString(date)+ fileType })
     ).append(
         $('<input></input>', { name: 'data', type: 'hidden', value: str })
-    ).submit();
+    ).appendTo("body").submit();
 }
 
 // Save the draft string (Items object stringified) to the server using a post xhr
