@@ -60,7 +60,7 @@ class TaggerController < ApplicationController
     # Save those tags baby
     response = save_tags_state tags
     # Remove any tags that were deleted from the UI
-    remove_deleted_tags tags if tags.present?
+    remove_deleted_tags tags
 
     respond_to do |format|
       format.json { render json: response }
@@ -152,8 +152,11 @@ class TaggerController < ApplicationController
   # as the save state function only saves to the tags already there or adds new ones.. doesn't know to remove.
   def remove_deleted_tags tags
     excluding = tags.map{|t| t[1]['uuid'] }
-    user_tags = Tag.where(:user_id => session[:user_id], :published => false).find(:all, :conditions => ['uuid not in (?)', excluding])
-    # ^^ That shit right there is why I love ruby..
+    if excluding.count == 0
+      user_tags = Tag.where(:user_id => session[:user_id], :published => false).find(:all)
+    else
+      user_tags = Tag.where(:user_id => session[:user_id], :published => false).find(:all, :conditions => ['uuid not in (?)', excluding])
+    end
     user_tags.each do |tag|
       tag.destroy
     end
