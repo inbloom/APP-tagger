@@ -11,6 +11,16 @@ $(function() {
 
         // Update the form
         updateInputFields();
+        
+        d = new Date();
+        var curr_day = ('0' + d.getDate()).slice(-2);
+        var curr_month = d.getMonth()+1;
+        var curr_year = d.getFullYear();
+        ds = curr_year + "-" + curr_month + "-" + curr_day;
+        
+        if ($("#createdOn").val() == "") {
+          $("#createdOn").val(ds);
+        }
 
         $("span.notYet").empty();
         $("#multiItemSelector").append($("<a href='#itemTag"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#itemTag"+itemCounter+"' id='itemTag"+itemCounter+"URL' style='display:none;' class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='itemTag"+itemCounter+"Label' class='checkbox'><input id='itemTag"+itemCounter+"' type='checkbox' name='tagItem'/><span>New Item</span></label>"));
