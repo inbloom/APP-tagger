@@ -1,3 +1,6 @@
+# development:
+#   client_id: gyipqMp4UW
+#   shared_secret: NeF8WljTBIf9fBJ32njqt9c0Vr7fT2Z8Z1zl3X7ls4so3ocW
 development:
   client_id: pJvLcdXyPx
   shared_secret: edxzmOr2BA2AQAGIWUKHQJ4ZjO5eK8I2Q4FRKB2yUYRJrWGt
@@ -8,5 +11,5 @@ test:
   client_id: pJvLcdXyPx
   shared_secret: edxzmOr2BA2AQAGIWUKHQJ4ZjO5eK8I2Q4FRKB2yUYRJrWGt
 production:
-  client_id: pJvLcdXyPx
-  shared_secret: edxzmOr2BA2AQAGIWUKHQJ4ZjO5eK8I2Q4FRKB2yUYRJrWGt
+  client_id: ljiec6GtSF
+  shared_secret: weI7qaOcEsckujHJUoJ0rZ1bhnyI3Mdc1KuUMpjP1pM988MQ
