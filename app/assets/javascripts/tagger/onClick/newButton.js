@@ -61,6 +61,8 @@ $(function() {
 
         updateMainContentBottom('');
         toggleForm();
+        // Enable the publish button
+        $("#publishLriButton").removeClass('disabled');
     });
 
 });
