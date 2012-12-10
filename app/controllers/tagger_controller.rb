@@ -35,6 +35,7 @@ class TaggerController < ApplicationController
     end
   end
 
+  # reset the requested resource
   def reset_resource
     found_tag = Tag.find_by_uuid params['uuid']
     if found_tag.present?
@@ -74,7 +75,14 @@ class TaggerController < ApplicationController
     # Working array of tags
     tags = []
     # Break out the tags from the sent parsed json hash
-    json_tags.each {|h| tags << h[1].clone }
+    # And check to see if there is a UUID, if not set one.
+    json_tags.each {|h|
+      tmpTag = h[1].clone
+      unless tmpTag['uuid'].present?
+        tmpTag['uuid'] ||= SecureRandom.uuid
+      end
+      tags << tmpTag
+    }
     # Choose which adaptor to use and publish those suckers
     case params[:remote]
       when 'LRI' then
@@ -119,19 +127,19 @@ class TaggerController < ApplicationController
       # Remove the ID as it doesn't mean anything and is only used by the UI for internal stuff (if at all)
       tag.delete('id')
       # if we have a UUID then we must save to that!
-      if tag['uuid'].present?
-        # This tag has a UUID so we need to load it first
-        found_tag = Tag.find_by_uuid tag['uuid']
-        if found_tag.present?
-          found_tag.user_id = session[:user_id]
-          found_tag.data = tag.to_json
-          found_tag.published = publish
-          found_tag.save()
-        end
-      else
+      unless tag['uuid'].present?
         # Generate a UUID for this item that will be used when sent to the LRI or any server out in the world.
         # This is unique to this tag and its history and could come from the client
         tag['uuid'] ||= SecureRandom.uuid
+      end
+      # This tag has a UUID so we need to load it first
+      found_tag = Tag.find_by_uuid tag['uuid']
+      if found_tag.present?
+        found_tag.user_id = session[:user_id]
+        found_tag.data = tag.to_json
+        found_tag.published = publish
+        found_tag.save()
+      else
         # Create each tag in the database
         Tag.create(
             :user_id => current_user.id,

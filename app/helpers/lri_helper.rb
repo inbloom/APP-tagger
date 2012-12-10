@@ -10,6 +10,7 @@ module LriHelper
 
     # The following is a list of deleted keys we are removing for the time being
     deleted_keys = [
+        'id',        # Don't delete this!
         'groupType', # The property "groupType" does not appear to exist in the LRMI or schema.org specs.
         'educationalAlignments' # TODO Need the CCSS stuff injected before I can use this..
     ]
