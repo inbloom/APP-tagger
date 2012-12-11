@@ -11,7 +11,6 @@ module LriHelper
     # The following is a list of deleted keys we are removing for the time being
     deleted_keys = [
         'id',        # Don't delete this!
-        'groupType', # The property "groupType" does not appear to exist in the LRMI or schema.org specs.
         'educationalAlignments'
     ]
 
@@ -61,8 +60,10 @@ module LriHelper
       search = self.find(request[remap_key('uuid')])
       if search
         if search['response'].present?
+puts '.'
           self.update request, search['response'].first
         else
+puts '+'
           self.create request
         end
       end
@@ -97,7 +98,8 @@ module LriHelper
         'timeRequired'          => 'urn:schema-org:property_type:time_required',
         'createdBy'             => 'urn:schema-org:property_type:author',
         'educationalAlignments' => 'urn:schema-org:property_type:educational_alignment',
-        'mediaType'             => 'urn:schema-org:property_type:physical_media_type'
+        'mediaType'             => 'urn:schema-org:property_type:physical_media_type',
+        'groupType'             => 'urn:schema-org:property_type:group_type'
     }
     return lri_key_mappings[key] if lri_key_mappings[key].present?
     key
