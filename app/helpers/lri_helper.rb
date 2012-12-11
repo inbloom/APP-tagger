@@ -10,15 +10,11 @@ module LriHelper
 
     # The following is a list of deleted keys we are removing for the time being
     deleted_keys = [
-        'id',        # Don't delete this!
-        'groupType', # The property "groupType" does not appear to exist in the LRMI or schema.org specs.
-        'educationalAlignments'
+        'id', # Don't delete this!
     ]
 
     # Don't Escape the values of these keys
-    dont_escape_keys = [
-        'educationalAlignments'
-    ]
+    dont_escape_keys = [ ]
 
     # Alignments array for storing the alignments that are removed from the tag
     alignments_array = []
@@ -61,8 +57,10 @@ module LriHelper
       search = self.find(request[remap_key('uuid')])
       if search
         if search['response'].present?
+puts '.'
           self.update request, search['response'].first
         else
+puts '+'
           self.create request
         end
       end
@@ -71,6 +69,12 @@ module LriHelper
 
     # Now return any failures if there are any
     @@failures
+  end
+
+  def self.wildcard_search query
+    query = ".*" + Rack::Utils.escape(query) + ".*"
+    request = {"urn:lri:property_type:name" => query, "limit" => '100'}
+    self.request :quickSearch, request
   end
 
   private
@@ -96,8 +100,9 @@ module LriHelper
         'learningResourceType'  => 'urn:schema-org:property_type:learning_resource_type',
         'timeRequired'          => 'urn:schema-org:property_type:time_required',
         'createdBy'             => 'urn:schema-org:property_type:author',
-        'educationalAlignments' => 'urn:schema-org:property_type:educational_alignment',
-        'mediaType'             => 'urn:schema-org:property_type:physical_media_type'
+        'educationalAlignments' => 'urn:schema-org:property_type:alignment_type',    #HACK
+        'mediaType'             => 'urn:schema-org:property_type:physical_media_type',
+        'groupType'             => 'urn:schema-org:property_type:group_type'
     }
     return lri_key_mappings[key] if lri_key_mappings[key].present?
     key
@@ -197,6 +202,7 @@ module LriHelper
         :createEntity     => '/entity/create?opts={"access_token":"letmein"}&q=',
         :getEnumerations  => '/entity/search?opts={"use_cached":false}&q=',
         :search           => '/entity/search?opts={"details":true,"use_cached":false}&q=',
+        :quickSearch      => '/entity/search?opts={"details":false,"use_cached":false}&q=',
     }
     # If not one of our request types, dump out
     return false unless requestTypes[type].present?

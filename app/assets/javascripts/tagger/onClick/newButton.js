@@ -63,6 +63,8 @@ $(function() {
         toggleForm();
         // Enable the publish button
         $("#publishLriButton").removeClass('disabled');
+        updateResourceCount();
+
     });
 
 });

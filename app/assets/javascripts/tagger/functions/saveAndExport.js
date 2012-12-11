@@ -124,6 +124,7 @@ function redrawResourcesBasedOnItems() {
         }
     }
     updateTextArea();
+    updateResourceCount();
 }
 
 // Helper function to redraw the history panel items based on list sent

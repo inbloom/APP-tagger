@@ -1,6 +1,6 @@
 
 function updateInputFields(){
-
+    updateResourceCount();
     // Disable the publish button
     $("#publishLriButton").addClass('disabled');
     // Clear form data
