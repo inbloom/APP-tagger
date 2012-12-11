@@ -129,8 +129,7 @@ $(function() {
 
                     }
 
-                    // Update the number of items
-                    $("#resourceCount").html($("#multiItemSelector input[type=checkbox]:checked").length + " of " + $("#multiItemSelector input[type=checkbox]").length + " resources");
+                    updateResourceCount();
 
                 }
             })(file);
