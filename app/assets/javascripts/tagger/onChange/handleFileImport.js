@@ -118,7 +118,7 @@ $(function() {
                                 'learningResourceType':output[i][16],
                                 'mediaType':output[i][9],
                                 'groupType':output[i][23],
-                                'timeRequired':output[i][3],
+                                'timeRequired':(output[i][3] != '')?output[i][3]:"P0Y0M0W0DT0H0M0S",
                                 'educationalAlignments':itemEducationAlignments
                             };
 
@@ -127,8 +127,10 @@ $(function() {
 
                         }
 
-
                     }
+
+                    // Update the number of items
+                    $("#resourceCount").html($("#multiItemSelector input[type=checkbox]:checked").length + " of " + $("#multiItemSelector input[type=checkbox]").length + " resources");
 
                 }
             })(file);
@@ -136,6 +138,7 @@ $(function() {
             reader.readAsText(file);
 
             $("#fileForm")[0].reset();
+
         }
     });
 
