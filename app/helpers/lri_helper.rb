@@ -14,9 +14,7 @@ module LriHelper
     ]
 
     # Don't Escape the values of these keys
-    dont_escape_keys = [
-        'educationalAlignments'
-    ]
+    dont_escape_keys = [ ]
 
     # Alignments array for storing the alignments that are removed from the tag
     alignments_array = []
@@ -102,7 +100,7 @@ puts '+'
         'learningResourceType'  => 'urn:schema-org:property_type:learning_resource_type',
         'timeRequired'          => 'urn:schema-org:property_type:time_required',
         'createdBy'             => 'urn:schema-org:property_type:author',
-        'educationalAlignments' => 'urn:schema-org:property_type:educational_alignment',
+        'educationalAlignments' => 'urn:schema-org:property_type:alignment_type',    #HACK
         'mediaType'             => 'urn:schema-org:property_type:physical_media_type',
         'groupType'             => 'urn:schema-org:property_type:group_type'
     }
