@@ -10,8 +10,7 @@ module LriHelper
 
     # The following is a list of deleted keys we are removing for the time being
     deleted_keys = [
-        'id',        # Don't delete this!
-        'educationalAlignments'
+        'id', # Don't delete this!
     ]
 
     # Don't Escape the values of these keys
@@ -72,6 +71,12 @@ puts '+'
 
     # Now return any failures if there are any
     @@failures
+  end
+
+  def self.wildcard_search query
+    query = ".*" + Rack::Utils.escape(query) + ".*"
+    request = {"urn:lri:property_type:name" => query, "limit" => '100'}
+    self.request :quickSearch, request
   end
 
   private
@@ -199,6 +204,7 @@ puts '+'
         :createEntity     => '/entity/create?opts={"access_token":"letmein"}&q=',
         :getEnumerations  => '/entity/search?opts={"use_cached":false}&q=',
         :search           => '/entity/search?opts={"details":true,"use_cached":false}&q=',
+        :quickSearch      => '/entity/search?opts={"details":false,"use_cached":false}&q=',
     }
     # If not one of our request types, dump out
     return false unless requestTypes[type].present?
