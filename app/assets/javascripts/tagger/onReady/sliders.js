@@ -4,10 +4,10 @@ $(function() {
         orientation: "horizontal",
         range: "min",
         min: 0,
-        max: 24,
+        max: 12,
         value: 0,
         slide: function( event, ui ) {
-            updateSlider('#slideryears', 'Year');
+            updateSlider(event, ui, '#slideryears', 'Year');
             updateTimeRequired('Year');
         }
     });
@@ -19,7 +19,7 @@ $(function() {
         max: 11,
         value: 0,
         slide: function( event, ui ) {
-            updateSlider('#slidermonths', 'Month');
+            updateSlider(event, ui, '#slidermonths', 'Month');
             updateTimeRequired('Month');
         }
     });
@@ -31,7 +31,7 @@ $(function() {
         max: 51,
         value: 0,
         slide: function( event, ui ) {
-            updateSlider('#sliderweeks', 'Week');
+            updateSlider(event, ui, '#sliderweeks', 'Week');
             updateTimeRequired('Week');
         }
     });
@@ -43,7 +43,7 @@ $(function() {
         max: 30,
         value: 0,
         slide: function( event, ui ) {
-            updateSlider('#sliderdays', 'Day');
+            updateSlider(event, ui, '#sliderdays', 'Day');
             updateTimeRequired('Day');
         }
     });
@@ -55,7 +55,7 @@ $(function() {
         max: 23,
         value: 0,
         slide: function( event, ui ) {
-            updateSlider('#sliderhours', 'Hour');
+            updateSlider(event, ui, '#sliderhours', 'Hour');
             updateTimeRequired('Hour');
         }
     });
@@ -67,7 +67,7 @@ $(function() {
         max: 59,
         value: 0,
         slide: function( event, ui ) {
-            updateSlider('#sliderminutes', 'Minute');
+            updateSlider(event, ui, '#sliderminutes', 'Minute');
             updateTimeRequired('Minute');
         }
     });
@@ -79,7 +79,7 @@ $(function() {
         max:59,
         value: 0,
         slide: function( event, ui ) {
-            updateSlider('#sliderseconds', 'Second');
+            updateSlider(event, ui, '#sliderseconds', 'Second');
             updateTimeRequired('Second');
         }
     });
@@ -88,10 +88,10 @@ $(function() {
 
 // Function to update the slider view elements without adjusting the item hash
 // sliderValue is optional
-function updateSlider(sliderObj, unitString, sliderValue) {
+function updateSlider(event, ui, sliderObj, unitString, sliderValue) {
 
     if (sliderValue == undefined) {
-        sliderValue = $(sliderObj).slider('value');
+        sliderValue = ui.value;
     } else {
         $(sliderObj).slider({value:sliderValue});
     }
