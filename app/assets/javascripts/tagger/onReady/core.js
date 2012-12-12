@@ -42,7 +42,11 @@ $(function() {
 
     $textarea.height( panelsHeight - 100);
 
-    $dotNotation.typeahead({source: dotNotationDisplayArray, items:8});
+    $dotNotation.typeahead({
+        source : dotNotationDisplayArray,
+        items  : 8
+    });
+
 
     $createdOn.val('');
 

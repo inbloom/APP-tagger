@@ -1,10 +1,14 @@
 // Used by the alignment reader in order to get information out of the files
 function processDataForAlignmentArray(allText)	{
-    var reader = new FileReader();
-    reader.readAsText(allText);
-    var output = $.csv2Array(allText);
-    for (var i = 1; i < output.length-1; i++) {
-        alignmentArray.push({'title':output[i][2],'url':output[i][3],'description':output[i][0],'guid':output[i][4]});
-        dotNotationDisplayArray.push(output[i][2]);
+    var lines = allText.split(/\n|\r/);
+    for (var i = 1; i < lines.length -1 ; i++) {
+        var split = lines[i].split(',');
+        alignmentArray.push({
+            'title'         : split[2],
+            'url'           : split[3],
+            'description'   : split[0],
+            'guid'          : split[4]
+        });
+        dotNotationDisplayArray.push(split[2]);
     }
 }
