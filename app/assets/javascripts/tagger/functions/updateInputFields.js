@@ -45,13 +45,13 @@ function updateInputFields(){
         if (item.timeRequired != "P0Y0M0W0DT0H0M0S") {
             var vals = item['timeRequired'].match(/(\d+)/g);
 
-            updateSlider($("#slideryears"), 'Year', vals[0]);
-            updateSlider($("#slidermonths"), 'Month', vals[1]);
-            updateSlider($("#sliderweeks"), 'Week', vals[2]);
-            updateSlider($("#sliderdays"), 'Day', vals[3]);
-            updateSlider($("#sliderhours"), 'Hour', vals[4]);
-            updateSlider($("#sliderminutes"), 'Minute', vals[5]);
-            updateSlider($("#sliderseconds"), 'Second', vals[6]);
+            updateSlider(event, ui, $("#slideryears"), 'Year', vals[0]);
+            updateSlider(event, ui, $("#slidermonths"), 'Month', vals[1]);
+            updateSlider(event, ui, $("#sliderweeks"), 'Week', vals[2]);
+            updateSlider(event, ui, $("#sliderdays"), 'Day', vals[3]);
+            updateSlider(event, ui, $("#sliderhours"), 'Hour', vals[4]);
+            updateSlider(event, ui, $("#sliderminutes"), 'Minute', vals[5]);
+            updateSlider(event, ui, $("#sliderseconds"), 'Second', vals[6]);
         }
 
         // Stuff the iframe
