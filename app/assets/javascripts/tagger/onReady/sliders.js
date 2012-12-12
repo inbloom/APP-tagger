@@ -40,7 +40,7 @@ $(function() {
         orientation: "horizontal",
         range: "min",
         min: 0,
-        max: 30,
+        max: 6,
         value: 0,
         slide: function( event, ui ) {
             updateSlider(event, ui, '#sliderdays', 'Day');
