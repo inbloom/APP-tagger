@@ -55,8 +55,6 @@ $(function() {
         $textarea.height( panelsHeight - 100);
     });
 
-    // checkCookie();
-
     loadDrafts();
     loadHistory();
 });
