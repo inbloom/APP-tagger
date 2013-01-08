@@ -1,6 +1,6 @@
 $(function() {
 
-    $("#publishLriButton").click( function() {
+    $("#publishButton").click( function() {
         showPleaseWait('Publishing...  (This can take some time depending on the number of resources you have selected..)');
 
         if (!$(this).hasClass('disabled')) {

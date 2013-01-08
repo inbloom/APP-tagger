@@ -2,7 +2,7 @@
 function updateInputFields(){
     updateResourceCount();
     // Disable the publish button
-    $("#publishLriButton").addClass('disabled');
+    $("#publishButton").addClass('disabled');
     // Clear form data
     $("form[name=LRMIData]").find("input[type=text], textarea, select").val("");
     // Clear alignment tabs
@@ -15,7 +15,7 @@ function updateInputFields(){
     if ($("#multiItemSelector input[type=checkbox]:checked").length == 1) {
 
         // Enable the publish button
-        $("#publishLriButton").removeClass('disabled');
+        $("#publishButton").removeClass('disabled');
 
         var item = items[$("#multiItemSelector input[type=checkbox]:checked").first().attr('id')];
 
@@ -72,7 +72,7 @@ function updateInputFields(){
         // If only one is selected then update the form with that one
     } else if ($("#multiItemSelector input[type=checkbox]:checked").length > 1) {
         // Enable the publish button
-        $("#publishLriButton").removeClass('disabled');
+        $("#publishButton").removeClass('disabled');
     } else {
         // Clear the time required sliders as they are special
         clearTimeRequired();
