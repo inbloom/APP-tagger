@@ -85,8 +85,10 @@ class TaggerController < ApplicationController
     }
     # Choose which adaptor to use and publish those suckers
     case params[:remote]
-      when 'LRI' then
-        errors = LriHelper::publish tags, current_user
+#      when 'LRI'
+#        errors = LriHelper::publish tags, current_user
+      when 'LR'
+        errors = LrHelper::publish tags, current_user
     end
 
     # TODO Eventually I need to only error those tags that didn't save, and set published the ones that did actually publish
