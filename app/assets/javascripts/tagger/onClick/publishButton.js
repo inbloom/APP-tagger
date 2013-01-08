@@ -9,7 +9,7 @@ $(function() {
             saveDraft(str);
             // Then save those that are checked remotely.
             var str = processJSONOutput(true);
-            saveRemote(str, 'LRI');
+            saveRemote(str, 'LR');
         }
     });
 
