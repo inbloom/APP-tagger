@@ -6,39 +6,44 @@ module LrHelper
 
   def self.publish tags, user
 
-    # Convert tags to request format
+    # Create the request wrapper
     request = {
-        "documents" => [
-        ]
+      "TOS" => {
+        "submission_TOS" => "http://www.learningregistry.org/information-assurances/open-information-assurances-1-0"
+      },
+      "active" => true,
+      "doc_type" => "resource_data",
+      "doc_version" => "0.23.0",
+      "identity" => {
+        "curator" => "Shared Learning Collaborative",
+        "submitter" => "SLC Tagger",
+        "signer" => "SLC Tagger",
+        "submitter_type" => "agent"
+      },
+      "keys" => [ ],
+      "payload_placement" => "inline",
+      "payload_schema" => [ "schema.org", "LRMI", "application/microdata+json" ],
+      "payload_schema_locator" => "http://www.w3.org/TR/2012/WD-microdata-20121025/#converting-html-to-other-formats",
+      "resource_data" => {
+        "items" => [ ]
+      },
+      "resource_data_type" => "metadata",
+      "resource_locator" => "URL Field"
     }
 
+    # Okay now for each tag, stuff them in the items array inside the request envelope
     tags.each { |tag|
-
-      request["documents"] << {
-          "doc_type" => 'resource_data',        # Req. Literal "resource_data"
-          "doc_version" => '0.23.0',            # Req. Literal current lr spec version
-          "doc_ID" => '',                       # Req. Unique ID within scope of the LR
-          "resource_data_type" => 'resource',   # Req. "paradata", "resource", "assertion" etc..
-          "active" => true,                     # Req. boolean
-          "identity" => {
-              "submitter_type" => 'anonymous',  # Req. Fixed Vocabulary "anonymous", "user", "agent"
-              "submitter" => 'foo',             # Req. Identity of the submitter (identified how?)
-              "curator" => '',                  # Id of curator
-              "owner" => '',                    # Id of owner
-              "signer" => ''                    # Id of signer
-          },
-          "submitter_timestamp" => '',          # Submitter created timestamp
-          "submitter_TTL" => '',                # Submitter statement of TTL of validity of submission
-          "publishing_node" => '',              # Req. Node_ID of node where injected into network
-          "node_timestamp" => '',               # Req. Timestamp when received by node
-          "create_timestamp" => '',             # Req. Timestamp when first published to network
-
+      request["resource_data"]["items"] << {
+        "type" => [ "http://schema.org/CreativeWork" ],
+        "id" => tag['uuid'],
+        "properties" => self.convert_to_properties(tag)
       }
-
     }
 
     self.request :publish, request
 
+    # Now return any failures if we had any
+    @@failures
   end
 
 
@@ -51,7 +56,7 @@ module LrHelper
         :publish => 'publish?'
     }
 
-puts request.inspect
+puts request.to_json
 
 #puts 'http://sandbox.learningregistry.org/' + requestTypes[type] + request
 
@@ -64,6 +69,99 @@ puts request.inspect
     #    )
     #)
 
+  end
+
+  # Take any incoming key and map it to the correct LRI output key (Just keys.. not values)
+  # Note; these aren't the FULL keys.. just the final part.. Full key would be something like;
+  #   urn:schema-org:property_type:{foo}
+  def self.remap_key key
+    # A list of key mappings to replace
+    lri_key_mappings = {
+        'types'                 => 'types',
+        'title'                 => 'name',
+        'url'                   => 'url',
+        'language'              => 'in_language',
+        'createdOn'             => 'date_created',
+        'topic'                 => 'about',
+        'usageRightsURL'        => 'use_rights_url',
+        'publisher'             => 'publisher',
+        'isBasedOnURL'          => 'is_based_on_url',
+        'endUser'               => 'intended_end_user_role',
+        'ageRange'              => 'typical_age_range',
+        'educationalUse'        => 'educational_use',
+        'interactivityType'     => 'interactivity_type',
+        'learningResourceType'  => 'learning_resource_type',
+        'timeRequired'          => 'time_required',
+        'createdBy'             => 'author',
+        'educationalAlignments' => 'educational_alignments',
+        'mediaType'             => 'physical_media_type',
+        'groupType'             => 'group_type'
+    }
+    return lri_key_mappings[key] if lri_key_mappings[key].present?
+    key
+  end
+
+
+  # Private
+  # Convert a tag as it comes from the UI into the property object that will go into the transmitted envelope.
+  def self.convert_to_properties tag
+    props = {}
+    alignments = []
+
+    # A list of keys that simply need their values turned into an array
+    simpleConvertKeys = ['title','language','url','createdOn','topic','usageRightsURL','isBasedOnURL','timeRequired']
+    # Step through all keys and find/use the simple ones -- Easy!
+    tag.each { |key,value|
+      next unless simpleConvertKeys.include?(key)
+      props[key] = [ value ] unless value.empty?
+    }
+
+    # A list of keys that are arrays by nature and need their comma delimited list broken out!
+    csvConvertKeys = ['endUser','ageRange','educationalUse','interactivityType','learningResourceType','mediaType','groupType']
+    tag.each { |key,value|
+      next unless csvConvertKeys.include?(key)
+      props[key] = value.split(',') unless value.empty?
+    }
+
+    # Now for some that take some doing...
+    # CreatedBy is the Author so.. its a person
+    props['createdBy'] = [ {
+        'type' => [ "http://schema.org/Person" ],
+        'properties' => {
+           'name' => [ tag['createdBy'] ]
+        }
+    } ] unless tag['createdBy'].empty?
+
+    # Publisher is an organization..
+    props['publisher'] = [ {
+        'type' => [ "http://schema.org/Organization" ],
+        'properties' => {
+           'name' => [ tag['publisher'] ]
+        }
+    } ] unless tag['publisher'].empty?
+
+    # Step through all the alignments sent by the tag and parse them out into an array
+    tag['educationalAlignments'].each { |key,value|
+      alignments << {
+          'type' => [ "http://schema.org/AlignmentObject" ],
+          'id' => 'urn:corestandards.org:guid:' + key.upcase,
+          'properties' => {
+              'name' => [ value['educationalAlignment'] ],
+              'alignmentType' => [ value['alignmentType'] ],
+              'targetDescription' => [ value['description'] ],
+              'targetName' => [ value['dotNotation'] ],
+              'targetURL' => [ value['itemURL'] ]
+          }
+      }
+    }
+    # Now stuff that alignments array into the props we are building..
+    props['educationalAlignments'] = alignments
+
+
+    # Remap the keys to something that schema.org and the like use
+    props = Hash[props.map{|k,v| [self.remap_key(k),v] }]
+
+    props
   end
 
 end
