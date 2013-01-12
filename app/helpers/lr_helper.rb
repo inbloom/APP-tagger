@@ -1,4 +1,5 @@
 require 'net/http'
+require 'uri'
 
 module LrHelper
   @@user = nil
@@ -56,18 +57,19 @@ module LrHelper
         :publish => 'publish?'
     }
 
-puts request.to_json
+    # do the request by type!
+    case type
+      when :publish
+        uri = URI.parse('http://sandbox.learningregistry.org/' + requestTypes[type].to_s)
+        http = Net::HTTP.new(uri.host, uri.port)
+        rawReq = Net::HTTP::Post.new(uri.request_uri)
+        rawReq.set_form_data({'documents'=>request})
+        rawResponse = http.request(rawReq)
+    end
 
-#puts 'http://sandbox.learningregistry.org/' + requestTypes[type] + request
+    puts request.to_json
 
-    ## Catch the type
-    #return false unless requestTypes[type].present?
-    ## build and make the raw request
-    #rawResponse = Net::HTTP.get(
-    #    URI.parse(
-    #        URI::encode('http://sandbox.learningregistry.org/' + requestTypes[type] + request)
-    #    )
-    #)
+    puts rawResponse.inspect
 
   end
 
