@@ -17,6 +17,6 @@
 /config/database.yml
 config/slc.yml
 config/slc.yml.bak
-
+config/amazon.yml
 
 /.idea
