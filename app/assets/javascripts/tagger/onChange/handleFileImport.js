@@ -120,6 +120,7 @@ $(function() {
                                 'id':itemCounter,
                                 'title':output[i][1],
                                 'language':output[i][8],
+                                'thumbnail':output[i][24],
                                 'url':itemUrl,
                                 'createdOn':output[i][5],
                                 'topic':output[i][4],

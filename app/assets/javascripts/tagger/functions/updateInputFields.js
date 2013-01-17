@@ -16,8 +16,17 @@
 
 function updateInputFields(){
     updateResourceCount();
+
     // Allow images to be added.
     $('#addThumbnailButton').addClass('disabled');
+    // Set the hidden input box
+    $('#thumbnail').attr('value', '');
+    // Set the thumb
+    $('#thumbnailImage').attr('src', '');
+    // Hide remove image button
+    $('#removeThumbnailButton').hide();
+    $('#thumbnailImage').hide();
+
     // Disable the publish button
     $("#publishButton").addClass('disabled');
     // Clear form data
@@ -48,6 +57,13 @@ function updateInputFields(){
         if (item.usageRightsURL != "")                $("#usageRightsURL").val(item.usageRightsURL);
         if (item.publisher != "")                     $("#publisher").val(item.publisher);
         if (item.isBasedOnURL != "")                  $("#isBasedOnURL").val(item.isBasedOnURL);
+        if (item.thumbnail != "") {
+            $("#thumbnail").val(item.thumbnail);
+            $("#thumbnailImage").attr('src','http://media.inbloom.org.s3.amazonaws.com/tagger/images/test/browser_thumb_' + item.thumbnail);
+            // Hide remove image button
+            $('#removeThumbnailButton').show();
+            $('#thumbnailImage').show();
+        }
         
         d = new Date();
         var curr_day = ('0' + d.getDate()).slice(-2);
@@ -93,6 +109,9 @@ function updateInputFields(){
     } else if ($("#multiItemSelector input[type=checkbox]:checked").length > 1) {
         // Enable the publish button
         $("#publishButton").removeClass('disabled');
+        // Allow images to be added.
+        $('#addThumbnailButton').removeClass('disabled');
+
     } else {
         // Clear the time required sliders as they are special
         clearTimeRequired();

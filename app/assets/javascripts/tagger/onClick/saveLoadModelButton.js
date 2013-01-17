@@ -35,6 +35,7 @@ $(function() {
                     'id':itemCounter,
                     'title':textLine[0],
                     'language':'',
+                    'thumbnail':'',
                     'url':textLine[1],
                     'createdOn':'',
                     'topic':'',

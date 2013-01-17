@@ -19,12 +19,17 @@ $(function() {
     $("#removeThumbnailButton").click(function() {
 
         // Set the hidden input box
-        $('#thumb').attr('value', thumb);
+        $('#thumbnail').attr('value', '');
         // Set the thumb
-        $('#thumbnailImage').attr('src', thumb);
+        $('#thumbnailImage').attr('src', '');
         // Hide remove image button
         $('#removeThumbnailButton').hide();
         $('#thumbnailImage').hide();
+
+        // Update items object
+        $("#multiItemSelector input[type=checkbox]:checked").each(function(i,obj) {
+            items[obj.id]["thumbnail"] = '';
+        });
 
         return false;
     });

@@ -55,6 +55,7 @@ $(function() {
             'id':itemCounter,
             'title':'',
             'language':'',
+            'thumbnail':'',
             'url':'',
             'createdOn':'',
             'topic':'',

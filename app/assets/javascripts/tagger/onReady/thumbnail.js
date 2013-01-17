@@ -20,11 +20,11 @@ $(function() {
         // Get our url from the object and use http not https
         var url = obj.image.url.split('/');
         url[0] = url[0].replace('https','http');
-        file = url.pop();
+        var fileHash = url.pop();
         // now build the thumb link
-        var thumb = url.join('/') + '/browser_thumb_' + file;
+        var thumb = url.join('/') + '/browser_thumb_' + fileHash;
         // Set the hidden input box
-        $('#thumb').attr('value', thumb);
+        $('#thumbnail').attr('value', fileHash);
         // Hide the modal
         $('#thumbModal').modal('hide');
         // Set the thumb
@@ -33,6 +33,10 @@ $(function() {
         $('#removeThumbnailButton').show();
         // Show thumbnail
         $('#thumbnailImage').show();
+        // Update items object
+        $("#multiItemSelector input[type=checkbox]:checked").each(function(i,obj) {
+            items[obj.id]["thumbnail"] = fileHash;
+        });
 
     });
 

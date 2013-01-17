@@ -18,12 +18,7 @@ class TaggerController < ApplicationController
 
   def index
   end
-  
-  # Temp - remove once modal is in place
-  def test_image_upload
-  end
-  
-  
+
   # Load the items list into the UI
   def load_drafts
     # The object we return to the UI, if any
