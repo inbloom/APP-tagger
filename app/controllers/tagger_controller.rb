@@ -18,7 +18,12 @@ class TaggerController < ApplicationController
 
   def index
   end
-
+  
+  # Temp - remove once modal is in place
+  def test_image_upload
+  end
+  
+  
   # Load the items list into the UI
   def load_drafts
     # The object we return to the UI, if any
@@ -132,6 +137,19 @@ class TaggerController < ApplicationController
     end
   end
 
+  # Adds image to media server
+  def add_image
+#    if current_user.present?
+      if params[:tag][:image].present?
+        img = Image.new
+        img.image = params[:tag][:image]
+        img.save!
+        # @todo: send img.image back to view
+        # @todo: delete image from db asap
+      end
+#    end
+  end
+
   private
 
   # Its possible to need to save the tags from multiple places so lets extract this
@@ -191,6 +209,5 @@ class TaggerController < ApplicationController
       tag.destroy
     end
   end
-  
 
 end
