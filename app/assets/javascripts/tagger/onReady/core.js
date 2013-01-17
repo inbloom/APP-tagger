@@ -63,6 +63,12 @@ $(function() {
         items  : 8
     });
 
+    // Hide remove image button
+    $('#removeThumbnailButton').hide();
+    $('#thumbnailImage').hide();
+
+    $('#addThumbnailButton').addClass('disabled');
+
 
     $createdOn.val('');
 

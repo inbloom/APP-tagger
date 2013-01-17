@@ -79,6 +79,8 @@ $(function() {
         toggleForm();
         // Enable the publish button
         $("#publishButton").removeClass('disabled');
+        // Enable the images
+        $('#addThumbnailButton').removeClass('disabled');
         updateResourceCount();
 
     });

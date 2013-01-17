@@ -148,6 +148,14 @@ class TaggerController < ApplicationController
         # @todo: delete image from db asap
       end
 #    end
+
+    respond_to do |format|
+      if img.present?
+        format.json { render json: img }
+      else
+        format.json { render status: 500, json: 'Something went wrong'}
+      end
+    end
   end
 
   private

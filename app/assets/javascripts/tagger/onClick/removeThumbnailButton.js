@@ -16,10 +16,15 @@
 
 $(function() {
 
-    $("#addThumbnailButton").click(function() {
-        if (!$(this).hasClass('disabled')) {
-            $('#thumbModal').modal('show');
-        }
+    $("#removeThumbnailButton").click(function() {
+
+        // Set the hidden input box
+        $('#thumb').attr('value', thumb);
+        // Set the thumb
+        $('#thumbnailImage').attr('src', thumb);
+        // Hide remove image button
+        $('#removeThumbnailButton').hide();
+        $('#thumbnailImage').hide();
 
         return false;
     });

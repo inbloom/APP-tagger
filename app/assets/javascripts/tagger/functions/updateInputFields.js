@@ -16,6 +16,8 @@
 
 function updateInputFields(){
     updateResourceCount();
+    // Allow images to be added.
+    $('#addThumbnailButton').addClass('disabled');
     // Disable the publish button
     $("#publishButton").addClass('disabled');
     // Clear form data
@@ -28,6 +30,9 @@ function updateInputFields(){
     toggleForm();
     // If only one is selected then update the form with that one
     if ($("#multiItemSelector input[type=checkbox]:checked").length == 1) {
+
+        // Allow images to be added.
+        $('#addThumbnailButton').removeClass('disabled');
 
         // Enable the publish button
         $("#publishButton").removeClass('disabled');
