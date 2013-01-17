@@ -59,7 +59,7 @@ function updateInputFields(){
         if (item.isBasedOnURL != "")                  $("#isBasedOnURL").val(item.isBasedOnURL);
         if (item.thumbnail != "") {
             $("#thumbnail").val(item.thumbnail);
-            $("#thumbnailImage").attr('src','http://media.inbloom.org.s3.amazonaws.com/tagger/images/test/browser_thumb_' + item.thumbnail);
+            $("#thumbnailImage").attr('src','http://media.inbloom.org.s3.amazonaws.com/tagger/images/browser_thumb_' + item.thumbnail);
             // Hide remove image button
             $('#removeThumbnailButton').show();
             $('#thumbnailImage').show();
