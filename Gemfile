@@ -51,6 +51,8 @@ gem "mini_magick"
 gem 'fog'
 # Carrierwave Media uploader
 gem 'carrierwave'
+# Remote form uploads
+gem 'remotipart'
 
 group :development, :test do
 # Use thin as webserver
