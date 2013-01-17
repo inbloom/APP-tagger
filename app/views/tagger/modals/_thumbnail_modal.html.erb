@@ -6,12 +6,14 @@
   <div class="modal-body">
     <p>Supported formats; jpg, gif and png.  Files should be no larger than 1.5megs.  Thumbnails will automatically be generated from the uploaded image.</p>
     <br/>
-    <form id="thumbForm">
-      <input type="file" id="files" name="files" multiple />
-    </form>
+    <%= form_for Tag.new, :url => add_image_tagger_index_path, :remote => true, :multipart => true, :html => { :id => 'thumbModalForm', :'data-type' => 'json' } do |f| %>
+      <%= f.label :image, 'Choose Image File' %>
+      <%= f.file_field :image %>
+      <br />
+    <% end %>
   </div>
   <div class="modal-footer">
-    <a href="#" class="btn btn-primary" data-dismiss="modal" id="thumbModalButton">Upload</a>
+    <a href="javascript:$('#thumbModalForm').submit();" class="btn btn-primary">Upload</a>
     <a href="javascript:$('#thumbModal').modal('hide');" class="btn btn-success">Close</a>
   </div>
 </div>
