@@ -25,6 +25,8 @@ LRMI::Application.routes.draw do
       post :save_export,    :path => "/save_export",    :constraints => { :format => /json/ }
       post :save_remote,    :path => "/save_remote",    :constraints => { :format => /json/ }
       post :reset_resource, :path => "/reset_resource", :constraints => { :format => /json/ }
+      get :test_image_upload, :path => "/test_upload"
+      post :add_image,      :path => "/add_image"
     end
   end
   
