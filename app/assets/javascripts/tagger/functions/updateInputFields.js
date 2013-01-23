@@ -51,6 +51,7 @@ function updateInputFields(){
         //Setup General Tab for Single Selection
         if (item.title != "")                         $("#title").val(item.title);
         if (item.url != "")                           $("#url").val(item.url);
+        if (item.tagDescription != "")                $("#tagDescription").val(item.tagDescription);
         if (item.language != "")                      $("#language").val(item.language);
         if (item.topic != "")                         $("#topic").val(item.topic);
         if (item.createdBy != "")                     $("#createdBy").val(item.createdBy);

@@ -21,6 +21,7 @@ function updateTextArea(){
 
         if (items[obj.id].title != "") textAreaValue += "Title:\n"+items[obj.id].title+"\n";
         if (items[obj.id].url != "") textAreaValue += "URL:\n"+items[obj.id].url+"\n";
+        if (items[obj.id].tagDescription != "") textAreaValue += "Description:\n"+items[obj.id].tagDescription+"\n";
         if (items[obj.id].language != "") textAreaValue += "Language:\n"+items[obj.id].language+"\n";
         if (items[obj.id].createdOn != "") textAreaValue += "Created On:\n"+items[obj.id].createdOn+"\n";
         if (items[obj.id].topic != "") textAreaValue += "Topic/Subject:\n"+items[obj.id].topic+"\n";

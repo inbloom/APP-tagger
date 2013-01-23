@@ -57,6 +57,7 @@ $(function() {
             'language':'',
             'thumbnail':'',
             'url':'',
+            'tagDescription':'',
             'createdOn':'',
             'topic':'',
             'createdBy':'',
