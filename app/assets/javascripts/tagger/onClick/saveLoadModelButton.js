@@ -37,6 +37,7 @@ $(function() {
                     'language':'',
                     'thumbnail':'',
                     'url':textLine[1],
+                    'tagDescription':'',
                     'createdOn':'',
                     'topic':'',
                     'createdBy':'',
