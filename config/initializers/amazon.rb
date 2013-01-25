@@ -1,3 +1,6 @@
-AMAZON_CONFIG = YAML.load(File.read(File.expand_path('../../amazon.yml', __FILE__)))
-AMAZON_CONFIG.merge! AMAZON_CONFIG.fetch(Rails.env, {})
-AMAZON_CONFIG.symbolize_keys!
+unless Rails.env.production?
+  ENV['aws_access_key_id'] = 'goes_here'
+  ENV['aws_secret_access_key'] = 'goes_here'
+  ENV['aws_bucket'] = 'goes_here'
+  ENV['aws_region'] = 'us-east-1'
+end

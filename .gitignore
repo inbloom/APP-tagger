@@ -18,5 +18,5 @@
 config/slc.yml
 config/slc.yml.bak
 config/amazon.yml
-
+config/initializers/amazon.rb
 /.idea
