@@ -17,7 +17,7 @@
 $(function() {
 
     $("#exportJsonButton").click( function() {
-        var str = processJSONOutput();
+        var str = processJSONOutput(true);
         saveAndExport(str,".json");
     });
 
