@@ -74,12 +74,22 @@ function processHTMLOutput(){
             str +=  '\t<meta itemprop="mediaType" content="' + array[j] + '"></meta>\n';
         }
 
-        if (typeof items[i].groupType !== 'undefined') {
-            string = items[i].groupType.replace(/\"/g, "'");
-            array = string.split(',');
-            for (j = 0; j < array.length; j++){
-                str +=  '\t<meta itemprop="groupType" content="' + array[j] + '"></meta>\n';
-            }
+        string = items[i].groupType.replace(/\"/g, "'");
+        array = string.split(',');
+        for (j = 0; j < array.length; j++){
+            str +=  '\t<meta itemprop="groupType" content="' + array[j] + '"></meta>\n';
+        }
+
+        string = items[i].thumbnail.replace(/\"/g, "'");
+        array = string.split(',');
+        for (j = 0; j < array.length; j++){
+            str +=  '\t<meta itemprop="thumbnail" content="' + array[j] + '"></meta>\n';
+        }
+
+        string = items[i].tagDescription.replace(/\"/g, "'");
+        array = string.split(',');
+        for (j = 0; j < array.length; j++){
+            str +=  '\t<meta itemprop="tagDescription" content="' + array[j] + '"></meta>\n';
         }
 
         for (j in items[i].educationalAlignments) {
