@@ -69,6 +69,9 @@ $(function() {
 
     $('#addThumbnailButton').addClass('disabled');
 
+    // Adding some global vars for file validation
+    fileHasErrors = false;
+    fileErrors = [];
 
     $createdOn.val('');
 
