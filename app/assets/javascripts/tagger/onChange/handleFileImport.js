@@ -77,10 +77,12 @@ $(function() {
 
                     // parse CSV input
                     if (allText[0] != '{') {
-
+console.log('CSV IMPORT');
+                        var tempItems = [];
                         var output = $.csv2Array(allText);
 
                         for (var i = 1; i < output.length; i++) {
+                            if (fileHasErrors) continue;
                             if (output[i] == undefined || output[i].length == 0) continue;
 
                             var itemTitle = (output[i][1] != '' && output[i][1] != undefined)? ((output[i][1].length > 25) ? output[i][1].substr(0,25) + '&hellip;' : output[i][1]) :"New Item " + itemCounter;
@@ -116,31 +118,42 @@ $(function() {
                                 itemEducationAlignments[objHash] = object;
                             }
 
-                            items['itemTag' + itemCounter] = {
-                                'id':itemCounter,
-                                'title':output[i][1],
-                                'language':output[i][8],
-                                'thumbnail':output[i][24],
-                                'url':itemUrl,
-                                'createdOn':output[i][5],
-                                'topic':output[i][4],
-                                'createdBy':output[i][6],
-                                'usageRightsURL':output[i][10],
-                                'publisher':output[i][7],
-                                'isBasedOnURL':output[i][11],
-                                'endUser':output[i][12],
-                                'ageRange':output[i][14],
-                                'educationalUse':output[i][13],
-                                'interactivityType':output[i][15],
-                                'learningResourceType':output[i][16],
-                                'mediaType':output[i][9],
-                                'groupType':output[i][23],
-                                'timeRequired':(output[i][3] != '')?output[i][3]:"P0Y0M0W0DT0H0M0S",
-                                'educationalAlignments':itemEducationAlignments
+                            tempItem = {
+                                'id'                    : itemCounter,
+                                'title'                 : validateImport('title', output[i][1]),
+                                'language'              : validateImport('language', output[i][8]),
+                                'thumbnail'             : validateImport('thumbnail', output[i][24]),
+                                'url'                   : validateImport('url', itemUrl),
+                                'tagDescription'        : validateImport('tagDescription', output[i][25]),
+                                'createdOn'             : validateImport('createdOn', output[i][5]),
+                                'topic'                 : validateImport('topic', output[i][4]),
+                                'createdBy'             : validateImport('createdBy', output[i][6]),
+                                'usageRightsURL'        : validateImport('usageRightsURL', output[i][10]),
+                                'publisher'             : validateImport('publisher', output[i][7]),
+                                'isBasedOnURL'          : validateImport('isBasedOnURL', output[i][11]),
+                                'endUser'               : validateImport('endUser', output[i][12]),
+                                'ageRange'              : validateImport('ageRange', output[i][14]),
+                                'educationalUse'        : validateImport('educationalUse', output[i][13]),
+                                'interactivityType'     : validateImport('interactivityType', output[i][15]),
+                                'learningResourceType'  : validateImport('learningResourceType', output[i][16]),
+                                'mediaType'             : validateImport('mediaType', output[i][9]),
+                                'groupType'             : validateImport('groupType', output[i][23]),
+                                'timeRequired'          : validateImport('timeRequired', output[i][3]),
+                                'educationalAlignments' : itemEducationAlignments
                             };
 
-                            $("#multiItemSelector").append($("<a href='#itemTag"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#itemTag"+itemCounter+"' id='itemTag"+itemCounter+"URL' "+(itemUrl!=""?"":"style='display:none;'")+" class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='itemTag"+itemCounter+"Label' class='checkbox'><input id='itemTag"+itemCounter+"' type='checkbox' name='tagItem'/><span>"+itemTitle+"</span></label>"));
-                            itemCounter++;
+                            // Did anything above generate an error?
+                            if (fileHasErrors) {
+console.log(fileErrors);
+                            } else {
+                                // Stuff the item
+                                items['itemTag' + itemCounter] = tempItem;
+                                // Inject the checkbox
+                                $("#multiItemSelector").append($("<a href='#itemTag"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#itemTag"+itemCounter+"' id='itemTag"+itemCounter+"URL' "+(itemUrl!=""?"":"style='display:none;'")+" class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='itemTag"+itemCounter+"Label' class='checkbox'><input id='itemTag"+itemCounter+"' type='checkbox' name='tagItem'/><span>"+itemTitle+"</span></label>"));
+                                // Increment the counter
+                                itemCounter++;
+
+                            }
 
                         }
 
