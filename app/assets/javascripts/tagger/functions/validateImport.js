@@ -17,6 +17,7 @@
  * value for that field.  If it cant it will set an error and return an empty string.
  */
 function validateImport(field, value) {
+    if (value == undefined) value = "";
     var results = "";
 
     switch(field) {
@@ -166,6 +167,7 @@ function toCorrectCase(string) {
     if (string == 'on-line')    res = 'On-Line';
     if (string == 'cd-rom')     res = 'CD-ROM';
     if (string == 'cd-i')       res = 'CD-I';
+    if (string == 'pdf')        res = 'PDF';
     if (string == 'e-mail')     res = 'E-Mail';
     if (string == 'audio cd')   res = 'Audio CD';
     if (string == 'dvd/blu-ray') res = 'DVD/Blu-ray';
