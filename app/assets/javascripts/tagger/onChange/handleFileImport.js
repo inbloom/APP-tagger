@@ -122,9 +122,9 @@ $(function() {
                                 'id'                    : itemCounter,
                                 'title'                 : validateImport('title', output[i][1]),
                                 'language'              : validateImport('language', output[i][8]),
-                                'thumbnail'             : validateImport('thumbnail', output[i][24]),
+                                'thumbnail'             : validateImport('thumbnail', output[i][23]),
                                 'url'                   : validateImport('url', itemUrl),
-                                'tagDescription'        : validateImport('tagDescription', output[i][25]),
+                                'tagDescription'        : validateImport('tagDescription', output[i][24]),
                                 'createdOn'             : validateImport('createdOn', output[i][5]),
                                 'topic'                 : validateImport('topic', output[i][4]),
                                 'createdBy'             : validateImport('createdBy', output[i][6]),
@@ -137,14 +137,17 @@ $(function() {
                                 'interactivityType'     : validateImport('interactivityType', output[i][15]),
                                 'learningResourceType'  : validateImport('learningResourceType', output[i][16]),
                                 'mediaType'             : validateImport('mediaType', output[i][9]),
-                                'groupType'             : validateImport('groupType', output[i][23]),
+                                'groupType'             : validateImport('groupType', output[i][22]),
                                 'timeRequired'          : validateImport('timeRequired', output[i][3]),
                                 'educationalAlignments' : itemEducationAlignments
                             };
 
                             // Did anything above generate an error?
                             if (fileHasErrors) {
-                                showMessage(fileErrors, "Import Errors!");
+
+                                var message = "No data could be imported. It looks like the file you're attempting to import had some column/row errors that Tagger doesn't understand.  Before this data can be imported you'll need to correct the following errors so that we don't import something incorrectly:<br /><br />" + fileErrors;
+
+                                showMessage(message, "Import Errors! :: Errors found in row #"+i);
                             } else {
                                 // Stuff the item
                                 items['itemTag' + itemCounter] = tempItem;
