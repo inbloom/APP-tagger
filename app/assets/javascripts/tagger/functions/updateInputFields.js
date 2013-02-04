@@ -33,6 +33,8 @@ function updateInputFields(){
     $("form[name=LRMIData]").find("input[type=text], textarea, select").val("");
     // Clear alignment tabs
     $("#currentAlignmentTable input[type=checkbox]").attr('checked', false);
+    // Clear the time required sliders as they are special
+    clearTimeRequired();
     // Clear the iframe
     updateMainContentBottom();
     // Update form enabled/disabled state
@@ -113,9 +115,5 @@ function updateInputFields(){
         $("#publishButton").removeClass('disabled');
         // Allow images to be added.
         $('#addThumbnailButton').removeClass('disabled');
-
-    } else {
-        // Clear the time required sliders as they are special
-        clearTimeRequired();
     }
 }
