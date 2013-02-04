@@ -33,6 +33,10 @@ $(function() {
                 return function(e) {
                     $("#loadModal").modal("hide");
 
+                    // Reset any previous errors
+                    fileHasErrors = false;
+                    fileErrors = [];
+
                     // Uncheck everything when you add a new tag
                     jQuery("#multiItemSelector input[type=checkbox]").each(function(i,obj) {
                         obj.checked = false;
