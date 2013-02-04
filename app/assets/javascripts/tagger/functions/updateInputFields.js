@@ -79,16 +79,17 @@ function updateInputFields(){
         }
 
         // Refactoring timeRequired update -- why are we using this format?
-        if (item.timeRequired != "P0Y0M0W0DT0H0M0S") {
+        if (item.timeRequired != "P0Y0M0W0DT0H0M0S" &&
+            item.timeRequired != "") {
             var vals = item['timeRequired'].match(/(\d+)/g);
 
-            updateSlider(event, ui, $("#slideryears"), 'Year', vals[0]);
-            updateSlider(event, ui, $("#slidermonths"), 'Month', vals[1]);
-            updateSlider(event, ui, $("#sliderweeks"), 'Week', vals[2]);
-            updateSlider(event, ui, $("#sliderdays"), 'Day', vals[3]);
-            updateSlider(event, ui, $("#sliderhours"), 'Hour', vals[4]);
-            updateSlider(event, ui, $("#sliderminutes"), 'Minute', vals[5]);
-            updateSlider(event, ui, $("#sliderseconds"), 'Second', vals[6]);
+            updateSlider(event, null, $("#slideryears"), 'Year', vals[0]);
+            updateSlider(event, null, $("#slidermonths"), 'Month', vals[1]);
+            updateSlider(event, null, $("#sliderweeks"), 'Week', vals[2]);
+            updateSlider(event, null, $("#sliderdays"), 'Day', vals[3]);
+            updateSlider(event, null, $("#sliderhours"), 'Hour', vals[4]);
+            updateSlider(event, null, $("#sliderminutes"), 'Minute', vals[5]);
+            updateSlider(event, null, $("#sliderseconds"), 'Second', vals[6]);
         }
 
         // Stuff the iframe

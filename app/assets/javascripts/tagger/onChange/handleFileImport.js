@@ -77,7 +77,7 @@ $(function() {
 
                     // parse CSV input
                     if (allText[0] != '{') {
-console.log('CSV IMPORT');
+
                         var tempItems = [];
                         var output = $.csv2Array(allText);
 
@@ -144,7 +144,7 @@ console.log('CSV IMPORT');
 
                             // Did anything above generate an error?
                             if (fileHasErrors) {
-console.log(fileErrors);
+                                showMessage(fileErrors, "Import Errors!");
                             } else {
                                 // Stuff the item
                                 items['itemTag' + itemCounter] = tempItem;
