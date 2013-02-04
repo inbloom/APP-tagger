@@ -17,7 +17,7 @@
 $(function() {
 
     $("#exportCsvButton").click( function() {
-        var str = processCSVOutput();
+        var str = processCSVOutput(true);
         saveAndExport(str,".csv");
     });
 

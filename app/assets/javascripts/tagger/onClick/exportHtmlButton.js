@@ -17,7 +17,7 @@
 $(function() {
 
     $("#exportHtmlButton").click( function() {
-        var str = processHTMLOutput();
+        var str = processHTMLOutput(true);
         saveAndExport(str,".html");
     });
 
