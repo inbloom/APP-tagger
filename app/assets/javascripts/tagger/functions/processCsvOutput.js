@@ -57,8 +57,8 @@ function processCSVOutput(){
 
         str = str + alignmentString1 + ',' + alignmentString2 + ',' + alignmentString3 + ',' + alignmentString4 + ',' + alignmentString5 + ',';
 
-        str = str + '"' + items[i].groupType.replace(/\"/g, "'") + '"';
-        str = str + '"' + items[i].thumbnail.replace(/\"/g, "'") + '"';
+        str = str + '"' + items[i].groupType.replace(/\"/g, "'") + '",';
+        str = str + '"' + items[i].thumbnail.replace(/\"/g, "'") + '",';
         str = str + '"' + items[i].tagDescription.replace(/\"/g, "'") + '"';
 
         str = str + '\n';
