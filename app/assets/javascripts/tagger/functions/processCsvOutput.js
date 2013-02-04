@@ -14,27 +14,35 @@
  * limitations under the License.
  */
 
-function processCSVOutput(){
+function processCSVOutput(checked){
+    var checked_items = {};
+    if (checked == undefined) {
+        checked_items = items;
+    } else {
+        $("#multiItemSelector input[type=checkbox]:checked").each(function(i,obj) {
+            checked_items[obj.id] = items[obj.id]
+        });
+    }
     var str = '"Metadata:","Title","URL","Time Required (FORMAT: P0Y0M0W0DT0H0M0S) ISO8601","Topic","Created (FORMAT: YYYY-MM-DD)","Creator","Publisher","Language","Mediatype","Use Rights URL","Is based on  URL","Intended End User Role","Educational Use","Typical Age Range","Interactivity Type","Learning Resource Type","Educational Alignment","Alignment Type","Dot Notation","Target URL","Target Description","Group Type","Thumbnail URL","Tag Description"\n';
 
-    for (i in items) {
+    for (i in checked_items) {
         str = str + '"",';
-        str = str + '"' + items[i].title.replace(/\"/g, "'") + '",';
-        str = str + '"' + items[i].url + '",';
-        str = str + '"' + items[i].timeRequired + '",';
-        str = str + '"' + items[i].topic.replace(/\"/g, "'") + '",';
-        str = str + '"' + items[i].createdOn + '",';
-        str = str + '"' + items[i].createdBy.replace(/\"/g, "'") + '",';
-        str = str + '"' + items[i].publisher.replace(/\"/g, "'") + '",';
-        str = str + '"' + items[i].language + '",';
-        str = str + '"' + items[i].mediaType.replace(/\"/g, "'") + '",';
-        str = str + '"' + items[i].usageRightsURL + '",';
-        str = str + '"' + items[i].isBasedOnURL + '",';
-        str = str + '"' + items[i].endUser.replace(/\"/g, "'") + '",';
-        str = str + '"' + items[i].educationalUse.replace(/\"/g, "'") + '",';
-        str = str + '"' + items[i].ageRange.replace(/\"/g, "'") + '",';
-        str = str + '"' + items[i].interactivityType.replace(/\"/g, "'") + '",';
-        str = str + '"' + items[i].learningResourceType.replace(/\"/g, "'") + '",';
+        str = str + '"' + checked_items[i].title.replace(/\"/g, "'") + '",';
+        str = str + '"' + checked_items[i].url + '",';
+        str = str + '"' + checked_items[i].timeRequired + '",';
+        str = str + '"' + checked_items[i].topic.replace(/\"/g, "'") + '",';
+        str = str + '"' + checked_items[i].createdOn + '",';
+        str = str + '"' + checked_items[i].createdBy.replace(/\"/g, "'") + '",';
+        str = str + '"' + checked_items[i].publisher.replace(/\"/g, "'") + '",';
+        str = str + '"' + checked_items[i].language + '",';
+        str = str + '"' + checked_items[i].mediaType.replace(/\"/g, "'") + '",';
+        str = str + '"' + checked_items[i].usageRightsURL + '",';
+        str = str + '"' + checked_items[i].isBasedOnURL + '",';
+        str = str + '"' + checked_items[i].endUser.replace(/\"/g, "'") + '",';
+        str = str + '"' + checked_items[i].educationalUse.replace(/\"/g, "'") + '",';
+        str = str + '"' + checked_items[i].ageRange.replace(/\"/g, "'") + '",';
+        str = str + '"' + checked_items[i].interactivityType.replace(/\"/g, "'") + '",';
+        str = str + '"' + checked_items[i].learningResourceType.replace(/\"/g, "'") + '",';
 
         var alignmentString1 = '"';
         var alignmentString2 = '"';
@@ -42,12 +50,12 @@ function processCSVOutput(){
         var alignmentString4 = '"';
         var alignmentString5 = '"';
 
-        for (j in items[i].educationalAlignments) {
-            alignmentString1 += items[i].educationalAlignments[j].educationalAlignment.replace(/,/g, '') + ',';
-            alignmentString2 += items[i].educationalAlignments[j].alignmentType.replace(/,/g, '') + ',';
-            alignmentString3 += items[i].educationalAlignments[j].dotNotation.replace(/,/g, '') + ',';
-            alignmentString4 += items[i].educationalAlignments[j].itemURL.replace(/,/g, '') + ',';
-            alignmentString5 += items[i].educationalAlignments[j].description.replace(/\"/g, "'").replace(/,/g, '') + ',';
+        for (j in checked_items[i].educationalAlignments) {
+            alignmentString1 += checked_items[i].educationalAlignments[j].educationalAlignment.replace(/,/g, '') + ',';
+            alignmentString2 += checked_items[i].educationalAlignments[j].alignmentType.replace(/,/g, '') + ',';
+            alignmentString3 += checked_items[i].educationalAlignments[j].dotNotation.replace(/,/g, '') + ',';
+            alignmentString4 += checked_items[i].educationalAlignments[j].itemURL.replace(/,/g, '') + ',';
+            alignmentString5 += checked_items[i].educationalAlignments[j].description.replace(/\"/g, "'").replace(/,/g, '') + ',';
         }
         alignmentString1 += '"';
         alignmentString2 += '"';
@@ -57,9 +65,9 @@ function processCSVOutput(){
 
         str = str + alignmentString1 + ',' + alignmentString2 + ',' + alignmentString3 + ',' + alignmentString4 + ',' + alignmentString5 + ',';
 
-        str = str + '"' + items[i].groupType.replace(/\"/g, "'") + '",';
-        str = str + '"' + items[i].thumbnail.replace(/\"/g, "'") + '",';
-        str = str + '"' + items[i].tagDescription.replace(/\"/g, "'") + '"';
+        str = str + '"' + checked_items[i].groupType.replace(/\"/g, "'") + '",';
+        str = str + '"' + checked_items[i].thumbnail.replace(/\"/g, "'") + '",';
+        str = str + '"' + checked_items[i].tagDescription.replace(/\"/g, "'") + '"';
 
         str = str + '\n';
 
