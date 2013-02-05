@@ -99,6 +99,7 @@ GEM
       net-ssh (>= 1.99.1)
     net-ssh (2.6.3)
     nokogiri (1.5.6)
+    oauth (0.4.7)
     oauth2 (0.8.0)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -190,6 +191,7 @@ DEPENDENCIES
   mime-types (~> 1.19)
   mini_magick
   mysql2
+  oauth
   omniauth
   omniauth-slc (= 0.0.2)
   pg

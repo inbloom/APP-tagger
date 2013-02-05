@@ -149,7 +149,7 @@ $(function() {
                             // Did anything above generate an error?
                             if (fileHasErrors) {
 
-                                var message = "No data could be imported. It looks like the file you're attempting to import had some column/row errors that Tagger doesn't understand.  Before this data can be imported you'll need to correct the following errors so that we don't import something incorrectly:<br /><br />" + fileErrors;
+                                var message = "Data could not be imported.  The file you're attempting to import appears to have some errors in rows or columns that Tagger does not understand.  This is usually as a result of data that doesn't conform to requirements for each column of data.<br /><br />Before Tagger can import this file, please correct the following errors." + fileErrors;
 
                                 showMessage(message, "Import Errors! :: Errors found in row #"+i);
                             } else {
