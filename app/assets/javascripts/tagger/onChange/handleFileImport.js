@@ -85,6 +85,11 @@ $(function() {
                         var tempItems = [];
                         var output = $.csv2Array(allText);
 
+                        // Make sure the headers are there in the right order
+                        validateImportHeaders(output[0]);
+                        if (fileHasErrors) showFileHasErrorsMessage("File Format Error");
+
+
                         for (var i = 1; i < output.length; i++) {
                             if (fileHasErrors) continue;
                             if (output[i] == undefined || output[i].length == 0) continue;
@@ -124,34 +129,31 @@ $(function() {
 
                             tempItem = {
                                 'id'                    : itemCounter,
-                                'title'                 : validateImport('title', output[i][1]),
-                                'language'              : validateImport('language', output[i][8]),
-                                'thumbnail'             : validateImport('thumbnail', output[i][23]),
-                                'url'                   : validateImport('url', itemUrl),
-                                'tagDescription'        : validateImport('tagDescription', output[i][24]),
-                                'createdOn'             : validateImport('createdOn', output[i][5]),
-                                'topic'                 : validateImport('topic', output[i][4]),
-                                'createdBy'             : validateImport('createdBy', output[i][6]),
-                                'usageRightsURL'        : validateImport('usageRightsURL', output[i][10]),
-                                'publisher'             : validateImport('publisher', output[i][7]),
-                                'isBasedOnURL'          : validateImport('isBasedOnURL', output[i][11]),
-                                'endUser'               : validateImport('endUser', output[i][12]),
-                                'ageRange'              : validateImport('ageRange', output[i][14]),
-                                'educationalUse'        : validateImport('educationalUse', output[i][13]),
-                                'interactivityType'     : validateImport('interactivityType', output[i][15]),
-                                'learningResourceType'  : validateImport('learningResourceType', output[i][16]),
-                                'mediaType'             : validateImport('mediaType', output[i][9]),
-                                'groupType'             : validateImport('groupType', output[i][22]),
-                                'timeRequired'          : validateImport('timeRequired', output[i][3]),
+                                'title'                 : validateImportField('title', output[i][1]),
+                                'language'              : validateImportField('language', output[i][8]),
+                                'thumbnail'             : validateImportField('thumbnail', output[i][23]),
+                                'url'                   : validateImportField('url', itemUrl),
+                                'tagDescription'        : validateImportField('tagDescription', output[i][24]),
+                                'createdOn'             : validateImportField('createdOn', output[i][5]),
+                                'topic'                 : validateImportField('topic', output[i][4]),
+                                'createdBy'             : validateImportField('createdBy', output[i][6]),
+                                'usageRightsURL'        : validateImportField('usageRightsURL', output[i][10]),
+                                'publisher'             : validateImportField('publisher', output[i][7]),
+                                'isBasedOnURL'          : validateImportField('isBasedOnURL', output[i][11]),
+                                'endUser'               : validateImportField('endUser', output[i][12]),
+                                'ageRange'              : validateImportField('ageRange', output[i][14]),
+                                'educationalUse'        : validateImportField('educationalUse', output[i][13]),
+                                'interactivityType'     : validateImportField('interactivityType', output[i][15]),
+                                'learningResourceType'  : validateImportField('learningResourceType', output[i][16]),
+                                'mediaType'             : validateImportField('mediaType', output[i][9]),
+                                'groupType'             : validateImportField('groupType', output[i][22]),
+                                'timeRequired'          : validateImportField('timeRequired', output[i][3]),
                                 'educationalAlignments' : itemEducationAlignments
                             };
 
                             // Did anything above generate an error?
                             if (fileHasErrors) {
-
-                                var message = "Data could not be imported.  The file you're attempting to import appears to have some errors in rows or columns that Tagger does not understand.  This is usually as a result of data that doesn't conform to requirements for each column of data.<br /><br />Before Tagger can import this file, please correct the following errors." + fileErrors;
-
-                                showMessage(message, "Import Errors! :: Errors found in row #"+i);
+                                showFileHasErrorsMessage("Errors found in row #"+i);
                             } else {
                                 // Stuff the item
                                 items['itemTag' + itemCounter] = tempItem;
