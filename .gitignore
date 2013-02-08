@@ -20,3 +20,5 @@ config/slc.yml.bak
 config/amazon.yml
 config/initializers/amazon.rb
 /.idea
+
+.DS_Store
