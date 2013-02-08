@@ -108,9 +108,8 @@ function updateSlider(event, ui, sliderObj, unitString, sliderValue) {
 
     if (sliderValue == undefined) {
         sliderValue = ui.value;
-    } else {
-        $(sliderObj).slider({value:sliderValue});
     }
+    $(sliderObj).slider({value:sliderValue});
 
     var p = $(sliderObj).prev();
     if (sliderValue == 0) {
