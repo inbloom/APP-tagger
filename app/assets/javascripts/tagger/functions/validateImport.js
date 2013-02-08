@@ -87,7 +87,16 @@ function validateImportField(field, value) {
 
         // Created on Date
         case 'createdOn':
-
+            if (value != undefined && value != "") {
+                var d = new Date(value);
+                if (isNaN(d) || d.getMonth() == 0 || d.getDate() == 0 || d.getFullYear() == 0) {
+                    fileHasErrors = true;
+                    fileErrors.push("<strong>Invalid file imported</strong><br /> It would appear you're attempting to import a file that is containing a &quote;Created On&quote; date that is an invalid ISO8601 value.  Value sent: &quote;"+value+"&quote;<br /><br />");
+                } else {
+                    results = (((d.getMonth()+1)<10)?'0'+(d.getMonth()+1):(d.getMonth()+1)) + '-' +
+                        ((d.getDate()<10)?'0'+ d.getDate(): d.getDate()) + '-' + d.getFullYear();
+                }
+            }
             break;
 
         // End user enums
@@ -161,13 +170,13 @@ function validateImportField(field, value) {
             }
             break;
         
-        
+        // Time required MUST conform to ISO8601 or be empty.  The end.
         case 'timeRequired':
             if (value != undefined && value != "") {
                 // Parse out the time required into results
                 if (!nezasa.iso8601.Period.isValid(value)) {
                     fileHasErrors = true;
-                    fileErrors.push("<strong>Invalid file imported</strong><br /> It would appear you're attempting to import a file with an invalid ISO8601 &quot;Time Required&quot; value.<br /><br />");
+                    fileErrors.push("<strong>Invalid file imported</strong><br /> It would appear you're attempting to import a file with an invalid ISO8601 &quot;Time Required&quot; value.  Value sent &quote;"+value+"&quote;<br /><br />");
                 }
 
                 parsedTimeRequired = nezasa.iso8601.Period.parse(value);
@@ -181,8 +190,8 @@ function validateImportField(field, value) {
 
                 results = parsedTimeRequired.join('');
             }
-
             break;
+
         case 'educationalAlignments':
             break;
 
