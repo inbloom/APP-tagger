@@ -54,6 +54,8 @@ gem 'carrierwave'
 # Remote form uploads
 gem 'remotipart'
 
+gem 'oauth'
+
 group :development, :test do
 # Use thin as webserver
   gem 'thin'

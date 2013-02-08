@@ -14,9 +14,6 @@
 # limitations under the License.
 ###############################################################################
 
-require 'net/http'
-require 'uri'
-
 module LrHelper
   @@user = nil
   @@failures = []
@@ -63,30 +60,19 @@ module LrHelper
     @@failures
   end
 
-
-
   private
 
   def self.request type, request
-    # requestTypes
-    requestTypes = {
-        :publish => 'publish?'
-    }
+    # OAuth stuff..
+    consumer = OAuth::Consumer.new 'agilixtagger@gmail.com', 'kf4ER109bnp8dzK8YzoBkm5EeTF1HV2k', { :site => 'http://lrnode.inbloom.org' }
+    token = OAuth::AccessToken.new(consumer, 'node_sign_token', 'qMiy1Mc6NGYeJNX1nP6DBtfWAx1mhZQf')
 
     # do the request by type!
     case type
       when :publish
-        uri = URI.parse('http://sandbox.learningregistry.org/' + requestTypes[type].to_s)
-        http = Net::HTTP.new(uri.host, uri.port)
-        rawReq = Net::HTTP::Post.new(uri.request_uri)
-        rawReq.set_form_data({'documents'=>request})
-        rawResponse = http.request(rawReq)
+        payload = {'documents' => [ request ]}
+        rawResponse = consumer.request(:post, '/publish', token, {}, payload.to_json, { 'Content-Type' => 'application/json' })
     end
-
-    puts request.to_json
-
-    puts rawResponse.inspect
-
   end
 
   # Take any incoming key and map it to the correct LRI output key (Just keys.. not values)

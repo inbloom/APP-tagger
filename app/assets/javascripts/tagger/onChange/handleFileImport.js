@@ -33,6 +33,10 @@ $(function() {
                 return function(e) {
                     $("#loadModal").modal("hide");
 
+                    // Reset any previous errors
+                    fileHasErrors = false;
+                    fileErrors = [];
+
                     // Uncheck everything when you add a new tag
                     jQuery("#multiItemSelector input[type=checkbox]").each(function(i,obj) {
                         obj.checked = false;
@@ -78,9 +82,16 @@ $(function() {
                     // parse CSV input
                     if (allText[0] != '{') {
 
+                        var tempItems = [];
                         var output = $.csv2Array(allText);
 
+                        // Make sure the headers are there in the right order
+                        validateImportHeaders(output[0]);
+                        if (fileHasErrors) showFileHasErrorsMessage("File Format Error");
+
+
                         for (var i = 1; i < output.length; i++) {
+                            if (fileHasErrors) continue;
                             if (output[i] == undefined || output[i].length == 0) continue;
 
                             var itemTitle = (output[i][1] != '' && output[i][1] != undefined)? ((output[i][1].length > 25) ? output[i][1].substr(0,25) + '&hellip;' : output[i][1]) :"New Item " + itemCounter;
@@ -116,31 +127,42 @@ $(function() {
                                 itemEducationAlignments[objHash] = object;
                             }
 
-                            items['itemTag' + itemCounter] = {
-                                'id':itemCounter,
-                                'title':output[i][1],
-                                'language':output[i][8],
-                                'thumbnail':output[i][24],
-                                'url':itemUrl,
-                                'createdOn':output[i][5],
-                                'topic':output[i][4],
-                                'createdBy':output[i][6],
-                                'usageRightsURL':output[i][10],
-                                'publisher':output[i][7],
-                                'isBasedOnURL':output[i][11],
-                                'endUser':output[i][12],
-                                'ageRange':output[i][14],
-                                'educationalUse':output[i][13],
-                                'interactivityType':output[i][15],
-                                'learningResourceType':output[i][16],
-                                'mediaType':output[i][9],
-                                'groupType':output[i][23],
-                                'timeRequired':(output[i][3] != '')?output[i][3]:"P0Y0M0W0DT0H0M0S",
-                                'educationalAlignments':itemEducationAlignments
+                            tempItem = {
+                                'id'                    : itemCounter,
+                                'title'                 : validateImportField('title', output[i][1]),
+                                'language'              : validateImportField('language', output[i][8]),
+                                'thumbnail'             : validateImportField('thumbnail', output[i][23]),
+                                'url'                   : validateImportField('url', itemUrl),
+                                'tagDescription'        : validateImportField('tagDescription', output[i][24]),
+                                'createdOn'             : validateImportField('createdOn', output[i][5]),
+                                'topic'                 : validateImportField('topic', output[i][4]),
+                                'createdBy'             : validateImportField('createdBy', output[i][6]),
+                                'usageRightsURL'        : validateImportField('usageRightsURL', output[i][10]),
+                                'publisher'             : validateImportField('publisher', output[i][7]),
+                                'isBasedOnURL'          : validateImportField('isBasedOnURL', output[i][11]),
+                                'endUser'               : validateImportField('endUser', output[i][12]),
+                                'ageRange'              : validateImportField('ageRange', output[i][14]),
+                                'educationalUse'        : validateImportField('educationalUse', output[i][13]),
+                                'interactivityType'     : validateImportField('interactivityType', output[i][15]),
+                                'learningResourceType'  : validateImportField('learningResourceType', output[i][16]),
+                                'mediaType'             : validateImportField('mediaType', output[i][9]),
+                                'groupType'             : validateImportField('groupType', output[i][22]),
+                                'timeRequired'          : validateImportField('timeRequired', output[i][3]),
+                                'educationalAlignments' : itemEducationAlignments
                             };
 
-                            $("#multiItemSelector").append($("<a href='#itemTag"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#itemTag"+itemCounter+"' id='itemTag"+itemCounter+"URL' "+(itemUrl!=""?"":"style='display:none;'")+" class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='itemTag"+itemCounter+"Label' class='checkbox'><input id='itemTag"+itemCounter+"' type='checkbox' name='tagItem'/><span>"+itemTitle+"</span></label>"));
-                            itemCounter++;
+                            // Did anything above generate an error?
+                            if (fileHasErrors) {
+                                showFileHasErrorsMessage("Errors found in row #"+i);
+                            } else {
+                                // Stuff the item
+                                items['itemTag' + itemCounter] = tempItem;
+                                // Inject the checkbox
+                                $("#multiItemSelector").append($("<a href='#itemTag"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#itemTag"+itemCounter+"' id='itemTag"+itemCounter+"URL' "+(itemUrl!=""?"":"style='display:none;'")+" class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='itemTag"+itemCounter+"Label' class='checkbox'><input id='itemTag"+itemCounter+"' type='checkbox' name='tagItem'/><span>"+itemTitle+"</span></label>"));
+                                // Increment the counter
+                                itemCounter++;
+
+                            }
 
                         }
 

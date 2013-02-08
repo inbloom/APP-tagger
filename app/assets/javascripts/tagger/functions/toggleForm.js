@@ -20,6 +20,7 @@ function toggleForm() {
         $("#educationTab,#alignmentTab").removeClass("disabled");
         $("#educationTab a,#alignmentTab a").attr('data-toggle', 'tab');
     } else {
+        $("#generalTab a").click();
         $("#LRMIData input,#LRMIData select,#LRMIData textarea").attr("disabled","disabled");
         $("#educationTab,#alignmentTab").addClass("disabled");
         $("#educationTab a,#alignmentTab a").removeAttr("data-toggle");

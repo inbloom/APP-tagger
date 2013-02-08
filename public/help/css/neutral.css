@@ -241,7 +241,7 @@ div#LessonPageNav {
   border-top: 1px solid #cfcfcf; 
   padding: 1em 0 1.25em 0; 
   margin-top: 2.5em; 
-  font-family: Georgia, serif; 
+  font-family: Helvetica Neue, Arial, Helvetica, sans-serif;
   font-size: 1.1em; 
   color: #222;}
 div#LessonPageNav ul {
@@ -314,7 +314,7 @@ body.trebuchet {
   
 
 body.lucida h2, body.helvetica h2, body.trebuchet h2 {
-  font-family: Georgia, "Times New Roman", Times, serif; }
+  font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif; }
 
 body.georgia h2 {
   font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif; }
