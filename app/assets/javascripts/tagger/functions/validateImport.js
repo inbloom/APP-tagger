@@ -238,6 +238,7 @@ function validateImportEducationalAlignment(importedObject) {
 
 // Dry way to check field csv values against the known valid options for that field
 function checkCSVValuesForValidOptions(field, validOptions, value, denyOther) {
+    if (value == undefined) return '';
     // Pushed result values
     resValues = [];
     // Filter values by splitting them out
