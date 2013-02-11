@@ -33,5 +33,6 @@
 //= require jquery.ui.mouse
 //= require jquery.ui.resizable
 //= require jquery.ui.slider
+//= require bootstrap-datepicker
 //= require_tree .
 
