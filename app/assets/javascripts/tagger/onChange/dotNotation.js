@@ -42,7 +42,9 @@ $(function() {
 
 
                 // The code below was written by someone who doesn't have a clue.. and yes.. it sucks..
-                // It needs to be replaced as wow.. .. just.. wow..
+                // It needs to be replaced as wow.. .. just.. wow.. this is extremely mickeymouse and is the
+                // kind of stuff we have had to put up with through this whole project.. I hope like hell we
+                // get a chance to fix this but if not.. to you future developer.. sorry man..
                 document.getElementById('description').value = 'Loading (please wait)....';
                 for (i = 0; i < alignmentArray.length; i++) {
                     if ($('#dotNotation').val() ==  alignmentArray[i].title) {
