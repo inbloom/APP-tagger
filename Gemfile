@@ -43,6 +43,8 @@ gem 'jquery-ui-rails'
 # Google Analytics
 gem 'google-analytics-rails'
 
+gem 'bootstrap-datepicker-rails'
+
 # Allows for the identification of a file's likely MIME content type
 gem "mime-types", "~> 1.19"
 # Mini Magick gem to interact with ImageMagick
