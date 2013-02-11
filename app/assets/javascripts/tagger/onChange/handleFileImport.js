@@ -86,9 +86,11 @@ $(function() {
                         var output = $.csv2Array(allText);
 
                         // Make sure the headers are there in the right order
-                        validateImportHeaders(output[0]);
+                        validateImportHeaders(output);
+                        // Validate columns (counts right now)
+                        if (!fileHasErrors) validateImportColumns(output);
+                        // Show errors.
                         if (fileHasErrors) showFileHasErrorsMessage("File Format Error");
-
 
                         for (var i = 1; i < output.length; i++) {
                             if (fileHasErrors) continue;

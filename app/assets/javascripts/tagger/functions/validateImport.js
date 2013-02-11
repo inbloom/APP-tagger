@@ -17,25 +17,42 @@
 /* Validate the very top row and make sure the headers are present exactly as they need to be and in the right order
  * or fail and give an error as they have the wrong file or something.
  */
-function validateImportHeaders(column) {
-    if (column.length == 25 && column[0] == 'Metadata:') {
+function validateImportHeaders(importedContent) {
+    var firstRow = importedContent[0];
+    var importedVersion = firstRow[0];
+
+    if (firstRow.length == 25 && importedVersion == 'Metadata:') {
+        // These are the valid first row values for this version of the file
         validValues = ["Metadata:","Title","URL","Time Required (FORMAT: P0Y0M0W0DT0H0M0S) ISO8601","Topic","Created (FORMAT: YYYY-MM-DD)","Creator","Publisher","Language","Mediatype","Use Rights URL","Is based on  URL","Intended End User Role","Educational Use","Typical Age Range","Interactivity Type","Learning Resource Type","Educational Alignment","Alignment Type","Dot Notation","Target URL","Target Description","Group Type","Thumbnail URL","Tag Description"];
-
-        compareValueEquals(column, validValues, 'There appears to be a value comparison error in the column headers preventing Tagger from knowing if this is a valid file:');
-
+        // Compare them
+        compareValueEquals(firstRow, validValues, 'There appears to be a value comparison error in the firstRow headers preventing Tagger from knowing if this is a valid file:');      
+        
     } else {
         fileHasErrors = true;
-        fileErrors.push("<strong>Invalid file imported</strong><br /> The file you attempted to import doesn't appear to have the correct number of columns ('"+column.length+"' is what we count, it should be '25') or doesn't begin with the correct header identifier ('"+column[0]+"' was  sent, it should be 'Metadata:') for this version of Tagger (v1.1).<br /><br />");
+        fileErrors.push("<strong>Invalid file imported</strong><br /> The file you attempted to import doesn't appear to have the correct number of columns ('"+firstRow.length+"' is what we count, it should be '25') or doesn't begin with the correct header identifier ('"+importedVersion+"' was  sent, it should be 'Metadata:') for this version of Tagger (v1.1).<br /><br />");
     }
 
 }
 
-
 /* Validate the number of columns and do any other column level validation needed
  *
  */
-function validateImportColumn(column) {
-
+function validateImportColumns(importedContent) {
+    var firstRow = importedContent[0];
+    var importedVersion = firstRow[0];
+    if (importedVersion == 'Metadata:') {
+        if (importedContent.length > 1) {
+            for (i in importedContent) {
+                if (importedContent[i].length != 25) {
+                    fileHasErrors = true;
+                    fileErrors.push("<strong>Invalid file imported</strong><br /> The file you attempted to import doesn't appear to have the correct number of columns in row #"+i+" (There appear to be '"+importedContent[i].length+"', it should be '25') for this version of Tagger (v1.1).<br /><br />");
+                }
+            }
+        } else {
+            fileHasErrors = true;
+            fileErrors.push("<strong>Empty file imported</strong><br /> The file you attempted to import doesn't appear to have any content in it.<br /><br />");
+        }
+    }
 }
 
 /* The validate import function will take the input for a named field and try its best to make the value match a legal
@@ -65,11 +82,13 @@ function validateImportField(field, value) {
             if (value != undefined && value != "") {
                 tValue = value.toLowerCase();
                 // Catch and Replace any well intentioned names, but incorrect
-                tValue = tValue.replace('english','EN_US');
-                tValue = tValue.replace('engrish','EN_US'); // heh
-                tValue = tValue.replace('spanish','ES_ES');
-                tValue = tValue.replace('espanol','ES_ES');
-                tValue = tValue.replace('español','ES_ES');
+                tValue = tValue.replace(/^en$/,'EN_US');
+                tValue = tValue.replace(/^english$/,'EN_US');
+                tValue = tValue.replace(/^engrish$/,'EN_US'); // heh
+                tValue = tValue.replace(/^spanish$/,'ES_ES');
+                tValue = tValue.replace(/^es$/,'ES_ES');
+                tValue = tValue.replace(/^espanol$/,'ES_ES');
+                tValue = tValue.replace(/^español$/,'ES_ES');
                 // Valid options
                 validOptions = ['EN_US','ES_ES'];
                 // Filter value
@@ -78,7 +97,7 @@ function validateImportField(field, value) {
                 // Set results
                 if ($.inArray(tValue, validOptions) == -1) {
                     fileHasErrors = true;
-                    fileErrors.push('Invalid Language: "'+tValue+'" -- Options: "'+validOptions.join()+'"');
+                    fileErrors.push('<strong>Invalid file imported -- <em>&quot;Language&quot;</em></strong><br /> It appears the sent language value is incorrect: "'+tValue+'" -- Valid Options: "'+validOptions.join()+'"<br /><br />');
                 } else {
                     results = tValue;
                 }                
@@ -91,7 +110,7 @@ function validateImportField(field, value) {
                 var d = new Date(value);
                 if (isNaN(d) || d.getMonth() == 0 || d.getDate() == 0 || d.getFullYear() == 0) {
                     fileHasErrors = true;
-                    fileErrors.push("<strong>Invalid file imported</strong><br /> It would appear you're attempting to import a file that is containing a &quote;Created On&quote; date that is an invalid ISO8601 value.  Value sent: &quote;"+value+"&quote;<br /><br />");
+                    fileErrors.push("<strong>Invalid file imported -- <em>&quot;Created On&quot;</em></strong><br /> It would appear you're attempting to import a file that is containing a &quot;Created On&quot; date that is an invalid ISO8601 value.  Value sent: &quot;"+value+"&quot;<br /><br />");
                 } else {
                     results = (((d.getMonth()+1)<10)?'0'+(d.getMonth()+1):(d.getMonth()+1)) + '-' +
                         ((d.getDate()<10)?'0'+ d.getDate(): d.getDate()) + '-' + d.getFullYear();
@@ -175,20 +194,22 @@ function validateImportField(field, value) {
             if (value != undefined && value != "") {
                 // Parse out the time required into results
                 if (!nezasa.iso8601.Period.isValid(value)) {
+                    results = "";
                     fileHasErrors = true;
-                    fileErrors.push("<strong>Invalid file imported</strong><br /> It would appear you're attempting to import a file with an invalid ISO8601 &quot;Time Required&quot; value.  Value sent &quote;"+value+"&quote;<br /><br />");
+                    fileErrors.push("<strong>Invalid file imported -- <em>&quot;Time Required&quot;</em></strong><br /> It would appear you're attempting to import a file with an invalid ISO8601 &quot;Time Required&quot; value.  Value sent &quot;"+value+"&quot;<br /><br />");
+                } else {
+                    parsedTimeRequired = nezasa.iso8601.Period.parse(value);
+                    parsedTimeRequired[0] = "P" + parsedTimeRequired[0] + "Y";
+                    parsedTimeRequired[1] = parsedTimeRequired[1] + "M";
+                    parsedTimeRequired[2] = parsedTimeRequired[2] + "W";
+                    parsedTimeRequired[3] = parsedTimeRequired[3] + "D";
+                    parsedTimeRequired[4] = "T" + parsedTimeRequired[4] + "H";
+                    parsedTimeRequired[5] = parsedTimeRequired[5] + "M";
+                    parsedTimeRequired[6] = parsedTimeRequired[6] + "S";
+
+                    results = parsedTimeRequired.join('');
                 }
 
-                parsedTimeRequired = nezasa.iso8601.Period.parse(value);
-                parsedTimeRequired[0] = "P" + parsedTimeRequired[0] + "Y";
-                parsedTimeRequired[1] = parsedTimeRequired[1] + "M";
-                parsedTimeRequired[2] = parsedTimeRequired[2] + "W";
-                parsedTimeRequired[3] = parsedTimeRequired[3] + "D";
-                parsedTimeRequired[4] = "T" + parsedTimeRequired[4] + "H";
-                parsedTimeRequired[5] = parsedTimeRequired[5] + "M";
-                parsedTimeRequired[6] = parsedTimeRequired[6] + "S";
-
-                results = parsedTimeRequired.join('');
             }
             break;
 
@@ -213,7 +234,7 @@ function checkCSVValuesForValidOptions(field, validOptions, value, denyOther) {
 
         if ($.inArray(tValue, validOptions) == -1 && denyOther == true) {
             fileHasErrors = true;
-            fileErrors.push('<strong>Invalid option in <em>"'+field+'"</em> column.</strong><br /> Value set: "'+tValue+'" -- Valid Options: "'+validOptions.join()+'"<br /><br />');
+            fileErrors.push('<strong>Invalid file imported -- <em>"'+field+'"</em></strong><br /> Value set: "'+tValue+'" -- Valid Options: "'+validOptions.join()+'"<br /><br />');
         } else {
             resValues.push(tValue);
         }
