@@ -19,33 +19,56 @@ $(function() {
     $("#dotNotation").change(function(e){
         if (e.target.value == previousDotValue) {}
         else {
-
             previousDotValue = $('#dotNotation').val();
             document.getElementById('itemURL').value = '';
             document.getElementById('description').value = '';
-            document.getElementById('description').value = 'Loading (please wait)....';
-            for (i = 0; i < alignmentArray.length; i++) {
-                if ($('#dotNotation').val() ==  alignmentArray[i].title) {
-                    document.getElementById('itemURL').value = alignmentArray[i].url;
-                    document.getElementById('itemGUID').value = alignmentArray[i].guid;
-                    $.ajax({
-                        async: false,
-                        url: 'http://anyorigin.com/get?url='+alignmentArray[i].description+'&callback=?',
-                        dataType: "json",
-                        success: function(data){
-                            var newTitle = $(data.contents).filter('title').text().replace(' | Achievement Standards Network', '');
-                            if (newTitle != ''){
-                                var tempDivLength = newTitle.length;
-                                document.getElementById('description').value = newTitle;
+
+            var dotNotationArrayKey = $.inArray(e.target.value, dotNotationDisplayArray)
+            if (dotNotationArrayKey == -1) {
+                $('#description').attr('value', "Error: The Dot Notation you entered doesn't appear to be valid.")
+            } else {
+// Commenting this out until we can get the right way to get it.. cause the bottom code is NOT the right way..
+//                var dotNotationObj = alignmentArray[dotNotationArrayKey];
+//                $('#itemURL').attr('value',dotNotationObj.url);
+//                $('#itemGUID').attr('value',dotNotationObj.guid);
+//                $.ajax({
+//                    dataType: "json",
+//                    url: dotNotationObj.description,
+//                    success: function() {
+//                    },
+//                    failure: function() {
+//                    }
+//                });
+
+
+                // The code below was written by someone who doesn't have a clue.. and yes.. it sucks..
+                // It needs to be replaced as wow.. .. just.. wow..
+                document.getElementById('description').value = 'Loading (please wait)....';
+                for (i = 0; i < alignmentArray.length; i++) {
+                    if ($('#dotNotation').val() ==  alignmentArray[i].title) {
+                        document.getElementById('itemURL').value = alignmentArray[i].url;
+                        document.getElementById('itemGUID').value = alignmentArray[i].guid;
+                        $.ajax({
+                            async: false,
+                            url: 'http://anyorigin.com/get?url='+alignmentArray[i].description+'&callback=?',
+                            dataType: "json",
+                            success: function(data){
+                                var newTitle = $(data.contents).filter('title').text().replace(' | Achievement Standards Network', '');
+                                if (newTitle != ''){
+                                    var tempDivLength = newTitle.length;
+                                    document.getElementById('description').value = newTitle;
+                                }
+                                if (newTitle == ''){
+                                    document.getElementById('description').value = 'No Description Available';
+                                }
+                                validateAlignmentForm();
                             }
-                            if (newTitle == ''){
-                                document.getElementById('description').value = 'No Description Available';
-                            }
-                            validateAlignmentForm();
-                        }
-                    });
+                        });
+                    }
                 }
+
             }
+
         }
     });
 
