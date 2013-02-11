@@ -43,7 +43,7 @@ function validateImportColumns(importedContent) {
     if (importedVersion == 'Metadata:') {
         if (importedContent.length > 1) {
             for (i in importedContent) {
-                if (importedContent[i].length != 25) {
+                if (importedContent[i].length != 25 && importedContent[i].length != 0) {
                     fileHasErrors = true;
                     fileErrors.push("<strong>Invalid file imported</strong><br /> The file you attempted to import doesn't appear to have the correct number of columns in row #"+i+" (There appear to be '"+importedContent[i].length+"', it should be '25') for this version of Tagger (v1.1).<br /><br />");
                 }
@@ -212,13 +212,28 @@ function validateImportField(field, value) {
 
             }
             break;
-
-        case 'educationalAlignments':
-            break;
-
     }
 
     return results;
+}
+
+// Return an object based on the imported dot notation
+// But first make sure it is a valid dot notation etc..
+function validateImportEducationalAlignment(importedObject) {
+    // Valid Options
+    var validOptions = ["Teaches","Assesses","Requires"];
+    // Check values
+    checkCSVValuesForValidOptions('Alignment Type', validOptions, importedObject['alignmentType'], true);
+    // Make sure the dot notation is in the list
+    var dotNotationArrayLocation = $.inArray(importedObject['dotNotation'], dotNotationDisplayArray);
+    // Is this a valid dotnotation?
+    if (dotNotationArrayLocation != -1) {
+        var parts = importedObject['dotNotation'].split('.');
+        if (parts[0].toUpperCase() == 'CCSS') {
+            importedObject['educationalAlignment'] = "Common Core State Standards";
+        }
+    }
+    return importedObject;
 }
 
 // Dry way to check field csv values against the known valid options for that field

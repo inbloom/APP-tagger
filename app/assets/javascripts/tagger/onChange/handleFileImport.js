@@ -112,21 +112,24 @@ $(function() {
                                     tempAlignmentTypeArray[ea] == '' ||
                                     tempDescriptionArray[ea] == '' ||
                                     tempItemURLArray[ea] == '') continue;
-                                var object = {
+
+                                var object = validateImportEducationalAlignment({
                                     'educationalAlignment' : tempEducationAlignmentArray[ea],
                                     'alignmentType' : tempAlignmentTypeArray[ea],
                                     'dotNotation' : tempDotNotationArray[ea],
                                     'description' : tempDescriptionArray[ea],
                                     'itemURL' : tempItemURLArray[ea]
-                                };
-                                var objHash = objectToHash(object);
-                                if (alignments[objHash] == undefined) {
-                                    $('.noAlignmentsYet').hide();
-                                    alignments[objHash] = object;
-                                    $('#currentAlignmentTable > tbody:last').append('<tr><td><label class="checkbox"><input type="checkbox" class="alignment-checkbox" value="'+objHash+'" />'+ tempDotNotationArray[ea] +'</label></td><td>'+ capitalize(tempAlignmentTypeArray[ea]) +'</td></tr>');
-                                }
+                                });
 
-                                itemEducationAlignments[objHash] = object;
+                                if (!fileHasErrors) {
+                                    var objHash = objectToHash(object);
+                                    if (alignments[objHash] == undefined) {
+                                        $('.noAlignmentsYet').hide();
+                                        alignments[objHash] = object;
+                                        $('#currentAlignmentTable > tbody:last').append('<tr><td><label class="checkbox"><input type="checkbox" class="alignment-checkbox" value="'+objHash+'" />'+ tempDotNotationArray[ea] +'</label></td><td>'+ capitalize(tempAlignmentTypeArray[ea]) +'</td></tr>');
+                                    }
+                                    itemEducationAlignments[objHash] = object;
+                                }
                             }
 
                             tempItem = {
