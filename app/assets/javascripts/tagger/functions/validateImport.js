@@ -21,15 +21,15 @@ function validateImportHeaders(importedContent) {
     var firstRow = importedContent[0];
     var importedVersion = firstRow[0];
 
-    if (firstRow.length == 25 && importedVersion == 'Metadata:') {
+    if (importedVersion == 'Metadata:') {
         // These are the valid first row values for this version of the file
         validValues = ["Metadata:","Title","URL","Time Required (FORMAT: P0Y0M0W0DT0H0M0S) ISO8601","Topic","Created (FORMAT: YYYY-MM-DD)","Creator","Publisher","Language","Mediatype","Use Rights URL","Is based on  URL","Intended End User Role","Educational Use","Typical Age Range","Interactivity Type","Learning Resource Type","Educational Alignment","Alignment Type","Dot Notation","Target URL","Target Description","Group Type","Thumbnail URL","Tag Description"];
         // Compare them
-        compareValueEquals(firstRow, validValues, 'There appears to be a value comparison error in the firstRow headers preventing Tagger from knowing if this is a valid file:');      
+        compareValueEquals(firstRow, validValues, 'There appears to be a value comparison error in the firstRow headers preventing Tagger from knowing if this is a valid file');
         
     } else {
         fileHasErrors = true;
-        fileErrors.push("<strong>Invalid file imported</strong><br /> The file you attempted to import doesn't appear to have the correct number of columns ('"+firstRow.length+"' is what we count, it should be '25') or doesn't begin with the correct header identifier ('"+importedVersion+"' was  sent, it should be 'Metadata:') for this version of Tagger (v1.1).<br /><br />");
+        fileErrors.push("<strong>Invalid file imported</strong><br /> The file you attempted to import doesn't appear to have the correct header identifier ('"+importedVersion+"' was  sent, it should be 'Metadata:') for this version of Tagger (v1.1).<br /><br />");
     }
 
 }
@@ -279,7 +279,7 @@ function compareValueEquals(askedValue,validValue,errorMessage) {
     if (typeof askedValue == "string") {
         if (askedValue.toLowerCase() != validValue.toLowerCase()) {
             fileHasErrors = true;
-            fileErrors.push("<strong>Invalid file imported</strong><br /> "+errorMessage+":'"+askedValue+"' is not equals to the correct value of '"+validValue+"'<br /><br />");
+            fileErrors.push("<strong>Invalid file imported</strong><br /> "+errorMessage+": '"+askedValue+"' is not equals to the correct value of '"+validValue+"'<br /><br />");
         }
     } else if (typeof askedValue == "object") {
         for (i in validValue) {
@@ -287,9 +287,9 @@ function compareValueEquals(askedValue,validValue,errorMessage) {
                 fileHasErrors = true;
 
                 if (askedValue[i] == undefined) {
-                    fileErrors.push("<strong>Invalid file imported</strong><br /> "+errorMessage+":'"+validValue[i]+"' appears to be missing entirely<br /><br />");
+                    fileErrors.push("<strong>Invalid file imported</strong><br /> "+errorMessage+": '"+validValue[i]+"' appears to be missing entirely<br /><br />");
                 } else {
-                    fileErrors.push("<strong>Invalid file imported</strong><br /> "+errorMessage+":'"+askedValue[i]+"' is not equals to the correct value of '"+validValue[i]+"'<br /><br />");
+                    fileErrors.push("<strong>Invalid file imported</strong><br /> "+errorMessage+": '"+askedValue[i]+"' is not equals to the correct value of '"+validValue[i]+"'<br /><br />");
                 }
             }
         }
