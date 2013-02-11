@@ -84,7 +84,8 @@ $(function() {
         // Enable the images
         $('#addThumbnailButton').removeClass('disabled');
         updateResourceCount();
-
+        // Clear the text output area
+        updateTextArea();
     });
 
 });

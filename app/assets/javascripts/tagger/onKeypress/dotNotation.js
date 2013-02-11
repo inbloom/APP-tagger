@@ -16,8 +16,10 @@
 
 $(function() {
 
-    $("#dotNotation").keypress(function(e){
-
+    $("#dotNotation").keypress(function(e) {
+        if (e.keyCode == 13) {
+            $("#dotNotation").blur();
+        }
     });
 
 });
