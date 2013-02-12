@@ -238,6 +238,12 @@ function validateImportEducationalAlignment(importedObject) {
 
 // Dry way to check field csv values against the known valid options for that field
 function checkCSVValuesForValidOptions(field, validOptions, value, denyOther) {
+    // Are we setting undefined to a required value?
+    if (value == undefined && denyOther == true) {
+        fileHasErrors = true;
+        fileErrors.push('<strong>Invalid file imported -- <em>"'+field+'"</em></strong><br /> Value set: "undefined" -- Valid Options: "'+validOptions.join()+'"<br /><br />');
+    }
+    // Kick us out if there is no value
     if (value == undefined) return '';
     // Pushed result values
     resValues = [];

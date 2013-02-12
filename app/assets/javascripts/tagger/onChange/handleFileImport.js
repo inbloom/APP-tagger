@@ -108,7 +108,8 @@ $(function() {
                             var tempItemURLArray = output[i][20].split(",");
 
                             var itemEducationAlignments = {}
-                            for (ea = 0; ea < tempEducationAlignmentArray.length; ea++) {
+                            for (ea = 0; ea < tempDotNotationArray.length; ea++) {
+console.log(ea);
                                 if (tempDotNotationArray[ea] == "") continue;
                                 var object = validateImportEducationalAlignment({
                                     'educationalAlignment' : tempEducationAlignmentArray[ea],
