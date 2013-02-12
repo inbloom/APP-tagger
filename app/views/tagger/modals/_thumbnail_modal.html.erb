@@ -14,7 +14,7 @@
     <% end %>
   </div>
   <div class="modal-footer">
-    <a href="javascript:$('#thumbModalForm').submit();" class="btn btn-primary">Upload</a>
-    <a href="javascript:$('#thumbModal').modal('hide');" class="btn btn-success">Close</a>
+    <a onclick="$('#thumbModalForm').submit(); return false;" class="btn btn-primary">Upload</a>
+    <a onclick="$('#thumbModal').modal('hide'); return false;" class="btn btn-success">Close</a>
   </div>
 </div>

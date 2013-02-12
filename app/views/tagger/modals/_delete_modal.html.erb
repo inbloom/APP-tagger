@@ -1,6 +1,6 @@
 <div id="deleteModal" class="modal hide fade">
   <div class="modal-header">
-    <a href="javascript:$('#deleteModal').modal('hide');" class="close">&times;</a>
+    <a onclick="$('#deleteModal').modal('hide'); return false;" class="close">&times;</a>
     <h3>Delete Resource</h3>
   </div>
   <div class="modal-body">
@@ -9,6 +9,6 @@
   </div>
   <div class="modal-footer">
     <a href="#" class="btn btn-danger">Delete Resource</a>
-    <a href="javascript:$('#deleteModal').modal('hide');" class="btn">Cancel</a>
+    <a onclick="$('#deleteModal').modal('hide'); return false;" class="btn">Cancel</a>
   </div>
 </div>
