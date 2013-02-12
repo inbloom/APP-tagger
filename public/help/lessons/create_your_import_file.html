@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> <html xmlns="http://www.w3.org/1999/xhtml"> <head> 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 	<meta name="generator" content="ScreenSteps http://www.screensteps.com/" /> 	<title>create your import file</title> 	<link href="../css/neutral.css" media="screen" rel="stylesheet" type="text/css" charset="utf-8" /> 	<link href="../css/prettyPhoto.css" media="screen" rel="stylesheet" type="text/css" charset="utf-8" /> 	<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>   <script src="../js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>   <script type="text/javascript" charset="utf-8"> 		$(document).ready(function(){ 			$("a[rel^='prettyPhoto']").prettyPhoto({ 			  show_title: false 			}); 		});   </script> 	 </head>  <body class="lucida">  <table width="100%" cellpadding="0" cellspacing="0">   <tbody>     <tr>       <td style="background-color: black;">       	<img src="../images/black_spacer.png"> 		<img src="../images/inbloom-logo.png">       </td>     </tr>   </tbody> </table> <div style="margin-left: 40px;"><big><big><big><span  style="color: rgb(218, 218, 218);">TAGGER</span></big></big></big></div>  	<div id="wrapper">		 		<div id="LessonContent"> 			<div class="LessonHeader">  			 <p> <a href="../inBloom_Tagger_1.1_User_Guide.html">Back to Table of Contents</a>	</p>		<h1 class="LessonTitle">create your import file</h1> 			</div> 				<div class="summary"> 		<p>You can bulk-upload educational resources into inBloom Tagger to create metadata tags that comply with the <a href="http://www.lrmi.net/the-specification" target="_blank">LRMI Specification</a>. </p> 	</div> 			 				<div id="step_1" class="lessonStep right"> 	        <h2 class="StepTitle">Overview of the Import Process</h2> 		 <div class="instructions">   <p>1.  <a href="inBloom_tagger_import_template.csv">Download the CSV Import Template to begin</a>. </p>
+
+<p>2.  Use the following Data Structure Rules as you populate the template to ensure that your import file will load into inBloom Tagger without error. Please enter one resource per line. </p>
+
+
+<p><strong>Note: inBloom Tagger will only accept well-formed data; it is very important that your data follows these rules, or it will not import correctly. </strong></p>
+
+
+<p>3.<strong> </strong>Save the completed upload file in either the .csv or .json format. </p>
+
+
+<p>4.  <a href="import_multiple_resources_from_a_CSV_or_JSON_File.html">Import the file.</a> </p> </div> 	</div> 	<div class="clear"></div>
+	<div id="step_2" class="lessonStep right"> 	        <h2 class="StepTitle">Data Structure Rules</h2> 		 <div class="instructions">   
+<h3>General Guidelines</h3>
+<ul>
+<li>All values can be any combination of uppercase or lowercase and still attempt to match the suggested values. 
+<li>Any correctly formatted CSV should work. 
+<li>All fields should allow for any UTF-8 characters.
+</ul>
+
+<style type="text/css">
+
+table {
+	font: Helvetica Neue, sans-serif;
+	border-collapse: collapse;
+	border:1px #137db9;
+	width: 100%;
+	}
+
+th {
+	padding: 0 0.5em;
+	text-align: left;
+	}
+
+td {
+	vertical-align:top;
+	border:1px solid blue;
+	padding: 0 0.5em;
+	}
+
+th { background: #137db9; 
+	color: #FFFFFF; 
+	vertical-align: bottom; 
+	border:1px solid white;
+	
+} 
+
+</style>
+
+
+
+</head><body>
+<table cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<th>Column Headings in
+Import Template</th>
+<th>LRMI Specification
+Property</th>
+<th>Description </th>
+<th>Example</th>
+<th>Correctly Formed
+Data Rule</th>
+</tr>
+<tr>
+<td>Title</td>
+<td>name</td>
+<td>The title of the
+resource being tagged. </td>
+<td>Calculating Square
+Footage</td>
+<td>Format is text. Only
+one resource should be entered per row. </td>
+</tr>
+<tr>
+<td>URL </td>
+<td></td>
+<td>The web page address
+for the resource being tagged; can be in the format of a universal
+resource locator (URL) or universal resource identifier (URI).</td>
+<td>http://exampleresource.com/234728934</td>
+<td></td>
+</tr>
+<tr>
+<td>Duration</td>
+<td>timeRequired</td>
+<td>The approximate or
+typical time it takes to work with or through this learning resource
+for the typical intended target audience. </td>
+<td>PT1H25M</td>
+<td>Must
+follow the ISO 8601 format. Please see the <a target="_blank" href="http://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> definition for more
+details. For example, a duration of 45 minutes would be represented as
+PT45M.</a></td>
+</tr>
+<tr>
+<td>Description </td>
+<td></td>
+<td>A description of the
+resource. </td>
+<td>The student will use
+a variety of hands-on activities to calculate the square footage of an
+area. </td>
+<td>Format is text. </td>
+</tr>
+<tr dir="ltr">
+<td>Topic</td>
+<td>About</td>
+<td>The subject of the
+content.</td>
+<td>Math</td>
+<td>Format is text,
+including alphanumeric input.</td>
+</tr>
+<tr>
+<td>Created </td>
+<td>dateCreated</td>
+<td>The date on which
+the resource was created.</td>
+<td>2012-06-14</td>
+<td>Must be either of the following formats: <br>MM-DD-YYYY or YYYY-MM-DD.
+
+<br>For example, a resource created on February 29th, 2012 would be represented as 02-29-2012.
+
+<br>For more information, please refer to the <a href="http://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> definition. </td>
+</tr>
+<tr>
+<td>Creator</td>
+<td>author</td>
+<td>The name of the
+individual credited with the creation of the resource.</td>
+<td>Blaise Gauss</td>
+<td>Format is text. </td>
+</tr>
+<tr>
+<td>Publisher </td>
+<td>publisher</td>
+<td>The organization
+credited with publishing the resource.</td>
+<td>Pythagoras
+Publishing House</td>
+<td>Format is text. </td>
+</tr>
+<tr>
+<td>Language </td>
+<td>inLanguage</td>
+<td>The primary language
+of the resource.</td>
+<td>EN_US, ES_ES</td>
+<td>Format is text;
+separate multiple values with a comma; use web standards for language ("EN_US" for English or "ES_ES" for Spanish).  </td>
+</tr>
+<tr>
+<td>Mediatype </td>
+<td>mediaType</td>
+<td>The type of media
+being described.</td>
+<td>Interactive
+Whiteboard, Webpage</td>
+<td>Format is text;
+separate multiple values with a comma. </td>
+</tr>
+<tr>
+<td class="s11">Use Rights URL</td>
+<td>useRightsUrl</td>
+<td>The URL where the
+owner specifies permissions for using the resource.</td>
+<td>http://creativecommons.org/licenses/by/3.0/</td>
+<td></td>
+</tr>
+<tr>
+<td>Is based on URL</td>
+<td>isBasedOnUrl</td>
+<td>A resource that was
+used in the creation of this resource. This term can be repeated for
+multiple sources.</td>
+<td>http://example.com/great-multiplication-intro.html</td>
+<td></td>
+</tr>
+<tr>
+<td>Intended End User
+Role </td>
+<td>intendedEndUserRole</td>
+<td>The individual or
+group for which the work in question was produced.</td>
+<td>student,teacher</td>
+<td>Format is text;
+separate multiple values with a comma. </td>
+</tr>
+<tr>
+<td>Educational Use </td>
+<td>educationalUse</td>
+<td>The purpose of the
+work in the context of education.</td>
+<td>assignment, group
+work</td>
+<td>Format is text;
+separate multiple values with a comma. </td>
+</tr>
+<tr>
+<td>Typical Age Range </td>
+<td>typicalAgeRange</td>
+<td>The typical range of
+ages for the content&#8217;s intended End User.</td>
+<td>5-8, 11-13</td>
+<td>Must be in the
+format Y1-Y2 where Y1 = lower value and Y2=upper value. Ensure there
+are no spaces in the age range value. For example, if a resource is tagged for ages 5-8 and 11-13, the value in the field should be 5-8, 11-13. </td>
+</tr>
+<tr>
+<td>Interactivity Type </td>
+<td>interactivityType</td>
+<td>The predominate mode
+of learning supported by the learning resource. </td>
+<td>active</td>
+<td>Accepted values are:<br>
+&#8226; Active<br>
+&#8226; Expositive<br>
+&#8226; Mixed</td>
+</tr>
+<tr>
+<td>Learning Resource Type</td>
+<td>learningResourceType</td>
+<td>The predominate
+type or kind characterizing the learning resource.</td>
+<td>presentation,
+handout</td>
+<td>Format is text;
+separate multiple values with a comma. </td>
+</tr>
+<tr>
+<td>Group</td>
+<td></td>
+<td>The type of group environment in which the resource is intended to be used. </td>
+<td>Class, Group Large
+(6+ members)</td>
+<td>Format is text;
+separate multiple values with a comma. </td>
+</tr>
+<tr>
+<td>Educational Alignment</td>
+<td class="s19">educationalAlignment</td>
+<td>An alignment to an established educational framework. </td>
+<td>Common Core State Standards</td>
+<td>Name of the framework to which the standard is aligned. </td>
+</tr>
+<tr>
+<td>Alignment Type</td>
+<td>alignmentType</td>
+<td>A category of
+alignment between the learning resource and the framework node. </td>
+<td>assesses, teaches</td>
+<td>Accepted values are: 
+<ul>
+<li>&#8216;assesses&#8217;
+<li>&#8216;teaches&#8217;
+<li>&#8216;requires&#8217;
+</ul>
+Provide one value per line for each standard referenced by dot notation.</td>
+</tr>
+<tr>
+<td>Dot Notation</td>
+<td>targetName</td>
+<td>Currently used to
+identify the name of a node in an established framework. Since Tagger
+currently only supports CCSS, use this field to input the CCSS dot
+notation if known. </td>
+<td>CCSS.Math.Content.HSG-GPE.A.1</td>
+<td>Include
+the complete dot notation. Please see <a target="_blank" href="http://www.corestandards.org">www.corestandards.org</a> for
+reference to CCSS dot notation. Following are
+examples:CCSS.ELA-Literacy.RL.1.1 and CCSS.ELA-Literacy.RL.6.1</td>
+</tr>
+<tr>
+<td>Target URL</td>
+<td>targetUrl</td>
+<td>The URL of a node in
+an established educational framework. </td>
+<td>The URL of a node in
+an established educational framework. </td>
+<td>Tagger defaults to
+the CCSS URL identifier from Corestandards.org.</td>
+</tr>
+<tr>
+<td>Target Description</td>
+<td>targetDescription</td>
+<td>The description of a
+node in an established educational framework.</td>
+<td>The description of a
+node in an established educational framework.</td>
+<td>Format is text. </td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+</div> 	</div> 	<div class="clear"></div>
+ 		</div> 		<div id="LessonPageNav"> 		  <p></p> 		  <ul> 		    <li id="LessonPagePrevious"><a href="create_multiple_resources_using_quick_load.html">Previous Page: create multiple resources using quick load </a> &nbsp;</li> 		    <li id="LessonPageCount">Page <strong>6</strong> of <strong>10</strong></li> 		    <li id="LessonPageNext"><a href="import_multiple_resources_from_a_CSV_or_JSON_File.html">Next Page: import multiple resources from a CSV or JSON File</a> &nbsp;</li> 		     		  </ul> 		</div>	 	</div>	 </body> </html>
