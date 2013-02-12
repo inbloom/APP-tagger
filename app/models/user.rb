@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
   private 
   
   def self.check_session(request, auth)
-    path = 'https://api.sandbox.slcedu.org/api/rest/system/session/check'
+    path = 'https://api.sandbox.inbloom.org/api/rest/system/session/check'
     headers = { "Accept" => 'application/vnd.slc+json',
                   "Content-Type" => 'application/vnd.slc+json',
                   "Authorization" => "bearer #{auth[:credentials][:token]}" }
