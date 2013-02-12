@@ -109,11 +109,7 @@ $(function() {
 
                             var itemEducationAlignments = {}
                             for (ea = 0; ea < tempEducationAlignmentArray.length; ea++) {
-                                if (tempEducationAlignmentArray[ea] == '' ||
-                                    tempAlignmentTypeArray[ea] == '' ||
-                                    tempDescriptionArray[ea] == '' ||
-                                    tempItemURLArray[ea] == '') continue;
-
+                                if (tempDotNotationArray[ea] == "") continue;
                                 var object = validateImportEducationalAlignment({
                                     'educationalAlignment' : tempEducationAlignmentArray[ea],
                                     'alignmentType' : tempAlignmentTypeArray[ea],
