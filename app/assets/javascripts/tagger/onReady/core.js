@@ -37,6 +37,8 @@ $(function() {
 
     $.ajaxSetup({ cache: false });
 
+    $('#pleasewait').hide();
+
     var $window = $( window );
     var $mainContentTopLeft = $( '#mainContentTopLeft' );
     var $mainContentTopRight = $( '#mainContentTopRight' );
