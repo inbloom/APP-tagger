@@ -67,7 +67,7 @@ class TaggerController < ApplicationController
 
   # Saves a string to a file named filename on a user's machine
   def save_export
-    send_data("#{params[:data]}", :filename => "#{params[:filename]}", :type => "text/plain")
+    send_data("#{params[:data]}", :filename => "#{params[:filename]}")
   end
 
   # Saves a json formatted string to the db, then formats and sends to LRI
