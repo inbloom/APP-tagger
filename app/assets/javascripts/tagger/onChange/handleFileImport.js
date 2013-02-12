@@ -178,7 +178,7 @@ $(function() {
                 }
             })(file);
 
-            if (! /(csv|json)$/.test(file.name)) {
+            if (! /(csv|json)$/.test(file.name.toLowerCase())) {
                 alert('Please select a .CSV file');
                 $("#fileForm")[0].reset();
             } else {
