@@ -17,6 +17,7 @@
 $(function() {
 
     $("#files").change(function(evt){
+
         importedFiles = evt.target.files;
         for (var i = 0,file; file = importedFiles[i]; i++) {
 
@@ -174,15 +175,21 @@ $(function() {
                     }
 
                     updateResourceCount();
-
+                    $("#pleasewait").hide();
                 }
             })(file);
 
-            reader.readAsText(file);
+            if (! /(csv|json)$/.test(file.name.toLowerCase())) {
+                alert('Please select a .CSV file');
+                $("#fileForm")[0].reset();
+            } else {
+                $("#pleasewait").show();
+                reader.readAsText(file);
+                $("#fileForm")[0].reset();
 
-            $("#fileForm")[0].reset();
-
+            }
         }
+
     });
 
 });

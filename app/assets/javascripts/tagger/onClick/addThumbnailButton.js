@@ -20,7 +20,6 @@ $(function() {
         if (!$(this).hasClass('disabled')) {
             $('#thumbModal').modal('show');
         }
-
         return false;
     });
 

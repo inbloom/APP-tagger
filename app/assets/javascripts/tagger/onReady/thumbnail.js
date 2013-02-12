@@ -37,7 +37,11 @@ $(function() {
         $("#multiItemSelector input[type=checkbox]:checked").each(function(i,obj) {
             items[obj.id]["thumbnail"] = fileHash;
         });
+        $("#pleasewait").hide();
+    });
 
+    $('#thumbModalForm').bind('ajax:complete', function(evt, obj, status) {
+        $("#pleasewait").hide();
     });
 
 });
