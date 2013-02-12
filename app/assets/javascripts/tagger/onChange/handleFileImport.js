@@ -178,10 +178,13 @@ $(function() {
                 }
             })(file);
 
-            reader.readAsText(file);
-
-            $("#fileForm")[0].reset();
-
+            if (! /(csv|json)$/.test(file.name)) {
+                alert('Please select a .CSV file');
+                $("#fileForm")[0].reset();
+            } else {
+                reader.readAsText(file);
+                $("#fileForm")[0].reset();
+            }
         }
     });
 
