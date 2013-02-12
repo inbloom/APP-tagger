@@ -33,7 +33,7 @@ function updateItemEducationTab(nameBox, nameInput){
             }
         }
         if (LRMIForm[nameInput].value != ''){
-            metaSourceValue = metaSourceValue + "," + LRMIForm[nameInput].value;
+            metaSourceValue = metaSourceValue + ((metaSourceValue == "")?"":",") + LRMIForm[nameInput].value;
         }
         items[obj.id][nameBox] = metaSourceValue;
     });
