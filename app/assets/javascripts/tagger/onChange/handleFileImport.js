@@ -69,7 +69,7 @@ $(function() {
                     // parse CSV input
                     if (allText[0] != '{') {
 
-                        var output = jsStringLexer.csv2array(allText);
+                        var output = $.csv.toArrays(allText);
 
                         for (var i = 1; i < output.length; i++) {
                             if (output[i] == undefined || output[i].length == 0) continue;
@@ -126,7 +126,9 @@ $(function() {
                                 'mediaType':output[i][9],
                                 'groupType':output[i][23],
                                 'timeRequired':(output[i][3] != '')?output[i][3]:"P0Y0M0W0DT0H0M0S",
-                                'educationalAlignments':itemEducationAlignments
+                                'educationalAlignments':itemEducationAlignments,
+                                'thumbnail':output[i][24],
+                                'tagDescription':output[i][25]
                             };
 
                             $("#multiItemSelector").append($("<a href='#itemTag"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#itemTag"+itemCounter+"' id='itemTag"+itemCounter+"URL' "+(itemUrl!=""?"":"style='display:none;'")+" class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='itemTag"+itemCounter+"Label' class='checkbox'><input id='itemTag"+itemCounter+"' type='checkbox' name='tagItem'/><span>"+itemTitle+"</span></label>"));
