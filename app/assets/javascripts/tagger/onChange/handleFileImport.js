@@ -124,11 +124,11 @@ $(function() {
                                 'interactivityType':output[i][15],
                                 'learningResourceType':output[i][16],
                                 'mediaType':output[i][9],
-                                'groupType':output[i][23],
+                                'groupType':output[i][22],
                                 'timeRequired':(output[i][3] != '')?output[i][3]:"P0Y0M0W0DT0H0M0S",
                                 'educationalAlignments':itemEducationAlignments,
-                                'thumbnail':output[i][24],
-                                'tagDescription':output[i][25]
+                                'thumbnail':output[i][23],
+                                'tagDescription':output[i][24]
                             };
 
                             $("#multiItemSelector").append($("<a href='#itemTag"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#itemTag"+itemCounter+"' id='itemTag"+itemCounter+"URL' "+(itemUrl!=""?"":"style='display:none;'")+" class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='itemTag"+itemCounter+"Label' class='checkbox'><input id='itemTag"+itemCounter+"' type='checkbox' name='tagItem'/><span>"+itemTitle+"</span></label>"));
