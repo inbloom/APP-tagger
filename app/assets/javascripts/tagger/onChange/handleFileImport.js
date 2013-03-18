@@ -69,7 +69,8 @@ $(function() {
                     // parse CSV input
                     if (allText[0] != '{') {
 
-                        var output = $.csv.toArrays(allText);
+                        var fixedText = allText.replace(/\r/g,'\r\n').replace(/\n\n/,'\n');
+                        var output = $.csv.toArrays(fixedText);
 
                         for (var i = 1; i < output.length; i++) {
                             if (output[i] == undefined || output[i].length == 0) continue;

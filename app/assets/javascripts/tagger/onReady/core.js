@@ -16,6 +16,8 @@
 
 $(function() {
 
+    taggerVersion = '1.1.100';
+
     window.itemCounter = 0;
     window.boxes = 0;
     window.currentAlignmentCounter = 0;
