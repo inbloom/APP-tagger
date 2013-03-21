@@ -1,0 +1,161 @@
+﻿Tagger V1.1 Readme
+2/12/13
+
+
+Agilix IdeaWorks is pleased to release this new version of Tagger, V1.1. It incorporates some new features and fixes a number of bugs related to importing of data. Please read through this document to understand these new features and behaviors of Tagger.  Online help is also available.
+
+
+Tagger complies with the LRMI V1.0 Specification, which in turn extends the Schema.org/CreativeWork specification.
+
+
+NEW FEATURE: IMAGE THUMBNAIL
+
+
+Tagger now allows an image to be uploaded with each resource.  This image will be displayed in the Search application as well as the future LRI Browser Application. 
+
+
+Images should be in a square aspect ratio.  Tagger will resize the image to:
+1. 128x128 for Search
+2. 64x64 for LRI Browser
+
+
+If you upload an image that’s different than a square aspect ratio, Tagger will crop it to a square aspect ratio.
+
+
+If no image is provided, Search will attempt to display a screenshot of the browser. Because this is an automated process, there is no guarantee on what the software will actually capture.  Therefore, we recommend adding thumbnails each resource.
+
+
+
+
+NEW FEATURE: VALIDATION
+We fixed many bugs related to validating data in order to prevent Tagger from acting buggy due to incorrectly formed data and to ensure that the data is correctly formed in instances where it needs to be in order to conform to standards, such as time required and created date fields. Otherwise Tagger should not limit your ability to import any values in the Education fields.  
+
+
+
+Tagger will also catch some common CSV file errors such as transposed or missing columns in the CSV import file. We have released a new CSV template that needs to be used when importing. This template is available from Tagger, on the Import Screen. The goal of this version of Tagger is to provide a program that facilitates tagging while preventing data formatting from causing the program to exhibit buggy behavior.  To that end, Tagger performs various checks on import and will provide useful error messages for poorly formed data. The data must be corrected before import will be successful.
+
+
+NEW FEATURE: PUBLISHING TO THE LEARNING REGISTRY
+This version of Tagger publishes to the Learning Registry (http://www.learningregistry.org/). You’ll be able to publish to the Learning Registry once you sign in by clicking on the “Sign In with inBloom” link on the upper right.  To do so, you’ll need to register with inBloom.
+
+
+OTHER FIELD IN EDUCATION TAB
+We have reinstituted the OTHER field in each element under the Education tab, with the exception of the Time Required field.
+
+
+You can choose either an item from a list, or add items to the other field, or both. You can add more than one item in a list by using a comma to separate each item.
+
+
+WORKING WITHOUT SIGNING IN
+You can use Tagger to work on any number of resources without signing in with an inBloom account.  Either create new items by clicking on the “new” button, or, import items using the “import” button.  Tagger import CSV files.  You can find the template in the “LRMI Template Guide” linked to from the Import dialog box.
+
+
+CLEARING YOUR WORK
+If you’re not signed in, you can quickly clear your existing work simply by refreshing the page.
+
+
+USING THE CSV TEMPLATE
+You’ll need to use Tagger’s CSV template to assure your data is organized correctly for import into Tagger.  You can find the template here:
+http://tagger.inbloom.org/Tagger-V1.1.0-Template.csv
+
+
+CREATING YOUR OWN CSV TEMPLATE
+Or, you can easily create your own CSV template by:
+1. Create one resource
+2. Uncheck the new item
+3. Export as CSV via the export button.
+
+
+
+
+TAGGER AND EXCEL
+If you use Excel to edit CSV files, be aware that Excel interprets the age range as a date.  Age ranges are two numbers separated by a hyphen, for example 10-12, or 14-16. Excel interprets “10-12” as “Oct-12.”
+
+
+There are a few solutions to this Excel problem of interpreting age ranges as dates.
+
+
+IF YOU’RE STARTING WITH A BLANK TEMPLATE
+If you’re starting with a blank template set the “Typical Age Range” column to display text instead of dates.  Here’s how:
+1. Highlight the column by clicking on the letter above “Typical Age Range”.
+2. Choose “Cells...” from the “Format” menu.
+3. Click “Text” in the “Category” list.
+4. Click the “OK” button
+
+
+IF YOU’RE EDITING AN EXISTING CSV FILE
+There are two ways to solve this problem.
+
+
+WORKFLOW #1
+One way to address this issue is to ensure that instead of opening the file with Excel by double clicking it, use the File/Import feature to import the CSV into Excel. 
+1. Don't click on the file to open it, or open it with Excel directly. Instead, within Excel go to the File Menu, select Import
+2. Select File Type = CSV and then navigate to the CSV you want to import
+3. Select Delimited and not Fixed Width
+4. The import wizard allows you to set the Data Format for each column. Go to Typical Age Range and set the column Data Format to text.
+
+
+
+
+
+
+WORKFLOW #2
+If you do open the file in Excel directly, when working on an existing CSV file with data, Excel will unfortunately interpret the following age ranges as dates:
+3-5 as 5-Mar 
+5-8 as 8-May
+10-12 as 12-Oct
+12-14 as 14-Dec
+
+
+Changing the column to display as text will change the dates to the numbers Excel uses internally for dates:
+3-5 becomes 41338
+5-8 becomes 41402
+10-12 becomes 41559
+12-14 becomes 41622
+
+
+To make Excel display the correct age ranges, you’ll then need to search and replace on each number, but add a leading apostrophe to the age range to force Excel to interpret it as a string.
+3-5 becomes 41338. Find 41338 and replace with ‘3-5
+5-8 becomes 41402. Find 41402 and replace with ‘5-8
+10-12 becomes 41559. Find 41559 and replace with ‘10-12
+12-14 becomes 41622. Find 41622 and replace with ‘12-14
+
+
+To summarize the workflow:
+1. Import an existing CSV that contains data.
+2. Change the Excel column to display as text.
+3. Find and replace all instances of 41338, 41402, 41559, and 41622. Replace with their corresponding age range, but be sure to put an apostrophe before the age range in the Find/Replace dialog box to force Excel to write the age range as a string.
+4. Continue with your workflow.
+
+
+You can automate the above task by creating a macro to speed up your work.
+
+
+
+
+HOW TAGGER BEHAVES
+The following are specific behaviors of Tagger. Being aware of them will help manage your workflow.
+
+
+- You must first create a new resource by clicking on the “New” button before you can add information to any field.
+
+
+- Tagger can import many records, but the exact number is limited to the amount of memory available on your computer and the timeout setting of the browser. In Agilix’ testing, we were able to import 500 records at a time in about 30 seconds.  You may be able to import more or less, depending on a variety of factors specific to the machine you’re using.
+
+
+- If you work on items without signing in to your inBloom account, you must export those items before signing in with your inBloom account and then re-import the items once you’re signed in. If you don’t, you’ll lose your work when you sign in with your inBloom account.
+
+
+- Once you’re signed in, you can recall any item you’ve previously published to the Learning Registry by clicking on the “history” button.  You can then make changes and resubmit or export. Currently, the Learning Registry doesn’t have the ability to update records, so it will accept an updated record while marking the original record to be ignored.
+
+
+- You can export and then re-import any number of items.  The data should be the same on import as it was at export.
+
+
+REPORTING BUGS AND/OR FEATURES
+
+
+If you discover a bug, please report it by clicking on the “Report Issue” button on the upper right of the screen. We’ll ask you a number of a questions concerning the bug and your system. While only a few of the items are required, giving us as much information as possible to recreate the bug will help us identify it and fix it.
+
+
+You can also use this screen to report future enhancements.
