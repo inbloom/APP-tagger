@@ -73,39 +73,43 @@ $(function() {
                         var output = $.csv.toArrays(fixedText);
 
                         for (var i = 1; i < output.length; i++) {
+                            if (output[i].length < 20) continue;
+
                             if (output[i] == undefined || output[i].length == 0) continue;
 
                             var itemTitle = (output[i][1] != '' && output[i][1] != undefined)? ((output[i][1].length > 25) ? output[i][1].substr(0,25) + '&hellip;' : output[i][1]) :"New Item " + itemCounter;
                             var itemUrl = output[i][2];
 
-                            // Parse the education alignments and use them, or create new ones.
-                            var tempEducationAlignmentArray = output[i][17].split(",");
-                            var tempAlignmentTypeArray = output[i][18].split(",");
-                            var tempDotNotationArray = output[i][19].split(",");
-                            var tempDescriptionArray = output[i][21].split(",");
-                            var tempItemURLArray = output[i][20].split(",");
+                            if (output[i][17] != undefined && output[i][17] != '') {
+                                // Parse the education alignments and use them, or create new ones.
+                                var tempEducationAlignmentArray = output[i][17].split(",");
+                                var tempAlignmentTypeArray = output[i][18].split(",");
+                                var tempDotNotationArray = output[i][19].split(",");
+                                var tempDescriptionArray = output[i][21].split(",");
+                                var tempItemURLArray = output[i][20].split(",");
 
-                            var itemEducationAlignments = {}
-                            for (ea = 0; ea < tempEducationAlignmentArray.length; ea++) {
-                                if (tempEducationAlignmentArray[ea] == '' ||
-                                    tempAlignmentTypeArray[ea] == '' ||
-                                    tempDescriptionArray[ea] == '' ||
-                                    tempItemURLArray[ea] == '') continue;
-                                var object = {
-                                    'educationalAlignment' : tempEducationAlignmentArray[ea],
-                                    'alignmentType' : tempAlignmentTypeArray[ea],
-                                    'dotNotation' : tempDotNotationArray[ea],
-                                    'description' : tempDescriptionArray[ea],
-                                    'itemURL' : tempItemURLArray[ea]
-                                };
-                                var objHash = objectToHash(object);
-                                if (alignments[objHash] == undefined) {
-                                    $('.noAlignmentsYet').hide();
-                                    alignments[objHash] = object;
-                                    $('#currentAlignmentTable > tbody:last').append('<tr><td><label class="checkbox"><input type="checkbox" class="alignment-checkbox" value="'+objHash+'" />'+ tempDotNotationArray[ea] +'</label></td><td>'+ capitalize(tempAlignmentTypeArray[ea]) +'</td></tr>');
+                                var itemEducationAlignments = {}
+                                for (ea = 0; ea < tempEducationAlignmentArray.length; ea++) {
+                                    if (tempEducationAlignmentArray[ea] == '' ||
+                                        tempAlignmentTypeArray[ea] == '' ||
+                                        tempDescriptionArray[ea] == '' ||
+                                        tempItemURLArray[ea] == '') continue;
+                                    var object = {
+                                        'educationalAlignment' : tempEducationAlignmentArray[ea],
+                                        'alignmentType' : tempAlignmentTypeArray[ea],
+                                        'dotNotation' : tempDotNotationArray[ea],
+                                        'description' : tempDescriptionArray[ea],
+                                        'itemURL' : tempItemURLArray[ea]
+                                    };
+                                    var objHash = objectToHash(object);
+                                    if (alignments[objHash] == undefined) {
+                                        $('.noAlignmentsYet').hide();
+                                        alignments[objHash] = object;
+                                        $('#currentAlignmentTable > tbody:last').append('<tr><td><label class="checkbox"><input type="checkbox" class="alignment-checkbox" value="'+objHash+'" />'+ tempDotNotationArray[ea] +'</label></td><td>'+ capitalize(tempAlignmentTypeArray[ea]) +'</td></tr>');
+                                    }
+
+                                    itemEducationAlignments[objHash] = object;
                                 }
-
-                                itemEducationAlignments[objHash] = object;
                             }
 
                             items['itemTag' + itemCounter] = {
@@ -119,13 +123,13 @@ $(function() {
                                 'usageRightsURL':output[i][10],
                                 'publisher':output[i][7],
                                 'isBasedOnURL':output[i][11],
-                                'endUser':output[i][12],
+                                'endUser':capitalize(output[i][12]),
                                 'ageRange':output[i][14],
-                                'educationalUse':output[i][13],
-                                'interactivityType':output[i][15],
-                                'learningResourceType':output[i][16],
-                                'mediaType':output[i][9],
-                                'groupType':output[i][22],
+                                'educationalUse':capitalize(output[i][13]),
+                                'interactivityType':capitalize(output[i][15]),
+                                'learningResourceType':capitalize(output[i][16]),
+                                'mediaType':capitalize(output[i][9]),
+                                'groupType':capitalize(output[i][22]),
                                 'timeRequired':(output[i][3] != '')?output[i][3]:"P0Y0M0W0DT0H0M0S",
                                 'educationalAlignments':itemEducationAlignments,
                                 'thumbnail':output[i][23],

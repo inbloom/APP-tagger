@@ -15,8 +15,9 @@
  */
 
 // Helper function for capitalizing strings
+// First character of every word at start, after space or after comma
 function capitalize(str) {
-    return (str + '').replace(/^([a-z])|\s+([a-z])/g, function($1) {
+    return (str + '').replace(/^([a-z])|\s+([a-z])|,+([a-z])/g, function($1) {
        return $1.toUpperCase();
     });
 }
