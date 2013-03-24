@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="generator" content="ScreenSteps http://www.screensteps.com/" />
+	<title>version 1.1 release notes</title>
+	<link href="../css/neutral.css" media="screen" rel="stylesheet" type="text/css" charset="utf-8" />
+	<link href="../css/prettyPhoto.css" media="screen" rel="stylesheet" type="text/css" charset="utf-8" />
+	<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" charset="utf-8">
+		$(document).ready(function(){
+			$("a[rel^='prettyPhoto']").prettyPhoto({
+			  show_title: false
+			});
+		});
+  </script>
+	
+</head>
+
+<body class="lucida">
+
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td style="background-color: black;">
+      	<img src="../images/black_spacer.png">
+		<img src="../images/inbloom-logo.png">
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div style="margin-left: 40px;"><big><big><big><span
+ style="color: rgb(218, 218, 218);">TAGGER</span></big></big></big></div>
+
+	<div id="wrapper">		
+		<div id="LessonContent">
+			<div class="LessonHeader">
+
+			 <p> <a href="../index.html">Back to Table of Contents</a>	</p>		<h1 class="LessonTitle">version 1.1 release notes</h1>
+			</div>
+				<div class="summary">
+		<p>Agilix IdeaWorks is pleased to release this new version of Tagger, V1.1. It incorporates some new features and fixes a number of bugs related to importing of data. Please read through this document to understand these new features and behaviors of Tagger.  Online help is also available.</p>
+
+
+<p>Tagger complies with the LRMI V1.0 Specification, which in turn extends the Schema.org/CreativeWork specification.</p>
+	</div>
+			
+				<div id="step_1" class="lessonStep right">
+	        <h2 class="StepTitle">New Feature: Image Thumbnail</h2>
+		 <div class="instructions">
+  <p>Tagger now allows an image to be uploaded with each resource.  This image will be displayed in the Search application as well as the future LRI Browser Application. </p>
+
+
+<p>Images should be in a square aspect ratio.  Tagger will resize the image to:</p>
+
+
+<p>128x128 for Search<br />
+64x64 for LRI Browser</p>
+
+
+<p>If you upload an image that&rsquo;s different than a square aspect ratio, Tagger will crop it to a square aspect ratio.</p>
+
+
+<p>If no image is provided, Search will attempt to display a screenshot of the browser. Because this is an automated process, there is no guarantee on what the software will actually capture.  Therefore, we recommend adding thumbnails each resource.</p>
+</div>
+	</div>
+	<div class="clear"></div>
+	<div id="step_2" class="lessonStep right">
+	        <h2 class="StepTitle">New Feature: Validation</h2>
+		 <div class="instructions">
+  <p>We fixed many bugs related to validating data in order to prevent Tagger from acting buggy due to incorrectly formed data and to ensure that the data is correctly formed in instances where it needs to be in order to conform to standards, such as time required and created date fields. Otherwise Tagger should not limit your ability to import any values in the Education fields.  </p>
+
+
+<p>Tagger will also catch some common CSV file errors such as transposed or missing columns in the CSV import file. We have released a new CSV template that needs to be used when importing. This template is available from Tagger, on the Import Screen. The goal of this version of Tagger is to provide a program that facilitates tagging while preventing data formatting from causing the program to exhibit buggy behavior.  To that end, Tagger performs various checks on import and will provide useful error messages for poorly formed data. The data must be corrected before import will be successful.</p>
+</div>
+	</div>
+	<div class="clear"></div>
+	<div id="step_3" class="lessonStep right">
+	        <h2 class="StepTitle">New Feature: Publishing to the Learning Registry</h2>
+		 <div class="instructions">
+  <p>This version of Tagger publishes to the Learning Registry (http://www.learningregistry.org/). You&rsquo;ll be able to publish to the Learning Registry once you sign in by clicking on the &ldquo;Sign In with inBloom&rdquo; link on the upper right.  To do so, you&rsquo;ll need to register with inBloom.</p>
+
+
+</div>
+	</div>
+	<div class="clear"></div>
+	<div id="step_4" class="lessonStep right">
+	        <h2 class="StepTitle">OTHER Field in Education Tab</h2>
+		 <div class="instructions">
+  <p>We have reinstituted the OTHER field in each element under the <strong>Education</strong> tab, with the exception of the <strong>Time Required</strong> field.</p>
+
+
+<p>You can choose either an item from a list, or add items to the other field, or both. You can add more than one item in a list by using a comma to separate each item.</p>
+</div>
+	</div>
+	<div class="clear"></div>
+	<div id="step_5" class="lessonStep right">
+	        <h2 class="StepTitle">Working Without Signing In</h2>
+		 <div class="instructions">
+  <p>You can use Tagger to work on any number of resources without signing in with an inBloom account.  Either create new items by clicking on the &ldquo;new&rdquo; button, or, import items using the &ldquo;import&rdquo; button.  Tagger import CSV files.  You can find the template in the &ldquo;LRMI Template Guide&rdquo; linked to from the Import dialog box.</p>
+</div>
+	</div>
+	<div class="clear"></div>
+	<div id="step_6" class="lessonStep right">
+	        <h2 class="StepTitle">Clearing Your Work</h2>
+		 <div class="instructions">
+  <p>If you&rsquo;re not signed in, you can quickly clear your existing work simply by refreshing the page.</p>
+</div>
+	</div>
+	<div class="clear"></div>
+	<div id="step_7" class="lessonStep right">
+	        <h2 class="StepTitle">Using the CSV Template</h2>
+		 <div class="instructions">
+  <p>You&rsquo;ll need to use Tagger&rsquo;s CSV template to assure your data is organized correctly for import into Tagger.  You can find the template here:<br />
+<a href="http://tagger.inbloom.org/Tagger-V1.1.0-Template.csv">http://tagger.inbloom.org/Tagger-V1.1.0-Template.csv</a></p>
+
+
+<p>CREATING YOUR OWN CSV TEMPLATE<br />
+Or, you can easily create your own CSV template by:</p>
+
+
+<p>Create one resource<br />
+Uncheck the new item<br />
+Export as CSV via the export button.</p>
+
+
+<p>TAGGER AND EXCEL<br />
+If you use Excel to edit CSV files, be aware that Excel interprets the age range as a date.  Age ranges are two numbers separated by a hyphen, for example 10-12, or 14-16. Excel interprets &ldquo;10-12&rdquo; as &ldquo;Oct-12.&rdquo;</p>
+
+
+<p>There are a few solutions to this Excel problem of interpreting age ranges as dates.</p>
+
+
+<p>IF YOU&rsquo;RE STARTING WITH A BLANK TEMPLATE<br />
+If you&rsquo;re starting with a blank template set the &ldquo;Typical Age Range&rdquo; column to display text instead of dates.  Here&rsquo;s how:</p>
+
+
+<p>Highlight the column by clicking on the letter above &ldquo;Typical Age Range&rdquo;.<br />
+Choose &ldquo;Cells...&rdquo; from the &ldquo;Format&rdquo; menu.<br />
+Click &ldquo;Text&rdquo; in the &ldquo;Category&rdquo; list.<br />
+Click the &ldquo;OK&rdquo; button</p>
+
+
+<p>IF YOU&rsquo;RE EDITING AN EXISTING CSV FILE<br />
+There are two ways to solve this problem.</p>
+
+
+<p>WORKFLOW #1<br />
+One way to address this issue is to ensure that instead of opening the file with Excel by double clicking it, use the File/Import feature to import the CSV into Excel. </p>
+
+
+<p>Don't click on the file to open it, or open it with Excel directly. Instead, within Excel go to the File Menu, select Import<br />
+Select File Type = CSV and then navigate to the CSV you want to import<br />
+Select Delimited and not Fixed Width<br />
+The import wizard allows you to set the Data Format for each column. Go to Typical Age Range and set the column Data Format to text.</p>
+
+
+<p>WORKFLOW #2<br />
+If you do open the file in Excel directly, when working on an existing CSV file with data, Excel will unfortunately interpret the following age ranges as dates:<br />
+3-5 as 5-Mar <br />
+5-8 as 8-May<br />
+10-12 as 12-Oct<br />
+12-14 as 14-Dec</p>
+
+
+<p>Changing the column to display as text will change the dates to the numbers Excel uses internally for dates:<br />
+3-5 becomes 41338<br />
+5-8 becomes 41402<br />
+10-12 becomes 41559<br />
+12-14 becomes 41622</p>
+
+
+<p>To make Excel display the correct age ranges, you&rsquo;ll then need to search and replace on each number, but add a leading apostrophe to the age range to force Excel to interpret it as a string.<br />
+3-5 becomes 41338. Find 41338 and replace with &lsquo;3-5<br />
+5-8 becomes 41402. Find 41402 and replace with &lsquo;5-8<br />
+10-12 becomes 41559. Find 41559 and replace with &lsquo;10-12<br />
+12-14 becomes 41622. Find 41622 and replace with &lsquo;12-14</p>
+
+
+<p>To summarize the workflow:</p>
+
+
+<p>Import an existing CSV that contains data.<br />
+Change the Excel column to display as text.<br />
+Find and replace all instances of 41338, 41402, 41559, and 41622. Replace with their corresponding age range, but be sure to put an apostrophe before the age range in the Find/Replace dialog box to force Excel to write the age range as a string.<br />
+Continue with your workflow.</p>
+
+
+<p>You can automate the above task by creating a macro to speed up your work.</p>
+</div>
+	</div>
+	<div class="clear"></div>
+	<div id="step_8" class="lessonStep right">
+	        <h2 class="StepTitle">How Tagger Behaves</h2>
+		 <div class="instructions">
+  <p>The following are specific behaviors of Tagger. Being aware of them will help manage your workflow.</p>
+
+
+<ul>
+<li>You must first create a new resource by clicking on the &ldquo;New&rdquo; button before you can add information to any field.</li>
+<li>Tagger can import many records, but the exact number is limited to the amount of memory available on your computer and the timeout setting of the browser. In Agilix&rsquo; testing, we were able to import 500 records at a time in about 30 seconds.  You may be able to import more or less, depending on a variety of factors specific to the machine you&rsquo;re using.</li>
+<li>If you work on items without signing in to your inBloom account, you must export those items before signing in with your inBloom account and then re-import the items once you&rsquo;re signed in. If you don&rsquo;t, you&rsquo;ll lose your work when you sign in with your inBloom account.</li>
+<li>Once you&rsquo;re signed in, you can recall any item you&rsquo;ve previously published to the Learning Registry by clicking on the &ldquo;history&rdquo; button.  You can then make changes and resubmit or export. Currently, the Learning Registry doesn&rsquo;t have the ability to update records, so it will accept an updated record while marking the original record to be ignored.</li>
+<li>You can export and then re-import any number of items.  The data should be the same on import as it was at export.</li>
+</ul>
+</div>
+	</div>
+	<div class="clear"></div>
+	<div id="step_9" class="lessonStep right">
+	        <h2 class="StepTitle">Reporting Bugs and/or Features</h2>
+		 <div class="instructions">
+  <p>If you discover a bug, please report it by clicking on the &ldquo;Report Issue&rdquo; button on the upper right of the screen. We&rsquo;ll ask you a number of a questions concerning the bug and your system. While only a few of the items are required, giving us as much information as possible to recreate the bug will help us identify it and fix it.</p>
+
+
+<p>You can also use this screen to report future enhancements.</p>
+
+
+</div>
+	</div>
+	<div class="clear"></div>
+
+		</div>
+		<div id="LessonPageNav">
+		  <p></p>
+		  <ul>
+		    <li id="LessonPagePrevious"> &nbsp;</li>
+		    <li id="LessonPageCount">Page <strong>1</strong> of <strong>12</strong></li>
+		    <li id="LessonPageNext"><a href="welcome.html">Next Page: welcome</a> &nbsp;</li>
+		    
+		  </ul>
+		</div>	
+	</div>	
+</body>
+</html>
