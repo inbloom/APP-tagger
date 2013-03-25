@@ -51,11 +51,11 @@ function processCSVOutput(checked){
         var alignmentString5 = '"';
 
         for (j in checked_items[i].educationalAlignments) {
-            alignmentString1 += checked_items[i].educationalAlignments[j].educationalAlignment.replace('"',"'").replace(',','') + ',';
-            alignmentString2 += checked_items[i].educationalAlignments[j].alignmentType.replace('"',"'").replace(',','') + ',';
-            alignmentString3 += checked_items[i].educationalAlignments[j].dotNotation.replace('"',"'").replace(',','') + ',';
-            alignmentString4 += checked_items[i].educationalAlignments[j].itemURL.replace('"',"'").replace(',','') + ',';
-            alignmentString5 += checked_items[i].educationalAlignments[j].description.replace('"',"'").replace(',','') + ',';
+            alignmentString1 += (checked_items[i].educationalAlignments[j].educationalAlignment != undefined) ? checked_items[i].educationalAlignments[j].educationalAlignment.replace('"',"'").replace(',','') + ',' : ',';
+            alignmentString2 += (checked_items[i].educationalAlignments[j].alignmentType != undefined) ? checked_items[i].educationalAlignments[j].alignmentType.replace('"',"'").replace(',','') + ',' : ',';
+            alignmentString3 += (checked_items[i].educationalAlignments[j].dotNotation != undefined) ? checked_items[i].educationalAlignments[j].dotNotation.replace('"',"'").replace(',','') + ',' : ',';
+            alignmentString4 += (checked_items[i].educationalAlignments[j].itemURL != undefined) ? checked_items[i].educationalAlignments[j].itemURL.replace('"',"'").replace(',','') + ',' : ',';
+            alignmentString5 += (checked_items[i].educationalAlignments[j].description != undefined) ? checked_items[i].educationalAlignments[j].description.replace('"',"'").replace(',','') + ',' : ',';
         }
 
         str +=  alignmentString1 + '",' + alignmentString2 + '",' + alignmentString3 + '",' + alignmentString4 + '",' + alignmentString5 + '",';
