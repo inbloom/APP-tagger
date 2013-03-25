@@ -84,7 +84,8 @@ $(function() {
                     if (allText[0] != '{') {
 
                         var tempItems = [];
-                        var output = $.csv2Array(allText);
+                        var fixedText = allText.replace(/\r/g,'\r\n').replace(/\n\n/, '\n');
+                        var output = $.csv.toArrays(fixedText);
 
                         // Make sure the headers are there in the right order
                         validateImportHeaders(output);
