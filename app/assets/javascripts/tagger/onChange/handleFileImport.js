@@ -1,13 +1,23 @@
-/* Handle File Import
- * This file does the work of importing csv and json files
- * It's an onChange because it does it exactly when they change the file select control instead of when they click load or okay per client request.
+/*
+ * Copyright 2012-2013 inBloom, Inc. and its affiliates.
  *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-
 
 $(function() {
 
     $("#files").change(function(evt){
+
         importedFiles = evt.target.files;
         for (var i = 0,file; file = importedFiles[i]; i++) {
 
@@ -23,6 +33,10 @@ $(function() {
 
                 return function(e) {
                     $("#loadModal").modal("hide");
+
+                    // Reset any previous errors
+                    fileHasErrors = false;
+                    fileErrors = [];
 
                     // Uncheck everything when you add a new tag
                     jQuery("#multiItemSelector input[type=checkbox]").each(function(i,obj) {
@@ -69,91 +83,109 @@ $(function() {
                     // parse CSV input
                     if (allText[0] != '{') {
 
-                        var fixedText = allText.replace(/\r/g,'\r\n').replace(/\n\n/,'\n');
-                        var output = $.csv.toArrays(fixedText);
+                        var tempItems = [];
+                        var output = $.csv2Array(allText);
+
+                        // Make sure the headers are there in the right order
+                        validateImportHeaders(output);
+                        // Validate columns (counts right now)
+                        if (!fileHasErrors) validateImportColumns(output);
+                        // Show errors.
+                        if (fileHasErrors) showFileHasErrorsMessage("File Format Error");
 
                         for (var i = 1; i < output.length; i++) {
-                            if (output[i].length < 20) continue;
-
+                            if (fileHasErrors) continue;
                             if (output[i] == undefined || output[i].length == 0) continue;
 
                             var itemTitle = (output[i][1] != '' && output[i][1] != undefined)? ((output[i][1].length > 25) ? output[i][1].substr(0,25) + '&hellip;' : output[i][1]) :"New Item " + itemCounter;
                             var itemUrl = output[i][2];
 
-                            if (output[i][17] != undefined && output[i][17] != '') {
+                            // Parse the education alignments and use them, or create new ones.
+                            var tempEducationAlignmentArray = output[i][17].split(",");
+                            var tempAlignmentTypeArray = output[i][18].split(",");
+                            var tempDotNotationArray = output[i][19].split(",");
+                            var tempDescriptionArray = output[i][21].split(",");
+                            var tempItemURLArray = output[i][20].split(",");
 
-                                // Parse the education alignments and use them, or create new ones.
-                                var tempEducationAlignmentArray = output[i][17].split(",");
-                                var tempAlignmentTypeArray = output[i][18].split(",");
-                                var tempDotNotationArray = output[i][19].split(",");
-                                var tempDescriptionArray = output[i][21].split(",");
-                                var tempItemURLArray = output[i][20].split(",");
+                            var itemEducationAlignments = {}
+                            for (ea = 0; ea < tempEducationAlignmentArray.length; ea++) {
+                                if (tempDotNotationArray[ea] == "") continue;
+                                var object = validateImportEducationalAlignment({
+                                    'educationalAlignment' : tempEducationAlignmentArray[ea],
+                                    'alignmentType' : tempAlignmentTypeArray[ea],
+                                    'dotNotation' : tempDotNotationArray[ea],
+                                    'description' : tempDescriptionArray[ea],
+                                    'itemURL' : tempItemURLArray[ea]
+                                });
 
-                                var itemEducationAlignments = {}
-                                for (ea = 0; ea < tempEducationAlignmentArray.length; ea++) {
-                                    if (tempEducationAlignmentArray[ea] == '' ||
-                                        tempAlignmentTypeArray[ea] == '' ||
-                                        tempDescriptionArray[ea] == '' ||
-                                        tempItemURLArray[ea] == '') continue;
-                                    var object = {
-                                        'educationalAlignment' : tempEducationAlignmentArray[ea],
-                                        'alignmentType' : tempAlignmentTypeArray[ea],
-                                        'dotNotation' : tempDotNotationArray[ea],
-                                        'description' : tempDescriptionArray[ea],
-                                        'itemURL' : tempItemURLArray[ea]
-                                    };
+                                if (!fileHasErrors) {
                                     var objHash = objectToHash(object);
                                     if (alignments[objHash] == undefined) {
                                         $('.noAlignmentsYet').hide();
                                         alignments[objHash] = object;
                                         $('#currentAlignmentTable > tbody:last').append('<tr><td><label class="checkbox"><input type="checkbox" class="alignment-checkbox" value="'+objHash+'" />'+ tempDotNotationArray[ea] +'</label></td><td>'+ capitalize(tempAlignmentTypeArray[ea]) +'</td></tr>');
                                     }
-
                                     itemEducationAlignments[objHash] = object;
                                 }
                             }
 
-                            items['itemTag' + itemCounter] = {
-                                'id':itemCounter,
-                                'title':output[i][1],
-                                'language':output[i][8],
-                                'url':itemUrl,
-                                'createdOn':output[i][5],
-                                'topic':output[i][4],
-                                'createdBy':output[i][6],
-                                'usageRightsURL':output[i][10],
-                                'publisher':output[i][7],
-                                'isBasedOnURL':output[i][11],
-                                'endUser':csvPreprocess(output[i][12]),
-                                'ageRange':csvPreprocess(output[i][14]),
-                                'educationalUse':csvPreprocess(output[i][13]),
-                                'interactivityType':csvPreprocess(output[i][15]),
-                                'learningResourceType':csvPreprocess(output[i][16]),
-                                'mediaType':csvPreprocess(output[i][9]),
-                                'groupType':csvPreprocess(output[i][22]),
-                                'timeRequired':(output[i][3] != '')?output[i][3]:"P0Y0M0W0DT0H0M0S",
-                                'educationalAlignments':itemEducationAlignments,
-                                'thumbnail':output[i][23],
-                                'tagDescription':output[i][24]
+                            tempItem = {
+                                'id'                    : itemCounter,
+                                'title'                 : validateImportField('title', output[i][1]),
+                                'language'              : validateImportField('language', output[i][8]),
+                                'thumbnail'             : validateImportField('thumbnail', output[i][23]),
+                                'url'                   : validateImportField('url', itemUrl),
+                                'tagDescription'        : validateImportField('tagDescription', output[i][24]),
+                                'createdOn'             : validateImportField('createdOn', output[i][5]),
+                                'topic'                 : validateImportField('topic', output[i][4]),
+                                'createdBy'             : validateImportField('createdBy', output[i][6]),
+                                'usageRightsURL'        : validateImportField('usageRightsURL', output[i][10]),
+                                'publisher'             : validateImportField('publisher', output[i][7]),
+                                'isBasedOnURL'          : validateImportField('isBasedOnURL', output[i][11]),
+                                'endUser'               : validateImportField('endUser', output[i][12]),
+                                'ageRange'              : validateImportField('ageRange', output[i][14]),
+                                'educationalUse'        : validateImportField('educationalUse', output[i][13]),
+                                'interactivityType'     : validateImportField('interactivityType', output[i][15]),
+                                'learningResourceType'  : validateImportField('learningResourceType', output[i][16]),
+                                'mediaType'             : validateImportField('mediaType', output[i][9]),
+                                'groupType'             : validateImportField('groupType', output[i][22]),
+                                'timeRequired'          : validateImportField('timeRequired', output[i][3]),
+                                'educationalAlignments' : itemEducationAlignments
                             };
 
-                            $("#multiItemSelector").append($("<a href='#itemTag"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#itemTag"+itemCounter+"' id='itemTag"+itemCounter+"URL' "+(itemUrl!=""?"":"style='display:none;'")+" class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='itemTag"+itemCounter+"Label' class='checkbox'><input id='itemTag"+itemCounter+"' type='checkbox' name='tagItem'/><span>"+itemTitle+"</span></label>"));
-                            itemCounter++;
+                            // Did anything above generate an error?
+                            if (fileHasErrors) {
+                                showFileHasErrorsMessage("Errors found in row #"+i);
+                            } else {
+                                // Stuff the item
+                                items['itemTag' + itemCounter] = tempItem;
+                                // Inject the checkbox
+                                $("#multiItemSelector").append($("<a href='#itemTag"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#itemTag"+itemCounter+"' id='itemTag"+itemCounter+"URL' "+(itemUrl!=""?"":"style='display:none;'")+" class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='itemTag"+itemCounter+"Label' class='checkbox'><input id='itemTag"+itemCounter+"' type='checkbox' name='tagItem'/><span>"+itemTitle+"</span></label>"));
+                                // Increment the counter
+                                itemCounter++;
+
+                            }
 
                         }
 
                     }
 
                     updateResourceCount();
-
+                    $("#pleasewait").hide();
                 }
             })(file);
 
-            reader.readAsText(file);
+            if (! /(csv|json)$/.test(file.name.toLowerCase())) {
+                alert('Please select a .CSV file');
+                $("#fileForm")[0].reset();
+            } else {
+                $("#pleasewait").show();
+                reader.readAsText(file);
+                $("#fileForm")[0].reset();
 
-            $("#fileForm")[0].reset();
-
+            }
         }
+
     });
 
 });
