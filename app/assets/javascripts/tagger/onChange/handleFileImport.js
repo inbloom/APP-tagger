@@ -82,7 +82,6 @@ $(function() {
 
                             if (output[i][17] != undefined && output[i][17] != '') {
 
-console.log(output[i][17]);
                                 // Parse the education alignments and use them, or create new ones.
                                 var tempEducationAlignmentArray = output[i][17].split(",");
                                 var tempAlignmentTypeArray = output[i][18].split(",");

@@ -17,12 +17,7 @@
 // Helper function for preprocessing the nested CSV strings used in places like the education tab
 //  to correctly capitalize things, then trim spaces
 function csvPreprocess(str) {
-    console.log('before: '+str);
-
-    foo = (str + '').replace(/^([a-z])|\s+([a-z])|,+([a-z])/g, function($1) {
+    return (str + '').replace(/^([a-z])|\s+([a-z])|,+([a-z])/g, function($1) {
         return $1.toUpperCase();
     }).replace(/^\s+/,'').replace(/\s+$/,'').replace(/\s+,/g,',').replace(/,\s+/g,',');
-
-    console.log('after: '+foo);
-    return foo
 }
