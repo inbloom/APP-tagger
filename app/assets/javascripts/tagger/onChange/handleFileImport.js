@@ -81,6 +81,8 @@ $(function() {
                             var itemUrl = output[i][2];
 
                             if (output[i][17] != undefined && output[i][17] != '') {
+
+console.log(output[i][17]);
                                 // Parse the education alignments and use them, or create new ones.
                                 var tempEducationAlignmentArray = output[i][17].split(",");
                                 var tempAlignmentTypeArray = output[i][18].split(",");
@@ -123,13 +125,13 @@ $(function() {
                                 'usageRightsURL':output[i][10],
                                 'publisher':output[i][7],
                                 'isBasedOnURL':output[i][11],
-                                'endUser':capitalize(output[i][12]),
-                                'ageRange':output[i][14],
-                                'educationalUse':capitalize(output[i][13]),
-                                'interactivityType':capitalize(output[i][15]),
-                                'learningResourceType':capitalize(output[i][16]),
-                                'mediaType':capitalize(output[i][9]),
-                                'groupType':capitalize(output[i][22]),
+                                'endUser':csvPreprocess(output[i][12]),
+                                'ageRange':csvPreprocess(output[i][14]),
+                                'educationalUse':csvPreprocess(output[i][13]),
+                                'interactivityType':csvPreprocess(output[i][15]),
+                                'learningResourceType':csvPreprocess(output[i][16]),
+                                'mediaType':csvPreprocess(output[i][9]),
+                                'groupType':csvPreprocess(output[i][22]),
                                 'timeRequired':(output[i][3] != '')?output[i][3]:"P0Y0M0W0DT0H0M0S",
                                 'educationalAlignments':itemEducationAlignments,
                                 'thumbnail':output[i][23],
