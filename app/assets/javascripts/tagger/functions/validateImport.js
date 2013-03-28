@@ -191,7 +191,7 @@ function validateImportField(field, value) {
         
         // Time required MUST conform to ISO8601 or be empty.  The end.
         case 'timeRequired':
-            if (value != undefined && value != "") {
+            if (value != undefined && value != '') {
                 // Parse out the time required into results
                 if (!nezasa.iso8601.Period.isValid(value)) {
                     results = "";
@@ -210,6 +210,8 @@ function validateImportField(field, value) {
                     results = parsedTimeRequired.join('');
                 }
 
+            } else {
+                results = 'P0Y0M0W0DT0H0M0S';
             }
             break;
     }
