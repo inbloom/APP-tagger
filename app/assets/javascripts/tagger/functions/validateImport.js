@@ -107,8 +107,10 @@ function validateImportField(field, value) {
         // Created on Date
         case 'createdOn':
             if (value != undefined && value != "") {
-                var d = new Date(value);
-                if (isNaN(d) || d.getMonth() == 0 || d.getDate() == 0 || d.getFullYear() == 0) {
+                var cst = 1000*60*60*6;
+                var dateString = Date.parse(value);
+                var d = new Date(dateString + cst);
+                if (isNaN(d) || d.getMonth()+1 == 0 || d.getDate() == 0 || d.getFullYear() == 0) {
                     fileHasErrors = true;
                     fileErrors.push("<strong>Invalid file imported -- <em>&quot;Created On&quot;</em></strong><br /> It would appear you're attempting to import a file that is containing a &quot;Created On&quot; date that is an invalid ISO8601 value.  Value sent: &quot;"+value+"&quot;<br /><br />");
                 } else {
