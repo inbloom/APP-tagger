@@ -96,7 +96,7 @@ $(function() {
 
                         for (var i = 1; i < output.length; i++) {
                             if (fileHasErrors) continue;
-                            if (output[i] == undefined || output[i].length == 0) continue;
+                            if (output[i] == undefined || output[i].length < 25) continue;
 
                             var itemTitle = (output[i][1] != '' && output[i][1] != undefined)? ((output[i][1].length > 25) ? output[i][1].substr(0,25) + '&hellip;' : output[i][1]) :"New Item " + itemCounter;
                             var itemUrl = output[i][2];

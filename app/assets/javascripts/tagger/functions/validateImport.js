@@ -43,7 +43,7 @@ function validateImportColumns(importedContent) {
     if (importedVersion == 'Metadata:') {
         if (importedContent.length > 1) {
             for (i in importedContent) {
-                if (importedContent[i].length != 25 && importedContent[i].length != 0) {
+                if (importedContent[i].length != 25 && importedContent[i].length > 1) {
                     fileHasErrors = true;
                     fileErrors.push("<strong>Invalid file imported</strong><br /> The file you attempted to import doesn't appear to have the correct number of columns in row #"+i+" (There appear to be '"+importedContent[i].length+"', it should be '25') for this version of Tagger (v1.1).<br /><br />");
                 }
