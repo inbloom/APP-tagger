@@ -76,9 +76,10 @@ function updateInputFields(){
         
         if (item.createdOn != "") {
           $("#createdOn").val(item.createdOn);
-        } else {
-          $("#createdOn").val(ds);
-        }
+        } 
+        // else {
+        //           $("#createdOn").val(ds);
+        //         }
 
         // Refactoring timeRequired update -- why are we using this format?
         if (item.timeRequired != "P0Y0M0W0DT0H0M0S" &&
