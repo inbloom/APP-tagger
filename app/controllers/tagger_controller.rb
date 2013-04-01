@@ -1,3 +1,19 @@
+###############################################################################
+# Copyright 2012-2013 inBloom, Inc. and its affiliates.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+###############################################################################
+
 class TaggerController < ApplicationController
 
   def index
@@ -51,7 +67,7 @@ class TaggerController < ApplicationController
 
   # Saves a string to a file named filename on a user's machine
   def save_export
-    send_data("#{params[:data]}", :filename => "#{params[:filename]}", :type => "text/plain")
+    send_data("#{params[:data]}", :filename => "#{params[:filename]}")
   end
 
   # Saves a json formatted string to the db, then formats and sends to LRI
@@ -85,8 +101,10 @@ class TaggerController < ApplicationController
     }
     # Choose which adaptor to use and publish those suckers
     case params[:remote]
-      when 'LRI' then
-        errors = LriHelper::publish tags, current_user
+#      when 'LRI'
+#        errors = LriHelper::publish tags, current_user
+      when 'LR'
+        errors = LrHelper::publish tags, current_user
     end
 
     # TODO Eventually I need to only error those tags that didn't save, and set published the ones that did actually publish
@@ -114,45 +132,70 @@ class TaggerController < ApplicationController
     end
   end
 
+  # Adds image to media server
+  def add_image
+#    if current_user.present?
+      if params[:tag][:image].present?
+        img = Image.new
+        img.image = params[:tag][:image]
+        img.save!
+        # @todo: send img.image back to view
+        # @todo: delete image from db asap
+      end
+#    end
+
+    respond_to do |format|
+      if img.present?
+        format.json { render json: img }
+      else
+        format.json { render status: 500, json: 'Something went wrong'}
+      end
+    end
+  end
+
   private
 
   # Its possible to need to save the tags from multiple places so lets extract this
   # out into a function of it's own for others to use.. share and share-a-like!
   def save_tags_state tags, publish = false
-    # The object we return to the UI, if any
-    response = {}
-    tags.each do |keyValue|
-      # This is the tag, 0 is the id in the UI which is meaningless
-      tag = keyValue[1]
-      # Remove the ID as it doesn't mean anything and is only used by the UI for internal stuff (if at all)
-      tag.delete('id')
-      # if we have a UUID then we must save to that!
-      unless tag['uuid'].present?
-        # Generate a UUID for this item that will be used when sent to the LRI or any server out in the world.
-        # This is unique to this tag and its history and could come from the client
-        tag['uuid'] ||= SecureRandom.uuid
-      end
-      # This tag has a UUID so we need to load it first
-      found_tag = Tag.find_by_uuid tag['uuid']
-      if found_tag.present?
-        found_tag.user_id = session[:user_id]
-        found_tag.data = tag.to_json
-        found_tag.published = publish
-        found_tag.save()
-      else
-        # Create each tag in the database
-        Tag.create(
-            :user_id => current_user.id,
-            :uuid => tag['uuid'],
-            :data => tag.to_json,
-            :published => publish
-        )
-      end
-      # Rebuild tags object for the UI
-      response[keyValue[0]]= tag
-    end if tags.present?
+    # Dont do this if there is no user
+    if current_user.present?
+      # The object we return to the UI, if any
+      response = {}
+      tags.each do |keyValue|
+        # This is the tag, 0 is the id in the UI which is meaningless
+        tag = keyValue[1]
+        # Remove the ID as it doesn't mean anything and is only used by the UI for internal stuff (if at all)
+        tag.delete('id')
+        # if we have a UUID then we must save to that!
+        unless tag['uuid'].present?
+          # Generate a UUID for this item that will be used when sent to the LRI or any server out in the world.
+          # This is unique to this tag and its history and could come from the client
+          tag['uuid'] ||= SecureRandom.uuid
+        end
+        # This tag has a UUID so we need to load it first
+        found_tag = Tag.find_by_uuid tag['uuid']
+        if found_tag.present?
+          found_tag.user_id = session[:user_id]
+          found_tag.data = tag.to_json
+          found_tag.published = publish
+          found_tag.save()
+        else
+          # Create each tag in the database
+          Tag.create(
+              :user_id => current_user.id,
+              :uuid => tag['uuid'],
+              :data => tag.to_json,
+              :published => publish
+          )
+        end
+        # Rebuild tags object for the UI
+        response[keyValue[0]]= tag
+      end if tags.present?
 
-    response
+      response
+    end
+
   end
 
   # Go through the list of tags the UI expects to be loaded on refresh and leave those.. remove the others.
@@ -169,6 +212,5 @@ class TaggerController < ApplicationController
       tag.destroy
     end
   end
-  
 
 end

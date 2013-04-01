@@ -4,21 +4,19 @@
     <h3>Load A CSV Template</h3>
   </div>
   <div class="modal-body">
-    <p>If you have utilized the LMRI CSV Template, you may select it from your local folder. The file must be in CSV format to be uploaded. <br/><br/> You may find a copy of the <a href="LRMI%20Tagger%20CSV%20Upload%20Template%20User%20Instructions.docx">LRMI Template Guide</a> available online.This file contains the CSV file embedded.</p>
-    <br/>
+    <p>If you have utilized the LRMI CSV Template, you may select it from your local folder. The file must be in CSV format to be uploaded.</p>
+    <p>You may find a copy of the <a href="Tagger CSV Upload Template User Instructions.docx">LRMI Template Guide</a> available online.This file contains the CSV file embedded.</p>
+    <p>If you'd like more details on how the LRMI specification for each data field please see the appendix in the help file "importing resource data to create tags through bulk processing."</p>
+
     <form id="fileForm">
-    <input type="file" id="files" name="files" multiple />
+        <input type="file" id="files" name="files" multiple />
     </form>
-    <!--output id="list"></output-->
-  </div>
-  <div class="modal-header">
+
     <hr/>
-    <h3>Quick Load</h3>
-  </div>
-  <div class="modal-body">
-    <p>To create multiple entries enter <i>title,URL</i> once per line.<br/><br/>   <strong>Example:</strong><br/>  Actual Title,http://www.test.com<br/>Actual Title Two,http://www.test2.com</p>
-    <br/>
-    <textarea id="loadModalTextArea" style="height: 50px; width: 95%;font-size:small;"></textarea>
+    <h4>Quick Load</h4>
+    <p>To create multiple entries enter <i>title,URL</i> once per line.<br/>   <strong>Example:</strong><br/>  Actual Title,http://www.test.com<br/>Actual Title Two,http://www.test2.com</p>
+
+    <textarea id="loadModalTextArea" style="height: 40px; width: 95%;font-size:small;"></textarea>
   </div>
   <div class="modal-footer">
     <a href="#" class="btn btn-primary" data-dismiss="modal" id="saveLoadModalButton">Load</a>

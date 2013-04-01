@@ -1,3 +1,18 @@
+/*
+ * Copyright 2012-2013 inBloom, Inc. and its affiliates.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 // Save and Export the file
 // This function returns a file..
@@ -6,7 +21,7 @@ function saveAndExport(str, fileType){
     var date = new Date();
     var form_action = location.protocol + '//' + location.host + "/tagger/save_export/";
     $('<form></form>', { action: form_action, method: 'POST'}).append(
-        $('<input></input>', { name: 'filename', type: 'hidden', value: fileType + "_" + ISODateString(date)+ fileType })
+        $('<input></input>', { name: 'filename', type: 'hidden', value: fileType + "_" + date.toISOString() + fileType })
     ).append(
         $('<input></input>', { name: 'data', type: 'hidden', value: str })
     ).appendTo("body").submit();

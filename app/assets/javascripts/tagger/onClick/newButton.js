@@ -1,3 +1,19 @@
+/*
+ * Copyright 2012-2013 inBloom, Inc. and its affiliates.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 $(function() {
 
     $("#newbutton").click(function() {
@@ -17,10 +33,6 @@ $(function() {
         var curr_month = d.getMonth()+1;
         var curr_year = d.getFullYear();
         ds = curr_year + "-" + curr_month + "-" + curr_day;
-        
-        if ($("#createdOn").val() == "") {
-          $("#createdOn").val(ds);
-        }
 
         $("span.notYet").empty();
         $("#multiItemSelector").append($("<a href='#itemTag"+itemCounter+"' class='pull-right delete-tag'><i class='icon-remove'></i></a>  <a href='#itemTag"+itemCounter+"' id='itemTag"+itemCounter+"URL' style='display:none;' class='pull-right render-tag'><i class='icon-share'></i>&nbsp;</a>  <label id='itemTag"+itemCounter+"Label' class='checkbox'><input id='itemTag"+itemCounter+"' type='checkbox' name='tagItem'/><span>New Item</span></label>"));
@@ -39,7 +51,9 @@ $(function() {
             'id':itemCounter,
             'title':'',
             'language':'',
+            'thumbnail':'',
             'url':'',
+            'tagDescription':'',
             'createdOn':'',
             'topic':'',
             'createdBy':'',
@@ -62,9 +76,12 @@ $(function() {
         updateMainContentBottom('');
         toggleForm();
         // Enable the publish button
-        $("#publishLriButton").removeClass('disabled');
+        $("#publishButton").removeClass('disabled');
+        // Enable the images
+        $('#addThumbnailButton').removeClass('disabled');
         updateResourceCount();
-
+        // Clear the text output area
+        updateTextArea();
     });
 
 });

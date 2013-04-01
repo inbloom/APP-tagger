@@ -14,9 +14,13 @@
 /log/*.log
 /tmp
 
+/public/uploads/tmp/
+
 /config/database.yml
 config/slc.yml
 config/slc.yml.bak
-
-
+config/amazon.yml
+config/initializers/amazon.rb
 /.idea
+
+.DS_Store

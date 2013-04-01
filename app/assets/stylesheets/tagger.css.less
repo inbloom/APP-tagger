@@ -18,11 +18,6 @@ div.header {
   background: black;
   border-bottom: 1px solid #1990d4;
 
-  div.logo {
-    color: white;
-    line-height: 48px;
-    font-size: 21px;
-  }
 }
 
 div.footer {
@@ -66,7 +61,7 @@ div.header-title {
   overflow-y: auto;
   overflow-x: hidden;
   background-color: #ffffff;
-  border-right: 1px solid #fbd385;
+  border-right: 1px solid #ade4ff;
 }
 
 #mainContentTopRight {
@@ -141,11 +136,26 @@ li a.disabled {
 }
 
 .btn-inverse {
-  .pmLinearGradient(0,#047094,50%,#067097,100%,#037196);
+  .pmLinearGradient(0,#047bbe,50%,#037bbe,100%,#037bbe);
+  &:active {
+    background-color:#0350be;
+  }
+  &[disabled], &.disabled {
+    background-color:#999;
+  }
 }
 
+.btn-group.open .btn-success.dropdown-toggle {
+  background-color:#27b1da;
+}
 .btn-success {
-  .pmLinearGradient(0,#f3812b,50%,#e57a2a,100%,#e3731f);
+  .pmLinearGradient(0,#2bc7de,50%,#23bfd6,100%,#1cb8cf);
+  &:active {
+    background-color:#27b1da;
+  }
+  &[disabled], &.disabled {
+    background-color:#999;
+  }
 }
 
 .bigModal {
@@ -193,4 +203,45 @@ div.controls.key {
   top: 38px;
   left: 30px;
 
+}
+
+p.durationLabel {
+  border:0;
+  color:#047bbe;
+  font-size:10px;
+  font-weight:bold;
+  text-align:right;
+  margin-top: 15px;
+  margin-bottom:0;
+}
+
+.modal-body .body-text {
+  word-break: break-word;
+}
+
+.modal-body hr {
+  margin: 5px 0;
+}
+
+
+#pleasewait {
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background-color: #000000;
+  text-align: center;
+  z-index: 10000;
+  opacity: 0.9;
+  h1 {
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+    margin-top: auto;
+  }
+}
+
+form {
+  margin-bottom:0;
 }

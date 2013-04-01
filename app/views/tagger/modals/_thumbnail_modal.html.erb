@@ -1,0 +1,20 @@
+<div class="modal hide fade" id="thumbModal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" id="closeModalButton">X</button>
+    <h3>Tag Image Uploader</h3>
+  </div>
+  <div class="modal-body">
+    <p>Supported formats; jpg, gif and png.  Files should be no larger than 1.5megs.  Thumbnails will automatically be generated from the uploaded image.</p>
+    <br/>
+
+    <%= form_for Tag.new, :url => add_image_tagger_index_path, :html => { :id => 'thumbModalForm', :'data-type' => 'json', :remote => true, :multipart => true } do |f| %>
+      <%= f.label :image, 'Choose Image File' %>
+      <%= f.file_field :image %>
+      <br />
+    <% end %>
+  </div>
+  <div class="modal-footer">
+    <a onclick="$('#thumbModalForm').submit(); $('#pleasewait').show(); return false;" class="btn btn-primary">Upload</a>
+    <a onclick="$('#thumbModal').modal('hide'); return false;" class="btn btn-success">Close</a>
+  </div>
+</div>
