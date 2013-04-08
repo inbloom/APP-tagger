@@ -35,7 +35,8 @@ $(function() {
                    url: '/ccss-sorted.json',
                    success: function(data) {
                      bigd = data;
-                     var notation = '["'+e.target.value.replace(/\./g,'"]["')+'"]';
+                     var dotty = e.target.value.replace(/\.([0-9])([a-z])/,".$1.$2")
+                     var notation = '["'+dotty.replace(/\./g,'"]["')+'"]';
                      $('#description').attr('value', eval('data'+notation+'._text'));
                    },
                    failure: function() {
