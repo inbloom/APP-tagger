@@ -21,11 +21,11 @@ $(function() {
         else {
             previousDotValue = $('#dotNotation').val();
             document.getElementById('itemURL').value = '';
-            document.getElementById('description').value = '';
+            $('#description').html('');
 
             var dotNotationArrayKey = $.inArray(e.target.value, dotNotationDisplayArray)
             if (dotNotationArrayKey == -1) {
-                $('#description').attr('value', "Error: The Dot Notation you entered doesn't appear to be valid.")
+                $('#description').html("Error: The Dot Notation you entered doesn't appear to be valid.")
             } else {
                var dotNotationObj = alignmentArray[dotNotationArrayKey];
                $('#itemURL').attr('value',dotNotationObj.url);
@@ -37,7 +37,7 @@ $(function() {
                      bigd = data;
                      var dotty = e.target.value.replace(/\.([0-9])([a-z])/,".$1.$2")
                      var notation = '["'+dotty.replace(/\./g,'"]["')+'"]';
-                     $('#description').attr('value', eval('data'+notation+'._text'));
+                     $('#description').html(eval('data'+notation+'._text'));
                    },
                    failure: function() {
                      alert('failed');
