@@ -20,41 +20,47 @@ module LrHelper
 
   def self.publish tags, user
 
-    # Create the request wrapper
-    request = {
-      "TOS" => {
-        "submission_TOS" => "http://www.learningregistry.org/information-assurances/open-information-assurances-1-0"
-      },
-      "active" => true,
-      "doc_type" => "resource_data",
-      "doc_version" => "0.23.0",
-      "identity" => {
-        "curator" => "Shared Learning Collaborative",
-        "submitter" => "SLC Tagger",
-        "signer" => "SLC Tagger",
-        "submitter_type" => "agent"
-      },
-      "keys" => [ ],
-      "payload_placement" => "inline",
-      "payload_schema" => [ "schema.org", "LRMI", "application/microdata+json" ],
-      "payload_schema_locator" => "http://www.w3.org/TR/2012/WD-microdata-20121025/#converting-html-to-other-formats",
-      "resource_data" => {
-        "items" => [ ]
-      },
-      "resource_data_type" => "metadata",
-      "resource_locator" => "URL Field"
-    }
-
+    # Document holder
+    documents = []
     # Okay now for each tag, stuff them in the items array inside the request envelope
     tags.each { |tag|
-      request["resource_data"]["items"] << {
-        "type" => [ "http://schema.org/CreativeWork" ],
-        "id" => tag['uuid'],
-        "properties" => self.convert_to_properties(tag)
+
+      documents << {
+          "TOS" => {
+              "submission_TOS" => "http://www.learningregistry.org/information-assurances/open-information-assurances-1-0"
+          },
+          "active" => true,
+          "doc_type" => "resource_data",
+          "doc_version" => "0.23.0",
+          "identity" => {
+              "curator" => "Shared Learning Collaborative",
+              "submitter" => "inBloom Tagger",
+              "signer" => "inBloom Tagger",
+              "submitter_type" => "agent"
+          },
+          "keys" => [ ],
+          "payload_placement" => "inline",
+          "payload_schema" => [ "schema.org", "LRMI", "application/microdata+json" ],
+          "payload_schema_locator" => "http://www.w3.org/TR/2012/WD-microdata-20121025/#converting-html-to-other-formats",
+          "resource_data" => {
+              "items" => [
+                  {
+                      "type" => [ "http://schema.org/CreativeWork" ],
+                      "id" => tag['uuid'],
+                      "properties" => self.convert_to_properties(tag)
+                  }
+              ]
+          },
+          "resource_data_type" => "metadata",
+          "resource_locator" => "URL Field"
       }
+
     }
 
-    self.request :publish, request
+    # Create the request wrapper
+    payload = { 'documents' => documents }
+
+    self.request :publish, payload
 
     # Now return any failures if we had any
     @@failures
@@ -62,7 +68,9 @@ module LrHelper
 
   private
 
-  def self.request type, request
+  # The magic man behind the curtain! This is the method that actually auths and then calls the site based on the type of call requested
+  # for now there is only one :publish, but I'm sure more will come
+  def self.request type, payload
     # OAuth stuff..
     consumer = OAuth::Consumer.new 'agilixtagger@gmail.com', 'kf4ER109bnp8dzK8YzoBkm5EeTF1HV2k', { :site => 'http://lrnode.inbloom.org' }
     token = OAuth::AccessToken.new(consumer, 'node_sign_token', 'qMiy1Mc6NGYeJNX1nP6DBtfWAx1mhZQf')
@@ -70,9 +78,9 @@ module LrHelper
     # do the request by type!
     case type
       when :publish
-        payload = {'documents' => [ request ]}
         rawResponse = consumer.request(:post, '/publish', token, {}, payload.to_json, { 'Content-Type' => 'application/json' })
     end
+
   end
 
   # Take any incoming key and map it to the correct LRI output key (Just keys.. not values)
