@@ -33,7 +33,7 @@ module LrHelper
           "doc_type" => "resource_data",
           "doc_version" => "0.23.0",
           "identity" => {
-              "curator" => "Shared Learning Collaborative",
+              "curator" => "#{current_user.realm}:#{current_user.user_id}",
               "submitter" => "inBloom Tagger",
               "signer" => "inBloom Tagger",
               "submitter_type" => "agent"
