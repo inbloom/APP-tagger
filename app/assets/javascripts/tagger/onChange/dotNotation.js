@@ -38,6 +38,7 @@ $(function() {
                      var dotty = e.target.value.replace(/\.([0-9])([a-z])/,".$1.$2")
                      var notation = '["'+dotty.replace(/\./g,'"]["')+'"]';
                      $('#description').html(eval('data'+notation+'._text'));
+                     validateAlignmentForm();
                    },
                    failure: function() {
                      alert('failed');
