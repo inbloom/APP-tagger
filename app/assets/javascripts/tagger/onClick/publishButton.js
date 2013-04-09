@@ -31,7 +31,7 @@ $(function() {
 
 });
 
-function forcePublish() {
-    var str = processJSONOutput(true);
-    saveRemote(str, 'LR');
-}
+//function forcePublish() {
+//    var str = processJSONOutput(true);
+//    saveRemote(str, 'LR');
+//}
