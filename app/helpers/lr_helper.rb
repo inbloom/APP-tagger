@@ -1,3 +1,4 @@
+
 ###############################################################################
 # Copyright 2012-2013 inBloom, Inc. and its affiliates.
 #
@@ -30,45 +31,41 @@ module LrHelper
       documents = []
       # Okay now for each tag, stuff them in the items array inside the request envelope
       tags.each { |tag|
-
         documents << {
-            "TOS" => {
-                "submission_TOS" => "http://www.learningregistry.org/information-assurances/open-information-assurances-1-0"
-            },
-            "active" => true,
-            "doc_type" => "resource_data",
-            "doc_version" => "0.23.0",
-            "identity" => {
-              "curator" => "#{user.realm}:#{user.user_id}",
-              "submitter" => "inBloom Tagger",
-              "signer" => "inBloom Tagger",
-              "submitter_type" => "agent"
-            },
-            "keys" => [ ],
-            "payload_placement" => "inline",
-            "payload_schema" => [ "schema.org", "LRMI", "application/microdata+json" ],
-            "payload_schema_locator" => "http://www.w3.org/TR/2012/WD-microdata-20121025/#converting-html-to-other-formats",
-            "resource_data" => {
-                "items" => [
-                    {
-                        "type" => [ "http://schema.org/CreativeWork" ],
-                        "id" => tag['uuid'],
-                        "properties" => self.convert_to_properties(tag)
-                    }
-                ]
-            },
-            "resource_data_type" => "metadata",
-            "resource_locator" => "URL Field"
+          "TOS" => {
+            "submission_TOS" => "http://www.learningregistry.org/information-assurances/open-information-assurances-1-0"
+          },
+          "active" => true,
+          "doc_type" => "resource_data",
+          "doc_version" => "0.23.0",
+          "identity" => {
+            "curator" => "#{user.realm}:#{user.user_id}",
+            "submitter" => "inBloom Tagger",
+            "signer" => "inBloom Tagger",
+            "submitter_type" => "agent"
+          },
+          "keys" => [ ],
+          "payload_placement" => "inline",
+          "payload_schema" => [ "schema.org", "LRMI", "application/microdata+json" ],
+          "payload_schema_locator" => "http://www.w3.org/TR/2012/WD-microdata-20121025/#converting-html-to-other-formats",
+          "resource_data" => {
+            "items" => [
+              {
+                "type" => [ "http://schema.org/CreativeWork" ],
+                "id" => tag['uuid'],
+                "properties" => self.convert_to_properties(tag)
+              }
+            ]
+          },
+          "resource_data_type" => "metadata",
+          "resource_locator" => tag['url']
         }
 
       }
 
       # Create the request wrapper
       payload = { 'documents' => documents }
-
-      puts payload
-
-#    self.request :publish, payload
+      self.request :publish, payload
     end
 
     # Now return any failures if we had any
@@ -93,31 +90,30 @@ module LrHelper
   end
 
   # Take any incoming key and map it to the correct output key (Just keys.. not values)
-  # These aren't the FULL keys, just the final part.. Full key would be something like; urn:schema-org:property_type:{foo}
-  # Note; This is no longer necessary going to the LR as the connector does it for us.  This used to be required going to the LRI
-  #  leaving the code here just incase we do need to eventually uncomment a key mapping and change it..
+  # These aren't the FULL keys, just the final part.. Full key would be something like; urn:schema-org:propertyType:{foo}
+  # Also, some of these keys are the same as their transformed value.. that wasn't the case when we were going to the LRI
+  # and I found it easier to just leave them in..
   def self.remap_key key
     # A list of key mappings to replace
     lri_key_mappings = {
-        #'types'                 => 'types',
-        #'title'                 => 'name',
-        #'url'                   => 'url',
-        #'language'              => 'in_language',
-        #'createdOn'             => 'date_created',
-        #'topic'                 => 'about',
-        #'usageRightsURL'        => 'use_rights_url',
-        #'publisher'             => 'publisher',
-        #'isBasedOnURL'          => 'is_based_on_url',
-        #'endUser'               => 'intended_end_user_role',
-        #'ageRange'              => 'typical_age_range',
-        #'educationalUse'        => 'educational_use',
-        #'interactivityType'     => 'interactivity_type',
-        #'learningResourceType'  => 'learning_resource_type',
-        #'timeRequired'          => 'time_required',
-        #'createdBy'             => 'author',
-        #'educationalAlignments' => 'educational_alignments',
-        #'mediaType'             => 'physical_media_type',
-        #'groupType'             => 'group_type'
+        'title'                 => 'name',
+        'url'                   => 'url',
+        'language'              => 'inLanguage',
+        'createdOn'             => 'dateCreated',
+        'topic'                 => 'about',
+        'usageRightsURL'        => 'useRightsUrl',
+        'publisher'             => 'publisher',
+        'isBasedOnURL'          => 'isBasedOnUrl',
+        'endUser'               => 'intendedEndUserRole',
+        'ageRange'              => 'typicalAgeRange',
+        'educationalUse'        => 'educationalUse',
+        'interactivityType'     => 'interactivityType',
+        'learningResourceType'  => 'learningResourceType',
+        'timeRequired'          => 'timeRequired',
+        'createdBy'             => 'author',
+        'educationalAlignments' => 'educationalAlignment',
+        'mediaType'             => 'mediaType',
+        'groupType'             => 'groupType'
     }
     return lri_key_mappings[key] if lri_key_mappings[key].present?
     key
