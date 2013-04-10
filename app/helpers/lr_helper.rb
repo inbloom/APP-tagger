@@ -127,7 +127,7 @@ module LrHelper
     alignments = []
 
     # A list of keys that simply need their values turned into an array
-    simpleConvertKeys = ['title','language','url','createdOn','topic','usageRightsURL','isBasedOnURL','timeRequired']
+    simpleConvertKeys = ['title','language','url','createdOn','usageRightsURL','isBasedOnURL','timeRequired']
     # Step through all keys and find/use the simple ones -- Easy!
     tag.each { |key,value|
       next unless simpleConvertKeys.include?(key)
@@ -144,19 +144,27 @@ module LrHelper
     # Now for some that take some doing...
     # CreatedBy is the Author so.. its a person
     props['createdBy'] = [ {
-        'type' => [ "http://schema.org/Person" ],
-        'properties' => {
-           'name' => [ tag['createdBy'] ]
-        }
+      'type' => [ "http://schema.org/Person" ],
+      'properties' => {
+       'name' => [ tag['createdBy'] ]
+      }
     } ] unless tag['createdBy'].empty?
 
     # Publisher is an organization..
     props['publisher'] = [ {
-        'type' => [ "http://schema.org/Organization" ],
-        'properties' => {
-           'name' => [ tag['publisher'] ]
-        }
+      'type' => [ "http://schema.org/Organization" ],
+      'properties' => {
+       'name' => [ tag['publisher'] ]
+      }
     } ] unless tag['publisher'].empty?
+
+    # Topic is a thing
+    props['topic'] = [ {
+      'type' => [ "http://schema.org/Thing" ],
+      'properties' => {
+        'name' => [ tag['topic'] ]
+      }
+    } ] unless tag['topic'].empty?
 
     # Step through all the alignments sent by the tag and parse them out into an array
     tag['educationalAlignments'].each { |key,value|
