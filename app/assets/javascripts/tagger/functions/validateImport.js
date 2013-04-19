@@ -80,27 +80,26 @@ function validateImportField(field, value) {
         // Language code
         case 'language':
             if (value != undefined && value != "") {
-                tValue = value.toLowerCase();
-                // Catch and Replace any well intentioned names, but incorrect
-                tValue = tValue.replace(/^en$/,'EN_US');
-                tValue = tValue.replace(/^english$/,'EN_US');
-                tValue = tValue.replace(/^engrish$/,'EN_US'); // heh
-                tValue = tValue.replace(/^spanish$/,'ES_ES');
-                tValue = tValue.replace(/^es$/,'ES_ES');
-                tValue = tValue.replace(/^espanol$/,'ES_ES');
-                tValue = tValue.replace(/^español$/,'ES_ES');
-                // Valid options
-                validOptions = ['EN_US','ES_ES'];
-                // Filter value
-                tValue = tValue.toUpperCase();        // en-US to EN-US
-                tValue = tValue.replace('-','_');     // EN-US to EN_US
-                // Set results
-                if ($.inArray(tValue, validOptions) == -1) {
-                    fileHasErrors = true;
-                    fileErrors.push('<strong>Invalid file imported -- <em>&quot;Language&quot;</em></strong><br /> It appears the sent language value is incorrect: "'+tValue+'" -- Valid Options: "'+validOptions.join()+'"<br /><br />');
-                } else {
-                    results = tValue;
-                }                
+              tValue = value.toLowerCase();
+              // Catch and Replace any well intentioned names, but incorrect
+              tValue = tValue.replace(/^en_us$/,'en-US');
+              tValue = tValue.replace(/^en$/,'en-US');
+              tValue = tValue.replace(/^english$/,'en-US');
+              tValue = tValue.replace(/^engrish$/,'en-US'); // heh
+              tValue = tValue.replace(/^es_es$/,'es-ES');
+              tValue = tValue.replace(/^es$/,'es-ES');
+              tValue = tValue.replace(/^espanol$/,'es-ES');
+              tValue = tValue.replace(/^español$/,'es-ES');
+              tValue = tValue.replace(/^spanish$/,'es-ES');
+              // Valid options
+              validOptions = ['en-US','en-ES'];
+              // Set results
+              if ($.inArray(tValue, validOptions) == -1) {
+                  fileHasErrors = true;
+                  fileErrors.push('<strong>Invalid file imported -- <em>&quot;Language&quot;</em></strong><br /> It appears the sent language value is incorrect: "'+tValue+'" -- Valid Options: "'+validOptions.join()+'"<br /><br />');
+              } else {
+                  results = tValue;
+              }
             } 
             break;
 
