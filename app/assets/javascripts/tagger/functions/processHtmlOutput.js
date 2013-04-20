@@ -97,7 +97,7 @@ function processHTMLOutput(checked){
         string = checked_items[i].tagDescription.replace(/\"/g, "'");
         array = string.split(',');
         for (j = 0; j < array.length; j++){
-            str +=  '\t<meta itemprop="tagDescription" content="' + array[j] + '"></meta>\n';
+            str +=  '\t<meta itemprop="description" content="' + array[j] + '"></meta>\n';
         }
 
         for (j in checked_items[i].educationalAlignments) {
