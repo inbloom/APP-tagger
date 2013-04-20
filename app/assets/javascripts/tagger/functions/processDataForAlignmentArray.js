@@ -15,16 +15,25 @@
  */
 
 // Used by the alignment reader in order to get information out of the files
-function processDataForAlignmentArray(allText)	{
-    var lines = allText.split(/\n|\r/);
-    for (var i = 1; i < lines.length -1 ; i++) {
-        var split = lines[i].split(',');
-        alignmentArray.push({
-            'title'         : split[2],
-            'url'           : split[3],
-            'description'   : split[0],
-            'guid'          : split[4]
-        });
+function processDataForAlignmentArray(allText, jsonStandards)	{
+
+  var lines = allText.split(/\n|\r/);
+  for (var i = 1; i < lines.length -1 ; i++) {
+      var split = lines[i].split(',');
+      alignmentArray.push({
+          'title'         : split[2],
+          'url'           : split[3],
+          'description'   : split[0],
+          'guid'          : split[4]
+      });
+      var notation = '["'+split[2].replace(/\./g,'"]["')+'"]';
+      try {
+        valed = eval("jsonStandards" + notation);  
+        console.log('truth, bro');
         dotNotationDisplayArray.push(split[2]);
-    }
+      }   
+      catch (e) {
+         // statements to handle any exceptions
+      }   
+  }
 }

@@ -14,13 +14,22 @@
  * limitations under the License.
  */
 
+var jsonStandards;
 function readAlignmentDataFromFiles() {
+  $.ajax({
+      type: "GET",
+      url: "ccss-sorted.json",
+      dataType: "json",
+      success: function(data) {
+          jsonStandards = data;
+      }
+  });
     $.ajax({
         type: "GET",
         url: "/ccss2asn-math.csv",
         dataType: "text",
         success: function(data) {
-            processDataForAlignmentArray(data);
+            processDataForAlignmentArray(data, jsonStandards);
         }
     });
     $.ajax({
@@ -28,7 +37,7 @@ function readAlignmentDataFromFiles() {
         url: "ccss2asn-ela.csv",
         dataType: "text",
         success: function(data) {
-            processDataForAlignmentArray(data);
+            processDataForAlignmentArray(data, jsonStandards);
         }
     });
 }
