@@ -26,7 +26,7 @@ $(function() {
         var formEducationAlignment = $('#educationalAlignment').val();
         var formAlignmentType = $('#alignmentType').val();
         var formDotNotation = $('#dotNotation').val();
-        var formDescription = $('#description').val();
+        var formDescription = $('#description').html();
         var formItemUrl = $('#itemURL').val();
 
         // Create our object
@@ -53,7 +53,7 @@ $(function() {
         // Zero the form
         $('#alignmentType').val('');
         $('#dotNotation').val('');
-        $('#description').val('');
+        $('#description').html('');
         $('#itemURL').val('');
         $('#itemGUID').val('');
 
