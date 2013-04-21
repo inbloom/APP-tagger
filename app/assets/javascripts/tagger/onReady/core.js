@@ -16,7 +16,7 @@
 
 $(function() {
 
-    taggerVersion = '1.1.513H';
+    taggerVersion = '1.2.1';
 
     window.itemCounter = 0;
     window.boxes = 0;
