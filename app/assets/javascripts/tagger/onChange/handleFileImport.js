@@ -105,7 +105,15 @@ $(function() {
                             var tempEducationAlignmentArray = output[i][17].split(",");
                             var tempAlignmentTypeArray = output[i][18].split(",");
                             var tempDotNotationArray = output[i][19].split(",");
-                            var tempDescriptionArray = output[i][21].split(",");
+                            // var tempDescriptionArray = output[i][21].split(",");
+                            var tempDescriptionArray = [];
+                            $.each(tempDotNotationArray, function(index, value) {
+                              try {
+                                tempDescriptionArray[index] = eval("jsonStandards" + '["'+value.replace(/\./g,'"]["')+'"]' + "['_text']");
+                              } catch(e) {
+                                console.log(value);
+                              }
+                            });
                             var tempItemURLArray = output[i][20].split(",");
 
                             var itemEducationAlignments = {}
