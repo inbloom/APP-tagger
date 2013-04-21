@@ -22,22 +22,23 @@ function readAlignmentDataFromFiles() {
       dataType: "json",
       success: function(data) {
           jsonStandards = data;
+          $.ajax({
+              type: "GET",
+              url: "/ccss2asn-math.csv",
+              dataType: "text",
+              success: function(data) {
+                  processDataForAlignmentArray(data, jsonStandards);
+              }
+          });
+          $.ajax({
+              type: "GET",
+              url: "ccss2asn-ela.csv",
+              dataType: "text",
+              success: function(data) {
+                  processDataForAlignmentArray(data, jsonStandards);
+              }
+          });
       }
   });
-    $.ajax({
-        type: "GET",
-        url: "/ccss2asn-math.csv",
-        dataType: "text",
-        success: function(data) {
-            processDataForAlignmentArray(data, jsonStandards);
-        }
-    });
-    $.ajax({
-        type: "GET",
-        url: "ccss2asn-ela.csv",
-        dataType: "text",
-        success: function(data) {
-            processDataForAlignmentArray(data, jsonStandards);
-        }
-    });
+
 }
