@@ -102,7 +102,7 @@ function processHTMLOutput(checked){
 
         for (j in checked_items[i].educationalAlignments) {
             str +=  '\t<meta itemprop="educationalAlignment" itemscope="itemscope" itemtype="schema.org/alignmentObject">\n';
-            str +=  '\t\t<meta itemprop="name" content="' + ((checked_items[i].educationalAlignments[j].educationalAlignment != undefined)?checked_items[i].educationalAlignments[j].educationalAlignment:'') + '"></meta>\n';
+            str +=  '\t\t<meta itemprop="educationalframework" content="' + ((checked_items[i].educationalAlignments[j].educationalAlignment != undefined)?checked_items[i].educationalAlignments[j].educationalAlignment:'') + '"></meta>\n';
             str +=  '\t\t<meta itemprop="alignmentType" content="' + ((checked_items[i].educationalAlignments[j].alignmentType != undefined)?checked_items[i].educationalAlignments[j].alignmentType:'') + '"></meta>\n';
             str +=  '\t\t<meta itemprop="targetDescription" content="' + ((checked_items[i].educationalAlignments[j].description != undefined)?checked_items[i].educationalAlignments[j].description.replace(/\"/g, "'"):'') + '"></meta>\n';
             str +=  '\t\t<meta itemprop="targetName" content="' + ((checked_items[i].educationalAlignments[j].dotNotation != undefined)?checked_items[i].educationalAlignments[j].dotNotation:'') + '"></meta>\n';
