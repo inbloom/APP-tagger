@@ -172,7 +172,7 @@ module LrHelper
           'type' => [ "http://schema.org/AlignmentObject" ],
           'id' => 'urn:corestandards.org:guid:' + key.upcase,
           'properties' => {
-              'name' => [ value['educationalAlignment'] ],
+              'educationalFramework' => [ value['educationalAlignment'] ],
               'alignmentType' => [ value['alignmentType'] ],
               'targetDescription' => [ value['description'] ],
               'targetName' => [ value['dotNotation'] ],
