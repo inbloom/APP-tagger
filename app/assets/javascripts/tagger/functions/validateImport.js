@@ -92,13 +92,15 @@ function validateImportField(field, value) {
               tValue = tValue.replace(/^español$/,'es-ES');
               tValue = tValue.replace(/^spanish$/,'es-ES');
               // Valid options
-              validOptions = ['en-US','en-ES'];
+              validOptions = ['en-us','es-es'];
               // Set results
               if ($.inArray(tValue, validOptions) == -1) {
-                  fileHasErrors = true;
-                  fileErrors.push('<strong>Invalid file imported -- <em>&quot;Language&quot;</em></strong><br /> It appears the sent language value is incorrect: "'+tValue+'" -- Valid Options: "'+validOptions.join()+'"<br /><br />');
+                fileHasErrors = true;
+                fileErrors.push('<strong>Invalid file imported -- <em>&quot;Language&quot;</em></strong><br /> It appears the sent language value is incorrect: "'+tValue+'" -- Valid Options: "'+validOptions.join()+'"<br /><br />');
               } else {
-                  results = tValue;
+                tValue = tValue.replace(/^en-us$/,'en-US');
+                tValue = tValue.replace(/^es-es$/,'es-ES');
+                results = tValue;
               }
             } 
             break;
