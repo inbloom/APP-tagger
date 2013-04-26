@@ -111,7 +111,7 @@ $(function() {
                               try {
                                 tempDescriptionArray[index] = eval("jsonStandards" + '["'+value.replace(/\./g,'"]["')+'"]' + "['_text']");
                               } catch(e) {
-                                console.log(value);
+                                // console.log(value);
                               }
                             });
                             var tempItemURLArray = output[i][20].split(",");
