@@ -170,7 +170,6 @@ module LrHelper
     tag['educationalAlignments'].each { |key,value|
       alignments << {
           'type' => [ "http://schema.org/AlignmentObject" ],
-          'id' => 'urn:corestandards.org:guid:' + key.upcase,
           'properties' => {
               'educationalFramework' => [ value['educationalAlignment'] ],
               'alignmentType' => [ value['alignmentType'] ],
