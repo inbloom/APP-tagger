@@ -65,6 +65,7 @@ module LrHelper
 
       # Create the request wrapper
       payload = { 'documents' => documents }
+
       self.request :publish, payload
     end
 
@@ -113,7 +114,8 @@ module LrHelper
         'createdBy'             => 'author',
         'educationalAlignments' => 'educationalAlignment',
         'mediaType'             => 'mediaType',
-        'groupType'             => 'groupType'
+        'groupType'             => 'groupType',
+        'tagDescription'        => 'description'
     }
     return lri_key_mappings[key] if lri_key_mappings[key].present?
     key
@@ -127,7 +129,7 @@ module LrHelper
     alignments = []
 
     # A list of keys that simply need their values turned into an array
-    simpleConvertKeys = ['title','language','url','createdOn','usageRightsURL','isBasedOnURL','timeRequired']
+    simpleConvertKeys = ['title','language','url','createdOn','usageRightsURL','isBasedOnURL','timeRequired','tagDescription']
     # Step through all keys and find/use the simple ones -- Easy!
     tag.each { |key,value|
       next unless simpleConvertKeys.include?(key)
@@ -181,7 +183,6 @@ module LrHelper
     }
     # Now stuff that alignments array into the props we are building..
     props['educationalAlignments'] = alignments
-
 
     # Remap the keys to something that schema.org and the like use
     props = Hash[props.map{|k,v| [self.remap_key(k),v] }]

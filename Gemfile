@@ -2,9 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.11'
 
-group :development, :staging do  
-  # Mysql
-  gem 'mysql2'
+group :development, :staging do
+  gem 'pg'
 end
 
 group :production do
