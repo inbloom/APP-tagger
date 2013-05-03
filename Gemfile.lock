@@ -96,6 +96,7 @@ GEM
     multi_json (1.5.0)
     multi_xml (0.5.1)
     multipart-post (1.1.5)
+    mysql2 (0.3.11)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-ssh (2.6.3)
@@ -192,6 +193,7 @@ DEPENDENCIES
   libv8
   mime-types (~> 1.19)
   mini_magick
+  mysql2
   oauth
   omniauth
   omniauth-slc (= 0.0.2)

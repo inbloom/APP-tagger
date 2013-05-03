@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.11'
 
 group :development, :staging do
-  gem 'pg'
+  gem 'mysql2'
 end
 
 group :production do
