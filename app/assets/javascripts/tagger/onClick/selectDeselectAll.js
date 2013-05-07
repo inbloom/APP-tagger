@@ -35,5 +35,7 @@ $(function() {
     }
     // Update the 0 of 0 resources counter
     updateResourceCount();
+    // Update the text area
+    updateTextArea();
   });
 });
