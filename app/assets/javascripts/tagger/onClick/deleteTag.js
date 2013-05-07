@@ -16,13 +16,17 @@
 
 $(function() {
 
-    $(".delete-tag").live('click', function(obj) {
-        var tag_id = $(obj.target).parent().attr('href').substr(1);
+  $(".delete-tag").live('click', function(obj) {
+    var tag_id = $(obj.target).parent().attr('href').substr(1);
+    if (tag_id != 'all') {
+      $('#deleteModal').find('p.question').html("You're about to delete a local resource, this can't be undone.");
 
-        $('#deleteModal .btn-danger').attr('onclick', "deleteTag('"+tag_id+"');").attr('href', "#");
-        $('#deleteModal').modal('show');
-
-        return false;
-    })
+    } else {
+      $('#deleteModal').find('p.question').html("You're about to delete <strong>ALL SELECTED</strong> local resources, this can't be undone.");
+    }
+    $('#deleteModal .btn-danger').attr('onclick', "deleteTag('"+tag_id+"');").attr('href', "#"+tag_id);
+    $('#deleteModal').modal('show');
+    return false;
+  })
 
 });
