@@ -24,6 +24,8 @@ $(function() {
             obj.checked = false;
             itemCounter++;
         });
+        // Deselect the ALL checkbox
+        $('#selectDeselectAllResources').prop('checked', false);
 
         // Update the form
         updateInputFields();
