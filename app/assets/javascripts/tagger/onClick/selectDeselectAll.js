@@ -15,20 +15,25 @@
  */
 
 $(function() {
-    $("#selectDeselectAllResources").click(function() {
-        checked = $(this).attr('checked');
-
-        $("#multiItemSelector input[type=checkbox]").each(function() {
-            if (checked) {
-                $(this).attr('checked',true);
-                $("#publishButton").removeClass("disabled");
-            } else {
-                $(this).removeAttr('checked');
-                $("#publishButton").addClass("disabled");
-            }
-        });
-
-        updateResourceCount();
-
+  $("#selectDeselectAllResources").click(function() {
+    // If we are checking, then check them if we are unchecking, then do that.
+    var checked = $(this).attr('checked');
+    $("#multiItemSelector input[type=checkbox]").each(function() {
+      if (checked) {
+        $(this).prop('checked', true);
+        $("#publishButton").removeClass("disabled");
+      } else {
+        $(this).prop('checked', false);
+        $("#publishButton").addClass("disabled");
+      }
     });
+    // If there are any to be deleted, show the master delete button
+    if ($("#multiItemSelector input[type=checkbox]:checked").not('.deleted').length > 0) {
+      $("#deleteAllTags").show();
+    } else {
+      $("#deleteAllTags").hide();
+    }
+    // Update the 0 of 0 resources counter
+    updateResourceCount();
+  });
 });
