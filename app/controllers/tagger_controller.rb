@@ -113,7 +113,7 @@ class TaggerController < ApplicationController
       # Save those tags baby
       save_tags_state json_tags, true
       # Remove any tags that were deleted from the UI
-      remove_deleted_tags tags, true
+      remove_deleted_tags json_tags, true
 
       # The object we return to the UI, if any
       response = {}
