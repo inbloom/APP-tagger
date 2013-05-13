@@ -39,7 +39,7 @@ function saveDraft(str){
     // Really nothing should change other than now the items have a UUID
     success : function(xhr) {
       items = xhr
-      showMessage("Successfully saved drafts", "Success");
+      showMessage("Successfully saved resources", "Success");
     },
     error : function(xhr, txtStatus, errThrown) {
       showMessage(errThrown, "Error saving drafts");

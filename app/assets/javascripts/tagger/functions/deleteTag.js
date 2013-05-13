@@ -47,6 +47,8 @@ function deleteTag(tag_id) {
   $("#deleteModal").modal('hide');
   // Update the text area
   updateTextArea();
+  // Save the tags
+  $('#saveDraftButton').click();
   // return false
   return false;
 }
