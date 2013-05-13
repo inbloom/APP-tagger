@@ -29,22 +29,23 @@ function saveAndExport(str, fileType){
 
 // Save the draft string (Items object stringified) to the server using a post xhr
 // The successful response will be the items coming back and reloaded.
-function saveDraft(str){
-    $.ajax({
-        type : "POST",
-        dataType : 'json',
-        url  : "/tagger/save_draft",
-        data : { content : str },
-        // On success update our items list to be what the server sends back
-        // Really nothing should change other than now the items have a UUID
-        success : function(xhr) {
-            items = xhr
-            showMessage("Successfully saved drafts", "Success");
-        },
-        error : function(xhr, txtStatus, errThrown) {
-            showMessage(errThrown, "Error saving drafts");
-        }
-    })
+function saveDraft(str, showModal){
+  if (showModal == undefined) showmodal = true;
+  $.ajax({
+    type : "POST",
+    dataType : 'json',
+    url  : "/tagger/save_draft",
+    data : { content : str },
+    // On success update our items list to be what the server sends back
+    // Really nothing should change other than now the items have a UUID
+    success : function(xhr) {
+      items = xhr
+      if (showModal) showMessage("Successfully saved drafts", "Success");
+    },
+    error : function(xhr, txtStatus, errThrown) {
+      showMessage(errThrown, "Error saving drafts");
+    }
+  });
 }
 
 // Save the selected tag to the remote server chosen (LRI is the only one as of this writing)
