@@ -27,12 +27,6 @@ $(function() {
         $("#publishButton").addClass("disabled");
       }
     });
-    // If there are any to be deleted, show the master delete button
-    if ($("#multiItemSelector input[type=checkbox]:checked").not('.deleted').length > 0) {
-      $("#deleteAllTags").show();
-    } else {
-      $("#deleteAllTags").hide();
-    }
     // Update the 0 of 0 resources counter
     updateResourceCount();
     // Update the text area

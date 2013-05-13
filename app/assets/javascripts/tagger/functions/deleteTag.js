@@ -28,8 +28,6 @@ function deleteTag(tag_id) {
 
     // Uncheck the select all checkbox
     $("#selectDeselectAllResources").prop('checked', false);
-    // hide delete all tags
-    $("#deleteAllTags").hide();
 
   } else {
     // Delete the item from the array
@@ -41,8 +39,6 @@ function deleteTag(tag_id) {
     if ($("#multiItemSelector input[type=checkbox]:checked").not('.deleted').length == 0) {
       // Uncheck the select all checkbox
       $("#selectDeselectAllResources").prop('checked', false);
-      // hide delete all tags
-      $("#deleteAllTags").hide();
     }
   }
   // Update the 0 of 0 resources counter
@@ -51,6 +47,7 @@ function deleteTag(tag_id) {
   $("#deleteModal").modal('hide');
   // Update the text area
   updateTextArea();
+  // return false
   return false;
 }
 
