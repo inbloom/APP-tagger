@@ -29,8 +29,7 @@ function saveAndExport(str, fileType){
 
 // Save the draft string (Items object stringified) to the server using a post xhr
 // The successful response will be the items coming back and reloaded.
-function saveDraft(str, publishToo){
-  if (publishToo == undefined) publishToo = false;
+function saveDraft(str){
   $.ajax({
     type : "POST",
     dataType : 'json',
@@ -40,13 +39,7 @@ function saveDraft(str, publishToo){
     // Really nothing should change other than now the items have a UUID
     success : function(xhr) {
       items = xhr
-      if (publishToo) {
-        // Then save those that are checked remotely.
-        var str = processJSONOutput(true);
-        saveRemote(str, 'LR');
-      } else {
-        showMessage("Successfully saved drafts", "Success");
-      }
+      showMessage("Successfully saved drafts", "Success");
     },
     error : function(xhr, txtStatus, errThrown) {
       showMessage(errThrown, "Error saving drafts");

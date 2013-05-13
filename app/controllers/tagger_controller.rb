@@ -112,6 +112,8 @@ class TaggerController < ApplicationController
     if errors.empty?
       # Save those tags baby
       save_tags_state json_tags, true
+      # Remove any tags that were deleted from the UI
+      remove_deleted_tags tags, true
 
       # The object we return to the UI, if any
       response = {}
@@ -201,12 +203,12 @@ class TaggerController < ApplicationController
   # Go through the list of tags the UI expects to be loaded on refresh and leave those.. remove the others.
   # without this if you delete a tag from the ui, save and reload the page it doesn't know to remove the deleted tag
   # as the save state function only saves to the tags already there or adds new ones.. doesn't know to remove.
-  def remove_deleted_tags tags
+  def remove_deleted_tags tags, onlyPublished = false
     excluding = tags.map{|t| t[1]['uuid'] }
     if excluding.count == 0
-      user_tags = Tag.where(:user_id => session[:user_id], :published => false).find(:all)
+      user_tags = Tag.where(:user_id => session[:user_id], :published => onlyPublished).find(:all)
     else
-      user_tags = Tag.where(:user_id => session[:user_id], :published => false).find(:all, :conditions => ['uuid not in (?)', excluding])
+      user_tags = Tag.where(:user_id => session[:user_id], :published => onlyPublished).find(:all, :conditions => ['uuid not in (?)', excluding])
     end
     user_tags.each do |tag|
       tag.destroy
