@@ -87,9 +87,9 @@ module LrHelper
         rawResponse = consumer.request(:post, '/publish', token, {}, payload.to_json, { 'Content-Type' => 'application/json' })
     end
 
-puts "##############"
-puts rawResponse
-puts "##############"
+logger.debug "##############"
+logger.debug rawResponse
+logger.debug "##############"
 
   end
 
