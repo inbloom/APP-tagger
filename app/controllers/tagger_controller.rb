@@ -112,8 +112,6 @@ class TaggerController < ApplicationController
     if errors.empty?
       # Save those tags baby
       save_tags_state json_tags, true
-      # Remove any tags that were deleted from the UI but only those we just sent
-#      remove_deleted_tags json_tags, true
 
       # The object we return to the UI, if any
       response = {}
@@ -203,18 +201,13 @@ class TaggerController < ApplicationController
   # Go through the list of tags the UI expects to be loaded on refresh and leave those.. remove the others.
   # without this if you delete a tag from the ui, save and reload the page it doesn't know to remove the deleted tag
   # as the save state function only saves to the tags already there or adds new ones.. doesn't know to remove.
-  def remove_deleted_tags tags, onlyJustPublished = false
+  def remove_deleted_tags tags
     excluding = tags.map{|t| t[1]['uuid'] }
 
-    # If we are only doing those just published ( meaning this is part of the save remote call ) then only kill those IN the excluding list
-    if onlyJustPublished
-      user_tags = Tag.where(:user_id => session[:user_id]).find(:all, :conditions => ['uuid in (?)', excluding])
+    if excluding.count == 0
+      user_tags = Tag.where(:user_id => session[:user_id], :published => false).find(:all)
     else
-      if excluding.count == 0
-        user_tags = Tag.where(:user_id => session[:user_id], :published => false).find(:all)
-      else
-        user_tags = Tag.where(:user_id => session[:user_id], :published => false).find(:all, :conditions => ['uuid not in (?)', excluding])
-      end
+      user_tags = Tag.where(:user_id => session[:user_id], :published => false).find(:all, :conditions => ['uuid not in (?)', excluding])
     end
 
     # Iterate through and destroy them
