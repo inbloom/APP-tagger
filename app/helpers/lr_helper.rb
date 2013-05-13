@@ -87,6 +87,10 @@ module LrHelper
         rawResponse = consumer.request(:post, '/publish', token, {}, payload.to_json, { 'Content-Type' => 'application/json' })
     end
 
+puts "##############"
+puts rawResponse
+puts "##############"
+
   end
 
   # Take any incoming key and map it to the correct output key (Just keys.. not values)
