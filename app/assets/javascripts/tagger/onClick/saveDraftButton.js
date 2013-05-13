@@ -16,9 +16,10 @@
 
 $(function() {
 
-    $("#saveDraftButton").click( function() {
-        var str = processJSONOutput();
-        saveDraft(str);
-    });
+  $("#saveDraftButton").click( function() {
+    showPleaseWait("Saving Resources.. One Moment Please...");
+    var str = processJSONOutput();
+    saveDraft(str);
+  });
 
 });

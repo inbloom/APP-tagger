@@ -87,9 +87,9 @@ module LrHelper
         rawResponse = consumer.request(:post, '/publish', token, {}, payload.to_json, { 'Content-Type' => 'application/json' })
     end
 
-Rails.logger.debug "##############"
-Rails.logger.debug rawResponse
-Rails.logger.debug "##############"
+Rails.logger.info "##############"
+Rails.logger.info rawResponse.inspect
+Rails.logger.info "##############"
 
   end
 

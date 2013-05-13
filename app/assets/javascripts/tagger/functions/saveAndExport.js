@@ -30,7 +30,7 @@ function saveAndExport(str, fileType){
 // Save the draft string (Items object stringified) to the server using a post xhr
 // The successful response will be the items coming back and reloaded.
 function saveDraft(str, showModal){
-  if (showModal == undefined) showmodal = true;
+  if (showModal == undefined) showModal = true;
   $.ajax({
     type : "POST",
     dataType : 'json',
