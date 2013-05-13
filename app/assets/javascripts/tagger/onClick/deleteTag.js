@@ -16,7 +16,7 @@
 
 $(function() {
 
-  $(".delete-tag").on('click', function(obj) {
+  $(document).on('click', ".delete-tag", function(obj) {
     var tag_id = $(obj.target).parent().attr('href').substr(1);
     if (tag_id != 'selected') {
       $('#deleteModal').find('p.question').html("You're about to delete a local resource, this can't be undone.");
