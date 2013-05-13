@@ -20,7 +20,7 @@ $(function() {
         if (!$(this).hasClass('disabled')) {
             showPleaseWait('Publishing... <br /><br /><small>Note: This can take some time depending on the number of resources you have selected..</small> ');
             // First save the draft state
-            var str = processJSONOutput();
+            var str = processJSONOutput(true);
             saveDraft(str, true);
         }
     });
