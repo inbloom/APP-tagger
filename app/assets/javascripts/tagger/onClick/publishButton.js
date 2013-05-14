@@ -18,8 +18,11 @@ $(function() {
 
   $("#publishButton").click( function() {
     if (!$(this).hasClass('disabled')) {
-//      showMessage('Publishing is currently disabled.  This will be fixed by EOD today. (5/14/2013)');
-      saveRemoteChunked();
+      showPleaseWait('Publishing ' + ($("#multiItemSelector input[type=checkbox]:checked").length) + ' Resources -- Saving UI State First... <br /><br /><small>Note: This can take some time depending on the number of resources you have selected..</small> ');
+
+      var str = processJSONOutput();
+      saveDraft(str, true);
+
     }
   });
 
