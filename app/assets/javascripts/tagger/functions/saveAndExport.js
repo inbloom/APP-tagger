@@ -80,7 +80,7 @@ function saveRemoteChunked() {
   saveRemoteChunks = [];
   saveRemoteIterationSize = 10;
   saveRemoteIterationNumber = 1;
-  saveRemoteResourceCount = $("#multiItemSelector input[type=checkbox]:checked").length();
+  saveRemoteResourceCount = $("#multiItemSelector input[type=checkbox]:checked").length;
   // build our chunks
   saveRemoteChunks = processJSONOutput(true, saveRemoteIterationSize);
   // Call the worker
