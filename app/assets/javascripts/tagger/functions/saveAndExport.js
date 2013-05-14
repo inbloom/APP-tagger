@@ -51,24 +51,73 @@ function saveDraft(str){
 // This will also save the current version of the tag to the db and then flag it as published
 // it will then remove it from the current resources tab and place it into the history
 function saveRemote(str, remote) {
-    $.ajax({
-        type : "POST",
-        dataType : 'json',
-        url  : "/tagger/save_remote",
-        data : { content : str, remote : remote },
-        // On success update our items list to be what the server sends back
-        // Really nothing should change other than now the items have a UUID
-        success : function(xhr) {
-            items = xhr
-            redrawResourcesBasedOnItems();
-            loadHistory();
-            showMessage("Resources published");
-        },
-        error : function(xhr, txtStatus, errThrown) {
-            showMessage("Go ahead and reload your ui, any work you were doing should have been saved. <br />" + xhr.responseText, "Remote Error (RELOAD YOUR UI!!)");
-        }
-    })
+  $.ajax({
+    type : "POST",
+    dataType : 'json',
+    url  : "/tagger/save_remote",
+    data : { content : str, remote : remote },
+    // On success update our items list to be what the server sends back
+    // Really nothing should change other than now the items have a UUID
+    success : function(xhr) {
+      items = xhr
+      redrawResourcesBasedOnItems();
+      loadHistory();
+      showMessage("Resources published");
+    },
+    error : function(xhr, txtStatus, errThrown) {
+      showMessage("Something has gone wrong on the back end -- you should reload your UI; <br />" + xhr.responseText, "Remote Error");
+    }
+  });
 }
+
+// This function will save remotely in chunks and give the user feedback about its state until its done -- in theory
+var saveRemoteChunks = [];
+var saveRemoteIterationSize = 25;
+var saveRemoteIterationNumber = 1;
+function saveRemoteChunked() {
+  // Reset
+  saveRemoteChunks = [];
+  saveRemoteIterationSize = 25;
+  saveRemoteIterationNumber = 1;
+  // build our chunks
+  saveRemoteChunks = processJSONOutput(true, saveRemoteIterationSize);
+  // Call the worker
+  saveRemoteIterate();
+}
+// This is the actual work horse of the save remote chunked method which iterates through the chunks
+function saveRemoteIterate() {
+  var str = saveRemoteChunks.pop();
+
+  // If we have successfully popped then we have something to do.. so do it.
+  if (str != undefined) {
+    // Show the modal of what we are doing (will be called each time we iterate))
+    showPleaseWait('Publishing Resources in '+saveRemoteIterationSize+' resource chunks -- ['+(saveRemoteIterationSize * (saveRemoteIterationNumber-1))+' - '+(saveRemoteIterationSize * saveRemoteIterationNumber)+']... <br /><br /><small>Note: This can take some time depending on the number of resources you have selected..</small> ');
+
+    $.ajax({
+      type : "POST",
+      dataType : 'json',
+      url  : "/tagger/save_remote",
+      data : { content : str, remote : "LR" },
+      // On success update our items list to be what the server sends back
+      // Really nothing should change other than now the items have a UUID
+      success : function(xhr) {
+        saveRemoteIterationNumber++;
+        saveRemoteIterate();
+      },
+      error : function(xhr, txtStatus, errThrown) {
+        showMessage("Something has gone wrong on the back end -- you should reload your UI; <br />" + xhr.responseText, "Remote Error");
+      }
+    });
+  } else {
+    loadDrafts();
+    loadHistory();
+    showMessage("Resources published");
+  }
+}
+
+
+
+
 
 // Load the drafts in the db into the items array and then redraw
 function loadDrafts() {

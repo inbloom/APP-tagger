@@ -14,14 +14,44 @@
  * limitations under the License.
  */
 
-function processJSONOutput(checked){
-    if (checked == undefined) {
-        return JSON.stringify(items);
+// If checked then only return those that are checked
+// If an iterationsize is sent (only if checked) then return them in an array of groups
+function processJSONOutput(checked,iterationSize) {
+  // If not checked then everything!
+  if (checked == undefined) {
+    return JSON.stringify(items);
+
+  // Else only return those checked
+  } else {
+    var checked_items = {};
+
+    // If no iteration size then just return all checked
+    if (iterationSize == undefined) {
+      $("#multiItemSelector input[type=checkbox]:checked").each(function(i,obj) {
+        checked_items[obj.id] = items[obj.id];
+      });
+
+      return JSON.stringify(checked_items);
+
+    // Else create an array object with each of the stringified groups
     } else {
-        var checked_items = {};
-        $("#multiItemSelector input[type=checkbox]:checked").each(function(i,obj) {
-            checked_items[obj.id] = items[obj.id]
-        });
-        return JSON.stringify(checked_items);
+      var iterationCounter = 0;
+      var iterationGroup = 0;
+      var item_groups = [];
+      $("#multiItemSelector input[type=checkbox]:checked").each(function(i,obj) {
+        if (iterationCounter >= iterationSize) {
+          iterationCounter = 0;
+          iterationGroup++;
+          item_groups.push(JSON.stringify(checked_items));
+          checked_items = {};
+        }
+        checked_items[obj.id] = items[obj.id];
+        iterationCounter++;
+      });
+      item_groups.push(JSON.stringify(checked_items));
+
+      return item_groups;
     }
+
+  }
 }
