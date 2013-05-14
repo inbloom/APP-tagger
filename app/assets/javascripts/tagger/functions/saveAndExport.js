@@ -119,6 +119,10 @@ function saveRemoteIterate() {
     loadDrafts();
     loadHistory();
     showMessage("Resources published");
+    // Uncheck the select all checkbox if they selected all
+    if ($("#multiItemSelector input[type=checkbox]:checked").not('.deleted').length == 0) {
+      $("#selectDeselectAllResources").prop('checked', false);
+    }
   }
 }
 
