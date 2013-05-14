@@ -78,7 +78,7 @@ var saveRemoteIterationNumber = 0;
 function saveRemoteChunked() {
   // Reset
   saveRemoteChunks = [];
-  saveRemoteIterationSize = 10;
+  saveRemoteIterationSize = 25;
   saveRemoteIterationNumber = 1;
   saveRemoteResourceCount = $("#multiItemSelector input[type=checkbox]:checked").length;
   // build our chunks
