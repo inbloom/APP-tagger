@@ -116,13 +116,14 @@ function saveRemoteIterate() {
       }
     });
   } else {
+    // we are loading drafts, so uncheck shit
+    $("#selectDeselectAllResources").prop('checked', false);
+    // Load all drafts
     loadDrafts();
+    // Load the history
     loadHistory();
+    // give a message
     showMessage("Resources published");
-    // Uncheck the select all checkbox if they selected all
-    if ($("#multiItemSelector input[type=checkbox]:checked").not('.deleted').length == 0) {
-      $("#selectDeselectAllResources").prop('checked', false);
-    }
   }
 }
 
