@@ -23,7 +23,7 @@ $(function() {
     } else {
       $('#deleteModal').find('p.question').html("You're about to delete <strong>ALL SELECTED</strong> local resources, this can't be undone.");
     }
-    $('#deleteModal .btn-danger').attr('onclick', "deleteTag('"+tag_id+"');").attr('href', "#"+tag_id);
+    $('#deleteModal .btn-danger').attr('onclick', "deleteTag('"+tag_id+"');return false;").attr('href', "#"+tag_id);
     $('#deleteModal').modal('show');
     return false;
   })
