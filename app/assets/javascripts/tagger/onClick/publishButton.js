@@ -18,7 +18,8 @@ $(function() {
 
   $("#publishButton").click( function() {
     if (!$(this).hasClass('disabled')) {
-      saveRemoteChunked();
+      showMessage('Publishing is currently disabled.  This will be fixed by EOD today. (5/14/2013)');
+//      saveRemoteChunked();
     }
   });
 
