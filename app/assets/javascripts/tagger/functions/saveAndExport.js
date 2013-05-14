@@ -72,13 +72,15 @@ function saveRemote(str, remote) {
 
 // This function will save remotely in chunks and give the user feedback about its state until its done -- in theory
 var saveRemoteChunks = [];
-var saveRemoteIterationSize = 25;
-var saveRemoteIterationNumber = 1;
+var saveRemoteResourceCount = 0;
+var saveRemoteIterationSize = 0;
+var saveRemoteIterationNumber = 0;
 function saveRemoteChunked() {
   // Reset
   saveRemoteChunks = [];
-  saveRemoteIterationSize = 25;
+  saveRemoteIterationSize = 10;
   saveRemoteIterationNumber = 1;
+  saveRemoteResourceCount = $("#multiItemSelector input[type=checkbox]:checked").length();
   // build our chunks
   saveRemoteChunks = processJSONOutput(true, saveRemoteIterationSize);
   // Call the worker
@@ -91,7 +93,7 @@ function saveRemoteIterate() {
   // If we have successfully popped then we have something to do.. so do it.
   if (str != undefined) {
     // Show the modal of what we are doing (will be called each time we iterate))
-    showPleaseWait('Publishing Resources in '+saveRemoteIterationSize+' resource chunks -- ['+(saveRemoteIterationSize * (saveRemoteIterationNumber-1))+' - '+(saveRemoteIterationSize * saveRemoteIterationNumber)+']... <br /><br /><small>Note: This can take some time depending on the number of resources you have selected..</small> ');
+    showPleaseWait('Publishing '+saveRemoteResourceCount+' Resources in '+saveRemoteIterationSize+' resource chunks -- ['+(saveRemoteIterationSize * (saveRemoteIterationNumber-1))+' - '+(saveRemoteIterationSize * saveRemoteIterationNumber)+']... <br /><br /><small>Note: This can take some time depending on the number of resources you have selected..</small> ');
 
     $.ajax({
       type : "POST",
