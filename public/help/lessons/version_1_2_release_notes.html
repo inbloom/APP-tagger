@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="generator" content="ScreenSteps http://www.screensteps.com/" />
+	<title>version 1.2 release notes</title>
+	<link href="../css/neutral.css" media="screen" rel="stylesheet" type="text/css" charset="utf-8" />
+	<link href="../css/prettyPhoto.css" media="screen" rel="stylesheet" type="text/css" charset="utf-8" />
+	<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" charset="utf-8">
+		$(document).ready(function(){
+			$("a[rel^='prettyPhoto']").prettyPhoto({
+			  show_title: false
+			});
+		});
+  </script>
+	
+</head>
+
+<body class="lucida">
+
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td style="background-color: black;">
+      	<img src="../images/black_spacer.png">
+		<img src="../images/inbloom-logo.png">
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div style="margin-left: 40px;"><big><big><big><span
+ style="color: rgb(218, 218, 218);">TAGGER</span></big></big></big></div>
+
+	<div id="wrapper">		
+		<div id="LessonContent">
+			<div class="LessonHeader">
+
+			 <p> <a href="../index.html">Back to Table of Contents</a>	</p>		<h1 class="LessonTitle">version 1.2 release notes</h1>
+			</div>
+				<div class="summary">
+		<p>This section outlines the new features, bug fixes, and behaviors of Tagger version 1.2. </p>
+
+
+<p>Tagger complies with LRMI V1.1. Much of LRMI was adopted by the Schema.org/CreativeWork specification. Tagger is also compliant with Schema.org/CreativeWork, except for those LRMI properties that were not adopted by Schema.org. </p>
+	</div>
+			
+				<div id="step_1" class="lessonStep right">
+	        <h2 class="StepTitle"> LRMI Adoption by Schema.org/CreativeWork</h2>
+		 <div class="instructions">
+  <p>In the spring of 2013, Schema.org adopted LRMI as part of Schema.org/CreativeWork, with the exception of five LRMI properties.  With the exception of these five properties, Tagger is compliant with Schema.org/CreativeWork.</p>
+
+
+<p>The five LRMI properties not adopted by Schema.org are:</p>
+<ul>
+<li>intendedEndUserRole</li>
+<li>mediaType</li>
+<li>groupType</li>
+<li>usageRightsURL</li>
+<li>EndUser (was intendedEndUserRole, which is what Tagger uses)</li>
+</ul>
+
+<p>Tagger outputs these five properties along with the Schema.org/CreativeWork compliant properties when exporting (CSS, JSON, HTML/XML) as well as when writing to the Learning Registry and makes no attempt to map these properties to existing Schema.org/CreativeWork properties. The developers of Tagger felt this was the best approach to take at this time to meet the needs of the educational publishing community as these five properties came from them via the LRMI specification.</p>
+
+
+<p>Schema.org did not provide any guidance on mapping any of these five properties to existing Schema.org properties, nor did they provide reasons for not adopting these properties.  Follow the discussion at the LRMI Google Group: https://groups.google.com/forum/?fromgroups=#!forum/lrmi</p>
+
+
+<p>Future versions of Tagger will be updated to accommodate these five properties as they either become adopted by Schema.org or a consensus arises in the educational publishing community with regard to how they should be mapped.</p>
+</div>
+	</div>
+	<div class="clear"></div>
+
+		</div>
+		<div id="LessonPageNav">
+		  <p></p>
+		  <ul>
+		    <li id="LessonPagePrevious"> &nbsp;</li>
+		    <li id="LessonPageCount">Page <strong>1</strong> of <strong>13</strong></li>
+		    <li id="LessonPageNext"><a href="version_1_1_release_notes.html">Next Page: version 1.1 release notes</a> &nbsp;</li>
+		    
+		  </ul>
+		</div>	
+	</div>	
+</body>
+</html>

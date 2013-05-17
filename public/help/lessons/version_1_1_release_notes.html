@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="generator" content="ScreenSteps http://www.screensteps.com/" />
+	<title>version 1.1 release notes</title>
+	<link href="../css/neutral.css" media="screen" rel="stylesheet" type="text/css" charset="utf-8" />
+	<link href="../css/prettyPhoto.css" media="screen" rel="stylesheet" type="text/css" charset="utf-8" />
+	<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" charset="utf-8">
+		$(document).ready(function(){
+			$("a[rel^='prettyPhoto']").prettyPhoto({
+			  show_title: false
+			});
+		});
+  </script>
+	
+</head>
+
+<body class="lucida">
+
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td style="background-color: black;">
+      	<img src="../images/black_spacer.png">
+		<img src="../images/inbloom-logo.png">
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div style="margin-left: 40px;"><big><big><big><span
+ style="color: rgb(218, 218, 218);">TAGGER</span></big></big></big></div>
+
+	<div id="wrapper">		
+		<div id="LessonContent">
+			<div class="LessonHeader">
+
+			 <p> <a href="../index.html">Back to Table of Contents</a>	</p>		<h1 class="LessonTitle">version 1.1 release notes</h1>
+			</div>
+				<div class="summary">
+		<p>This section outlines the new features, bug fixes, and behaviors of Tagger version 1.1. </p>
+
+
+<p>Tagger complies with LRMI V1.1 specification.</p>
+	</div>
+			
+				<div id="step_1" class="lessonStep right">
+	        <h2 class="StepTitle">New Feature: Image Thumbnail</h2>
+		 <div class="instructions">
+  <p>Tagger now allows an image to be uploaded with each resource. This image will be displayed in the inBloom Search application as well as the Learning Registry Index (LRI) Browser application.</p>
+
+
+<p>Images should be in a square aspect ratio. Tagger will resize the image to the following:</p>
+<ul>
+<li>128 pixels x 128 pixels for inBloom Search</li>
+<li>64 pixels x 64 pixels for LRI Browser</li>
+</ul>
+
+<p>If the user uploads an image that is different than a square aspect ratio, Tagger will crop it to a square aspect ratio. If no image is provided, Tagger will attempt to display a screenshot of the webpage associated with the resource&rsquo;s URL. Because this is an automated process, there is no guarantee what the software will capture. Therefore, uploading thumbnails is highly recommended.</p>
+</div>
+	</div>
+	<div class="clear"></div>
+	<div id="step_2" class="lessonStep right">
+	        <h2 class="StepTitle">New Feature: Data Validation</h2>
+		 <div class="instructions">
+  <p><font color="#333333">Version 1.1 of Tagger corrected a number of issues with data validation to ensure that the data correctly conforms to standards where needed, such as time required and created date fields. Otherwise, Tagger should not limit the user&rsquo;s ability to import any values in the Education fields.</font></p>
+
+
+<p><font color="#333333">Tagger will also catch some common CSV file errors such as transposed or missing columns in the CSV import file. A new CSV template that needs to be used when importing has been released. This template is available from Tagger, on the Import screen. The goal of this version of Tagger is to provide an application that facilitates tagging while preventing errors caused by data formatting issues. Tagger performs various checks on import and provides error messages for poorly formed data. Then, the data must be corrected before import will be successful.</font></p>
+</div>
+	</div>
+	<div class="clear"></div>
+	<div id="step_3" class="lessonStep right">
+	        <h2 class="StepTitle">New Feature: Publishing to the Learning Registry</h2>
+		 <div class="instructions">
+  <p><font color="#333333">This version of Tagger publishes resource metadata to the Learning Registry (http://www.learningregistry.org/). The user can publish to the Learning Registry after signing in via the &ldquo;Sign In with inBloom&rdquo; link on the upper right corner of the Tagger application page. To do so, the user must register for a developer account with inBloom.</font></p>
+</div>
+	</div>
+	<div class="clear"></div>
+	<div id="step_4" class="lessonStep right">
+	        <h2 class="StepTitle">OTHER Field in Education Tab</h2>
+		 <div class="instructions">
+  <p><font color="#333333">The OTHER field has been reinstated for each element under the <strong>Education </strong>tab, excluding the<strong>Time Required </strong>field. The user can choose item(s) from a drop-down list and/or add free-text items in the Other field. Use commas to separate each item in the Other field.</font></p>
+</div>
+	</div>
+	<div class="clear"></div>
+	<div id="step_5" class="lessonStep right">
+	        <h2 class="StepTitle">Working Without Signing In</h2>
+		 <div class="instructions">
+  <p><font color="#333333">Tagger can be used to work on any number of resources without signing in with an inBloom account. The user creates new items by clicking on the &ldquo;New&rdquo; button or import items using the &ldquo;Import&rdquo; button. The CSV import template can be found  in the &ldquo;LRMI Template Guide&rdquo; link provided in the Import dialog box.</font></p>
+</div>
+	</div>
+	<div class="clear"></div>
+	<div id="step_6" class="lessonStep right">
+	        <h2 class="StepTitle">Clearing Work</h2>
+		 <div class="instructions">
+  <p><font color="#333333">If the user is not signed in, refreshing the page will clear all existing work.</font></p>
+</div>
+	</div>
+	<div class="clear"></div>
+	<div id="step_7" class="lessonStep right">
+	        <h2 class="StepTitle">Using the CSV Template</h2>
+		 <div class="instructions">
+  <p><font color="#333333">The user should use Tagger&rsquo;s CSV template to ensure that the data is organized correctly for import into Tagger. The template can be found here:</font></p>
+
+
+<p><a href="http://tagger.inbloom.org/Tagger-V1.2.0-Template.csv"><u><font color="#000099">http://tagger.inbloom.org/Tagger-V1.2.0-Template.csv</font></u></a></p>
+
+
+<p><font color="#333333">CREATING A CSV TEMPLATE</font><br />
+<font color="#333333">Or, a CSV template can be created through the following steps:</font></p>
+<ol>
+<li><font color="#333333">Create one resource</font></li>
+<li><font color="#333333">Uncheck the new item</font></li>
+<li><font color="#333333">Export as CSV via the export button.</font></li>
+</ol>
+
+<p><font color="#333333">TAGGER AND EXCEL</font><br />
+<font color="#333333">If Excel is used to edit CSV files, Excel interprets the age range as a date. Age ranges are two numbers separated by a hyphen, for example 10-12, or 14-16. Excel interprets &ldquo;10-12&rdquo; as &ldquo;Oct-12.&rdquo;</font></p>
+
+
+<p><font color="#333333">There are a few solutions to address this Excel problem of interpreting age ranges as dates.</font></p>
+
+
+<p><font color="#333333">STARTING WITH A BLANK TEMPLATE</font><br />
+<font color="#333333">If starting with a blank template, the user should set the &ldquo;Typical Age Range&rdquo; column to display text instead of dates through the following steps:</font></p>
+<ol>
+<li><font color="#333333">Highlight the column by clicking on the letter above &ldquo;Typical Age Range&rdquo;.</font></li>
+<li><font color="#333333">Choose &ldquo;Cells...&rdquo; from the &ldquo;Format&rdquo; menu.</font></li>
+<li><font color="#333333">Click &ldquo;Text&rdquo; in the &ldquo;Category&rdquo; list.</font></li>
+<li><font color="#333333">Click the &ldquo;OK&rdquo; button</font></li>
+</ol>
+
+<p><font color="#333333">EDITING AN EXISTING CSV FILE</font><br />
+<font color="#333333">There are two ways to solve this problem when editing an existing CSV file.</font></p>
+
+
+<p><font color="#333333">WORKFLOW #1</font><br />
+<font color="#333333">Instead of opening the CSV file with Excel by double clicking it, the user can use the File/Import feature to import the CSV file into Excel:</font></p>
+<ol>
+<li><font color="#333333">Do not click on the file to open it, or do not open it with Excel directly. Instead, within Excel, go to the File Menu and select Import</font></li>
+<li><font color="#333333">Select File Type = CSV, and then navigate to the CSV file that needs to be imported</font></li>
+<li><font color="#333333">Select Delimited and not Fixed Width</font></li>
+<li><font color="#333333">The import wizard allows the user to set the Data Format for each column. Go to Typical Age Range and set the column Data Format to text.</font></li>
+</ol>
+
+<p><font color="#333333">WORKFLOW #2</font><br />
+<font color="#333333">If the user opens an existing CSV file with data in Excel directly, Excel will interpret the following age ranges as dates:</font></p>
+<ul>
+<li>3-5 as 5-Mar</li>
+<li>5-8 as 8-May</li>
+<li>10-12 as 12-Oct</li>
+<li>12-14 as 14-Dec</li>
+</ul>
+
+<p><font color="#333333">Changing the column to display as text will change the dates to the numbers Excel uses internally for dates:</font></p>
+<ul>
+<li><font color="#333333">3-5 becomes 41338</font></li>
+<li><font color="#333333">5-8 becomes 41402</font></li>
+<li><font color="#333333">10-12 becomes 41559</font></li>
+<li><font color="#333333">12-14 becomes 41622</font></li>
+</ul>
+
+<p><font color="#333333">To make Excel display the correct age ranges, the user must search and replace on each number, but add a leading apostrophe to the age range to force Excel to interpret it as a string.</font></p>
+<ul>
+<li><font color="#333333">3-5 becomes 41338. Find 41338 and replace with &lsquo;3-5</font></li>
+<li><font color="#333333">5-8 becomes 41402. Find 41402 and replace with &lsquo;5-8</font></li>
+<li><font color="#333333">10-12 becomes 41559. Find 41559 and replace with &lsquo;10-12</font></li>
+<li><font color="#333333">12-14 becomes 41622. Find 41622 and replace with &lsquo;12-14</font></li>
+</ul>
+
+<p><font color="#333333">Following is a summary of the workflow:</font></p>
+<ol>
+<li><font color="#333333">Import an existing CSV that contains data.</font></li>
+<li><font color="#333333">Change the Excel column to display as text.</font></li>
+<li><font color="#333333">Find and replace all instances of 41338, 41402, 41559, and 41622. Replace with their corresponding age range, but include a leading apostrophe before the age range in the Find/Replace dialog box to force Excel to write the age range as a string.</font></li>
+<li><font color="#333333">Continue with the workflow.</font></li>
+<li><font color="#333333">The above task can be automated and expedited by creating a macro.</font></li>
+</ol>
+</div>
+	</div>
+	<div class="clear"></div>
+	<div id="step_8" class="lessonStep right">
+	        <h2 class="StepTitle">How Tagger Behaves</h2>
+		 <div class="instructions">
+  <p>The following are specific behaviors of Tagger that will help the user manage his or her workflow:</p>
+<ul>
+<li>The user must first create a new resource by clicking on the &ldquo;New&rdquo; button before the user can add information to any field.</li>
+<li>Tagger can import many records, but the exact number is limited to the amount of memory available on the user&rsquo;s computer and the timeout setting of the browser. During testing, 500 records were imported in about 30 seconds. The user may be able to import more or less, depending on a variety of factors specific to the user&rsquo;s machine.</li>
+<li>If the user works on items without signing into an inBloom account, the user must export those items before signing in with the user&rsquo;s inBloom account and then re-import the items after signing in. Otherwise, the user will lose his or her work after signing in with an inBloom account. </li>
+<li>After the user signs in, the user can recall any item he or she has previously published to the Learning Registry by clicking on the &ldquo;History&rdquo; button. Then, the user can make changes and resubmit or export. Currently, the Learning Registry does not have the ability to update records, so it will accept an updated record while marking the original record to be ignored.</li>
+<li>The user can export and then re-import any number of items. The data should be the same on import as it was at export.</li>
+</ul>
+</div>
+	</div>
+	<div class="clear"></div>
+	<div id="step_9" class="lessonStep right">
+	        <h2 class="StepTitle">Reporting Bugs and/or Features</h2>
+		 <div class="instructions">
+  <p><font color="#333333">The user can report bugs by clicking on the &ldquo;Report Issue&rdquo; button on the upper right of the screen. The report issue form asks the user a number of questions concerning the bug and the user&rsquo;s system. Though only a few items are required, providing as much information as possible to recreate the bug will help the support team identify and fix the issue.</font></p>
+</div>
+	</div>
+	<div class="clear"></div>
+
+		</div>
+		<div id="LessonPageNav">
+		  <p></p>
+		  <ul>
+		    <li id="LessonPagePrevious"><a href="version_1_2_release_notes.html">Previous Page: version 1.2 release notes</a> &nbsp;</li>
+		    <li id="LessonPageCount">Page <strong>2</strong> of <strong>13</strong></li>
+		    <li id="LessonPageNext"><a href="welcome.html">Next Page: welcome</a> &nbsp;</li>
+		    
+		  </ul>
+		</div>	
+	</div>	
+</body>
+</html>
