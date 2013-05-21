@@ -13,39 +13,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var bigd = '';
+
 $(function() {
 
-    $("#dotNotation").change(function(e){
-        if (e.target.value == previousDotValue) {}
-        else {
-            previousDotValue = $('#dotNotation').val();
-            document.getElementById('itemURL').value = '';
-            $('#description').html('');
+  $("#dotNotation").change(function(e){
+    // Nothing changed? then change nothing!
+    if (e.target.value == typedDotNotation) {}
+    else {
+      // What did they type?
+      typedDotNotation = $('#dotNotation').val();
 
-            var dotNotationArrayKey = $.inArray(e.target.value, dotNotationDisplayArray)
-            if (dotNotationArrayKey == -1) {
-                $('#description').html("Error: The Dot Notation you entered doesn't appear to be valid.")
-            } else {
-               var dotNotationObj = alignmentArray[dotNotationArrayKey];
-               $('#itemURL').attr('value',dotNotationObj.url);
-               $('#itemGUID').attr('value',dotNotationObj.guid);
-               $.ajax({
-                   dataType: "json",
-                   url: '/ccss-sorted.json',
-                   success: function(data) {
-                     bigd = data;
-                     var dotty = e.target.value.replace(/\.([0-9])([a-z])/,".$1.$2")
-                     var notation = '["'+dotty.replace(/\./g,'"]["')+'"]';
-                     $('#description').html(eval('data'+notation+'._text'));
-                     validateAlignmentForm();
-                   },
-                   failure: function() {
-                     alert('failed');
-                   }
-               });
-            }
+      // Clear the form and under it
+      $('#itemURL').val('');
+      $('#description').html('');
+      
+      // Does the dot notation we are asking about exist in the array of dotnotations?
+      if ($.inArray(e.target.value, jsonStandardsArray) == -1) {
+        // No? Complain.
+        $('#description').html("Error: The Dot Notation you entered doesn't appear to be valid.")
+      } else {
+        // Yes? Then try to parse it out if you can
+        var notation = '["'+typedDotNotation.replace(/\./g,'"]["')+'"]';
+        try {
+          // Hey if we don't catch here, then it worked
+          var valed = eval("jsonStandards" + notation);
+          // Generate the URL.. this is hacky but we have no way to get the url so we parse it from the dot notation itself
+          // Note this likely wont work for other systems but thankfully it does work for corestandards.org.. mostly
+          var urled = typedDotNotation.replace(/\./g,'/').replace(/CCSS/g,'http://www.corestandards.org');
+          // Set the url and description
+          $('#itemURL').attr('value', urled);
+          $('#description').html(valed._text);
         }
-    });
+        catch (e) {
+          // Doh! it doesn't exist or someone kicked a kitten somewhere, so give an error message.
+          $('#description').html("Error: Unable to find the Dot Notation you entered in the known list.")
+        }
+      }
+    }
+  });
 
 });

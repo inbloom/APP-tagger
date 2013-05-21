@@ -230,7 +230,7 @@ function validateImportEducationalAlignment(importedObject) {
     // Check values
     checkCSVValuesForValidOptions('Alignment Type', validOptions, importedObject['alignmentType'], true);
     // Make sure the dot notation is in the list
-    var dotNotationArrayLocation = $.inArray(importedObject['dotNotation'], dotNotationDisplayArray);
+    var dotNotationArrayLocation = $.inArray(importedObject['dotNotation'], jsonStandardsArray);
     // Is this a valid dotnotation?
     if (dotNotationArrayLocation != -1) {
         var parts = importedObject['dotNotation'].split('.');

@@ -31,7 +31,7 @@ $(function() {
     alignments = {};
 
     window.alignmentArray = new Array();
-    window.dotNotationDisplayArray = new Array();
+    window.jsonStandardsArray = new Array();
 
     readAlignmentDataFromFiles();
 
@@ -63,7 +63,7 @@ $(function() {
     $textarea.height( panelsHeight - 100);
 
     $dotNotation.typeahead({
-        source : dotNotationDisplayArray,
+        source : jsonStandardsArray,
         items  : 8
     });
 
