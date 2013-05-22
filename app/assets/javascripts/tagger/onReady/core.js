@@ -25,7 +25,7 @@ $(function() {
     window.firtname = '';
     window.lastname = '';
     window.activeTab = null;
-    window.previousDotValue = '';
+    window.typedDotNotation = '';
 
     items = {};
     alignments = {};
