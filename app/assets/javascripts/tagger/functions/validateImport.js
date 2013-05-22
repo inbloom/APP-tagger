@@ -115,8 +115,8 @@ function validateImportField(field, value) {
                     fileHasErrors = true;
                     fileErrors.push("<strong>Invalid file imported -- <em>&quot;Created On&quot;</em></strong><br /> It would appear you're attempting to import a file that is containing a &quot;Created On&quot; date that is an invalid ISO8601 value.  Value sent: &quot;"+value+"&quot;<br /><br />");
                 } else {
-                    results = (((d.getMonth()+1)<10)?'0'+(d.getMonth()+1):(d.getMonth()+1)) + '-' +
-                        ((d.getDate()<10)?'0'+ d.getDate(): d.getDate()) + '-' + d.getFullYear();
+                    results = d.getFullYear() + '-' + (((d.getMonth()+1)<10)?'0'+(d.getMonth()+1):(d.getMonth()+1)) + '-' +
+                        ((d.getDate()<10)?'0'+ d.getDate(): d.getDate());
                 }
             }
             break;
