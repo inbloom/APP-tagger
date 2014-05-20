@@ -4,10 +4,10 @@
 The Tagger is a web application that will generate valid envelopes for publishing to the Learning Registry
 
 ##SYSTEM REQUIREMENTS
-Pre-reqs for install go here...
+
 
 ##INSTALLATION
-Installation instructions go here!
+
 
 ##CONTRIBUTE
 
